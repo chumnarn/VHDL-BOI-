@@ -644,7 +644,7 @@ tx:  ━━━┐
 
 ### 11.2 ใช้ Template
 
-```markdown
+````markdown
 # Mini Project: UART TX - Final Verification Report
 
 **Date:** [Date]
@@ -743,7 +743,7 @@ All checks passed:
 | Designer | ____ | ____ |
 | Verifier | ____ | ____ |
 | Lead | ____ | ____ |
-```
+````
 
 ### 11.3 ใส่ Reports
 

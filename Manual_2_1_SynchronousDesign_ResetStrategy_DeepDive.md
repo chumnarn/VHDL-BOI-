@@ -12,11 +12,11 @@
 ใน **synchronous design** ทุก flip-flop ใช้ **clock ตัวเดียวกัน** (single clock domain) และทุก state transition เกิดที่ **edge ของ clock** เท่านั้น สัญญาณอื่น (data input, output enable) สามารถเปลี่ยนค่าเมื่อใดก็ได้ แต่จะถูก sample ที่ clock edge ถัดไป
 
 ```
-                  ┌────────────────────────────────────┐
-                  │          SINGLE CLOCK              │
-                  │  ───┐      ┌───      ┌───          │
-                  │     │      │         │             │
-   clk:    ───────┘      └──────┘         └────────────┘
+                  ┌────────────────────────────────┐
+                  │          SINGLE CLOCK          │
+                  │  ───┐      ┌──────┐            │
+                  │     │      │      │            │
+   clk:    ───────┘     └──────┘      └────────────┘
 
    data:   ──────███████░░░░░░░░░████████████░░░░░░░
                       ↑   ↑   ↑   ↑
@@ -39,8 +39,8 @@
 ### 1.2 Asynchronous Design (สิ่งที่ควรหลีกเลี่ยง)
 
 ```
-   clk1:    ───┐       ┌───      ┌───
-            │ │      │
+   clk1:    ───┐ ┌──────
+               │ │      │
    clk1:    ─────┘      └──────┘
 
    data:    ────────┐
@@ -109,10 +109,10 @@
 
 ```
                     FF_A → combinational → FF_B
-   clk at FF_A: ─────┐                       ┌─────
+   clk at FF_A: ─────┐                         ┌─────
                      │             delay       │
-   clk at FF_B: ──────────┐                   ┌─────
-                         └───── (skew = δ)────┘
+   clk at FF_B: ──────────┐                    ┌─────
+                          └───── (skew = δ)────┘
 
    Setup slack = T - t_setup - (comb_delay) + skew
    Hold slack  = t_hold - (comb_delay) - skew
@@ -127,10 +127,10 @@ Jitter คือ **cycle-to-cycle variation** ของ clock period:
 
 ```
    ideal:   ─┐    ┌──┐    ┌──┐    ┌──
-            └─┼────┼──┼────┼──┼────┼─
-              │    │  │    │
-    actual:  ─┐  ┌┼┐┌┼┐ ┌┼┼┐ ┌┼┐
-              └──┘└─┘└─┘└─┘└─┘└─┘└──
+             └─┼────┼──┼────┼──┼────┼─
+               │    │  │    │
+    actual:  ─┐  ┌┼┐ ┌┼┐ ┌┼┼┐ ┌┼┐
+              └──┘ └─┘ └─┘  └─┘ └─┘└─┘└──
                 ↑  ↑  ↑   ↑
                 T±jitter
 ```
@@ -195,14 +195,14 @@ Clock มาจาก PLL → เข้า chip → กระจายไปย�
 
 ```
                               ┌─────────────┐
-   data:    ──────┐           │ status │
+   data:    ──────┐           │ status      │
                   └───────────┼─────────────┼──────────
                               ↑      ↑      ↑
                           setup   actual   hold
                           time    edge     time
                           
    clk:    ─────┐         ┌─────┐
-                 └─────────┘
+                └─────────┘
                           ↑ violation!
                           metastable!
 ```
@@ -318,7 +318,7 @@ end process;
                 └────┘  └────┘  └────┘
 
    rst_n:  ─────┐              ┌────────────
-                 └──────────────┘
+                └──────────────┘
 
    q:       ──────────────────[reset applied]
                                ↑     [q goes to 0]
@@ -355,8 +355,8 @@ end process;
    clk:      ───┐    ┌──┐    ┌──┐    ┌──┐
                 └────┘  └────┘  └────┘
 
-   rst_n:  ─────┐                    ┌───────
-                 └───────────────────┘
+   rst_n:  ─────┐                   ┌───────
+                └───────────────────┘
                  async            sync de-assertion
                  ↓                 ↓
    q:         q=0   q=0   q=0    (asynchronous reset) → ปล่อยให้นับ
@@ -426,7 +426,7 @@ end process;
                 └────┘  └────┘
 
    rst_n:  ─────┐           ┌──────
-                 └───────────┘
+                └───────────┘
                             ↑ de-asserted ใกล้ edge!
                             
    Recovery time: เวลาที่ rst_n ต้อง de-assert ก่อน edge
@@ -470,13 +470,13 @@ end architecture;
 
 ```
    async_rstn:  ─┐                    ┌──
-                  └────────────────────┘
+                 └────────────────────┘
                  async                 async(1)
                  assert                de-assert
                   ↓                      ↓
    sync1:                             ─┐
    sync2:                              └─┐ (1 cycle delay)
-   sync_rstn:                           └── (2 cycle delay, synchronous!)
+   sync_rstn:                            └── (2 cycle delay, synchronous!)
 ```
 
 **หลักการ:**
@@ -528,11 +528,11 @@ end process;
 ```
 
 ```
-   clk:    ─┐    ┌──┐    ┌──┐    ┌──┐
+   clk:    ─┐   ┌──┐    ┌──┐    ┌──┐
             └───┘  └────┘  └────┘
   
   ce:     ───┐          ┌───
-            └──────────┘
+             └──────────┘
   
   gclk:    ─┐  ┌─┐       ┌─┐           ← Tool insert: gclk = clk AND ce
             └──┘ └───────┘ └─────
@@ -648,8 +648,8 @@ end process;
                      rst_n_initial
                        │
                   ┌─────────┐
-                  │ Schmitt  │  -- ป้องกัน oscillation
-                  │ Trigger  │
+                  │ Schmitt │  -- ป้องกัน oscillation
+                  │ Trigger │
                   └─────────┘
                        │
                        ▼
@@ -671,7 +671,7 @@ end process;
                      │ VDD stable
                      ▼
    rst_n:  ─────────┐
-                     └────────────────
+                    └────────────────
                      POR releases
                      after VDD stable
                      for some time
@@ -1055,7 +1055,7 @@ end architecture;
               └─────────────────────────────────────  (de-asserted sync)
 
    load:  ────────┐             ┌──────────────────
-                   └─────────────┘
+                  └─────────────┘
 
    ce:        ─────┐     ┌─────┐     ┌──────
                    └─────┘     └─────┘

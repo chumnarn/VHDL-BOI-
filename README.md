@@ -1,1741 +1,655 @@
-# คู่มือหลักสูตร Advanced Digital IC and MEMS Design with EDA Verification and Simulation Tools
+# Advanced Digital IC and MEMS Design with EDA Verification and Simulation Tools
 
-## ส่วนที่ 1: Digital IC Design & Verification ด้วย VHDL และ Siemens EDA (วันที่ 1 – 5)
+> **คู่มือประกอบการอบรม** — จัดโดย **HENISWARE Co., Ltd.** (ตัวแทนจำหน่าย Siemens EDA ในประเทศไทย) ร่วมกับ **BOI** และ **MUT**
+>
+> เอกสารชุดนี้เป็น **ส่วนที่ 1 (วันที่ 1–5): Digital IC Design & Verification ด้วย VHDL และ Siemens EDA** ครบทั้งภาคทฤษฎี ภาคปฏิบัติ Lab และข้อสอบ
 
 ---
 
-### ข้อมูลหลักสูตร
+## สารบัญ
+
+1. [ข้อมูลหลักสูตร](#1-ข้อมูลหลักสูตร)
+2. [ภาพรวมหลักสูตร 10 วัน](#2-ภาพรวมหลักสูตร-10-วัน)
+3. [Quick Start](#3-quick-start-เริ่มใช้งานใน-5-นาที)
+4. [โครงสร้างไฟล์](#4-โครงสร้างไฟล์)
+5. [ดัชนีเอกสารทั้งหมด](#5-ดัชนีเอกสารทั้งหมด)
+6. [สถานะ Lab และผลการตรวจสอบ](#6-สถานะ-lab-และผลการตรวจสอบ)
+7. [เครื่องมือและ Prerequisites](#7-เครื่องมือและ-prerequisites)
+8. [วิธีรัน Simulation](#8-วิธีรัน-simulation)
+9. [Troubleshooting: ปัญหาที่พบบ่อย](#9-troubleshooting-ปัญหาที่พบบ่อย)
+10. [สิ่งที่ยังไม่ได้ทำ / Part 2](#10-สิ่งที่ยังไม่ได้ทำ--part-2-วันที่-6-10)
+11. [คู่มือเดิมใน version-01](#11-คู่มือเดิมใน-version-01)
+
+---
+
+## 1. ข้อมูลหลักสูตร
 
 | รายการ | รายละเอียด |
 | --- | --- |
 | ชื่อหลักสูตร | Advanced Digital IC and MEMS Design with EDA Verification and Simulation Tools |
-| ผู้จัด | HENISWARE Co., Ltd. (ตัวแทนจำหน่าย Siemens EDA ในประเทศไทย) ร่วมกับ BOI และ MUT |
-| ระยะเวลา | 10 วัน วันละ 8 ชั่วโมง รวม 80 ชั่วโมง (ภาคทฤษฎี 40 ชม. + ภาคปฏิบัติ 40 ชม.) |
-| ส่วนที่ 1 (เล่มนี้) | วันที่ 1 – 5: Digital IC Design & Verification ด้วย VHDL (40 ชม.) |
-| ส่วนที่ 2 | วันที่ 6 – 10: IC Layout และ MEMS Design & Simulation (40 ชม.) |
-| เกณฑ์ประเมิน | สอบภาคทฤษฎีและจำลองการทำงานด้วยโปรแกรม |
+| ผู้จัด | HENISWARE Co., Ltd. ร่วมกับ BOI และ MUT |
+| ระยะเวลา | 10 วัน วันละ 8 ชั่วโมง รวม 80 ชั่วโมง (ทฤษฎี 40 ชม. + ปฏิบัติ 40 ชม.) |
+| **ส่วนที่ 1 (ชุดนี้)** | **วันที่ 1–5: Digital IC Design & Verification ด้วย VHDL — เอกสารครบ 100%** |
+| ส่วนที่ 2 | วันที่ 6–10: IC Layout + MEMS Design & Simulation — **ยังไม่ได้จัดทำ** |
+| เกณฑ์การประเมิน | Beginner 50–59% · Intermediate 60–79% · Advanced ≥ 80% (ผ่านที่ 70%) |
 
-### เครื่องมือที่ใช้ในส่วนที่ 1 (Siemens EDA / Mentor Graphics)
+### เครื่องมือที่ใช้ในส่วนที่ 1
 
 | เครื่องมือ | บทบาท | ใช้ในวันที่ |
 | --- | --- | --- |
 | Questa Advanced Simulator | Simulation, Functional Coverage, Assertions | 1, 2, 4, 5 |
 | ModelSim | Simulation ระดับ HDL | 1, 2 |
-| HDL Designer | สร้าง Block Diagram และสร้างโค้ด VHDL อัตโนมัติ | 2 |
-| Precision RTL | RTL Synthesis และ Optimization | 3 |
+| HDL Designer | สร้าง Block Diagram / State Diagram และ generate VHDL | 2 |
+| Precision RTL | RTL Synthesis และ Optimization | 3, 5 |
 
-### เกณฑ์การประเมินผลผู้เชี่ยวชาญขั้นสูง
-
-| ระดับ | ช่วงคะแนน | คุณสมบัติของผู้ผ่านการอบรม |
-| --- | --- | --- |
-| Beginner | 50 – 59 % | เข้าใจพื้นฐาน Digital IC, VHDL, IC Layout และกระบวนการผลิต สามารถเลือกใช้เครื่องมือพื้นฐานได้ แก้ปัญหาง่าย ๆ ได้ด้วยตนเอง |
-| Intermediate | 60 – 79 % | วางแผนกระบวนการผลิตได้อย่างเป็นระบบ ประยุกต์ใช้ความรู้เพื่อปรับปรุงประสิทธิภาพ วิเคราะห์และแก้ปัญหาในขั้นตอนออกแบบ/ทดสอบได้ |
-| Advanced | ≥ 80 % | ถ่ายทอดองค์ความรู้ได้อย่างเป็นระบบ วิเคราะห์เชิงลึกถึงปัญหาและแนวทางปรับปรุงคุณภาพ อธิบายหลักการและเหตุผลทางเทคนิคได้ถูกต้องตามหลักวิชาการ |
+**เสริม (open-source ไม่ต้องมี license):** Yosys · LibreLane · Icarus Verilog · GHDL · PDK sky130A — ใช้ในหัวข้อ 3.5–3.6 และแล็บ 3B
 
 ---
 
-## วันที่ 1: Fundamentals of VHDL and Digital IC Design (8 ชั่วโมง)
-
-### วัตถุประสงค์ของวัน
-- อธิบายกระบวนการออกแบบวงจรดิจิทัลเปรียบเทียบระหว่าง ASIC และ FPGA ได้
-- อธิบายโครงสร้างพื้นฐานของภาษา VHDL และองค์ประกอบสำคัญได้
-- เขียนโค้ด VHDL สำหรับโมดูลตรรกะพื้นฐาน (AND, OR, MUX, Decoder) ได้อย่างถูกต้อง
-- ดำเนินการ Simulation และวิเคราะห์ waveform เพื่อ Debugging ด้วย Questa หรือ ModelSim ได้
-
-### โครงสร้างเวลา
-
-| เวลา | กิจกรรม | ชม. |
-| --- | --- | --- |
-| 09:00 – 10:30 | บรรยาย: Digital IC Design Flow (Behavioral → Physical) | 1.5 |
-| 10:30 – 10:45 | พัก | – |
-| 10:45 – 12:00 | บรรยาย: ASIC vs FPGA, VHDL Building Blocks | 1.25 |
-| 12:00 – 13:00 | พักเที่ยง | – |
-| 13:00 – 14:30 | บรรยาย: Simulation vs Synthesis, Data Types | 1.5 |
-| 14:30 – 14:45 | พัก | – |
-| 14:45 – 16:30 | แล็บ 1: เขียนโค้ด AND/OR/MUX/Decoder + Simulation | 1.75 |
-| 16:30 – 17:00 | สรุปประจำวัน + ถาม-ตอบ | 0.5 |
-
----
-
-### 1.1 ภาคทฤษฎี: Digital IC Design Flow
-
-#### 1.1.1 ลำดับชั้นของการออกแบบ (Design Abstraction Levels)
-
-การออกแบบวงจรดิจิทัลสามารถจำลองได้ในหลายระดับของนามธรรม โดยแต่ละระดับให้มุมมองที่แตกต่างกันทั้งด้านความเร็วในการจำลองและความใกล้เคียงกับฮาร์ดแวร์จริง
-
-1. **Behavioral / System Level** – อธิบายฟังก์ชันด้วยอัลกอริทึมหรือโมเดลทางคณิตศาสตร์ ไม่สนใจโครงสร้างฮาร์ดแวร์
-2. **Register-Transfer Level (RTL)** – อธิบายการไหลของข้อมูลระหว่างเรจิสเตอร์และตรรกะเชิงผสม เป็นระดับมาตรฐานที่ใช้เขียน VHDL/Verilog เพื่อสังเคราะห์
-3. **Logic Gate-Level** – วงจรถูกแทนด้วยเกตมาตรฐาน (NAND, NOR, DFF, MUX ฯลฯ) ผลลัพธ์จาก Synthesis
-4. **Physical Design** – แปลงเนตร์ลิสต์เป็นเลย์เอาต์จริงบนซิลิคอน (Floorplan, Placement, Routing)
+## 2. ภาพรวมหลักสูตร 10 วัน
 
 ```
-System/Behavioral ──► RTL ──► Logic Gate-Level ──► Physical Layout
- (Algorithm)        (VHDL)    (Netlist)            (GDSII)
-```
+╔══════════════════════════════════════════════════════════════════════════╗
+║  PART 1 — Digital IC Design & Verification (วันที่ 1-5)  ✅ จัดทำครบ    ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║  Day 1  Fundamentals of VHDL and Digital IC Design          [คู่มือหลัก] ║
+║    1.1 Digital IC Design Flow                                 ✅ มี deep dive ║
+║    1.2 พื้นฐานภาษา VHDL (ASIC vs FPGA + Building Blocks)     ✅ มี deep dive ║
+║    1.3 Simulation vs Synthesis + Data Types                  ✅ มี deep dive ║
+║    1.4 LAB 1 — AND/OR/MUX/Decoder + Simulation               ✅ มี step-by-step║
+║                                                                           ║
+║  Day 2  Advanced RTL Design Using VHDL                        [คู่มือหลัก] ║
+║    2.1 Synchronous Design & Reset Strategy                    ✅ มี deep dive ║
+║    2.2 FSM — Moore vs Mealy                                   ✅ มี deep dive ║
+║    2.3 Structural vs Behavioral Modeling                      ✅ ในคู่มือหลัก ║
+║    2.4 RTL Design Guidelines (Latch, CDC)                     ✅ มี deep dive ║
+║    2.5 Testbench                                             ✅ มี deep dive ║
+║    2.6 LAB 2 — FSM + Testbench + HDL Designer                ✅ มี step-by-step║
+║                                                                           ║
+║  Day 3  RTL Synthesis and Optimization (Precision RTL)       [คู่มือหลัก] ║
+║    3.1 Synthesis Flow                                         ✅ ในคู่มือหลัก ║
+║    3.2 Constraints (SDC)                                      ✅ ในคู่มือหลัก ║
+║    3.3 Timing Analysis เบื้องต้น                                ✅ ในคู่มือหลัก ║
+║    3.4 Optimization Techniques                                ✅ ในคู่มือหลัก ║
+║    3.5 การสังเคราะห์ด้วย Yosys (Open-source)                  ✅ มี deep dive ║
+║    3.6 LAB 3B — Yosys & LibreLane (RTL → GDSII)              ✅ มี step-by-step║
+║    3.7 LAB 3 — 8-bit Adder variants + Synthesis              ✅ ในคู่มือหลัก ║
+║                                                                           ║
+║  Day 4  Design Verification Using Questa                      [คู่มือหลัก] ║
+║    4.1 Verification Methodology                               ✅ มี deep dive ║
+║    4.2 Assertions & Functional Coverage                       ✅ มี deep dive ║
+║    4.3 Gate-Level Simulation & SDF                            ✅ มี deep dive ║
+║    4.4 LAB 4 — ALU Verification + GLS                         ✅ มี step-by-step║
+║                                                                           ║
+║  Day 5  Mini Project — UART TX                                [คู่มือหลัก] ║
+║    5.1 ASIC Flow Integration                                  ✅ มี deep dive ║
+║    5.2 Verification Plan & Sign-off                           ✅ มี deep dive ║
+║    5.3 Mini Project — RTL Design                             ✅ มี deep dive ║
+║    5.4 RTL-to-GDSII Full Chip Flow (LibreLane)                ✅ มี deep dive ║
+║    5.5 LAB 5B — Mini Project จนถึง GDSII                     ✅ มี step-by-step║
+║    5.6 สรุปและประเด็นสำคัญ (ปิดท้าย Part 1)                    ✅ มี deep dive ║
+╚══════════════════════════════════════════════════════════════════════════╝
 
-#### 1.1.2 ASIC vs FPGA
-
-| คุณสมบัติ | ASIC (Application-Specific IC) | FPGA (Field-Programmable Gate Array) |
-| --- | --- | --- |
-| ต้นทุนเริ่มต้น (NRE) | สูงมาก (mask cost) | ต่ำ |
-| ต้นทุนต่อหน่วย (เมื่อผลิตมาก) | ต่ำมาก | สูง |
-| ประสิทธิภาพ | สูง (ปรับแต่งได้ตามต้องการ) | ต่ำกว่า (มี overhead ของ programmable fabric) |
-| เวลาออกสู่ตลาด | นาน (หลายเดือนถึงปี) | เร็ว (วันถึงสัปดาห์) |
-| ความยืดหยุ่นหลังผลิต | ไม่ได้ (ต้องผลิตใหม่) | สูง (โปรแกรมใหม่ได้) |
-| เหมาะกับ | ผลิตภัณฑ์ปริมาณมาก, ต้องการ performance สูง | ต้นแบบ, ผลิตปริมาณน้อย, ต้องการ iterate เร็ว |
-
-**ข้อสังเกต:** หลักสูตรนี้เน้น ASIC Flow เป็นหลัก แต่ภาษา VHDL ที่เรียนสามารถใช้ได้ทั้งสองแพลตฟอร์ม
-
-#### 1.1.3 ASIC Design Flow (Front-End vs Back-End)
-
-```
-┌────────────────── FRONT-END (ออกแบบเชิงตรรกะ) ─────────────────────┐
-│                                                                   │
-│  Spec ──► RTL Design ──► Functional Verification ──► Synthesis    │
-│                                (Simulation)           (Netlist)   │
-└───────────────────────────────────────────────────────────────────┘
-                              │
-┌────────────────── BACK-END (ออกแบบทางกายภาพ) ────────────────────┐
-│                                                                   │
-│  Floorplan ──► Placement ──► CTS ──► Routing ──► Sign-off         │
-│                                                   (DRC, LVS, STA) │
-└───────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                          GDSII ──► Fabrication ──► Testing
-```
-
-ใน 5 วันแรกเราจะเน้นเฉพาะ Front-End Flow ตั้งแต่ RTL ไปจนถึง Gate-Level Netlist
-
----
-
-### 1.2 ภาคทฤษฎี: พื้นฐานภาษา VHDL
-
-VHDL (VHSIC Hardware Description Language) เป็นภาษาที่พัฒนาโดยกระทรวงกลาโหมสหรัฐฯ ตั้งแต่ปี ค.ศ. 1980 และกลายเป็นมาตรฐาน IEEE 1076 ใช้อธิบายพฤติกรรมและโครงสร้างของวงจรดิจิทัลได้ทั้งในมุมของ Simulation และ Synthesis
-
-#### 1.2.1 โครงสร้างของไฟล์ VHDL
-
-ไฟล์ VHDL ที่สังเคราะห์ได้ (synthesizable) ต้องประกอบด้วย 3 ส่วนหลักเสมอ:
-
-```vhdl
--- 1) Library/Use clause (เรียกใช้ไลบรารีมาตรฐาน)
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- 2) Entity (ประกาศ I/O ของโมดูล – มองจากภายนอก)
-entity my_module is
-    port (
-        a, b : in  std_logic;
-        sel  : in  std_logic;
-        y    : out std_logic
-    );
-end entity my_module;
-
--- 3) Architecture (อธิบายพฤติกรรม/โครงสร้างภายใน)
-architecture rtl of my_module is
-begin
-    -- concurrent statements อยู่ที่นี่
-end architecture rtl;
-```
-
-#### 1.2.2 Entity
-
-Entity คือ "หน้าต่าง" ของโมดูล บอกว่าโมดูลนี้มีขาอะไรบ้าง เป็นขาเข้าหรือออก ชนิดข้อมูลอะไร คล้ายกับ schematic symbol
-
-- **port mode**: `in`, `out`, `inout`, `buffer`
-- **port type**: โดยทั่วไปใช้ `std_logic` หรือ `std_logic_vector`
-
-#### 1.2.3 Architecture
-
-Architecture คือ "ตัวถัง" ภายใน อธิบายการทำงานของวงจร สามารถเขียนได้หลายสไตล์:
-
-| สไตล์ | ลักษณะ | ตัวอย่าง |
-| --- | --- | --- |
-| Behavioral | ใช้ process, if, case | เหมาะกับ RTL ระดับสูง |
-| Dataflow | ใช้ concurrent signal assignment พร้อมนิพจน์บูลีน | เหมาะกับตรรกะเชิงผสม |
-| Structural | เรียก component ย่อย ๆ มาต่อกัน | เหมาะกับการสร้าง hierarchy |
-
-หนึ่ง entity สามารถมีได้หลาย architecture เช่น ตัวหนึ่งสำหรับ simulation อีกตัวสำหรับ synthesis
-
-#### 1.2.4 Data Types ที่ใช้บ่อย
-
-| Type | ความหมาย | ใช้เมื่อ |
-| --- | --- | --- |
-| `std_logic` | สัญญาณดิจิทัล 1 บิต มี 9 ค่า (`'0'`,`'1'`,`'X'`,`'U'`,`'Z'`,`'W'`,`'L'`,`'H'`,`'-'`) | I/O port ทั่วไป |
-| `std_logic_vector(N-1 downto 0)` | บัสขนาด N บิต | อาเรย์ของสัญญาณ |
-| `integer` | จำนวนเต็ม | ตัวนับใน loop, parameter |
-| `boolean` | `TRUE` / `FALSE` | เงื่อนไข, function return |
-| `natural`, `positive` | subset ของ integer | ดัชนีที่ไม่เป็นลบ |
-
-ไลบรารีมาตรฐานที่ควรเรียกใช้เกือบทุกไฟล์:
-- `IEEE.STD_LOGIC_1164` – กำหนด `std_logic` และ `std_logic_vector`
-- `IEEE.NUMERIC_STD` – ฟังก์ชันแปลงชนิดเชิงตัวเลข (`unsigned`, `signed`, `to_unsigned`, …)
-
-#### 1.2.5 Signals vs Variables
-
-| หัวข้อ | Signal | Variable |
-| --- | --- | --- |
-| ขอบเขตการใช้งาน | ทั่วทั้ง architecture, ระหว่าง process | ภายใน process หรือ function/subprogram เท่านั้น |
-| เวลาที่อัปเดตค่า | ปลายรอบ simulation delta (ทุกครั้งที่ process หยุดรอ) | ทันทีที่บรรทัดนั้นรัน |
-| ใช้ในการสังเคราะห์ | ใช่ – สร้างเป็น wire/FF จริง | ไม่ – เป็นเพียงตัวแปรชั่วคราวในการจำลอง |
-| คำแนะนำ | ใช้สำหรับขาออก, state, bus | ใช้เป็นตัวแปรช่วยคำนวณภายใน process |
-
-ตัวอย่างความแตกต่าง:
-
-```vhdl
-process (a, b)
-    variable v_temp : std_logic;  -- variable: เปลี่ยนค่าทันที
-    signal  s_temp : std_logic;  -- signal:   เปลี่ยนค่าเมื่อ process suspend
-begin
-    v_temp := a and b;            -- ใช้ได้ทันทีในบรรทัดถัดไป
-    s_temp <= a xor b;            -- ค่าใหม่จะเห็นในรอบถัดไป
-    y     <= v_temp;              -- เห็นค่า a and b
-    z     <= s_temp;              -- เห็นค่า a xor b จากรอบก่อน
-end process;
+╔══════════════════════════════════════════════════════════════════════════╗
+║  PART 2 — IC Layout + MEMS Design (วันที่ 6-10)  ❌ ยังไม่ได้จัดทำ     ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║  Day 6   Basic IC Design / Tanner Tools                        ❌            ║
+║  Day 7   CMOS Layout / L-Edit                                  ❌            ║
+║  Day 8   MEMS Layout / L-Edit                                   ❌            ║
+║  Day 9   MEMS Design / FEM / Ansys                              ❌            ║
+║  Day 10  Advanced MEMS Simulation                              ❌            ║
+╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-### 1.3 ภาคทฤษฎี: Simulation vs Synthesis
+## 3. Quick Start (เริ่มใช้งานใน 5 นาที)
 
-| มิติ | Simulation | Synthesis |
-| --- | --- | --- |
-| จุดประสงค์ | ตรวจสอบฟังก์ชัน (functional correctness) | แปลง RTL เป็นเกตระดับฮาร์ดแวร์ |
-| เวลาที่รัน | ก่อนผลิต (pre-silicon) | ก่อนส่งไป fab |
-| ผลลัพธ์ | waveform, report | netlist, area report, timing report |
-| โครงสร้างที่รองรับ | เกือบทุกคำสั่ง VHDL | รับเฉพาะ synthesizable subset |
-| เครื่องมือหลักในหลักสูตร | Questa / ModelSim | Precision RTL |
+### 3.1 เปิดคู่มือหลัก
 
-**Synthesizable subset** ที่ควรยึดถือตั้งแต่วันที่ 1:
-- หลีกเลี่ยง `wait for`, `assert` ในส่วนที่จะสังเคราะห์
-- หลีกเลี่ยง `initial` (ใช้ได้เฉพาะ testbench)
-- ใช้ `rising_edge(clk)` เพื่ออธิบาย edge-sensitive logic
-- หลีกเลี่ยง `std_logic` ค่า `'X'`, `'U'`, `'Z'` ใน design (ใช้ได้เฉพาะ testbench)
-- ใช้ clock, reset แบบ synchronous ทุกครั้งที่เป็นไปได้
+เริ่มจาก **`Manual_Part1_Day1-5.md`** — เป็นคู่มือหลักที่มีตารางเวลา วัตถุประสงค์ของวัน เกณฑ์ประเมิน และตัวอย่างโค้ดในตัว
 
----
+### 3.2 รัน Lab ทั้งหมดในแต่ละวัน
 
-### 1.4 ภาคปฏิบัติ: แล็บ 1 – โมดูลตรรกะพื้นฐานและ Questa/ModelSim
-
-#### 1.4.1 ตัวอย่างโค้ด VHDL
-
-**Lab 1-1: AND Gate (Dataflow Style)**
-
-```vhdl
--- File: and_gate.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity and_gate is
-    port (
-        a, b : in  std_logic;
-        y    : out std_logic
-    );
-end entity and_gate;
-
-architecture dataflow of and_gate is
-begin
-    y <= a and b;
-end architecture dataflow;
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day1
+vsim -do run_lab1.do -c
 ```
 
-**Lab 1-2: 2-to-1 MUX (Behavioral Style)**
+เปลี่ยน `day1` → `day2` … `day5` เพื่อรันวันถัดไป สคริปต์จะ compile และรัน testbench ทุกตัวของวันนั้นและสรุปผลท้ายสุด
 
-```vhdl
--- File: mux2x1.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+> ต้องมี `vsim` อยู่ใน `PATH` ดูวิธีตั้งค่าใน [ข้อ 7](#7-เครื่องมือและ-prerequisites)
 
-entity mux2x1 is
-    port (
-        a, b : in  std_logic;
-        sel  : in  std_logic;
-        y    : out std_logic
-    );
-end entity mux2x1;
-
-architecture rtl of mux2x1 is
-begin
-    process (a, b, sel)
-    begin
-        if sel = '1' then
-            y <= b;
-        else
-            y <= a;
-        end if;
-    end process;
-end architecture rtl;
-```
-
-**Lab 1-3: 2-to-4 Decoder (Behavioral Style)**
-
-```vhdl
--- File: dec2x4.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity dec2x4 is
-    port (
-        en  : in  std_logic;
-        a   : in  std_logic_vector(1 downto 0);
-        y   : out std_logic_vector(3 downto 0)
-    );
-end entity dec2x4;
-
-architecture rtl of dec2x4 is
-begin
-    process (en, a)
-    begin
-        y <= (others => '0');
-        if en = '1' then
-            case a is
-                when "00" => y <= "0001";
-                when "01" => y <= "0010";
-                when "10" => y <= "0100";
-                when "11" => y <= "1000";
-                when others => y <= (others => '0');
-            end case;
-        end if;
-    end process;
-end architecture rtl;
-```
-
-**Lab 1-4: Testbench อย่างง่าย**
-
-```vhdl
--- File: tb_mux2x1.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_mux2x1 is
-end entity tb_mux2x1;
-
-architecture sim of tb_mux2x1 is
-    signal a, b, sel, y : std_logic;
-begin
-    -- DUT
-    dut : entity work.mux2x1
-        port map (a => a, b => b, sel => sel, y => y);
-
-    -- Stimulus
-    stim : process
-    begin
-        a <= '0'; b <= '0'; sel <= '0';
-        wait for 10 ns;
-
-        a <= '1'; b <= '0'; sel <= '0';
-        wait for 10 ns;
-
-        a <= '0'; b <= '1'; sel <= '1';
-        wait for 10 ns;
-
-        a <= '1'; b <= '1'; sel <= '1';
-        wait for 10 ns;
-
-        report "Simulation finished";
-        wait;
-    end process;
-end architecture sim;
-```
-
-#### 1.4.2 ขั้นตอนการใช้งาน Questa Advanced Simulator
-
-**GUI Mode:**
-
-1. เปิด Questa → `File ▸ New ▸ Project`
-2. ตั้งชื่อโปรเจกต์ (เช่น `lab1_day1`) และเลือก working library = `work`
-3. `Project ▸ Add to Project ▸ Existing File…` เพิ่มไฟล์ `.vhd` ทั้งหมด
-4. คอมไพล์: คลิมาร์กไฟล์ใน Project tab → คลิกปุ่ม **Compile** (Alt+F9) หรือคลิกขวา → Compile
-5. เริ่ม Simulation: `Simulate ▸ Start Simulation…` → เลือก `tb_mux2x1` ในแท็บ Design
-6. เปิด Wave window: คลิกขวาที่สัญญาณใน sim tab → `Add Wave`
-7. รัน simulation: พิมพ์ `run 100 ns` ใน transcript หรือกดปุ่ม **Run**
-8. วิเคราะห์ waveform, ตรวจสอบค่า y เมื่อ sel เปลี่ยน
-
-**Batch Mode (Tcl):**
-
-ไฟล์ `run.do`:
-
-```tcl
-# run.do – Questa batch script
-vlib work
-vcom -2008 *.vhd
-vsim -do "add wave *; run 200 ns" work.tb_mux2x1
-```
-
-รันด้วยคำสั่ง:
+### 3.3 รัน Lab 3B — Yosys + LibreLane (Linux / WSL)
 
 ```bash
-vsim -do run.do -c
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day3_yosys"
+bash run_yosys_lab.sh
 ```
 
-#### 1.4.3 แบบฝึกหัดประจำวันที่ 1
+ใช้เครื่องมือ open-source ทั้งหมด (ไม่ต้องมี license หรือ PDK ขององค์กร) — สังเคราะห์ได้ตั้งแต่
+RTL → netlist → GDSII พร้อม DRC/LVS ดูวิธีติดตั้งใน [ข้อ 7.1.1](#711-เครื่องมือ-open-source-สำหรับ-lab-3b--5b--ไม่ต้องมี-license)
 
-| ข้อ | โจทย์ | ผลที่คาดหวัง |
-|-----|--------|----------------|
-| 1.1 | เขียน VHDL ของ OR gate และ NAND gate (4 อินพุต) แล้วเขียน testbench ทดสอบครบทุกกรณี | ทุกกรณีผ่าน ไม่มี `'X'` ในผลลัพธ์ |
-| 1.2 | เขียน 4-to-1 MUX ในรูปแบบ dataflow และ behavioral เปรียบเทียบผล | ผลลัพธ์เหมือนกัน |
-| 1.3 | เขียน 3-to-8 decoder พร้อม enable ใช้ case statement | waveform ตรง truth table |
-| 1.4 | ใช้ Questa batch mode สร้าง `.do` file เพื่อรัน simulation ทั้งหมด | รันซ้ำได้ด้วยคำสั่งเดียว |
+### 3.4 ทำข้อสอบ
 
----
-
-## วันที่ 2: Advanced RTL Design Using VHDL (8 ชั่วโมง)
-
-### วัตถุประสงค์ของวัน
-- เขียนโค้ด VHDL สำหรับระบบ Synchronous พร้อมจัดการ Clock, Reset, Clock Enable ได้
-- ออกแบบ FSM ทั้งแบบ Moore และ Mealy ได้อย่างเหมาะสม
-- เลือกใช้และอธิบายความแตกต่างของ Structural และ Behavioral Modeling ได้
-- ปฏิบัติตามแนวทางการออกแบบ RTL ที่ถูกต้อง หลีกเลี่ยง Latch ได้
-- สร้าง Testbench และ Debug ด้วย Questa ได้
-- ใช้ HDL Designer สร้าง Block Diagram และแปลงเป็นโค้ด VHDL อัตโนมัติได้
-
-### โครงสร้างเวลา
-
-| เวลา | กิจกรรม | ชม. |
+| ไฟล์ | เมื่อไหร่ | รูปแบบ |
 | --- | --- | --- |
-| 09:00 – 10:30 | บรรยาย: Synchronous Design & Reset Strategy | 1.5 |
-| 10:30 – 10:45 | พัก | – |
-| 10:45 – 12:00 | บรรยาย: FSM Moore vs Mealy | 1.25 |
-| 12:00 – 13:00 | พักเที่ยง | – |
-| 13:00 – 14:30 | บรรยาย: RTL Coding Guidelines (Latch, CDC) และ Testbench | 1.5 |
-| 14:30 – 14:45 | พัก | – |
-| 14:45 – 16:30 | แล็บ 2: FSM + Testbench + HDL Designer | 1.75 |
-| 16:30 – 17:00 | สรุปประจำวัน + ถาม-ตอบ | 0.5 |
+| `test/Part1_PreTest_25_Questions.md` | **ก่อน**เริ่มเรียน | MC 10 + T/F 10 + Short 5 (100 คะแนน) |
+| `test/Part1_PostTest_25_Questions.md` | **หลัง**เรียนจบ | MC 10 + Code Analysis 8 + Short 2 (100 คะแนน) |
+
+ทั้งสองไฟล์มี **เฉลยพร้อมคำอธิบาย** อยู่ท้ายไฟล์
 
 ---
 
-### 2.1 ภาคทฤษฎี: Synchronous Design
+## 4. โครงสร้างไฟล์
 
-#### 2.1.1 หลักการ Synchronous Design
-
-การออกแบบดิจิทัลระดับ ASIC ส่วนใหญ่ใช้ **single-clock synchronous design** เพราะ:
-- ง่ายต่อการวิเคราะห์ timing
-- ลดปัญหา metastability และ race condition
-- เครื่องมือ STA (Static Timing Analysis) ทำงานได้แม่นยำ
-
-โครงสร้างมาตรฐานของ synchronous block:
-
-```vhdl
-process (clk)
-begin
-    if rising_edge(clk) then
-        if rst = '1' then
-            -- synchronous reset
-            state <= IDLE;
-            cnt   <= (others => '0');
-        else
-            state <= next_state;
-            cnt   <= cnt + 1;
-        end if;
-    end if;
-end process;
+```
+E:\lab\VHDL(BOI)\
+│
+├── README.md                              ◀◀ คุณอยู่ที่นี่ (ดัชนีหลักสูตร)
+│
+├── Manual_Part1_Day1-5.md                 คู่มือหลักสูตร วันที่ 1-5 (~74 KB, ~1,740 บรรทัด)
+│
+├── ── เนื้อหาเชิงลึก (Deep Dive) — 17 ไฟล์ ──────────────────────────────
+├── Manual_1_1_0_DigitalICDesignFlow_DeepDive.md
+├── Manual_1_1_2_ASIC_vs_FPGA_and_VHDL_BuildingBlocks_DeepDive.md
+├── Manual_1_2_4_and_1_3_Simulation_vs_Synthesis_DataTypes_DeepDive.md
+├── Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md
+├── Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md
+├── Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md
+├── Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md
+├── Manual_4_1_Verification_Methodology_DeepDive.md
+├── Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md
+├── Manual_4_3_GateLevelSimulation_SDF_DeepDive.md
+├── Manual_5_1_ASIC_Flow_and_Verification_Plan_DeepDive.md
+├── Manual_5_3_MiniProject_RTL_Design_DeepDive.md
+├── Manual_5_4_MiniProject_Verification_Synthesis_DeepDive.md
+├── Manual_5_4_RTL_to_GDSII_LibreLane_FullChipFlow_DeepDive.md
+├── Manual_Part1_Summary_and_Key_Takeaways_DeepDive.md
+│
+├── ── Step-by-Step Lab Guide — 6 ไฟล์ ────────────────────────────────────
+├── Manual_1_4_Lab1_StepByStepGuide.md
+├── Manual_2_6_Lab2_FSM_StepByStepGuide.md
+├── Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md
+├── Manual_4_4_Lab4_GLS_AssertionBasedTB_StepByStepGuide.md
+├── Manual_5_5_Lab5_MiniProject_GLS_Debug_Report_StepByStepGuide.md
+├── Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md
+│
+├── ── ข้อสอบ ──────────────────────────────────────────────────────────────
+├── test/                                ◀ ข้อสอบ Pre-Test / Post-Test (25 ข้อ + เฉลย)
+│   ├── Part1_PreTest_25_Questions.md
+│   └── Part1_PostTest_25_Questions.md
+│
+├── lab_code/                              ◀ ซอร์สโค้ดที่ compile + simulate ผ่านแล้ว
+│   ├── README.md
+│   ├── day1/   8 design + 6 testbench + run_lab1.do                  (15 ไฟล์)
+│   ├── day2/   6 design + 4 testbench + run_lab2.do                  (11 ไฟล์)
+│   ├── day3/   4 design + 3 testbench + SDC + Tcl + 1 .do            (10 ไฟล์)
+│   ├── day3_yosys/  Yosys + LibreLane (Lab 3B) + README              (18 ไฟล์)
+│   ├── day4/   3 design + 2 testbench + 1 SystemVerilog + 3 .do       (9 ไฟล์)
+│   ├── day5/   3 design + 1 testbench + SDC + Tcl + 2 .do + report   (10 ไฟล์)
+│   └── day5_yosys/  RTL-to-GDSII Full Chip Flow (Lab 5B) + README    (14 ไฟล์)
+│
+├── docs/reference/                       ◀ เอกสารอ้างอิง Questa / VHDL
+│   ├── questa/   (18 ไฟล์)
+│   └── vhdl/     (19 ไฟล์)
+│
+├── tools/                                ◀ เครื่องมือช่วยตรวจงานคู่มือ + เอกสารเครื่องมือ
+│   ├── check-links.sh                    ตัวตรวจลิงก์ภายในของโปรเจกต์
+│   └── *.md                               เอกสาร Yosys / LibreLane / Questa / Verilator
+│
+└── version-01/                            คู่มือเดิมภาษาไทย 4 ไฟล์ (ดูข้อ 11)
 ```
 
-#### 2.1.2 Reset Strategy
+---
 
-| ประเภท | คุณสมบัติ | ข้อดี | ข้อเสีย |
+## 5. ดัชนีเอกสารทั้งหมด
+
+### 5.1 คู่มือหลัก
+
+| ไฟล์ | เนื้อหา | ขนาด |
+| --- | --- | --- |
+| [`Manual_Part1_Day1-5.md`](Manual_Part1_Day1-5.md) | คู่มือหลักสูตร วันที่ 1–5 ครบทั้งภาคทฤษฎี/ปฏิบัติ + ภาคผนวก | ~75 KB |
+
+### 5.2 เนื้อหาเชิงลึด (Deep Dive) — แทรกเสริมในคู่มือหลัก
+
+| ไฟล์ | แทรกที่หัวข้อ | เวลาบรรยาย | หัวข้อย่อย |
 | --- | --- | --- | --- |
-| Synchronous Reset | Reset ตรวจสอบเฉพาะ rising edge ของ clk | ปลอดภัย, ใช้ FF ที่มี reset pin อย่างเดียว, timing analysis ง่าย | ต้องมี clk ทำงานเพื่อ reset |
-| Asynchronous Reset | Reset ทำงานทันทีไม่สนใจ clk | รับประกันการเข้าสู่ known state แม้ clk หยุด | ต้อง de-assert synchronously เพื่อป้องกัน recovery/removal |
+| [`Manual_1_1_0_DigitalICDesignFlow_DeepDive.md`](Manual_1_1_0_DigitalICDesignFlow_DeepDive.md) | 1.1 Digital IC Design Flow | 90–120 นาที | 12 |
+| [`Manual_1_1_2_ASIC_vs_FPGA_and_VHDL_BuildingBlocks_DeepDive.md`](Manual_1_1_2_ASIC_vs_FPGA_and_VHDL_BuildingBlocks_DeepDive.md) | 1.1.2 + 1.2 | 120–150 นาที | 18 |
+| [`Manual_1_2_4_and_1_3_Simulation_vs_Synthesis_DataTypes_DeepDive.md`](Manual_1_2_4_and_1_3_Simulation_vs_Synthesis_DataTypes_DeepDive.md) | 1.2.4 + 1.3 | 90–120 นาที | 22 |
+| [`Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md`](Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md) | 2.1 | 90–120 นาที | 15 |
+| [`Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md`](Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md) | 2.2 | 90–120 นาที | 14 |
+| [`Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md`](Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md) | 2.4 + 2.5 | 90–120 นาที | 26 |
+| [`Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md`](Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md) | 3.5 การสังเคราะห์ด้วย Yosys (Open-source) | 90–120 นาที | 24 |
+| [`Manual_4_1_Verification_Methodology_DeepDive.md`](Manual_4_1_Verification_Methodology_DeepDive.md) | 4.1 | 90–120 นาที | 21 |
+| [`Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md`](Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md) | 4.2 | 90–120 นาที | 26 |
+| [`Manual_4_3_GateLevelSimulation_SDF_DeepDive.md`](Manual_4_3_GateLevelSimulation_SDF_DeepDive.md) | 4.3 | 90–120 นาที | 28 |
+| [`Manual_5_1_ASIC_Flow_and_Verification_Plan_DeepDive.md`](Manual_5_1_ASIC_Flow_and_Verification_Plan_DeepDive.md) | 5.1 + 5.2 | 90–120 นาที | 8 ส่วน |
+| [`Manual_5_3_MiniProject_RTL_Design_DeepDive.md`](Manual_5_3_MiniProject_RTL_Design_DeepDive.md) | 5.3 | 90–120 นาที | 13 |
+| [`Manual_5_4_MiniProject_Verification_Synthesis_DeepDive.md`](Manual_5_4_MiniProject_Verification_Synthesis_DeepDive.md) | 5.3 (ภาค verification + synthesis) | 90–120 นาที | 9 ส่วน |
+| [`Manual_5_4_RTL_to_GDSII_LibreLane_FullChipFlow_DeepDive.md`](Manual_5_4_RTL_to_GDSII_LibreLane_FullChipFlow_DeepDive.md) | 5.4 RTL-to-GDSII Full Chip Flow | 90–120 นาที | 19 |
+| [`Manual_Part1_Summary_and_Key_Takeaways_DeepDive.md`](Manual_Part1_Summary_and_Key_Takeaways_DeepDive.md) | 5.6 (ปิดท้าย Part 1) | 60–90 นาที | 18 |
 
-แนะนำ: ใช้ **Synchronous Reset** เป็นค่า default ยกเว้นข้อกำหนดเฉพาะของ ASIC (เช่น low-power, scan)
+> ทุกไฟล์ Deep Dive มี ASCII diagrams, ตารางเปรียบเทียบ, ตัวอย่างโค้ดจริง, checklist และ troubleshooting ครบถ้วน — ออกแบบให้แทรกเข้าคู่มือหลักได้ทันที
 
-#### 2.1.3 Clock Enable (CE)
+### 5.3 Step-by-Step Lab Guide
 
-ใช้เพื่อหยุดการ tick ของ register บางส่วนโดยไม่ต้องปิด clock (ประหยัดพลังงาน, ลด clock tree complexity)
+| ไฟล์ | Lab | เวลาใช้งาน | ขั้นตอน |
+| --- | --- | --- | --- |
+| [`Manual_1_4_Lab1_StepByStepGuide.md`](Manual_1_4_Lab1_StepByStepGuide.md) | Lab 1 — โมดูลตรรกะพื้นฐาน | 1.5–2 ชม. | 10 |
+| [`Manual_2_6_Lab2_FSM_StepByStepGuide.md`](Manual_2_6_Lab2_FSM_StepByStepGuide.md) | Lab 2 — FSM + Testbench + HDL Designer | 2–2.5 ชม. | 10 |
+| [`Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md`](Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md) | Lab 3B — Yosys + LibreLane (RTL → GDSII) | 2.5–3 ชม. | 12 |
+| [`Manual_4_4_Lab4_GLS_AssertionBasedTB_StepByStepGuide.md`](Manual_4_4_Lab4_GLS_AssertionBasedTB_StepByStepGuide.md) | Lab 4 — Verification + GLS + Assertion TB | 2.5–3 ชม. | 12 |
+| [`Manual_5_5_Lab5_MiniProject_GLS_Debug_Report_StepByStepGuide.md`](Manual_5_5_Lab5_MiniProject_GLS_Debug_Report_StepByStepGuide.md) | Lab 5 — Mini Project End-to-End | 2.5–3 ชม. | 12 |
+| [`Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md`](Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md) | Lab 5B — RTL-to-GDSII Full Chip Flow | 3–3.5 ชม. | 12 |
 
-```vhdl
-process (clk)
-begin
-    if rising_edge(clk) then
-        if rst = '1' then
-            cnt <= (others => '0');
-        elsif ce = '1' then
-            cnt <= cnt + 1;
-        end if;
-    end if;
-end process;
-```
+### 5.4 ข้อสอบ
+
+| ไฟล์ | รูปแบบ | คะแนน | เฉลย |
+| --- | --- | --- | --- |
+| [`test/Part1_PreTest_25_Questions.md`](test/Part1_PreTest_25_Questions.md) | MC 10 + T/F 10 + Short 5 | 100 | ✅ พร้อมคำอธิบาย |
+| [`test/Part1_PostTest_25_Questions.md`](test/Part1_PostTest_25_Questions.md) | MC 10 + Code Analysis 8 + Short 2 | 100 | ✅ พร้อมคำอธิบาย |
 
 ---
 
-### 2.2 ภาคทฤษฎี: FSM – Moore vs Mealy
+## 6. สถานะ Lab และผลการตรวจสอบ
 
-#### 2.2.1 ความแตกต่าง
+### 6.1 ผลการตรวจสอบอัตโนมัติ
 
-| หัวข้อ | Moore Machine | Mealy Machine |
+โค้ดใน `lab_code/` ทั้งหมดถูกตรวจสอบด้วย **ModelSim/Questa Advanced Simulator 2026.1** (`vcom` + `vsim`)
+
+| วัน | Testbench | ผลการตรวจสอบ |
 | --- | --- | --- |
-| เงื่อนไขผลลัพธ์ | ขึ้นกับ state ปัจจุบันเท่านั้น | ขึ้นกับ state ปัจจุบัน **และ** input |
-| จำนวน state | มากกว่า (ต้องแยกทุก combination ของ output) | น้อยกว่า |
-| Output timing | ออกหลังจาก clock edge (delay 1 cycle) | ออกทันทีที่ input เปลี่ยน (combinational) |
-| Glitch | ปลอดภัย | อาจมี glitch ถ้า input ไม่ synchronized |
-| เหมาะกับ | control path ที่ต้องการ stability | control path ที่ต้องการ latency ต่ำ |
+| 1 | `tb_and_or` — AND/OR gate | ✅ ผ่าน |
+| 1 | `tb_nand4_gate` — 4-input NAND | ✅ ผ่าน (16 patterns) |
+| 1 | `tb_mux2x1` — 2-to-1 MUX | ✅ ผ่าน |
+| 1 | `tb_mux4x1` — 4-to-1 MUX (dataflow vs behavioral) | ✅ ผ่าน |
+| 1 | `tb_dec2x4` — 2-to-4 Decoder | ✅ ผ่าน |
+| 1 | `tb_dec3x8` — 3-to-8 Decoder | ✅ ผ่าน |
+| 2 | `tb_counter8` — 8-bit counter (sync reset + CE + load) | ✅ ผ่าน |
+| 2 | `tb_seq_moore` — Moore FSM "101" (overlapping) | ✅ ผ่าน (10 checks) |
+| 2 | `tb_seq_mealy` — Mealy FSM "101" (overlapping) | ✅ ผ่าน (10 checks) |
+| 2 | `tb_adder4` — 4-bit ripple carry adder | ✅ ผ่าน (512 patterns) |
+| 3 | `tb_adder8` — 8-bit ripple carry adder | ✅ ผ่าน |
+| 3 | `tb_add_sub_shared` — ADD/SUB resource sharing + signed overflow | ✅ ผ่าน (512 patterns) |
+| 3 | `tb_adder8_pipelined` — pipelined adder (latency 1 cycle) | ✅ ผ่าน |
+| 4 | `tb_alu8_selfcheck` — 8-bit ALU vs reference model | ✅ ผ่าน (262,144 patterns) |
+| 4 | `tb_handshake` — handshake protocol + concurrent assertion | ✅ ผ่าน (16 handshakes) |
+| 5 | `tb_uart_top` — UART TX frame verification | ✅ ผ่าน (6 frames) |
 
-#### 2.2.2 ตัวอย่าง FSM: Sequence Detector "101"
+**สรุป: 16/16 testbench ผ่าน — compile 0 errors, simulation 0 failures**
 
-**Moore Implementation:**
+> สคริปต์ `run_labX.do` ไม่ได้ตรวจแค่ "ไม่มี error" แต่ยังตรวจ **completion marker**
+> ของแต่ละ testbench ด้วย จึงจับกรณี `run` time สั้นเกินไปจน simulation หยุดกลางคัน
+> แต่ยังดูเหมือนผ่านได้ (กรณีนี้เคยเกิดกับ `tb_adder4` และ `tb_add_sub_shared`
+> ที่รันได้แค่ 40 / 511 patterns จากทั้งหมด 512)
 
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+### 6.2 ผลการตรวจสอบ Lab 3B (Yosys + LibreLane)
 
-entity seq_det_moore is
-    port (
-        clk      : in  std_logic;
-        rst      : in  std_logic;
-        din      : in  std_logic;
-        detected : out std_logic
-    );
-end entity seq_det_moore;
+ตรวจสอบด้วย **Yosys 0.52 · Icarus Verilog 12.0 · GHDL 5.0.1 · LibreLane v3.0.17 · PDK sky130A**
+บน WSL Ubuntu 26.04 — ทุกตัวเลขด้านล่างมาจากการรันจริง
 
-architecture rtl of seq_det_moore is
-    type state_t is (S0, S1, S2, S3);  -- S3 = "101"
-    signal state, next_state : state_t;
-begin
-    -- State register
-    sync_proc : process (clk)
-    begin
-        if rising_edge(clk) then
-            if rst = '1' then
-                state <= S0;
-            else
-                state <= next_state;
-            end if;
-        end if;
-    end process sync_proc;
+| ขั้นตอน | ผลการตรวจสอบ |
+| --- | --- |
+| RTL simulation (`tb_adder8`) | ✅ `PASS=131072 FAIL=0` |
+| RTL simulation (`tb_adder8_pipe`) | ✅ `PASS=64 FAIL=0` |
+| Yosys generic synthesis | ✅ `adder8` = 52 cells · `adder8_pipe` = 78 cells (26 SDFF) |
+| Yosys gate-level mapping | ✅ `adder8` = 41 cells · `adder8_pipe` = 66 cells |
+| Gate-Level Simulation ของ netlist | ✅ ผ่าน 131,072 patterns เท่ากับ RTL |
+| VHDL → GHDL → Verilog → Yosys | ✅ 88 cells · ผ่าน 131,072 patterns |
+| Map เข้า sky130 standard cell | ✅ 24 cells · **220.2112 µm²** |
+| LibreLane full flow | ✅ **80/80 stages** · DRC 0 · LVS 0 · Antenna 0 |
+| Timing sign-off | ✅ setup slack **5.587222 ns** · hold slack **0.317141 ns** |
+| Layout | ✅ instances 399 · die 4331.89 µm² · utilization 68.95 % |
+| GDSII | ✅ `adder8_pipe.gds` 413,344 bytes |
 
-    -- Next-state & output logic
-    comb_proc : process (state, din)
-    begin
-        detected <= '0';  -- default
-        case state is
-            when S0 =>
-                if din = '1' then next_state <= S1;
-                else              next_state <= S0;
-                end if;
-            when S1 =>
-                if din = '0' then next_state <= S2;
-                else              next_state <= S1;
-                end if;
-            when S2 =>
-                if din = '1' then next_state <= S3;
-                else              next_state <= S0;
-                end if;
-            when S3 =>
-                detected <= '1';
-                if din = '1' then next_state <= S1;
-                else              next_state <= S0;
-                end if;
-        end case;
-    end process comb_proc;
-end architecture rtl;
-```
+> รายละเอียดเพิ่มเติม: [`lab_code/day3_yosys/README.md`](lab_code/day3_yosys/README.md)
+> และ [`lab_code/day3_yosys/librelane/README.md`](lab_code/day3_yosys/librelane/README.md)
 
-**Mealy Implementation:**
+### 6.3 ผลการตรวจสอบ Lab 5B (RTL-to-GDSII Full Chip Flow)
 
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+ตรวจสอบด้วย **Yosys 0.52 · Icarus Verilog 12.0 · LibreLane v3.0.17 · PDK sky130A**
+บน WSL Ubuntu 26.04 — รันซ้ำสองครั้งได้ตัวเลขเดียวกันทุกตัว
 
-entity seq_det_mealy is
-    port (
-        clk      : in  std_logic;
-        rst      : in  std_logic;
-        din      : in  std_logic;
-        detected : out std_logic
-    );
-end entity seq_det_mealy;
+| ขั้นตอน | ผลการตรวจสอบ |
+| --- | --- |
+| RTL simulation (`tb_uart_top`) | ✅ `PASS=6 FAIL=0` (0x00, 0xFF, 0x55, 0xAA, 0x42, 0x3C) |
+| Yosys generic synthesis | ✅ `baud_gen` 44 · `uart_tx` 74 · รวม 118 cells |
+| Yosys gate-level mapping | ✅ `uart_top` 112 cells |
+| Gate-Level Simulation ของ netlist | ✅ ผ่าน 6/6 เฟรมเท่ากับ RTL |
+| Map เข้า sky130 standard cell | ✅ 122 cells · area **1087.2928 µm²** |
+| LibreLane full flow | ✅ **80/80 stages** · `error.log` 0 bytes |
+| DRC / LVS / Antenna violations | ✅ **0 / 0 / 0** |
+| Timing sign-off (9 corners) | ✅ setup **6.235697 ns** · hold **0.191574 ns** · Fmax ≈ 265.7 MHz |
+| Layout | ✅ instances 526 · die 4975.42 µm² · utilization 60.12 % · power 303.98 µW |
+| GDSII | ✅ `uart_top.gds` 517,382 bytes |
 
-architecture rtl of seq_det_mealy is
-    type state_t is (S0, S1, S2);
-    signal state, next_state : state_t;
-begin
-    sync_proc : process (clk)
-    begin
-        if rising_edge(clk) then
-            if rst = '1' then
-                state <= S0;
-            else
-                state <= next_state;
-            end if;
-        end if;
-    end process sync_proc;
+> รายละเอียดเพิ่มเติม: [`lab_code/day5_yosys/README.md`](lab_code/day5_yosys/README.md)
+> และ [`lab_code/day5_yosys/librelane/README.md`](lab_code/day5_yosys/librelane/README.md)
 
-    comb_proc : process (state, din)
-    begin
-        detected <= '0';
-        case state is
-            when S0 =>
-                if din = '1' then
-                    next_state <= S1;
-                else
-                    next_state <= S0;
-                end if;
-            when S1 =>
-                if din = '0' then
-                    next_state <= S2;
-                else
-                    next_state <= S1;
-                end if;
-            when S2 =>
-                if din = '1' then
-                    next_state <= S1;
-                    detected <= '1';   -- output ติดทันที
-                else
-                    next_state <= S0;
-                end if;
-        end case;
-    end process comb_proc;
-end architecture rtl;
-```
+### 6.4 สถานะแต่ละ Lab
+
+| วัน | Lab | สถานะ | หมายเหตุ |
+| --- | --- | --- | --- |
+| 1 | AND/OR/NAND + exhaustive TB | ✅ พร้อมใช้ | ตรวจครบทุก combination |
+| 1 | MUX (2-to-1, 4-to-1) | ✅ พร้อมใช้ | เทียบ dataflow vs behavioral |
+| 1 | Decoder (2-to-4, 3-to-8) | ✅ พร้อมใช้ | enable low/high |
+| 2 | 8-bit Counter with CE + load | ✅ พร้อมใช้ | Synchronous reset |
+| 2 | Sequence Detector (Moore + Mealy) | ✅ พร้อมใช้ | Self-checking TB + overlapping |
+| 2 | 4-bit Adder (Structural) | ✅ พร้อมใช้ | Exhaustive 256×256 |
+| 3 | 8-bit Ripple Carry Adder | ✅ พร้อมใช้ | |
+| 3 | 8-bit Pipelined Adder | ✅ พร้อมใช้ | Latency = 1 cycle |
+| 3 | ADD/SUB Resource Sharing | ✅ พร้อมใช้ | Exhaustive pattern + signed overflow |
+| 3 | Precision RTL Synthesis | ⚠️ ต้องมี PDK | ปรับ `tech_lib` path |
+| 3 | **Yosys Generic + Gate-Level Synthesis** | ✅ รันจริงผ่าน | 52 / 78 cells generic · 41 / 66 cells gate |
+| 3 | **Gate-Level Simulation ของ netlist Yosys** | ✅ รันจริงผ่าน | testbench เดิมผ่าน 131,072 patterns เท่ากับ RTL |
+| 3 | **VHDL → GHDL → Verilog → Yosys** | ✅ รันจริงผ่าน | netlist จาก VHDL (88 cells) ผ่าน 131,072 patterns |
+| 3 | **Map เข้า sky130 standard cell** | ✅ รันจริงผ่าน | 24 cells · area 220.2112 µm² |
+| 3 | **LibreLane RTL → GDSII (80 stages)** | ✅ รันจริงผ่าน | DRC/LVS/Antenna ผ่าน · setup 5.587 ns · hold 0.317 ns |
+| 4 | 8-bit ALU (ADD/SUB/AND/OR) | ✅ พร้อมใช้ | 262,144 patterns |
+| 4 | Reference Model (cycle-accurate) | ✅ พร้อมใช้ | |
+| 4 | Handshake Protocol | ✅ พร้อมใช้ | Concurrent assertion |
+| 4 | GLS with SDF | ⚠️ ต้องมี netlist | ต้องสังเคราะห์ก่อน (Day 3) |
+| 5 | UART TX Mini Project | ✅ พร้อมใช้ | Frame-level check, 6 patterns |
+| 5 | Precision RTL + SDF | ⚠️ ต้องมี PDK | ปรับ `tech_lib` path |
+| 5 | **Yosys + GLS ของ Mini Project UART TX** | ✅ รันจริงผ่าน | netlist ผ่าน 6/6 เฟรมเท่ากับ RTL |
+| 5 | **LibreLane RTL-to-GDSII Full Chip Flow** | ✅ รันจริงผ่าน | 80/80 stages · DRC/LVS/Antenna ผ่าน · GDSII ได้ |
+
+> ⚠️ = ต้องเตรียม PDK / netlist ขององค์กร ไม่สามารถรันได้ด้วยไฟล์ที่แนบมาเพียงอย่างเดียว
 
 ---
 
-### 2.3 ภาคทฤษฎี: Structural vs Behavioral Modeling
+## 7. เครื่องมือและ Prerequisites
 
-| สไตล์ | ใช้เมื่อ | ตัวอย่าง |
+### 7.1 เครื่องมือที่ต้องมี
+
+| เครื่องมือ | ใช้สำหรับ | License | จำเป็น? |
+| --- | --- | --- | --- |
+| Questa Advanced Simulator | Simulation, Functional Coverage, Assertion | Commercial (Siemens EDA) | แนะนำ |
+| ModelSim | Simulation ระดับ HDL | Commercial | ทางเลือก (ใช้แทน Questa ได้) |
+| Precision RTL | RTL → Netlist Synthesis | Commercial | สำหรับ Day 3, 5 |
+| HDL Designer | Block/State Diagram → VHDL | Commercial | สำหรับ Day 2 |
+| PDK (เช่น TSMC / GlobalFoundries / IHP SG13G2) | Target library สำหรับ synthesis | ต้องขอจากองค์กร | สำหรับ Day 3, 5 |
+
+ทุกเครื่องมือมาจาก **Siemens EDA** (เดิม Mentor Graphics) ซึ่ง **HENISWARE Co., Ltd.** เป็นตัวแทนจำหน่ายในประเทศไทย
+
+### 7.1.1 เครื่องมือ Open-source (สำหรับ Lab 3B / 5B — ไม่ต้องมี license)
+
+Lab 3B (Yosys + LibreLane) และ Lab 5B (RTL-to-GDSII Full Chip Flow) ใช้ชุดเครื่องมือที่ **ฟรีทั้งหมด** ติดตั้งบน Linux / WSL
+
+| เครื่องมือ | ใช้สำหรับ | วิธีติดตั้ง |
 | --- | --- | --- |
-| Behavioral | อธิบาย "อะไร" ที่ต้องทำ ด้วย process, if, case | FSM, datapath ที่ซับซ้อน |
-| Dataflow | อธิบายด้วย concurrent expression | ตรรกะเชิงผสมขนาดเล็ก, bus assignment |
-| Structural | ประกอบ component ย่อย ๆ (เรียก entity อื่น) | hierarchical design, สร้าง wrapper |
+| Yosys 0.52 | RTL → netlist synthesis | `sudo apt install yosys` |
+| Icarus Verilog 12.0 | RTL / Gate-Level Simulation | `sudo apt install iverilog` |
+| GHDL 5.0.1 | สะพาน VHDL → Verilog | `sudo apt install ghdl` |
+| LibreLane v3.0.17 | Open-source ASIC flow (RTL → GDSII) | `nix profile install nixpkgs#librelane` |
+| PDK sky130A | Target library (open-source) | ดาวน์โหลดอัตโนมัติผ่าน `--volare-pdk` |
 
-ตัวอย่าง Structural:
+> Nix ดึง **OpenROAD, Magic, KLayout, Netgen, Yosys, yosys-ghdl** มาให้ใน closure เดียวกัน
+> รายละเอียดการติดตั้งและการเปลี่ยน PDK: [`lab_code/day3_yosys/librelane/README.md`](lab_code/day3_yosys/librelane/README.md)
+> และ [`lab_code/day5_yosys/librelane/README.md`](lab_code/day5_yosys/librelane/README.md)
 
-```vhdl
-architecture struct of full_adder is
-    component xor_gate is
-        port (a, b : in  std_logic; y : out std_logic);
-    end component;
-    component and_gate is
-        port (a, b : in  std_logic; y : out std_logic);
-    end component;
-    component or_gate  is
-        port (a, b : in  std_logic; y : out std_logic);
-    end component;
-    signal s1, s2, s3 : std_logic;
-begin
-    u1 : xor_gate port map (a => a, b => b, y => s1);
-    u2 : xor_gate port map (a => s1, b => cin, y => sum);
-    u3 : and_gate port map (a => a, b => b, y => s2);
-    u4 : and_gate port map (a => s1, b => cin, y => s3);
-    u5 : or_gate  port map (a => s2, b => s3, y => cout);
-end architecture struct;
+### 7.2 ตั้งค่า PATH สำหรับ ModelSim/Questa
+
+ตรวจสอบตำแหน่งติดตั้ง:
+
+```powershell
+Get-ChildItem "C:\Siemens" -Directory
 ```
 
----
+ตั้งค่าให้ `vsim` / `vcom` เรียกได้จาก command line:
 
-### 2.4 ภาคทฤษฎี: RTL Design Guidelines
-
-#### 2.4.1 วิธีหลีกเลี่ยง Latch
-
-Latch เกิดเมื่อ **process** หรือ **concurrent assignment** มี output ที่ไม่ได้กำหนดค่าในทุก path ของเงื่อนไข เป็นอันตรายเพราะ:
-- ทำให้ timing analysis ยาก
-- อาจเกิด race condition ใน testbench
-- ส่วนใหญ่ synthesis tool จะเตือน แต่บางครั้งอาจ miss
-
-**ตัวอย่าง Bad (เกิด Latch):**
-
-```vhdl
-process (sel, a, b)
-begin
-    if sel = '1' then
-        y <= a;
-    end if;       -- ไม่มี else ⇒ เกิด latch!
-end process;
+```powershell
+$env:PATH = "C:\Siemens\modelsim_dlx64_2026.1\win64pe;$env:PATH"
 ```
 
-**ตัวอย่าง Good (default assignment):**
+ตรวจสอบว่าใช้ได้:
 
-```vhdl
-process (sel, a, b)
-begin
-    y <= b;       -- default ทุกกรณี
-    if sel = '1' then
-        y <= a;
-    end if;
-end process;
+```powershell
+vsim -version
 ```
 
-**ตัวอย่าง Good (full case):**
+### 7.3 การตั้งค่า PDK สำหรับ Synthesis
 
-```vhdl
-case sel is
-    when "00" => y <= a;
-    when "01" => y <= b;
-    when "10" => y <= d;
-    when "11" => y <= e;
-    when others => y <= '0';   -- ป้องกัน latch + handle unknown
-end case;
-```
-
-#### 2.4.2 Clock Domain Crossing (CDC) – เบื้องต้น
-
-หลักการเบื้องต้น:
-- สัญญาณที่ข้าม clock domain ต้องผ่าน **synchronizer** (2-stage FF อย่างน้อย) เพื่อลด metastability
-- ใช้ **handshake** หรือ **FIFO** สำหรับข้อมูลหลายบิต
-- หลีกเลี่ยงการส่งสัญญาณมากกว่า 1 บิตพร้อมกันโดยไม่มี handshake
-
----
-
-### 2.5 ภาคทฤษฎี: Testbench
-
-#### 2.5.1 องค์ประกอบของ Testbench ที่ดี
-
-1. **Stimulus generator** – สร้างอินพุตให้ครอบคลุมทุกกรณี
-2. **DUT instantiation** – เรียกใช้ Design Under Test
-3. **Checker / Monitor** – ตรวจสอบผลลัพธ์อัตโนมัติ
-4. **Reporting** – สรุปผล, fail/pass, coverage
-
-#### 2.5.2 Self-Checking Testbench
-
-ตัวอย่างสำหรับ FSM Moore (ตรวจสอบผลอัตโนมัติ):
-
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_seq_moore is
-end entity tb_seq_moore;
-
-architecture sim of tb_seq_moore is
-    constant CLK_PERIOD : time := 10 ns;
-    signal clk, rst, din, detected : std_logic;
-    signal pass_cnt, fail_cnt      : integer := 0;
-begin
-    -- DUT
-    dut : entity work.seq_det_moore
-        port map (clk => clk, rst => rst, din => din, detected => detected);
-
-    -- Clock
-    clk <= not clk after CLK_PERIOD / 2;
-
-    stim : process
-        procedure check(input  : in  std_logic;
-                       expect : in  std_logic;
-                       tag    : in  string) is
-        begin
-            if detected /= expect then
-                report "FAIL " & tag & ": got " & std_logic'image(detected) &
-                       " expected " & std_logic'image(expect)
-                    severity error;
-                fail_cnt <= fail_cnt + 1;
-            else
-                pass_cnt <= pass_cnt + 1;
-            end if;
-        end procedure;
-    begin
-        rst <= '1'; din <= '0';
-        wait for 2 * CLK_PERIOD;
-        rst <= '0';
-
-        -- pattern 101
-        din <= '1'; wait for CLK_PERIOD; check(din, '0', "1");
-        din <= '0'; wait for CLK_PERIOD; check(din, '0', "10");
-        din <= '1'; wait for CLK_PERIOD; check(din, '1', "101");
-
-        report "PASS=" & integer'image(pass_cnt) &
-               " FAIL=" & integer'image(fail_cnt);
-        wait;
-    end process stim;
-end architecture sim;
-```
-
-#### 2.5.3 Packages และ Constants
-
-การแยก constants ออกเป็น package ช่วยให้ reuse ได้และง่ายต่อการแก้ไข:
-
-```vhdl
--- File: my_types_pkg.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-package my_types_pkg is
-    constant FIFO_DEPTH : integer := 16;
-    constant DATA_WIDTH : integer := 8;
-    type    fifo_state_t is (EMPTY, PARTIAL, FULL);
-end package my_types_pkg;
-```
-
-```vhdl
--- เรียกใช้ใน design file
-library work;
-use work.my_types_pkg.ALL;
-```
-
----
-
-### 2.6 ภาคปฏิบัติ: แล็บ 2 – FSM, Testbench และ HDL Designer
-
-#### 2.6.1 Lab 2-1: ใช้ HDL Designer สร้าง Block Diagram
-
-ขั้นตอน:
-
-1. `File ▸ New ▸ Design` เลือก Project
-2. สร้างไฟล์ block diagram: `File ▸ New ▸ Block Diagram`
-3. วาง block: คลิกขวา → Add Component → เลือก AND, OR, MUX, DFF จากไลบรารี
-4. เชื่อมต่อ wire ระหว่าง block
-5. คลิกขวา → **Generate HDL** → เลือก VHDL → ตั้งชื่อ output file
-6. ตรวจสอบโค้ด VHDL ที่ได้ เทียบกับโค้ดที่เขียนเอง
-7. นำไฟล์ที่ได้ไป simulate ใน Questa เพื่อยืนยันผล
-
-#### 2.6.2 Lab 2-2: Self-Checking Testbench พร้อม Assertion (PSL/VHDL assert)
-
-ใช้ concurrent assertion เพื่อตรวจสอบ property ที่ต้องการ:
-
-```vhdl
--- ในไฟล์ design หรือในไฟล์ตรวจสอบแยก
-assert_det : assert never (rst = '1' and rising_edge(clk))
-             report "Reset must not be high at clock edge"
-             severity failure;
-```
-
-#### 2.6.3 Debugging Waveform ใน Questa
-
-เคล็ดลับ:
-- ใช้ **Grouping** จัดสัญญาณเป็นกลุ่ม (clk, input, output, internal)
-- ใช้ **Divider** แยกกลุ่ม clk, output, internal
-- ใช้ **Search** (Ctrl+F) หา transition ที่ต้องการ
-- ใช้ **Cursors** วัด timing ระหว่าง event
-- คลิกขวา signal → **Add to Wave ▸ Selected Signals**
-
-#### 2.6.4 แบบฝึกหัดประจำวันที่ 2
-
-| ข้อ | โจทย์ | ผลที่คาดหวัง |
-|-----|--------|----------------|
-| 2.1 | เขียน 8-bit synchronous counter พร้อม CE และ synchronous reset | ทดสอบ count, enable, reset ผ่าน |
-| 2.2 | เขียน FSM detector สำหรับ pattern "1101" (Moore) | waveform ตรง truth table |
-| 2.3 | เขียน Mealy detector สำหรับ pattern "1101" เปรียบเทียบกับ Moore | จำนวน state, latency ต่างกัน |
-| 2.4 | สร้าง self-checking testbench ที่ตรวจสอบผลอัตโนมัติ | PASS count = จำนวน testcase |
-| 2.5 | ใช้ HDL Designer สร้าง block diagram ของ full adder 4-bit แล้ว generate HDL | โค้ด VHDL ที่ได้ compile ผ่าน simulate ได้ |
-
----
-
-## วันที่ 3: RTL Synthesis and Optimization with Precision RTL (8 ชั่วโมง)
-
-### วัตถุประสงค์ของวัน
-- ดำเนินการ Synthesis จาก RTL สู่ Netlist พร้อมกำหนด Constraints ได้อย่างถูกต้อง
-- วิเคราะห์ Timing และปรับปรุงการออกแบบโดยใช้เทคนิค RTL Optimization ได้
-- จัดทำรายงานด้าน Timing และ Resource และแก้ไข Timing Violations ได้อย่างเหมาะสม
-
-### โครงสร้างเวลา
-
-| เวลา | กิจกรรม | ชม. |
-| --- | --- | --- |
-| 09:00 – 10:30 | บรรยาย: Synthesis Flow & Constraints | 1.5 |
-| 10:30 – 10:45 | พัก | – |
-| 10:45 – 12:00 | บรรยาย: Timing Analysis เบื้องต้น | 1.25 |
-| 12:00 – 13:00 | พักเที่ยง | – |
-| 13:00 – 14:30 | บรรยาย: Optimization Techniques | 1.5 |
-| 14:30 – 14:45 | พัก | – |
-| 14:45 – 16:30 | แล็บ 3: Precision RTL – Synthesis + Timing Report | 1.75 |
-| 16:30 – 17:00 | สรุปประจำวัน + ถาม-ตอบ | 0.5 |
-
----
-
-### 3.1 ภาคทฤษฎี: Synthesis Flow
-
-#### 3.1.1 High-Level View
-
-```
-┌──────────┐    ┌─────────────┐    ┌──────────────┐    ┌──────────┐
-│ RTL VHDL │ ─► │  Elaboration│ ─► │  Optimization│ ─► │  Netlist │
-│  /Verilog│    │  (Parse +   │    │  (Mapping +  │    │ (Gate +  │
-└──────────┘    │  Hierarchy) │    │ Optimization)│    │  Timing) │
-                └─────────────┘    └──────────────┘    └──────────┘
-                          │                  │
-                       reports           reports
-                          ▼                  ▼
-                   (elaboration.log)  (timing.rpt,
-                                       area.rpt,
-                                       power.rpt)
-```
-
-#### 3.1.2 ขั้นตอนหลักใน Precision RTL
-
-1. **Read** – อ่านไฟล์ VHDL/Verilog
-2. **Elaborate** – ตีความ + สร้าง GTECH netlist (technology-independent)
-4. **Apply Constraints** – clock period, input delay, output delay, false paths, multicycle paths
-5. **Compile/Optimize** – mapping เข้าไลบรารีเกตของเทคโนโลยีเป้าหมาย + optimization
-6. **Report** – area, timing, power, fanout, congestion
-
----
-
-### 3.2 ภาคทฤษฎี: Constraints
-
-#### 3.2.1 ประเภทของ Constraints
-
-| ประเภท | ความหมาย | ตัวอย่าง |
-| --- | --- | --- |
-| Clock | กำหนดความถี่ของ clock | `create_clock -name clk -period 10 [get_ports clk]` |
-| Input Delay | เวลาที่ input data มาถึงเทียบกับ clock edge | `set_input_delay -clock clk 2.0 [get_ports din*]` |
-| Output Delay | เวลาที่ output data ต้องออกก่อน clock edge ถัดไป | `set_output_delay -clock clk 2.0 [get_ports dout*]` |
-| False Path | เส้นทางที่ไม่ต้องวิเคราะห์ timing | `set_false_path -from [get_pins reg_a/Q] -to [get_pins reg_b/D]` |
-| Multicycle Path | เส้นทางที่ใช้หลาย cycle | `set_multicycle_path -setup 2 -from ... -to ...` |
-| Operating Conditions | Process, Voltage, Temperature | `set_operating_conditions -process typical -voltage 1.0 -temp 25` |
-
-#### 3.2.2 ไฟล์ Constraints (SDC – Synopsys Design Constraints)
-
-Precision RTL รองรับ SDC format ตัวอย่างไฟล์ `constraints.sdc`:
+ในไฟล์ `synth.tcl` (Day 3) และ `synth_uart.tcl` (Day 5) มีค่า placeholder ที่ต้องแก้ให้ตรงกับ PDK ขององค์กร:
 
 ```tcl
-# Clock
-create_clock -name sys_clk -period 10.0 -waveform {0 5} [get_ports clk]
-derive_pll_clocks
-
-# Input/Output delay
-set_input_delay  -clock sys_clk 2.0 [get_ports {din*}]
-set_output_delay -clock sys_clk 2.0 [get_ports {dout*}]
-
-# False path
-set_false_path -from [get_ports rst]
-
-# Drive strength / load
-set_driving_cell -lib_cell INVX1 -pin Y [get_ports {din*}]
-set_load 0.05 [get_ports {dout*}]
+# ── TODO: เปลี่ยน path ให้ตรงกับ PDK ที่องค์กรให้ ──────────────
+set tech_lib   "/tech/gscl45nm"
+set target_lib "/tech/gscl45nm/stdcells.lib"
 ```
+
+วิธีหา path ที่ถูกต้อง:
+
+```powershell
+# ดูรายชื่อ technology library ที่ Precision RTL มองเห็น
+precision -shell -file <your_script.tcl>
+> report_libs
+```
+
+### 7.4 ข้อกำหนดของสภาพแวดล้อมที่ใช้ทดสอบ
+
+| รายการ | ค่า |
+| --- | --- |
+| Simulator | ModelSim/Questa Advanced Simulator **2026.1** (Windows x64) |
+| VHDL Standard | `--std=2008` (ทุกไฟล์ใช้ `vcom -2008`) |
+| ระบบปฏิบัติการ | Windows 10/11 x64 |
+| Path ที่มีวงเล็บ | รองรับ แต่ต้องห่อด้วย `"` ในคำสั่ง `cmd` |
 
 ---
 
-### 3.3 ภาคทฤษฎี: Timing Analysis เบื้องต้น
+## 8. วิธีรัน Simulation
 
-#### 3.3.1 Setup และ Hold
+### 8.1 แบบ Batch (ทั้งวัน)
 
-สำหรับ register-to-register path:
-
-```
-data launch edge: FF_A latch data on rising edge of clk at t=0
-data capture edge: FF_B must latch at t=T (next rising edge)
-
-Setup requirement: data must arrive at FF_B.D at least t_setup before t=T
-Hold  requirement: data must remain stable at FF_B.D at least t_hold  after  t=T
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day1
+vsim -do run_lab1.do -c
 ```
 
-ค่า **slack** บวก = OK, ลบ = violation
+สคริปต์ `run_labX.do` จะ:
+1. สร้าง work library (`vlib work`) ถ้ายังไม่มี
+2. Compile design units และ testbench ด้วย `vcom -2008`
+3. รัน **ทุก testbench ของวันนั้น** แยก process ผ่าน `exec` (เพื่อไม่ให้ `quit -f` ของ testbench ก่อนหยุด script)
+4. ตรวจจับ `** Error` / `** Failure` / `** Fatal` และสรุปผลท้ายสุด
+
+ผลลัพธ์ท้องเท้า:
 
 ```
-slack = (data arrival time) - (data required time)
-       = (T_clk - delay) - (T_clk - t_setup)
+All Day 1 labs completed successfully (6/6 testbenches passed).
 ```
 
-#### 3.3.2 Timing Report
+### 8.2 แบบ Questa GUI
 
-ตัวอย่าง timing report (Precision RTL):
+1. เปิด Questa → **File ▸ Source** → เลือก `lab_code/dayX/run_labX.do`
+2. ดูผลลัพธ์ใน Transcript
 
-```
-Path 1: VIOLATED  -0.42 ns
-=================================================
-Startpoint: counter_reg[3] (rising edge-triggered flip-flop)
-Endpoint:   comparator_out_reg/D (rising edge-triggered flip-flop)
-Path Group:   sys_clk
-Path Type:    max (setup)
+> เมื่อรันจาก GUI ต้องมี `vsim` อยู่ใน `PATH` ของเครื่อง ไม่เช่นนั้น `exec` จะหาไม่พบ
 
-Point                                    Incr   Path
--------------------------------------------------------------
-clock sys_clk (rise edge)                 0.00   0.00
-clock network delay (ideal)               0.00   0.00
-counter_reg[3]/CK (DFFRX1)                0.00   0.00 r
-counter_reg[3]/Q (DFFRX1)                 0.35   0.35 r
-... (combinational) ...
-comparator_out_reg/D (DFFRX1)            -0.10   5.42 f
-data arrival time                                  5.42
-...
-data required time                                 5.00
-slack (VIOLATED)                                  -0.42
+### 8.3 รัน testbench เดี่ยว
+
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day4
+vlib work
+vcom -2008 -work work alu8.vhd ref_model_alu8.vhd handshake_protocol.vhd
+vcom -2008 -work work tb_alu8_selfcheck.vhd tb_handshake.vhd
+vsim work.tb_alu8_selfcheck
+add wave *
+run 300 us
 ```
 
----
+### 8.4 สังเคราะห์ด้วย Precision RTL (Day 3 / Day 5)
 
-### 3.4 ภาคทฤษฎี: Optimization Techniques
-
-#### 3.4.1 Retiming
-
-ย้าย flip-flop ข้าม combinational logic เพื่อสมดุล delay แต่ละ stage โดยไม่เปลี่ยนฟังก์ชัน
-
-```
-Before:    FF ──► [logic A: 3ns] ──► [logic B: 5ns] ──► FF
-After:     FF ──► [logic A: 3ns] ──► FF ──► [logic B: 5ns] ──► FF
-                                      ^                      
-                          (FF เพิ่ม แต่ critical path ลด)
-```
-
-#### 3.4.2 Pipelining
-
-ตัด combinational chain ยาว ๆ แล้วใส่ register คั่น เพิ่ม throughput โดย latency เพิ่ม 1 cycle
-
-```vhdl
--- Before pipelining
-y <= (a * b) + (c * d);
-
--- After pipelining (latency = 1 cycle)
-process (clk) begin
-    if rising_edge(clk) then
-        p <= a * b;
-    end if;
-end process;
-process (clk) begin
-    if rising_edge(clk) then
-        y <= p + (c * d);
-    end if;
-end process;
-```
-
-#### 3.4.3 Resource Sharing
-
-ใช้ functional unit ร่วมกันเมื่อทำได้ เช่น ALU ที่ทำทั้ง add และ sub โดยใช้ adder ตัวเดียว
-
-```vhdl
--- share adder
-process (a, b, sel)
-begin
-    case sel is
-        when ADD => result <= a + b;
-        when SUB => result <= a - b;
-        when others => result <= (others => '0');
-    end case;
-end process;
-```
-
-#### 3.4.4 Constant Propagation และ Dead Code Elimination
-
-เครื่องมือ synthesis จะทำให้อัตโนมัติ เช่น `if "1" = '1'` จะถูก collapse เป็น always-true
-
-#### 3.4.5 Clock Gating
-
-ลด dynamic power โดยปิด clock ของ register ที่ไม่ทำงานในรอบนั้น (tool จะ infer จาก CE pattern ที่เหมาะสม)
-
-```vhdl
--- สไตล์ที่ tool สามารถ infer clock-gating ได้
-process (clk)
-begin
-    if rising_edge(clk) then
-        if ce = '1' then
-            reg <= din;
-        end if;
-    end if;
-end process;
-```
-
----
-
-### 3.5 ภาคปฏิบัติ: แล็บ 3 – Precision RTL
-
-#### 3.5.1 โครงสร้างโปรเจกต์
-
-```
-lab3_synth/
-├── rtl/
-│   ├── adder8.vhd
-│   ├── counter8.vhd
-│   └── top.vhd
-├── constraints/
-│   └── top.sdc
-├── scripts/
-│   └── synth.tcl
-└── reports/    (สร้างอัตโนมัติ)
-```
-
-#### 3.5.2 Precision RTL – GUI
-
-1. `File ▸ New Project` ตั้งชื่อ ระบุ technology library (เช่น `gscl45nm`)
-3. `File ▸ Add Source…` เพิ่มไฟล์ VHDL
-4. ตั้ง top module: คลิกขวาไฟล์ → **Set as Top**
-5. `Tools ▸ Constraints Editor` หรือ `File ▸ Add Source` เพิ่ม SDC
-6. กดปุ่ม **Compile** (ไอคอนรูปสายฟ้า) เพื่อสังเคราะห์
-7. ดู Reports:
-   - **Area Report** – จำนวน gate, utilization
-   - **Timing Report** – slack ต่อ path
-   - **Power Report** – dynamic/static power
-   - **Netlist** – ไฟล์ `.v` ที่ synthesize แล้ว
-
-#### 3.5.3 Precision RTL – Batch (Tcl script)
-
-ไฟล์ `synth.tcl`:
-
-```tcl
-# Setup
-set company     "MyCompany"
-set design_name "top"
-set tech_lib    "/path/to/gscl45nm"
-
-# New project
-new_project -name $design_name -technology "$tech_lib"
-
-# Add source files
-add_source -type vhdl -work work  rtl/adder8.vhd
-add_source -type vhdl -work work  rtl/counter8.vhd
-add_source -type vhdl -work work  rtl/top.vhd
-
-# Constraints
-add_constraint_file constraints/top.sdc
-
-# Set top
-set_top_module top
-
-# Compile
-compile -incremental_mapping
-
-# Reports
-report_area   -file reports/area.rpt
-report_timing -delay max -num_paths 50 -file reports/timing_max.rpt
-report_timing -delay min -num_paths 50 -file reports/timing_min.rpt
-
-# Export netlist
-export_netlist -format verilog -output netlist/top_netlist.v
-
-# Exit
-exit
-```
-
-รัน:
-
-```bash
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day3
 precision -shell -file synth.tcl
 ```
 
-#### 3.5.4 แก้ไข Timing Violation
+ผลลัพธ์จะอยู่ใน `reports/` และ `netlist/` — ต้องแก้ `tech_lib` ก่อนตาม [ข้อ 7.3](#73-การตั้งค่า-pdk-สำหรับ-synthesis)
 
-ขั้นตอนเมื่อ slack เป็นลบ:
+### 8.5 Gate-Level Simulation (Day 4 / Day 5)
 
-1. ดู **critical path** ใน timing report
-2. วิเคราะห์ว่าเกิดจากส่วนใด (combinational, clock network, I/O)
-3. เลือกวิธีแก้:
-   - **Pipeline** – ใส่ register ตรงกลาง
-   - **Retiming** – ย้าย FF (Precision รองรับด้วย option `-retiming`)
-   - **Logic optimization** – refactor expression
-   - **Relax constraints** – ตรวจสอบว่า constraint สมเหตุสมผล
-   - **Floorplan-aware** – ดู congestion (เบื้องต้นไม่ลงรายละเอียด)
+ต้องรัน synthesis มาก่อนให้ได้ netlist และ SDF แล้วจึงรัน:
 
-#### 3.5.5 แบบฝึกหัดประจำวันที่ 3
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day4
+vsim -do run_gls.do -c
+```
 
-| ข้อ | โจทย์ | ผลที่คาดหวัง |
-|-----|--------|----------------|
-| 3.1 | สังเคราะห์ 8-bit ripple carry adder ด้วย Precision RTL | ได้ netlist + area report |
-| 3.2 | ตั้ง clock period 5 ns สังเคราะห์อีกครั้ง สังเกต slack | slack เป็นลบ |
-| 3.3 | แก้ไขด้วย pipelining (ใส่ register ระหว่าง full adder) | slack ≥ 0 |
-| 3.4 | ลองใช้ Resource Sharing ระหว่าง adder และ subtractor | area ลดลงเทียบกับใช้สองตัวแยก |
-| 3.5 | สร้าง Tcl script ที่สังเคราะห์และ export netlist อัตโนมัติ | script รันซ้ำได้ |
+### 8.6 รัน Lab 3B — Yosys + LibreLane (Linux / WSL)
+
+```bash
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day3_yosys"
+
+bash run_yosys_lab.sh          # ทุกขั้น (ยกเว้น LibreLane ที่ต้องมี PDK)
+bash run_yosys_lab.sh --full   # รวมขั้นตอน LibreLane (~90 วินาที เมื่อมี PDK แล้ว)
+```
+
+หรือรันทีละขั้นด้วย Makefile:
+
+```bash
+make sim        # RTL simulation
+make synth      # Yosys generic synthesis
+make synth-gate # gate-level netlist
+make sim-gls    # Gate-Level Simulation
+make ghdl       # VHDL -> GHDL -> Verilog -> Yosys
+make sky130     # map เข้า sky130 standard cell
+make librelane  # full flow RTL -> GDSII
+```
+
+> ⚠️ **ถ้าอยู่ใน WSL และ path มีวงเล็บ** เช่น `/mnt/e/lab/VHDL(BOI)/...` ต้องห่อด้วย `"` เสมอ
+> ไม่งั้น shell จะตีความ `(BOI)` เป็น subshell แล้วคำสั่งพัง
+
+### 8.7 รัน Lab 5B — RTL-to-GDSII Full Chip Flow (Linux / WSL)
+
+```bash
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day5_yosys"
+
+bash run_yosys_lab.sh          # ทุกขั้น (ยกเว้น LibreLane ที่ต้องมี PDK)
+bash run_yosys_lab.sh --full   # รวมขั้นตอน LibreLane (~1 นาที 50 วินาที เมื่อมี PDK แล้ว)
+```
+
+หรือรันทีละขั้นด้วย Makefile:
+
+```bash
+make sim        # RTL simulation
+make synth      # Yosys generic synthesis
+make synth-gate # gate-level netlist
+make sim-gls    # Gate-Level Simulation
+make sky130     # map เข้า sky130 standard cell
+make librelane  # full flow RTL -> GDSII
+```
+
+ดูผลลัพธ์ layout:
+
+```bash
+RUN=$(ls -dt librelane/runs/RUN_* | head -1)
+klayout "$RUN/final/klayout_gds/uart_top.klayout.gds"
+ls "$RUN/final/render/"
+```
 
 ---
 
-## วันที่ 4: Design Verification Using Questa (8 ชั่วโมง)
+## 9. Troubleshooting: ปัญหาที่พบบ่อย
 
-### วัตถุประสงค์ของวัน
-- เลือกใช้แนวทาง Verification ที่เหมาะสมตามลักษณะการออกแบบได้
-- พัฒนา Testbench แบบ Self-checking และใช้ Assertions เพื่อเพิ่มความแม่นยำในการตรวจสอบได้
-- ดำเนินการ Gate-Level Simulation (GLS) พร้อมกำหนด SDF และวิเคราะห์ปัญหา Timing (Setup/Hold) ได้อย่างถูกต้อง
+### 9.1 ปัญหาที่พบระหว่างจัดทำและแก้ไขแล้ว (บันทึกไว้เป็นบทเรียน)
 
-### โครงสร้างเวลา
-
-| เวลา | กิจกรรม | ชม. |
+| อาการ | สาเหตุ | วิธีแก้ |
 | --- | --- | --- |
-| 09:00 – 10:30 | บรรยาย: Verification Methodology | 1.5 |
-| 10:30 – 10:45 | พัก | – |
-| 10:45 – 12:00 | บรรยาย: Assertions & Functional Coverage | 1.25 |
-| 12:00 – 13:00 | พักเที่ยง | – |
-| 13:00 – 14:30 | บรรยาย: Gate-Level Simulation & SDF | 1.5 |
-| 14:30 – 14:45 | พัก | – |
-| 14:45 – 16:30 | แล็บ 4: GLS + Assertion-based TB | 1.75 |
-| 16:30 – 17:00 | สรุปประจำวัน + ถาม-ตอบ | 0.5 |
+| `** Fatal: Array lengths do not match. Left is 9. Right is 16/17` | ผลลัพธ์ของ `&` มีความยาวไม่ตรงกับตัวแปรปลายทาง | ใช้ `resize()` ให้ความยาวเท่ากัน เช่น `resize(unsigned(a), 9)` |
+| ผลลัพธ์กลับเป็น 17 บิตแทน 9 บิต | operator `&` มี precedence ต่ำกว่า `+` → `a + "0" & b` ถูกตีความเป็น `(a + "0") & (b + 1)` | ครอบวงเล็บการต่อสตริงเสมอ: `a + ("0" & b)` |
+| ค่า output ค้างเป็น `'U'` ตลอด | process อ่านสัญญาณที่ตัวเองเพิ่ง assign (อ่านค่าเก่า) | ขับ output จาก **variable** ใน process ไม่ใช่จาก signal |
+| นาฬิกาไม่เดินเลย | `signal clk : std_logic;` ไม่มี initial value → `not 'U'` = `'U'` | ต้องประกาศ `signal clk : std_logic := '0';` |
+| ค่าที่ป้อนเป็น `'X'` แทน `'0'/'1'` | `std_logic'val(x + 1)` → enumeration ของ `std_logic` เริ่มที่ `'U'` จึงได้ `'X'` | ใช้ `std_logic_vector(to_unsigned(bit, 1))` |
+| เทสต์ "ผ่าน" แต่ไม่ได้ตรวจอะไรจริง | expected value คำนวณจากสัญญาณที่ผิดค่าเหมือนกันทั้งสองฝั่ง | คำนวณ expected จากตัวแปร/ค่าคงที่ ไม่ใช่จาก signal ที่ขับเข้า |
+| Assertion fail ที่ขอบ clock edge | checker อ่าน output ที่เพิ่งถูก register update ใน delta เดียวกัน | ใส่ `wait for 1 ns;` หลัง `rising_edge(clk)` ก่อนตรวจ |
+| ตัวอย่าง serial bit ผิดบิต | ระยะห่างการ sample ไม่เท่ากับ 1 bit period (drift สะสม) | sample ที่ **กลาง cell** ของแต่ละบิต และใช้ `din_rdy` handshake |
 
----
+### 9.1.1 ปัญหาที่พบจากการทำงานกับ Yosys / LibreLane
 
-### 4.1 ภาคทฤษฎี: Verification Methodology
-
-#### 4.1.1 ระดับของ Verification
-
-| ระดับ | จุดประสงค์ | เทคนิค |
+| อาการ | สาเหตุ | วิธีแก้ |
 | --- | --- | --- |
-| Module/IP | ตรวจสอบบล็อกย่อย | Directed testing, self-checking TB |
-| Subsystem/Block | ตรวจสอบการ integrate | Constrained random, assertions |
-| Chip/SoC | ตรวจสอบทั้งชิป | UVM, coverage-driven, formal |
-| Post-silicon | ตรวจสอบบนซิลิคอนจริง | Validation, characterization |
-
-#### 4.1.2 Directed vs Random vs Coverage-Driven
-
-| เทคนิค | ข้อดี | ข้อเสีย |
-| --- | --- | --- |
-| Directed Testing | ตรงจุด, ใช้เวลาเขียนน้อย, ง่ายต่อการ debug | ครอบคลุม corner case น้อย, ต้องเขียนเอง |
-| Constrained Random | ครอบคลุม scenario กว้าง, ลดเวลาเขียน stimulus | ต้องมี checker/assertion ที่ดี, debug ยากกว่า |
-| Coverage-Driven | ปิดจุดอ่อนของ random (ตรวจ coverage เพื่อปิด gap) | ต้องวางแผน + tooling สูง |
-
-#### 4.1.3 Verification Plan (ตัวอย่าง)
-
-```
-1. Feature list extraction    – จาก spec ของ design
-2. Testbench architecture      – TB, monitor, scoreboard
-3. Stimulus generation plan    – directed scenarios + random seeds
-4. Checker/Assertion list      – protocol + data integrity
-5. Coverage model              – code/functional/coverage points
-6. Sign-off criteria           – เป้า coverage ≥ X%
-```
-
----
-
-### 4.2 ภาคทฤษฎี: Assertions
-
-Assertion คือ property ที่ระบุไว้ใน design หรือ testbench เพื่อให้เครื่องมือตรวจสอบ property นั้นระหว่าง simulation (หรือ formal ในกรณี formal verification)
-
-#### 4.2.1 ตัวอย่าง VHDL Assertion (Concurrent)
-
-```vhdl
--- request ต้องคงสถานะสูงจนกว่า grant จะขึ้น
-assert_request_high : assert always
-    (req = '1') ->
-    (req = '1') until (gnt = '1')
-    report "REQ must remain high until GNT"
-    severity failure;
-```
-
-#### 4.2.2 Immediate vs Concurrent Assertion
-
-| ประเภท | ทำงานเมื่อ | ใช้กับ |
-| --- | --- | --- |
-| Immediate (`assert ... report ... severity ...`) | รันทันทีใน process | ตรวจสอบ simple condition |
-| Concurrent (PSL/SVA) | ตรวจตลอดเวลา simulation | property ที่ซับซ้อน, multi-cycle |
-
-#### 4.2.3 Functional Coverage
-
-Questa รองรับ Functional Coverage ผ่าน SystemVerilog covergroup หรือใช้ PSL cover ใน VHDL:
-
-```sv
-covergroup cg_alu @(posedge clk);
-    cp_op : coverpoint op {
-        bins add = {2'b00};
-        bins sub = {2'b01};
-        bins AND = {2'b10};
-        bins OR  = {2'b11};
-    }
-    cp_flags : coverpoint {flags_z, flags_n} {
-        bins zero  = {2'b10};
-        bins neg   = {2'b01};
-        bins other = default;
-    }
-    cross cp_op, cp_flags;
-endgroup
-```
-
-รายงาน coverage ใน Questa: `Tools ▸ Coverage Report`
-
----
-
-### 4.3 ภาคทฤษฎี: Gate-Level Simulation (GLS)
-
-#### 4.3.1 จุดประสงค์
-
-- ตรวจสอบฟังก์ชันหลัง synthesis (logic-level correctness)
-- ตรวจสอบ timing violation (Setup/Hold) ด้วย SDF back-annotation
-- ตรวจสอบ X-propagation, glitch, race condition
-
-#### 4.3.2 SDF (Standard Delay Format)
-
-SDF เป็นไฟล์ที่บรรจุ delay ของ cell และ interconnect ที่ได้จาก P&R (หรือจาก synthesis tool รุ่นที่ทำ delay estimation ได้)
-
-โครงสร้าง:
-
-```
-(CELL
-  (CELLTYPE "DFFRX1")
-  (INSTANCE counter_reg[3])
-  (DELAY
-    (ABSOLUTE
-      (IOPATH clk Q (0.18) (0.20))
-    )
-  )
-)
-```
-
-#### 4.3.3 Simulation Flow
-
-```
-Netlist (gate-level) + SDF ──► Compiled to simulator ──► Run TB ──► Check output
-                  │
-                  └──► (optional) + parasitics + power intent
-```
-
-ใน Questa:
-
-1. Compile netlist จาก Precision RTL เป็น Verilog (ถ้า netlist เป็น Verilog) หรือ VHDL
-2. โหลด SDF: `vsim -sdf {/top/u1} = top.sdf top`
-4. รัน testbench เดิม
-6. ตรวจดู X-propagation และ timing violation ใน transcript
-
----
-
-### 4.4 ภาคปฏิบัติ: แล็บ 4 – Verification ด้วย Questa
-
-#### 4.4.1 Lab 4-1: Self-Checking Testbench + Assertion
-
-ใช้ FSM จากวันที่ 2 เพิ่ม concurrent assertion:
-
-```vhdl
--- ในไฟล์ tb_seq_moore_assert.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_seq_moore_assert is
-end entity tb_seq_moore_assert;
-
-architecture sim of tb_seq_moore_assert is
-    signal clk, rst, din, detected : std_logic;
-    signal err_cnt : integer := 0;
-begin
-    dut : entity work.seq_det_moore
-        port map (clk, rst, din, detected);
-
-    clk <= not clk after 5 ns;
-
-    stim : process
-    begin
-        rst <= '1'; din <= '0';
-        wait for 25 ns;
-        rst <= '0';
-        din <= '1'; wait for 10 ns;
-        din <= '0'; wait for 10 ns;
-        din <= '1'; wait for 10 ns;
-        din <= '1'; wait for 10 ns;
-        wait for 100 ns;
-        report "Error count = " & integer'image(err_cnt);
-        std.env.stop;
-    end process;
-
-    -- Concurrent check
-    chk : process (clk)
-        variable prev_d : std_logic := '0';
-    begin
-        if rising_edge(clk) then
-            if detected = '1' and prev_d = '1' then
-                report "Glitch detected on detected signal"
-                    severity warning;
-            end if;
-            prev_d := detected;
-        end if;
-    end process;
-end architecture sim;
-```
-
-#### 4.4.2 Lab 4-2: Gate-Level Simulation
-
-ใช้ netlist จาก Precision RTL เป็น DUT แทน RTL:
-
-```tcl
-# compile_netlist.do
-vlib work_gate
-vlog -work work_gate netlist/top_netlist.v
-vcom -work work_gate rtl/tb_seq_moore.vhd
-vsim -sdf /tb_seq_moore/dut=netlist/top.sdf work_gate.tb_seq_moore
-add wave *
-run 500 ns
-```
-
-หรือใน batch:
-
-```tcl
-# run_gls.do
-vlib work
-vlog netlist/top_netlist.v
-vcom rtl/tb_seq_moore.vhd
-vsim -c -do "add wave *; run 1 us; quit -f" \
-     -sdf /tb_seq_moore/dut=top.sdf work.tb_seq_moore
-```
-
-#### 4.4.3 Setup/Hold Violation Detection
-
-หาก GLS แสดง `'X'` บนสัญญาณ output หรือ FF ภายใน โดยที่ RTL simulation ปกติดี:
-- ตรวจดู SDF – delay ที่มากเกินไปอาจทำให้ setup violation
-- ดู transcript – Questa จะพิมพ์ `** Warning: Setup violation ...`
-- แก้ไขโดยเพิ่ม clock period หรือ refactor critical path
-
-#### 4.4.4 แบบฝึกหัดประจำวันที่ 4
-
-| ข้อ | โจทย์ | ผลที่คาดหวัง |
-|-----|--------|----------------|
-| 4.1 | พัฒนา self-checking TB ของ 8-bit ALU (add, sub, AND, OR) โดยใช้ reference model | PASS = 64 |
-| 4.2 | เพิ่ม concurrent assertion ตรวจสอบ data ready/valid handshake | assertion ผ่านตลอด |
-| 4.3 | ทำ GLS ของ ALU ด้วย netlist + SDF เปรียบเทียบกับ RTL sim | ผลลัพธ์ตรงกันเมื่อไม่มี timing violation |
-| 4.4 | บังคับให้ setup violation เกิด (ลด clock period) แล้วสังเกต warning | เห็น warning ใน transcript |
-| 4.5 | สร้าง covergroup ตรวจสอบ coverage ของ ALU operations | coverage 100% |
-
----
-
-## วันที่ 5: Mini Project – Digital IC Design and Verification Flow (8 ชั่วโมง)
-
-### วัตถุประสงค์ของวัน
-- ดำเนินกระบวนการออกแบบและตรวจสอบ Digital IC แบบครบวงจรตั้งแต่ RTL ไปจนถึง Gate-Level Simulation ได้
-- ออกแบบและพัฒนา Testbench พร้อมตรวจสอบผลการทำงานผ่าน Simulation และวิเคราะห์ Timing ได้
-- จัดทำรายงานผลการออกแบบและ Verification พร้อมนำเสนอและอธิบายผลลัพธ์ได้อย่างมีประสิทธิภาพ
-
-### โครงสร้างเวลา
-
-| เวลา | กิจกรรม | ชม. |
-| --- | --- | --- |
-| 09:00 – 10:00 | บรรยาย: สรุป ASIC Flow + Verification Plan | 1.0 |
-| 10:00 – 10:15 | พัก | – |
-| 10:15 – 12:00 | Mini Project – ออกแบบ RTL | 1.75 |
-| 12:00 – 13:00 | พักเที่ยง | – |
-| 13:00 – 14:30 | Mini Project – Verification + Synthesis | 1.5 |
-| 14:30 – 14:45 | พัก | – |
-| 14:45 – 16:30 | Mini Project – GLS + Debug + รายงาน | 1.75 |
-| 16:30 – 17:00 | นำเสนอผลงาน + ถาม-ตอบ + สรุปหลักสูตร | 0.5 |
-
----
-
-### 5.1 ภาคทฤษฎี: ASIC Flow Integration (สรุปจากวันที่ 1-4)
-
-```
-┌───────────────────────────────────────────────────────────────────┐
-│ 1. SPEC          : กำหนด functional spec, interface, timing       │
-│ 2. RTL DESIGN    : VHDL/Verilog ตาม coding style                  │
-│ 3. RTL SIM       : self-checking TB + assertions (Questa)         │
-│ 4. SYNTHESIS     : Precision RTL (RTL → Netlist + Constraints)    │
-│ 5. GLS           : Questa + SDF back-annotation                   │
-│ 6. SIGN-OFF      : coverage, timing report, final report          │
-└───────────────────────────────────────────────────────────────────┘
-```
-
-### 5.2 ภาคทฤษฎี: Verification Plan & Sign-off
-
-Verification Plan ต้องครอบคลุม:
-1. **Feature list** – จาก functional spec
-2. **Stimulus plan** – กรณีทดสอบที่ต้องครอบคลุม
-3. **Checker & Assertion** – ตรวจอะไร, property อะไร
-4. **Coverage goals** – code coverage ≥ 95%, functional coverage ≥ 95%
-5. **Corner cases** – boundary, reset, error injection
-6. **Pass criteria** – เกณฑ์ผ่าน (เช่น no X, no error, coverage ถึงเป้า)
-
-### 5.3 ภาคปฏิบัติ: Mini Project – ตัวอย่างโจทย์และแนวทาง
-
-#### 5.3.1 ตัวอย่างโจทย์ (เลือก 1 ใน 3)
-
-**โจทย์ A: UART Transceiver (TX only)**
-- Baud rate generator (programmable divisor)
-- 8-N-1 frame
-- Self-checking TB ทดสอบ pattern ต่าง ๆ
-- สังเคราะห์ด้วย Precision RTL แล้วทำ GLS
-
-**โจทย์ B: SPI Master**
-- Configurable clock divider
-- CPOL/CPHA selectable
-- 8/16-bit transaction
-- Scoreboard เปรียบเทียบ MOSI กับ pattern ที่คาดหวัง
-
-**โจทย์ C: Simple MAC (เน้น FSM-heavy)**
-- FSM สำหรับ packet handling
-- CRC8 checker
-- Constrained random stimulus
-- Functional coverage ของ packet type
-
-#### 5.3.2 ตัวอย่างโครงสร้างโปรเจกต์ (โจทย์ A – UART TX)
-
-```
-mini_project/
-├── spec/uart_spec.md
-├── rtl/
-│   ├── baud_gen.vhd
-│   ├── uart_tx.vhd
-│   └── uart_top.vhd
-├── tb/
-│   ├── tb_uart_top.vhd
-│   └── ref_model.vhd
-├── constraints/
-│   └── uart.sdc
-├── scripts/
-│   ├── synth.tcl
-│   └── run_gls.do
-└── report/
-    └── final_report.md
-```
-
-#### 5.3.3 ตัวอย่าง RTL – UART TX (แนะนำ)
-
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-
-entity uart_tx is
-    port (
-        clk      : in  std_logic;
-        rst      : in  std_logic;
-        din      : in  std_logic_vector(7 downto 0);
-        din_vld  : in  std_logic;
-        din_rdy  : out std_logic;
-        tx       : out std_logic
-    );
-end entity uart_tx;
-
-architecture rtl of uart_tx is
-    type state_t is (IDLE, START, DATA, STOP);
-    signal state    : state_t;
-    signal baud_cnt : integer range 0 to 100;
-    signal bit_cnt  : integer range 0 to 8;
-    signal data_reg : std_logic_vector(7 downto 0);
-begin
-    sync : process (clk)
-    begin
-        if rising_edge(clk) then
-            if rst = '1' then
-                state    <= IDLE;
-                baud_cnt <= 0;
-                bit_cnt  <= 0;
-                data_reg <= (others => '0');
-                tx       <= '1';      -- idle line
-                din_rdy  <= '1';
-            else
-                case state is
-                    when IDLE =>
-                        tx <= '1';
-                        din_rdy <= '1';
-                        if din_vld = '1' then
-                            data_reg <= din;
-                            state    <= START;
-                            baud_cnt <= 0;
-                            din_rdy  <= '0';
-                        end if;
-                    when START =>
-                        if baud_cnt = 86 then  -- assume 100MHz / 115200 ~ 868
-                            tx       <= '0';
-                            baud_cnt <= 0;
-                            state    <= DATA;
-                            bit_cnt  <= 0;
-                        else
-                            baud_cnt <= baud_cnt + 1;
-                        end if;
-                    when DATA =>
-                        if baud_cnt = 86 then
-                            baud_cnt <= 0;
-                            tx <= data_reg(bit_cnt);
-                            if bit_cnt = 7 then
-                                state <= STOP;
-                            else
-                                bit_cnt <= bit_cnt + 1;
-                            end if;
-                        else
-                            baud_cnt <= baud_cnt + 1;
-                        end if;
-                    when STOP =>
-                        if baud_cnt = 86 then
-                            state    <= IDLE;
-                            baud_cnt <= 0;
-                            tx       <= '1';
-                        else
-                            baud_cnt <= baud_cnt + 1;
-                            tx       <= '1';
-                        end if;
-                end case;
-            end if;
-        end if;
-    end process;
-end architecture rtl;
-```
-
-#### 5.3.4 ตัวอย่าง Self-Checking Testbench + Scoreboard
-
-```vhdl
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity tb_uart_tx is
-end entity tb_uart_tx;
-
-architecture sim of tb_uart_tx is
-    constant CLK_PERIOD : time := 10 ns;
-    signal clk, rst          : std_logic;
-    signal din               : std_logic_vector(7 downto 0);
-    signal din_vld, din_rdy  : std_logic;
-    signal tx                : std_logic;
-    signal pass_cnt, fail_cnt : integer := 0;
-
-    -- Scoreboard queue
-    type q_byte_arr is array (natural range <>) of std_logic_vector(7 downto 0);
-    signal expected_q : q_byte_arr(0 to 63);
-    signal q_head, q_tail : integer := 0;
-begin
-    dut : entity work.uart_tx
-        port map (clk => clk, rst => rst,
-                  din => din, din_vld => din_vld, din_rdy => din_rdy,
-                  tx => tx);
-
-    clk <= not clk after CLK_PERIOD / 2;
-
-    -- Scoreboard checker (observe TX bit-by-bit)
-    checker : process
-        variable cnt_baud : integer := 0;
-        variable bit_idx  : integer := 0;
-        variable cur_byte : std_logic_vector(7 downto 0) := (others => '0');
-        variable bits_collected : integer := 0;
-    begin
-        wait until rst = '0';
-        wait until rising_edge(clk);
-
-        loop
-            wait until rising_edge(clk);
-            -- simple: assume baud is multiple of CLK_PERIOD; count edges
-            exit when false;
-        end loop;
-    end process;
-```
-
-หมายเหตุ: Scoreboard ที่สมบูรณ์ควรนับ baud tick จริง ๆ ตัวอย่างนี้เป็นเพียง skeleton ให้นักเรียนเขียนต่อใน Lab
-
-#### 5.3.5 Verification Plan ตัวอย่าง
-
-| Feature | Test Scenario | Pass Criteria |
-| --- | --- | --- |
-| Reset | rst=1 for 5 cycles | tx=1, din_rdy=1 |
-| Transmit 0x55 | send 0x55, observe 10 bits | start=0, bits=01010101, stop=1 |
-| Back-to-back | send 0x55, 0xAA, 0x00, 0xFF | no extra bits between |
-| Glitch protection | change din during transmission | behavior unchanged |
-| Coverage | functional coverage of all byte values | ≥ 95% |
-
-#### 5.3.6 Synthesis + GLS
-
-ใช้ Tcl script จากวันที่ 3 ปรับชื่อ module + ใช้ SDC ที่ clock 100 MHz
-
-```tcl
-create_clock -name sys_clk -period 10 [get_ports clk]
-set_input_delay  -clock sys_clk 2.0 [get_ports {din din_vld rst}]
-set_output_delay -clock sys_clk 2.0 [get_ports {tx din_rdy}]
-set_false_path -from [get_ports rst]
-```
-
-รัน GLS แล้วบันทึก waveform เพื่อแนบในรายงาน
-
-#### 5.3.7 Final Verification Report (Template)
-
-ไฟล์ `report/final_report.md`:
-
-```markdown
-# Mini Project Report – UART TX
-
-## 1. Design Specification
-- Baud rate: 115200
-- Frame: 8-N-1
-- Clock: 100 MHz
-
-## 2. RTL Design
-ไฟล์ rtl/uart_tx.vhd – รายละเอียด state machine
-
-## 3. Verification
-- TB: self-checking with scoreboard
-- Coverage: code coverage = X%, functional coverage = Y%
-- Corner cases ที่ทดสอบ:
-  1. reset
-  2. byte ทุกค่า 0x00 – 0xFF
-  3. back-to-back transmission
-
-## 4. Synthesis Result
-- Area: จำนวน gate = X
-- Target clock: 10 ns
-- Worst slack: Y ns
-
-## 5. Gate-Level Simulation
-- SDF back-annotation: ผ่าน
-- Setup/Hold: ไม่มี violation
-
-## 6. Conclusion
-อธิบายผลลัพธ์และข้อเสนอแนะ
-```
-
-#### 5.3.8 แบบฝึกหัดประจำวันที่ 5 (Mini Project Checklist)
-
-| Item | Description | Done |
-| --- | --- | --- |
-| 1 | RTL design (เลือก 1 โจทย์) | ☐ |
-| 2 | Self-checking testbench | ☐ |
-| 3 | Functional coverage ≥ 95% | ☐ |
-| 4 | Synthesis with constraints (Precision RTL) | ☐ |
-| 5 | Gate-Level Simulation with SDF | ☐ |
-| 6 | Final report + นำเสนอ 5 นาที | ☐ |
-
----
-
-## ภาคผนวก: เครื่องมือ Siemens EDA – คำสั่งที่ใช้บ่อย
-
-### A.1 Questa / ModelSim – Tcl Commands
-
-| คำสั่ง | ความหมาย |
+| `ERROR: Unsupported gate type: NOT` | ABC ไม่รองรับ gate type `NOT` | เอา `NOT` ออกจาก `abc -g` — inverter ถูกสร้างอัตโนมัติอยู่แล้ว |
+| netlist simulate ไม่ได้ (`unknown module type $_NAND_`) | ยังไม่ได้ `simplemap` | เพิ่ม `simplemap` หลัง `abc` |
+| `ghdl: unknown command '--out=verilog'` | สลับลำดับ option (GHDL 5.x) | ใช้ `ghdl synth --std=08 --out=verilog <top>` และ redirect stdout เอง |
+| Yosys `cells.lib` map logic ไม่ได้ | `/usr/share/yosys/cells.lib` มีแต่ DFF ไม่มี gate | ใช้ Liberty ของ PDK จริง (`make sky130`) |
+| `librelane: command not found` | ยังได้ติดตั้งผ่าน nix | `nix profile install nixpkgs#librelane` + เพิ่ม PATH |
+| `Unable to find PDK sky130A` | ยังไม่ได้ดาวน์โหลด | รันด้วย `--volare-pdk` หรือ `--manual-pdk` |
+| `grep` จับ pattern ไม่เจอ | BRE ไม่รองรับ `+`; pattern ที่ขึ้นต้นด้วย `$_` ให้ผลผิด | ใช้ `grep -E` และเลี่ยง `$_` เช่น `SDFF_PP0_ +26` |
+| `iverilog: syntax error` ที่ `rtl/uart_top.v` | ใช้ syntax `name : module` ซึ่งเป็น SystemVerilog | ใช้ `module_name instance_name (...)` แบบ Verilog ธรรมดา |
+| `VERILOG_FILES` หาไฟล์ไม่เจอใน LibreLane | path ผิดระดับ | `dir::` คือ relative จากโฟลเดอร์ config — จาก `librelane/` ใช้ `../rtl/*.v` |
+| `Can't find top module` (LibreLane) | `DESIGN_NAME` ไม่ตรงกับชื่อ module ใน RTL | ตรวจ `DESIGN_NAME` และ `CLOCK_PORT` ให้ตรงกัน |
+| `flow complete` แต่ไม่มี `final/` | รันไม่จบ | ดู `error.log` และ `flow.log` ใน `runs/RUN_*/` |
+| path มีวงเล็บทำให้คำสั่งพัง | shell ไม่ escape | ห่อด้วย `"` เช่น `cd "/mnt/e/lab/VHDL(BOI)/..."` |
+
+### 9.2 ปัญหาที่อาจเจอระหว่างสอน
+
+| อาการ | วิธีแก้ |
 | --- | --- |
-| `vlib <name>` | สร้าง working library |
-| `vcom -2008 file.vhd` | คอมไพล์ VHDL (VHDL-2008) |
-| `vlog file.v` | คอมไพล์ Verilog |
-| `vsim work.tb_top` | เริ่ม simulation |
-| `add wave *` | เพิ่มสัญญาณทั้งหมดใน wave |
-| `add wave -radix hex /tb_top/dut/*` | เพิ่มสัญญาณแบบ hex |
-| `run 1 us` | รัน 1 ไมโครวินาที |
-| `force /tb_top/clk 1 0, 0 5 ns -r 10 ns` | สร้าง clock ด้วย force |
-| `view wave` / `view structure` | เปิดหน้าต่าง |
-| `quit -f` | ออกจากโปรแกรม |
-| `vcover merge -out cov.ucdb *.ucdb` | รวม coverage database |
-
-### A.2 Precision RTL – Tcl Commands
-
-| คำสั่ง | ความหมาย |
-| --- | --- |
-| `new_project` | สร้างโปรเจกต์ |
-| `add_source` | เพิ่ม source file |
-| `add_constraint_file` | เพิ่ม SDC |
-| `set_top_module` | ตั้ง top |
-| `compile` | รัน synthesis |
-| `report_area` / `report_timing` / `report_power` | สร้างรายงาน |
-| `export_netlist` | export netlist |
-
-### A.3 HDL Designer – เมนูสำคัญ
-
-| เมนู | ความหมาย |
-| --- | --- |
-| File ▸ New ▸ Block Diagram | สร้าง block diagram ใหม่ |
-| File ▸ New ▸ State Diagram | สร้าง state diagram |
-| Generate HDL | แปลง diagram เป็น VHDL/Verilog |
-| Block ▸ Add Component | เพิ่ม component |
-| Tools ▸ Library Manager | จัดการไลบรารี |
+| `License request for ... feature failed` | ตรวจสอบ `LM_LICENSE_FILE` หรือ `MGLS_LICENSE_FILE` ให้ชี้ไฟล์ license ขององค์กร |
+| `vsim: command not found` | เพิ่ม `C:\Siemens\modelsim_dlx64_2026.1\win64pe` เข้า `PATH` |
+| `vlib: Library already exists` | ไม่เป็นไร ลบโฟลเดอร์ `work/` ในโฟลเดอร์ lab แล้วรันใหม่ |
+| `Unable to access library 'work'` | ต้อง `cd` เข้าโฟลเดอร์ของวันนั้นก่อนรัน `vsim -do run_labX.do -c` |
+| Synthesis หา library ไม่เจอ | ตรวจสอบ `tech_lib` / `target_lib` ในไฟล์ `.tcl` ตาม [ข้อ 7.3](#73-การตั้งค่า-pdk-สำหรับ-synthesis) |
+| GLS รันแล้วเป็น `'X'` ทั้งหมด | netlist/SDF ไม่ตรงกับ RTL หรือยังไม่ได้สังเคราะห์ — รัน synthesis ใหม่แล้ว export SDF ใหม่ |
 
 ---
 
-## ภาคผนวก: แหล่งอ้างอิงและเอกสารเพิ่มเติม
+## 10. สิ่งที่ยังไม่ได้ทำ / Part 2 (วันที่ 6-10)
 
-### B.1 Standards และคู่มือ
+### 10.1 ช่องว่างในส่วนที่ 1
 
-- IEEE Std 1076 – VHDL Language Reference Manual (LRM)
-- IEEE Std 1076.4 – VHDL Synthesis Package (NUMERIC_STD, NUMERIC_BIT)
-- IEEE Std 1800 – SystemVerilog (ใช้สำหรับ assertion/covergroup ร่วมกับ VHDL)
-- IEEE Std 1364 – Verilog (สำหรับ netlist interchange)
-- IEEE Std 1497 – Standard Delay Format (SDF)
-- Synopsys Design Constraints (SDC) Reference Manual
+| รายการ | สถานะ | หมายเหตุ |
+| --- | --- | --- |
+| Lab 3 (Precision RTL) Step-by-Step Guide | ⚠️ **ยังไม่มี** | เนื้อหา Lab 3 อยู่ใน `Manual_Part1_Day1-5.md` หัวข้อ 3.7 และมีโค้ดครบใน `lab_code/day3/` แล้ว แต่ยังไม่ได้เขียนเป็นคู่มือ step-by-step แยก |
+| Lab 3 runnable script | ✅ มี | `lab_code/day3/run_lab3.do` รันผ่าน 3/3 testbench |
+| **Lab 3B (Yosys + LibreLane) Step-by-Step Guide** | ✅ **มี** | `Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md` — 12 ขั้นตอน พร้อมผลจากการรันจริง |
+| **Lab 3B runnable script** | ✅ **มี** | `lab_code/day3_yosys/run_yosys_lab.sh` — รันผ่านครบทุกขั้น รวม LibreLane 80/80 stages |
+| **Lab 5B (RTL-to-GDSII Full Chip Flow) Step-by-Step Guide** | ✅ **มี** | `Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md` — 12 ขั้นตอน จนถึง GDSII |
+| **Lab 5B runnable script** | ✅ **มี** | `lab_code/day5_yosys/run_yosys_lab.sh` — รันผ่านครบทุกขั้น รวม LibreLane 80/80 stages |
+| **Full chip flow RTL → GDSII** | ✅ **มี** | `lab_code/day5_yosys/librelane/` — DRC/LVS/Antenna ผ่าน ได้ GDSII จริง |
+| GLS จริง (netlist + SDF) | ⚠️ ต้องมี PDK | ต้องสังเคราะห์ใน Day 3 ก่อน (หรือใช้ netlist จาก Lab 3B ที่มีอยู่แล้ว) |
+| Precision RTL report จริง | ⚠️ ต้องมี PDK | ไม่มีตัวเลขที่สังเคราะห์จริงถูกระบุไว้ในเอกสาร — มีแต่ผลของ open-source flow ที่รันจริง |
+| Open-source ASIC flow (RTL → GDSII) | ✅ **มี** | `lab_code/day3_yosys/librelane/` — DRC/LVS/Antenna ผ่าน ได้ GDSII จริง |
 
-### B.2 เอกสารจากผู้ผลิตเครื่องมือ
+### 10.2 Part 2 — IC Layout + MEMS (วันที่ 6-10)
 
-- Questa Advanced Simulator User's Manual – Siemens EDA
-- ModelSim User's Manual – Siemens EDA
-- Precision RTL Synthesis User's Manual – Siemens EDA
-- HDL Designer User's Manual – Siemens EDA
+ยังไม่ได้จัดทำเอกสาร มีโครงสร้างตามโปรแกรมของหลักสูตร:
 
-### B.3 หนังสือแนะนำ
-
-- "VHDL: Programming by Example" – Douglas L. Perry
-- "The Designer's Guide to VHDL" – Peter J. Ashenden
-- "Digital Design and Verilog HDL Fundamentals" – Joseph Cavanagh
-- "Static Timing Analysis for Nanometer Designs" – J. Bhasker, R. Chadha
-
-### B.4 เว็บไซต์อ้างอิง
-
-- Siemens EDA Documentation Portal
-- IEEE Xplore (สำหรับ IEEE Std)
-- OpenCores (ตัวอย่าง open-source IP)
-- EDA Playground (ทดลอง simulation ออนไลน์)
+| วัน | หัวข้อ | เครื่องมือ |
+| --- | --- | --- |
+| 6 | Basic IC Design | Tanner Tools |
+| 7 | CMOS Layout | L-Edit |
+| 8 | MEMS Layout | L-Edit |
+| 9 | MEMS Design / FEM | Ansys |
+| 10 | Advanced MEMS Simulation | — |
 
 ---
 
-## สรุปการเรียนรู้ส่วนที่ 1 (วันที่ 1-5)
+## 11. คู่มือเดิมใน version-01
 
-เมื่อจบส่วนที่ 1 ผู้เข้าอบรมควรสามารถ:
+โฟลเดอร์ `version-01/` เก็บคู่มือภาษาไทยฉบับเดิมที่จัดทำไว้ก่อนหน้านี้ ใช้เป็น **ภาคผนวกเชิงเครื่องมือ** (วิธีใช้เมนูแบบละเอียด) ได้ดี
 
-1. อธิบายกระบวนการออกแบบ ASIC ตั้งแต่ RTL จนถึง Gate-Level ได้
-2. เขียน VHDL ที่สังเคราะห์ได้ตามแนวทางมาตรฐาน
-3. ออกแบบ FSM ทั้งแบบ Moore และ Mealy ได้
-4. ใช้ Questa/ModelSim จำลองการทำงานและ Debug ด้วย waveform ได้
-5. สร้าง Self-checking Testbench พร้อม Assertion ได้
-6. สังเคราะห์วงจรด้วย Precision RTL พร้อมวิเคราะห์ Timing ได้
-7. ทำ Gate-Level Simulation ด้วย SDF back-annotation ได้
-8. ดำเนินโครงงาน Mini Project ครบกระบวนการได้อย่างเป็นระบบ
+| ไฟล์ | เนื้อหา |
+| --- | --- |
+| `คู่มือฝึกอบรม การออกแบบและตรวจสอบวงจรรวมดิจิทัลขั้นสูงด้วยเครื่องมือ Siemens EDA.md` | คู่มือหลักฉบับเดิมของหลักสูตร |
+| `คู่มือการใช้งาน Siemens Precision Synthesis สำหรับการสังเคราะห์วงจรดิจิทัล.md` | วิธีใช้ Precision RTL แบบละเอียด |
+| `คู่มือการใช้งาน QuestaSim สำหรับการจำลองและตรวจสอบวงจร VHDL.md` | วิธีใช้ QuestaSim แบบละเอียด |
+| `คู่มือการใช้งาน ModelSim สำหรับการจำลองและตรวจสอบวงจร VHDL.md` | วิธีใช้ ModelSim แบบละเอียด |
+| `Siemens QuestaSim.md` | เอกสารประกอบ QuestaSim |
 
-**ต่อไป:** ส่วนที่ 2 (วันที่ 6-10) จะกล่าวถึง Basic IC Design, CMOS Layout, MEMS Layout และ MEMS Simulation ด้วย Siemens EDA Tools S-Edit L-Edit
+---
+
+## การติดต่อ
+
+| หัวข้อ | รายละเอียด |
+| --- | --- |
+| ผู้จัดหลักสูตร | HENISWARE Co., Ltd. |
+| ผู้ร่วมจัด | BOI, MUT |
+| ผู้ให้บริการ EDA | Siemens EDA (เดิม Mentor Graphics) |
+| ตัวแทนจำหน่ายในไทย | HENISWARE Co., Ltd. |
+
+---
+
+*เอกสารชุดนี้จัดทำสำหรับ **ส่วนที่ 1 (วันที่ 1–5)** เท่านั้น — ส่วนที่ 2 (วันที่ 6–10) อยู่ระหว่างการจัดทำ*

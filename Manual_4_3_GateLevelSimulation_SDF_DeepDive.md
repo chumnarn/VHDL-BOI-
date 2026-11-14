@@ -71,42 +71,42 @@
 
 ```
    ┌────────────────────────────────────────┐
-   │  Step 1: Generate netlist               │
+   │  Step 1: Generate netlist              │
    │  - Precision RTL → Verilog netlist     │
    │  - Save as top_netlist.v               │
    └─────────────┬──────────────────────────┘
                  │
                  ▼
    ┌────────────────────────────────────────┐
-   │  Step 2: Generate SDF                   │
-   │  - Precision RTL → SDF file           │
+   │  Step 2: Generate SDF                  │
+   │  - Precision RTL → SDF file            │
    │  - Save as top.sdf                     │
    └─────────────┬──────────────────────────┘
                  │
                  ▼
    ┌────────────────────────────────────────┐
-   │  Step 3: Prepare testbench              │
+   │  Step 3: Prepare testbench             │
    │  - Same TB as RTL sim                  │
    │  - May need different instance names   │
    └─────────────┬──────────────────────────┘
                  │
                  ▼
    ┌────────────────────────────────────────┐
-   │  Step 4: Compile libraries + netlist    │
+   │  Step 4: Compile libraries + netlist   │
    │  vlog cell_lib.v                       │
    │  vlog top_netlist.v                    │
    └─────────────┬──────────────────────────┘
                  │
                  ▼
    ┌────────────────────────────────────────┐
-   │  Step 5: Load SDF                       │
+   │  Step 5: Load SDF                      │
    │  vsim -sdf /tb/dut=top.sdf top         │
    └─────────────┬──────────────────────────┘
                  │
                  ▼
    ┌────────────────────────────────────────┐
-   │  Step 6: Run simulation                 │
-   │  - Same testbench patterns              │
+   │  Step 6: Run simulation                │
+   │  - Same testbench patterns             │
    │  - Watch for X, timing warnings        │
    └────────────────────────────────────────┘
 ```
@@ -227,12 +227,12 @@ end
 **Setup violation** เกิดเมื่อ data มาถึง FF ไม่ทันก่อน clock edge
 
 ```
-   clk:       ─┐          ┌──
-                └─────────┘
+   clk:       ─┐         ┌──
+               └─────────┘
                           ↑
                           clock edge
    data:    ──┐
-               └────────────────────
+              └────────────────────
                     ↑
                     data transition (too close to edge)
 
@@ -244,12 +244,12 @@ end
 **Hold violation** เกิดเมื่อ data เปลี่ยนเร็วเกินไปหลัง clock edge
 
 ```
-   clk:       ─┐          ┌──
-                └─────────┘
+   clk:       ─┐         ┌──
+               └─────────┘
                 ↑
                 clock edge (data latch)
    data:    ──┐       ┌──
-               └───────┘
+              └───────┘
                     ↑
                     data changes too soon (hold violation)
 ```
@@ -291,7 +291,7 @@ write wave -window 15200.0ns 15250.0ns wave.glg
 
    expected: a AND b
    actual:  glitch (สั้น pulse ก่อน settle)
-                ┌──
+               ┌──
    y:    ──┐   │  │
            └───┘  └─────
             ↑ glitch (2 ms)
@@ -348,12 +348,12 @@ end process;
 
 ```
    clock edge: ─┐    ┌──
-                 └────┘
+                └────┘
                           ↑
                           must de-assert async reset BEFORE this edge (≥ recovery)
 
-   async reset: ─┐          ┌──
-                   └────────┘
+   async reset: ─┐        ┌──
+                 └────────┘
                               ↑
                               must remain asserted AFTER this edge (≥ removal)
 ```
@@ -394,10 +394,10 @@ Power-aware GLS ต้อง:
    ┌────────┬─────────┬──────────┐
    │ State  │ Domain1 │ Domain2  │
    ├────────┼─────────┼──────────┤
-   │ FULL   │ ON      │ ON         │
-   │ IDLE   │ ON      │ Clock-Gate│
-   │ SLEEP  │ Retention│ OFF      │
-   │ OFF    │ GND       │ GND      │
+   │ FULL   │ ON      │ON        │
+   │ IDLE   │ ON      │Clock-Gate│
+   │ SLEEP  │Retention│ OFF      │
+   │ OFF    │GND      │ GND      │
    └────────┴─────────┴──────────┘
 ```
 
@@ -538,7 +538,7 @@ PATHPULSE defines **pulse propagation behavior** — ว่า pulse ขนา�
 
 ```
    Input:  ───┐
-               └─────────────  pulse width = T1
+              └─────────────  pulse width = T1
 
    Output (narrow):
               ┌──┐
@@ -726,7 +726,7 @@ SDF 4.0 vs 5.0 vs 5.1 มี syntax ต่างกันเล็กน้อ�
    │  GLS Setup                         │
    │  - Compile netlist + SDF           │
    │  - Load TB                         │
-   │  - Run simulation                 │
+   │  - Run simulation                  │
    └────────────┬───────────────────────┘
                 │
                 ▼
@@ -734,8 +734,8 @@ SDF 4.0 vs 5.0 vs 5.1 มี syntax ต่างกันเล็กน้อ�
    │  Analysis                          │
    │  - Setup/Hold violations           │
    │  - X-propagation                   │
-   │  - Glitches                       │
-   │  - Functional mismatch                  │
+   │  - Glitches                        │
+   │  - Functional mismatch             │
    └────────────────────────────────────┘
 ```
 

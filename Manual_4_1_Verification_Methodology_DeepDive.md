@@ -54,9 +54,9 @@
 
 ```
               ┌──────────────────────────┐
-              │   Chip-Level (SoC)        │  ← Highest coverage requirement
+              │   Chip-Level (SoC)       │  ← Highest coverage requirement
               ├──────────────────────────┤
-              │   Subsystem / Block       │  ← Pre-defined specs
+              │   Subsystem / Block      │  ← Pre-defined specs
               ├──────────────────────────┤
               │   Module / Unit (IP)     │  ← Designers verify own work
               └──────────────────────────┘
@@ -64,7 +64,7 @@
               ⏬
               
               ┌──────────────────────────┐
-              │   Post-Silicon Validation │  ← Real silicon
+              │  Post-Silicon Validation │  ← Real silicon
               └──────────────────────────┘
 ```
 
@@ -237,17 +237,17 @@ endclass
 
 ```
    ┌─────────────────────────────────────────────────┐
-   │ Spec → Features → Coverage Model → Test Plan     │
+   │ Spec → Features → Coverage Model → Test Plan    │
    └─────────────────────────────────────────────────┘
                           │
                           ▼
    ┌─────────────────────────────────────────────────┐
-   │ Testbench: random + checker + coverage sampler   │
+   │ Testbench: random + checker + coverage sampler  │
    └─────────────────────────────────────────────────┘
                           │
                           ▼
    ┌─────────────────────────────────────────────────┐
-   │ Run → Coverage Report → Identify Gaps            │
+   │ Run → Coverage Report → Identify Gaps           │
    └─────────────────────────────────────────────────┘
                           │
                           ▼
@@ -257,7 +257,7 @@ endclass
                           │
                           ▼ (iterate)
    ┌─────────────────────────────────────────────────┐
-   │ Coverage goals achieved → DONE                           │
+   │ Coverage goals achieved → DONE                  │
    └─────────────────────────────────────────────────┘
 ```
 
@@ -295,7 +295,7 @@ endclass
    ┌──────────┐    ┌─────────┐    ┌──────────┐
    │ Driver   │───►│   DUT   │───►│ Monitor  │
    └──────────┘    └─────────┘    └────┬─────┘
-                                        ▼
+                                       ▼
                                    ┌──────────┐
                                    │Scoreboard│
                                    └──────────┘
@@ -375,50 +375,50 @@ endclass
 
 ```
    ┌─────────────────────────────────────────────┐
-   │  Test Layer (stimulus generation)            │
-   │  - Test cases                                │
-   │  - Scenarios                                 │
+   │  Test Layer (stimulus generation)           │
+   │  - Test cases                               │
+   │  - Scenarios                                │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
    │  Stimulus Layer (transactions)              │
    │  - Transactions (packets, frames)           │
-   │  - Random generators                          │
+   │  - Random generators                        │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
-   │  Driver Layer                                │
-   │  - Convert transaction → pin-level           │
-   │  - Protocol-aware                             │
+   │  Driver Layer                               │
+   │  - Convert transaction → pin-level          │
+   │  - Protocol-aware                           │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
-   │  DUT (Design Under Test)                      │
+   │  DUT (Design Under Test)                    │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
-   │  Monitor Layer                                │
-   │  - Capture pin-level events                   │
-   │  - Convert → transactions                                      │
+   │  Monitor Layer                              │
+   │  - Capture pin-level events                 │
+   │  - Convert → transactions                   │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
-   │  Checker Layer                                │
-   │  - Compare expected vs actual                 │
-   │  - Reference model                            │
-   │  - Scoreboard                                 │
+   │  Checker Layer                              │
+   │  - Compare expected vs actual               │
+   │  - Reference model                          │
+   │  - Scoreboard                               │
    └────────────┬────────────────────────────────┘
                 │
                 ▼
    ┌─────────────────────────────────────────────┐
-   │  Coverage Layer                               │
-   │  - Functional coverage                        │
-   │  - Code coverage                              │
+   │  Coverage Layer                             │
+   │  - Functional coverage                      │
+   │  - Code coverage                            │
    └─────────────────────────────────────────────┘
 ```
 
@@ -526,19 +526,19 @@ Scoreboard เก็บ **expected transactions** และ **actual transaction
 
 ```
    ┌──────────────────────────────────────────────┐
-   │  Stimulus ──► Expected Queue ──┐              │
-   │                                │              │
-   │                                ▼              │
-   │                          ┌──────────┐         │
-   │                          │ Score-   │         │
-   │                          │  board   │         │
-   │                          └────┬─────┘         │
-   │                                │              │
-   │  DUT ─► Monitor ─► Actual Queue ─┐              │
-   │                                   │              │
-   │                                   ▼              │
-   │                              Match / Mismatch  │
-   │                              Pass / Fail       │
+   │  Stimulus ──► Expected Queue ──┐             │
+   │                                │             │
+   │                                ▼             │
+   │                          ┌──────────┐        │
+   │                          │ Score-   │        │
+   │                          │  board   │        │
+   │                          └────┬─────┘        │
+   │                               │              │
+   │  DUT ─► Monitor ─► Actual Queue ─┐           │
+   │                                  │           │
+   │                                  ▼           │
+   │                             Match / Mismatch │
+   │                             Pass / Fail      │
    └──────────────────────────────────────────────┘
 ```
 
@@ -827,21 +827,21 @@ endproperty
 
 ```
    ┌──────────────┐         ┌──────────────┐
-   │ Spec         │         │ Implementation│
-   │ (properties) │   ────► │ (RTL)         │
+   │ Spec         │         │Implementation│
+   │ (properties) │   ────► │(RTL)         │
    └──────────────┘         └──────────────┘
                                      │
                                      ▼
                             ┌──────────────┐
                             │ Formal Tool  │
                             │ (JasperGold, │
-                            │  Questa Formal)│
+                            │Questa Formal)│
                             └──────────────┘
                                      │
                                      ▼
                             ┌──────────────┐
                             │  PROOF /     │
-                            │  Counter-example│
+                            │Counter-example│
                             └──────────────┘
 ```
 
@@ -956,13 +956,13 @@ endproperty
 
 ```
    ┌──────────────────────────────────────┐
-   │  VIP for AXI4                         │
-   │  ┌──────────┐   ┌─────────────┐     │
-   │  │  Driver  │   │  Monitor    │     │
-   │  └──────────┘   └─────────────┘     │
-   │  ┌──────────┐   ┌─────────────┐     │
-   │  │Sequencer │   │ Scoreboard  │     │
-   │  └──────────┘   └─────────────┘     │
+   │  VIP for AXI4                        │
+   │  ┌──────────┐   ┌─────────────┐      │
+   │  │  Driver  │   │  Monitor    │      │
+   │  └──────────┘   └─────────────┘      │
+   │  ┌──────────┐   ┌─────────────┐      │
+   │  │Sequencer │   │ Scoreboard  │      │
+   │  └──────────┘   └─────────────┘      │
    └──────────────────────────────────────┘
             │                     │
             ▼                     ▼
@@ -1089,9 +1089,9 @@ randomize ...
 ```
    ┌─────────────────────────────────────────────┐
    │  Portable Stimulus (Accellera standard)     │
-   │  - Abstract scenario description             │
-   │  - Platform-independent                       │
-   │  - Generate for sim, emul, post-silicon    │
+   │  - Abstract scenario description            │
+   │  - Platform-independent                     │
+   │  - Generate for sim, emul, post-silicon     │
    └─────────────────────────────────────────────┘
 ```
 
