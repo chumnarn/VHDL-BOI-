@@ -1,0 +1,231 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/lab/VHDL(BOI)/lab_code/day4
+Ealu8
+Z1 w1792040933
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 0
+R0
+Z5 8alu8.vhd
+Z6 Falu8.vhd
+l0
+L12 1
+VLzig?7ESPJ5`fZBSXbk][1
+!s100 >4:feOOeFa4Kbj?HXdB8Y0
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1792041248
+!i10b 1
+Z9 !s108 1792041248.000000
+Z10 !s90 -2008|-work|work|alu8.vhd|ref_model_alu8.vhd|handshake_protocol.vhd|
+Z11 !s107 handshake_protocol.vhd|ref_model_alu8.vhd|alu8.vhd|
+!i113 1
+Z12 o-2008 -work work
+Z13 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+Z14 DEx4 work 4 alu8 0 22 Lzig?7ESPJ5`fZBSXbk][1
+!i122 0
+l24
+L22 30
+VPi40IKhj@jJ>G=5h^h=VJ2
+!s100 ZQNG9eOaVAcice[TXi?Qc0
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ehandshake_protocol
+Z15 w1792041264
+R2
+R3
+R4
+!i122 1
+R0
+Z16 8handshake_protocol.vhd
+Z17 Fhandshake_protocol.vhd
+l0
+L8 1
+VL4S>fUZOKZUiF?CLDU<YX2
+!s100 W:`KU4<[DKSOHZXfTK1`F2
+R7
+33
+Z18 !s110 1792041269
+!i10b 1
+Z19 !s108 1792041269.000000
+Z20 !s90 -2008|-work|work|handshake_protocol.vhd|
+Z21 !s107 handshake_protocol.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+Z22 DEx4 work 18 handshake_protocol 0 22 L4S>fUZOKZUiF?CLDU<YX2
+!i122 1
+l24
+L20 36
+Vh4jIQ^z5?IkZU9CGN6jI<1
+!s100 5ALO_4liYL_VJoYid];Hd1
+R7
+33
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
+Eref_model_alu8
+Z23 w1792040938
+R2
+R3
+R4
+!i122 0
+R0
+Z24 8ref_model_alu8.vhd
+Z25 Fref_model_alu8.vhd
+l0
+L7 1
+VP6EUmz5:2[`MZf8nS3^X;0
+!s100 CT0U?UUG>`NFUj<lcK7M61
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Asim
+R2
+R3
+R4
+Z26 DEx4 work 14 ref_model_alu8 0 22 P6EUmz5:2[`MZf8nS3^X;0
+!i122 0
+l18
+L17 25
+VTGcfn`zi_;WQL>EbH6;U[1
+!s100 MSP[FN0SJKaXalihB`0Wc2
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Etb_alu8_selfcheck
+Z27 w1792040943
+R2
+R3
+R4
+!i122 2
+R0
+Z28 8tb_alu8_selfcheck.vhd
+Z29 Ftb_alu8_selfcheck.vhd
+l0
+L8 1
+VQgRf:l9:C57BAAfB_?me03
+!s100 2?Um;1f2Ag9nd2oe[Gl9X3
+R7
+33
+Z30 !s110 1792041275
+!i10b 1
+Z31 !s108 1792041275.000000
+Z32 !s90 -2008|-work|work|tb_alu8_selfcheck.vhd|tb_handshake.vhd|
+Z33 !s107 tb_handshake.vhd|tb_alu8_selfcheck.vhd|
+!i113 1
+R12
+R13
+Asim
+Z34 DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+R26
+R14
+R2
+R3
+R4
+DEx4 work 17 tb_alu8_selfcheck 0 22 QgRf:l9:C57BAAfB_?me03
+!i122 2
+l18
+L11 53
+VX4LLE^oM72FT5PNZo^AeD0
+!s100 Xd?gf7C8Wkd_3e4:`c6jh3
+R7
+33
+R30
+!i10b 1
+R31
+R32
+R33
+!i113 1
+R12
+R13
+Etb_handshake
+Z35 w1792041283
+R2
+R3
+R4
+!i122 3
+R0
+Z36 8tb_handshake.vhd
+Z37 Ftb_handshake.vhd
+l0
+L7 1
+VnXfh3Hc1Ng23?Yc@gD2MX1
+!s100 ic0BAUJ[W^a81@ZAjOMgH0
+R7
+33
+Z38 !s110 1792041287
+!i10b 1
+Z39 !s108 1792041287.000000
+Z40 !s90 -2008|-work|work|tb_handshake.vhd|
+!s107 tb_handshake.vhd|
+!i113 1
+R12
+R13
+Asim
+R34
+R22
+R2
+R3
+R4
+DEx4 work 12 tb_handshake 0 22 nXfh3Hc1Ng23?Yc@gD2MX1
+!i122 3
+l17
+L10 70
+VXmbf0D>k_0OI^Rz4=kHg_2
+!s100 :KmNbR4n8=XUj3RIOl5<D0
+R7
+33
+R38
+!i10b 1
+R39
+R40
+Z41 !s107 tb_handshake.vhd|
+!i113 1
+R12
+R13

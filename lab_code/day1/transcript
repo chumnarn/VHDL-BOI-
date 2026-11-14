@@ -1,0 +1,10 @@
+# ** Note: (vsim-220) 'C:/Siemens/modelsim_dlx64_2026.1/win64pe/../modelsim.ini' is used as the ini file.
+# vsim -c -do "verify_and_or.do" work.tb_and_or 
+# Start time: 12:15:31 on Oct 15,2026
+# ** License Issue: License request for msimpevsim feature failed
+# ** License Issue: Invalid host. (C:\MentorGraphics\License_Files\license.txt)
+# ** License Issue: Invalid host. (C:\MentorGraphics\License_Files\license.txt)
+# ** Error: Failure to obtain a VHDL simulation license. Unable to checkout 'msimpevsim' license feature.
+# Error loading design
+# End time: 12:15:34 on Oct 15,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0

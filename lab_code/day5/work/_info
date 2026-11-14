@@ -1,0 +1,187 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/lab/VHDL(BOI)/lab_code/day5
+Ebaud_gen
+Z1 w1792040984
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 0
+R0
+Z5 8baud_gen.vhd
+Z6 Fbaud_gen.vhd
+l0
+L8 1
+V^I<i1>=V;I[lGi4a`Ub4b1
+!s100 K[^h8_fF;TLPe_TJcMi6a0
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1792041296
+!i10b 1
+Z9 !s108 1792041295.000000
+Z10 !s90 -2008|-work|work|baud_gen.vhd|uart_tx.vhd|uart_top.vhd|
+Z11 !s107 uart_top.vhd|uart_tx.vhd|baud_gen.vhd|
+!i113 1
+Z12 o-2008 -work work
+Z13 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+Z14 DEx4 work 8 baud_gen 0 22 ^I<i1>=V;I[lGi4a`Ub4b1
+!i122 0
+l25
+L21 28
+VL6MH][BidV7HFedUkzdiL3
+!s100 966I6I03k2Li1FCcDoBe82
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Etb_uart_top
+Z15 w1792041017
+R2
+R3
+R4
+!i122 1
+R0
+Z16 8tb_uart_top.vhd
+Z17 Ftb_uart_top.vhd
+l0
+L9 1
+VQ5k89oD;O<lG5X`k]Y0ZW0
+!s100 =W79]SOK1TJO010nGn7Cc1
+R7
+33
+Z18 !s110 1792041303
+!i10b 1
+Z19 !s108 1792041303.000000
+Z20 !s90 -2008|-work|work|tb_uart_top.vhd|
+!s107 tb_uart_top.vhd|
+!i113 1
+R12
+R13
+Asim
+DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+Z21 DEx4 work 8 uart_top 0 22 Umh;2U[U65]ze_zi=9Pj81
+R2
+R3
+R4
+DEx4 work 11 tb_uart_top 0 22 Q5k89oD;O<lG5X`k]Y0ZW0
+!i122 1
+l24
+L12 88
+VoKlelB8MlMkz20?LJCKSJ1
+!s100 6Zo8O:fcD40:bbSR78kK^1
+R7
+33
+R18
+!i10b 1
+R19
+R20
+Z22 !s107 tb_uart_top.vhd|
+!i113 1
+R12
+R13
+Euart_top
+Z23 w1792040992
+R2
+R3
+R4
+!i122 0
+R0
+Z24 8uart_top.vhd
+Z25 Fuart_top.vhd
+l0
+L7 1
+VUmh;2U[U65]ze_zi=9Pj81
+!s100 LdOee=OHdZRUCjKKS=BP72
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Astruct
+Z26 DEx4 work 7 uart_tx 0 22 <lN9FXUOV2cG5Pj`;:hl32
+R14
+R2
+R3
+R4
+R21
+!i122 0
+l20
+L18 26
+VYEA?H=LD3bAIZG>8hZ3jF1
+!s100 W7jdjS`g9GOKzD^P<80Wb2
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Euart_tx
+Z27 w1792040989
+R2
+R3
+R4
+!i122 0
+R0
+Z28 8uart_tx.vhd
+Z29 Fuart_tx.vhd
+l0
+L7 1
+V<lN9FXUOV2cG5Pj`;:hl32
+!s100 lfW^elPh6;LN0ab@NzL3K3
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+R4
+R26
+!i122 0
+l24
+L19 54
+V5YZb9N2R@S29m?Ifn?RAC3
+!s100 01W2EaU?QLabSLfMUGjCM2
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
