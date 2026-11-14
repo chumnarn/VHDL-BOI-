@@ -1,0 +1,40 @@
+# synth_gates.ys
+# Yosys technology mapping -> gate-level netlist ที่ simulate ได้จริง
+#
+# เป้าหมาย: สร้าง netlist ที่ประกอบด้วย gate พื้นฐาน (AND/OR/XOR/NOT/MUX)
+#   แล้วเอาไปทำ Gate-Level Simulation ด้วย Icarus Verilog
+#   เพื่อพิสูจน์ว่า netlist ที่ Yosys สร้างมีฟังก์ชันเหมือน RTL เดิม
+#
+# รันจากโฟลเดอร์รากของแล็บ:  yosys -s scripts/synth_gates.ys
+
+# ---------------------------------------------------------------- adder8 ----
+read_verilog rtl/adder8.v
+hierarchy -check -top adder8
+
+# -noabc : ยังไม่ map เป็น gate เพื่อเรา control ตัว map เองด้วย abc ด้านล่าง
+synth -top adder8 -noabc
+
+# map เป็น gate พื้นฐาน
+# (หมายเหตุ: ABC ไม่รองรับ gate type "NOT" - ตัว inverter ถูกสร้างให้อัตโนมัติ)
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX
+
+# simplemap แปลง cell ภายในของ Yosys ($_AND_ ฯลฯ) ให้เป็น expression
+# ของ Verilog ธรรมดา -> Icarus Verilog simulate ได้
+simplemap
+opt_clean
+
+tee -o build/adder8_gates_stat.txt stat
+write_verilog -noattr build/adder8_gates.v
+
+# ---- เริ่ม design ใหม่ ----------------------------------------------------
+design -reset
+
+# ----------------------------------------------------------- adder8_pipe ----
+read_verilog rtl/adder8_pipe.v
+hierarchy -check -top adder8_pipe
+synth -top adder8_pipe -noabc
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX
+simplemap
+opt_clean
+tee -o build/adder8_pipe_gates_stat.txt stat
+write_verilog -noattr build/adder8_pipe_gates.v

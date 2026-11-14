@@ -45,8 +45,12 @@ begin
                 end if;
             when S3 =>
                 detected <= '1';
+                -- OVERLAPPING detection: keep the longest suffix that is also
+                -- a prefix of "101" so that "10101" is detected twice.
+                --   S3 + '1' -> suffix "1"  -> S1
+                --   S3 + '0' -> suffix "10" -> S2   (NOT S0 - see Lab2 Challenge 2)
                 if din = '1' then next_state <= S1;
-                else              next_state <= S0;
+                else              next_state <= S2;
                 end if;
         end case;
     end process comb_proc;

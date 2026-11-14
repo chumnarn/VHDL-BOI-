@@ -20,6 +20,7 @@ begin
     process
         variable ia, ib, ic, es, ec : integer;
         variable ev, ey : std_logic_vector(7 downto 0);
+        variable exp_cout : std_logic;
     begin
         rst <= '1'; wait for 25 ns;
         rst <= '0';
@@ -31,7 +32,9 @@ begin
             ic := vec mod 2;
             a <= std_logic_vector(to_unsigned(ia, 8));
             b <= std_logic_vector(to_unsigned(ib, 8));
-            cin <= std_logic'val(ic + 1);
+            -- std_logic'val(ic + 1) would give 'X'/'0' (the std_logic
+            -- enumeration starts at 'U'). Use a conditional for a real '0'/'1'.
+            cin <= '1' when ic = 1 else '0';
             es := ia + ib + ic;
             ev := std_logic_vector(to_unsigned(es mod 256, 8));
             ec := 1 when es > 255 else 0;
@@ -45,7 +48,12 @@ begin
                        " got=" & integer'image(to_integer(unsigned(sum))) &
                        " exp=" & integer'image(to_integer(unsigned(ev)))
                 severity failure;
-            assert cout = std_logic'val(ec + 1)
+            if ec = 1 then
+                exp_cout := '1';
+            else
+                exp_cout := '0';
+            end if;
+            assert cout = exp_cout
                 report "Pipelined adder cout fail vec=" & integer'image(vec)
                 severity failure;
         end loop;

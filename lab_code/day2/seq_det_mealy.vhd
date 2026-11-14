@@ -45,6 +45,8 @@ begin
                 end if;
             when S2 =>
                 if din = '1' then
+                    -- OVERLAPPING detection: keep the suffix "1" so that a
+                    -- following "01" completes another "101".
                     next_state <= S1;
                     detected <= '1';
                 else

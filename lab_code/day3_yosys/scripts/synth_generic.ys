@@ -1,0 +1,24 @@
+# synth_generic.ys
+# Yosys generic synthesis - ไม่ต้องใช้ technology library
+#
+# เป้าหมาย: เห็นกระบวนการ "การย่อย RTL เป็น logic สามารถ" ของ Yosys
+#   RTL  -> RTLIL -> (opt/techmap) -> generic cells ($add, $_AND_, ...)
+#
+# รันจากโฟลเดอร์รากของแล็บ:  yosys -s scripts/synth_generic.ys
+
+# ---------------------------------------------------------------- adder8 ----
+read_verilog rtl/adder8.v
+hierarchy -check -top adder8
+synth -top adder8
+tee -o build/adder8_generic_stat.txt stat
+write_verilog -noattr build/adder8_generic.v
+
+# ---- เริ่ม design ใหม่ (ล้างสถานะทั้งหมด) --------------------------------
+design -reset
+
+# ----------------------------------------------------------- adder8_pipe ----
+read_verilog rtl/adder8_pipe.v
+hierarchy -check -top adder8_pipe
+synth -top adder8_pipe
+tee -o build/adder8_pipe_generic_stat.txt stat
+write_verilog -noattr build/adder8_pipe_generic.v

@@ -2,6 +2,7 @@
 -- Testbench for 4-input NAND gate (all 16 patterns)
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity tb_nand4_gate is
 end entity tb_nand4_gate;
@@ -16,10 +17,13 @@ begin
         variable cnt : integer := 0;
     begin
         for i in 0 to 15 loop
-            a <= std_logic'val((i / 8) mod 2 + 1);  -- '0' or '1'
-            b <= std_logic'val((i / 4) mod 2 + 1);
-            c <= std_logic'val((i / 2) mod 2 + 1);
-            d <= std_logic'val((i)      mod 2 + 1);
+            -- NOTE: do NOT use std_logic'val(bit + 1) here.
+            -- The std_logic enumeration order is 'U','X','0','1',... so val(1)='X'
+            -- and val(2)='0'. Use a conditional to get a real '0'/'1'.
+            a <= '1' when ((i / 8) mod 2) = 1 else '0';
+            b <= '1' when ((i / 4) mod 2) = 1 else '0';
+            c <= '1' when ((i / 2) mod 2) = 1 else '0';
+            d <= '1' when (i mod 2) = 1 else '0';
             wait for 5 ns;
 
             assert y = not (a and b and c and d)

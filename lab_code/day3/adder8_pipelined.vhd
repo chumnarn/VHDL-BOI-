@@ -47,8 +47,11 @@ begin
                 cout <= '0';
             else
                 -- Low nibble add with r1_cin
-                va := "0" & unsigned(r1_a(3 downto 0));
-                vb := "0" & unsigned(r1_b(3 downto 0));
+                -- NOTE: resize() zero-extends to the full 9 bits. A plain
+                -- "0" & unsigned(r1_a(3 downto 0)) would only be 5 bits and
+                -- the mismatched length raises a runtime error.
+                va := resize(unsigned(r1_a(3 downto 0)), 9);
+                vb := resize(unsigned(r1_b(3 downto 0)), 9);
                 if r1_cin = '1' then
                     vs := va + vb + 1;
                 else
@@ -58,8 +61,8 @@ begin
                 low_cout <= vs(4);
 
                 -- High nibble add with carry from low
-                va := "0" & unsigned(r1_a(7 downto 4));
-                vb := "0" & unsigned(r1_b(7 downto 4));
+                va := resize(unsigned(r1_a(7 downto 4)), 9);
+                vb := resize(unsigned(r1_b(7 downto 4)), 9);
                 if vs(4) = '1' then
                     vs := va + vb + 1;
                 else

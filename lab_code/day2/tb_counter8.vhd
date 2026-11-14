@@ -40,12 +40,13 @@ begin
             severity failure;
 
         -- 4) Resume counting
+        -- cnt was 6 before the pause; 5 more enabled clock edges give 11
         ce <= '1';
         for i in 0 to 4 loop
             wait until rising_edge(clk);
             wait for 1 ns;
         end loop;
-        assert cnt = to_unsigned(10, COUNTER_WIDTH)
+        assert cnt = to_unsigned(11, COUNTER_WIDTH)
             report "Counter resume fail: got " & integer'image(to_integer(cnt))
             severity failure;
 

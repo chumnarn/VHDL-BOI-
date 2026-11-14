@@ -20,7 +20,9 @@ begin
         variable fail_cnt : integer := 0;
     begin
         for c in 0 to 1 loop
-            cin <= std_logic'val(c + 1);
+            -- std_logic'val(c + 1) would give 'X'/'0' because the std_logic
+            -- enumeration starts at 'U'. Use a conditional for a real '0'/'1'.
+            cin <= '1' when c = 1 else '0';
             for i in 0 to 15 loop
                 for j in 0 to 15 loop
                     a <= std_logic_vector(to_unsigned(i, 4));
@@ -49,11 +51,6 @@ begin
                                    " exp=0"
                             severity failure;
                     end if;
-                        report "Cout fail: a=" & integer'image(i) &
-                               " b=" & integer'image(j) &
-                               " cin=" & integer'image(c) &
-                               " got=" & std_logic'image(cout)
-                        severity failure;
                     pass_cnt := pass_cnt + 1;
                 end loop;
             end loop;
