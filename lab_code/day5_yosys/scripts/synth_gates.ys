@@ -1,0 +1,29 @@
+# synth_gates.ys
+# Yosys technology mapping -> gate-level netlist ที่ simulate ได้จริง
+#
+# เป้าหมาย: สร้าง netlist ที่ประกอบด้วย gate พื้นฐาน แล้วเอาไปทำ
+#   Gate-Level Simulation ด้วย Icarus Verilog โดยใช้ testbench ไฟล์เดียวกับ RTL
+#   เพื่อพิสูจน์ว่า netlist ที่ Yosys สร้างมีฟังก์ชันเหมือน Mini Project เดิม
+#
+# รันจากโฟลเดอร์รากของแล็บ:  yosys -s scripts/synth_gates.ys
+
+read_verilog rtl/baud_gen.v
+read_verilog rtl/uart_tx.v
+read_verilog rtl/uart_top.v
+
+hierarchy -check -top uart_top
+
+# -noabc : ยังไม่ map เป็น gate เพื่อเราจะ control ตัว map เองด้วย abc ด้านล่าง
+synth -top uart_top -flatten -noabc
+
+# map เป็น gate พื้นฐาน
+# (หมายเหตุ: ABC ไม่รองรับ gate type "NOT" - ตัว inverter ถูกสร้างให้อัตโนมัติ)
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX
+
+# simplemap แปลง cell ภายในของ Yosys ($_AND_ ฯลฯ) ให้เป็น expression
+# ของ Verilog ธรรมดา -> Icarus Verilog simulate ได้
+simplemap
+opt_clean
+
+tee -o build/uart_top_gates_stat.txt stat
+write_verilog -noattr build/uart_top_gates.v

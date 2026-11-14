@@ -64,16 +64,22 @@ begin
         std.env.stop;
     end process;
 
-    -- Concurrent check: req must be low during reset
-    chk_rst_req : process (clk)
+    -- Concurrent check: req must be low during reset.
+    -- The DUT drives req from a flip-flop, so at the first rising edge req is
+    -- still 'U' (the register has not been updated yet). Sampling it in the
+    -- same delta as the clock edge is a race: wait one settle time so the
+    -- register update is visible before the check.
+    -- NOTE: this process must NOT have a sensitivity list - a process with a
+    -- sensitivity list may not contain a wait statement.
+    chk_rst_req : process
     begin
-        if rising_edge(clk) then
-            if rst = '1' then
-                assert req = '0'
-                    report "REQ must be low during reset (at time " &
-                           time'image(now) & ")"
-                    severity failure;
-            end if;
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        if rst = '1' then
+            assert req = '0'
+                report "REQ must be low during reset (at time " &
+                       time'image(now) & ")"
+                severity failure;
         end if;
     end process;
 end architecture sim;

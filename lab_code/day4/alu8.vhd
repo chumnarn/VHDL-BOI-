@@ -20,13 +20,11 @@ entity alu8 is
 end entity alu8;
 
 architecture rtl of alu8 is
-    signal yy : unsigned(7 downto 0);
 begin
     process (a, b, op)
         variable bb : unsigned(7 downto 0);
-        variable va : unsigned(8 downto 0);
-        variable vb : unsigned(8 downto 0);
         variable vy : unsigned(8 downto 0);
+        variable y8 : unsigned(7 downto 0);
     begin
         -- Compute bb: invert b for SUB
         case op is
@@ -35,17 +33,24 @@ begin
         end case;
 
         -- Compute based on op
+        -- NOTE: resize() zero-extends to 9 bits. Without it the AND/OR
+        -- branches would build a 16-bit value ("00000000" & a and bb) and
+        -- the mismatched length raises "Array lengths do not match".
         case op is
-            when "00" => vy := ("0" & unsigned(a)) + ("0" & bb);
-            when "01" => vy := ("0" & unsigned(a)) + ("0" & bb) + 1;
-            when "10" => vy := "00000000" & (unsigned(a) and bb);
-            when "11" => vy := "00000000" & (unsigned(a) or  bb);
+            when "00" => vy := resize(unsigned(a), 9) + resize(bb, 9);
+            when "01" => vy := resize(unsigned(a), 9) + resize(bb, 9) + 1;
+            when "10" => vy := resize(unsigned(a) and bb, 9);
+            when "11" => vy := resize(unsigned(a) or  bb, 9);
             when others => vy := (others => '0');
         end case;
 
-        yy <= vy(7 downto 0);
-        y      <= std_logic_vector(yy);
-        z_flag <= '1' when yy = (yy'range => '0') else '0';
-        n_flag <= yy(7);
+        -- IMPORTANT: drive the outputs from the VARIABLE, not from a signal
+        -- that this process assigns. Reading back a signal that the same
+        -- process drives returns the OLD value, so "y <= std_logic_vector(yy)"
+        -- would latch the previous (or initial 'U') value and never settle.
+        y8      := vy(7 downto 0);
+        y       <= std_logic_vector(y8);
+        z_flag  <= '1' when y8 = (y8'range => '0') else '0';
+        n_flag  <= y8(7);
     end process;
 end architecture rtl;

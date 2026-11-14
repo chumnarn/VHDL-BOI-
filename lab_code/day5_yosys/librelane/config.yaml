@@ -1,0 +1,43 @@
+# config.yaml - LibreLane configuration (Lab 5B — UART TX, RTL → GDSII)
+#
+# รูปแบบของไฟล์นี้เป็น schema ของ LibreLane 3.x
+# ค่าที่อยู่ในระดับบนสุดคือค่าที่ใช้ทั่วไป ส่วนบล็อก "pdk::<ชื่อ PDK>:" ใช้ override
+# เฉพาะเมื่อใช้ PDK ตัวนั้น
+#
+# วิธีรัน:
+#   librelane --volare-pdk -p sky130A config.yaml
+#   (ครั้งแรกจะดาวน์โหลด PDK อัตโนมัติ ประมาณ 1-2 GB)
+
+# ---- ข้อมูลออกแบบหลัก ---------------------------------------------------
+DESIGN_NAME: uart_top
+# ชี้กลับไปที่ rtl/ ของแล็บโดยตรง เพื่อไม่ให้มีสำเนา RTL สองชุด
+# (dir:: = path สัมพัทธ์จากโฟลเดอร์ที่วาง config.yaml ไว้)
+VERILOG_FILES: dir::../rtl/*.v
+CLOCK_PORT: clk
+CLOCK_PERIOD: 10          # ns -> 100 MHz (ตรงกับ clk 100 MHz ของ Mini Project)
+
+# ---- SDC ----------------------------------------------------------------
+PNR_SDC_FILE: dir::src/impl.sdc
+SIGNOFF_SDC_FILE: dir::src/signoff.sdc
+
+# ---- Power Distribution Network ------------------------------------------
+PDN_VOFFSET: 5
+PDN_HOFFSET: 5
+PDN_VWIDTH: 2
+PDN_HWIDTH: 2
+PDN_VPITCH: 30
+PDN_HPITCH: 30
+PDN_SKIPTRIM: true
+
+# ---- ค่าเฉพาะตาม PDK ----------------------------------------------------
+pdk::sky130*:
+  FP_CORE_UTIL: 45        # % ของพื้นที่ core ที่ใช้จริงหลังวางวงจร
+  CLOCK_PERIOD: 10.0
+
+pdk::ihp*:
+  FP_CORE_UTIL: 40
+  CLOCK_PERIOD: 10.0
+
+pdk::gf180mcu*:
+  FP_CORE_UTIL: 38
+  CLOCK_PERIOD: 24.0

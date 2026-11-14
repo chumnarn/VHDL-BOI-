@@ -1,0 +1,28 @@
+# synth_generic.ys
+# Yosys generic synthesis - ไม่ต้องใช้ technology library
+#
+# เป้าหมาย: เห็นกระบวนการย่อย RTL ของ Mini Project (UART TX) เป็น logic สามารถ
+#   RTL  -> RTLIL -> (proc/opt/techmap) -> generic cells ($add, $_AND_, ...)
+#
+# รันจากโฟลเดอร์รากของแล็บ:  yosys -s scripts/synth_generic.ys
+
+# ---- อ่าน RTL ทั้งหมด (ลำดับสำคัญ: module ที่ถูกเรียกต้องมาก่อน/ครบ) ----
+read_verilog rtl/baud_gen.v
+read_verilog rtl/uart_tx.v
+read_verilog rtl/uart_top.v
+
+hierarchy -check -top uart_top
+synth -top uart_top
+tee -o build/uart_top_generic_stat.txt stat
+write_verilog -noattr build/uart_top_generic.v
+
+# ---- แยก module เพื่อดูการกระจายของ cell รายบล็อก ----------------------
+design -reset
+
+read_verilog rtl/baud_gen.v
+read_verilog rtl/uart_tx.v
+read_verilog rtl/uart_top.v
+hierarchy -check -top uart_top
+synth -top uart_top -flatten
+tee -o build/uart_top_flat_stat.txt stat
+write_verilog -noattr build/uart_top_flat.v

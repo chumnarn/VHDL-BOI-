@@ -2,6 +2,12 @@
 -- Self-checking testbench for UART TX
 -- Scoreboard: send known byte, observe tx line over 10 bit periods,
 -- verify frame = start(0) | data | stop(1)
+--
+-- Sampling rule: one bit cell = BAUD_CYCLES clocks = 8680 ns.
+-- Every bit is sampled at the CENTRE of its bit cell (half a bit period
+-- after the cell starts), which is the only safe place to sample a
+-- serial line: sampling on the cell boundary is ambiguous because the
+-- transmitter can change tx on the very same clock edge.
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -13,38 +19,69 @@ architecture sim of tb_uart_top is
     constant CLK_FREQ_HZ : integer := 100_000_000;
     constant BAUD_RATE    : integer := 115_200;
     constant CLK_PERIOD   : time := 10 ns;
-    constant BAUD_CYCLES  : integer := CLK_FREQ_HZ / BAUD_RATE;
+    constant BAUD_CYCLES  : integer := CLK_FREQ_HZ / BAUD_RATE;   -- 868
+    constant HALF_CYCLES  : integer := BAUD_CYCLES / 2;           -- 434
 
     signal clk, rst           : std_logic := '0';
     signal din                : std_logic_vector(7 downto 0) := (others => '0');
     signal din_vld, din_rdy   : std_logic;
     signal tx                 : std_logic;
-
-    signal pass_cnt, fail_cnt : integer := 0;
 begin
     clk <= not clk after CLK_PERIOD / 2;
 
     dut : entity work.uart_top port map (clk, rst, din, din_vld, din_rdy, tx);
 
     stim : process
-        -- Sample tx at center of each bit period (1.5 baud cycles after detection)
-        procedure sample_and_check(b : std_logic_vector(7 downto 0)) is
-            variable wait_cycles : integer;
+        variable btest : std_logic_vector(7 downto 0);
+        -- Counters are VARIABLES: a signal assignment would only be applied
+        -- at the end of the current delta cycle, so the final report would
+        -- read the stale value and miss the last increment.
+        variable pass_cnt : integer := 0;
+        variable fail_cnt : integer := 0;
+
+        -- Send one byte and check the complete 10-bit frame on the tx line.
+        procedure send_and_check(b : std_logic_vector(7 downto 0)) is
         begin
-            -- Wait for the transmitter to finish accepting the byte
-            wait until rising_edge(clk);
-            wait until rising_edge(clk);
+            -- 1. wait until the transmitter is ready for a new byte
+            for guard in 0 to 4 * BAUD_CYCLES loop
+                wait until rising_edge(clk);
+                exit when din_rdy = '1';
+            end loop;
+
+            -- 2. present the data and the valid strobe
+            din     <= b;
+            din_vld <= '1';
+
+            -- 3. wait until the transmitter has latched the byte
+            for guard in 0 to 4 * BAUD_CYCLES loop
+                wait until rising_edge(clk);
+                exit when din_rdy = '0';
+            end loop;
             din_vld <= '0';
 
-            -- Sample 10 bits at baud period
-            wait_cycles := BAUD_CYCLES + BAUD_CYCLES / 2;   -- start bit mid-cell
-            for bit_i in 0 to 9 loop
+            -- 4. synchronise on the start bit (tx goes low)
+            for guard in 0 to 4 * BAUD_CYCLES loop
                 wait until rising_edge(clk);
-                for j in 1 to wait_cycles loop
-                    wait until rising_edge(clk);
-                end loop;
+                exit when tx = '0';
+            end loop;
+            assert tx = '0'
+                report "Timeout: start bit was never detected"
+                severity failure;
 
-                -- Compare
+            -- 5. sample every bit cell at its centre
+            for bit_i in 0 to 9 loop
+                if bit_i = 0 then
+                    -- first cell: half a bit period after the start edge
+                    for j in 1 to HALF_CYCLES loop
+                        wait until rising_edge(clk);
+                    end loop;
+                else
+                    -- one full bit period to the next cell centre
+                    for j in 1 to BAUD_CYCLES loop
+                        wait until rising_edge(clk);
+                    end loop;
+                end if;
+
                 if bit_i = 0 then
                     -- start bit
                     assert tx = '0'
@@ -65,7 +102,7 @@ begin
                 end if;
             end loop;
 
-            pass_cnt <= pass_cnt + 1;
+            pass_cnt := pass_cnt + 1;
         end procedure;
     begin
         rst <= '1'; wait for 5 * CLK_PERIOD;
@@ -75,15 +112,14 @@ begin
         -- Test pattern set: 0x00, 0xFF, 0x55, 0xAA, 0x42, 0x3C
         for sel in 0 to 5 loop
             case sel is
-                when 0 => din <= x"00";
-                when 1 => din <= x"FF";
-                when 2 => din <= x"55";
-                when 3 => din <= x"AA";
-                when 4 => din <= x"42";
-                when others => din <= x"3C";
+                when 0 => btest := x"00";
+                when 1 => btest := x"FF";
+                when 2 => btest := x"55";
+                when 3 => btest := x"AA";
+                when 4 => btest := x"42";
+                when others => btest := x"3C";
             end case;
-            din_vld <= '1';
-            sample_and_check(din);
+            send_and_check(btest);
             assert tx = '1'
                 report "TX not idle between frames"
                 severity failure;

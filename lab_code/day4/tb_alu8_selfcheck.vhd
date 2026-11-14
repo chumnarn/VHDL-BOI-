@@ -14,13 +14,17 @@ architecture sim of tb_alu8_selfcheck is
     signal y_dut, y_ref : std_logic_vector(7 downto 0);
     signal z_dut, z_ref : std_logic;
     signal n_dut, n_ref : std_logic;
-    signal pass_cnt, fail_cnt : integer := 0;
 begin
     dut : entity work.alu8         port map (a, b, op, y_dut, z_dut, n_dut);
     ref : entity work.ref_model_alu8 port map (a, b, op, y_ref, z_ref, n_ref);
 
     process
         variable is_first_fail : boolean := true;
+        -- Counters are VARIABLES: a signal assignment would only be applied
+        -- at the end of the current delta cycle, so the final report would
+        -- read the stale value and miss the last increment.
+        variable pass_cnt : integer := 0;
+        variable fail_cnt : integer := 0;
     begin
         for opv in 0 to 3 loop
             op <= std_logic_vector(to_unsigned(opv, 2));
@@ -30,7 +34,7 @@ begin
                     b <= std_logic_vector(to_unsigned(bv, 8));
                     wait for 1 ns;
                     if y_dut /= y_ref then
-                        fail_cnt <= fail_cnt + 1;
+                        fail_cnt := fail_cnt + 1;
                         if is_first_fail then
                             report "First mismatch: op=" & integer'image(opv) &
                                    " a=" & integer'image(av) &
@@ -41,13 +45,13 @@ begin
                             is_first_fail := false;
                         end if;
                     else
-                        pass_cnt <= pass_cnt + 1;
+                        pass_cnt := pass_cnt + 1;
                     end if;
                     if z_dut /= z_ref then
-                        fail_cnt <= fail_cnt + 1;
+                        fail_cnt := fail_cnt + 1;
                     end if;
                     if n_dut /= n_ref then
-                        fail_cnt <= fail_cnt + 1;
+                        fail_cnt := fail_cnt + 1;
                     end if;
                 end loop;
             end loop;
