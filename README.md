@@ -89,16 +89,16 @@ System/Behavioral ──► RTL ──► Logic Gate-Level ──► Physical La
 #### 1.1.3 ASIC Design Flow (Front-End vs Back-End)
 
 ```
-┌────────────────── FRONT-END (ออกแบบเชิงตรรกะ) ──────────────────┐
+┌────────────────── FRONT-END (ออกแบบเชิงตรรกะ) ─────────────────────┐
 │                                                                   │
-│  Spec ──► RTL Design ──► Functional Verification ──► Synthesis     │
-│                                (Simulation)           (Netlist)    │
+│  Spec ──► RTL Design ──► Functional Verification ──► Synthesis    │
+│                                (Simulation)           (Netlist)   │
 └───────────────────────────────────────────────────────────────────┘
                               │
 ┌────────────────── BACK-END (ออกแบบทางกายภาพ) ────────────────────┐
 │                                                                   │
-│  Floorplan ──► Placement ──► CTS ──► Routing ──► Sign-off          │
-│                                                  (DRC, LVS, STA) │
+│  Floorplan ──► Placement ──► CTS ──► Routing ──► Sign-off         │
+│                                                   (DRC, LVS, STA) │
 └───────────────────────────────────────────────────────────────────┘
                               │
                               ▼
