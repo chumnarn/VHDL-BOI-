@@ -1738,4 +1738,4 @@ set_false_path -from [get_ports rst]
 7. ทำ Gate-Level Simulation ด้วย SDF back-annotation ได้
 8. ดำเนินโครงงาน Mini Project ครบกระบวนการได้อย่างเป็นระบบ
 
-**ต่อไป:** ส่วนที่ 2 (วันที่ 6-10) จะกล่าวถึง Basic IC Design, CMOS Layout, MEMS Layout และ MEMS Simulation ด้วย Tanner Tools, L-Edit และ Ansys
+**ต่อไป:** ส่วนที่ 2 (วันที่ 6-10) จะกล่าวถึง Basic IC Design, CMOS Layout, MEMS Layout และ MEMS Simulation ด้วย Siemens EDA Tools S-Edit L-Edit
