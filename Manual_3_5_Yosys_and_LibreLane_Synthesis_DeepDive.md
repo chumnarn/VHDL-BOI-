@@ -55,13 +55,13 @@ Precision RTL, Genus, Design Compiler เป็นเครื่องมือ
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
-║           Open-source ASIC Stack (ทั้งหมดใช้ฟรี และมี source code เปิด)           ║
+║           Open-source ASIC Stack (ทั้งหมดใช้ฟรี และมี source code เปิด)       ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  สังเคราะห์ Logic         : Yosys            (C++ / สังเคราะห์เป็น Verilog)        ║
-║  Place & Route        : OpenROAD         (C++ / สูตรเดียวกับ Cadence)         ║
+║  สังเคราะห์ Logic         : Yosys            (C++ / สังเคราะห์เป็น Verilog)    ║
+║  Place & Route        : OpenROAD         (C++ / สูตรเดียวกับ Cadence)       ║
 ║  DRC                  : Magic            (VLSI Layout)                   ║
 ║  GDS Merge / View     : KLayout          (Ruby / Python)                 ║
-║  LVS                  : Netgen           (เทียบ schematic vs layout)       ║
+║  LVS                  : Netgen           (เทียบ schematic vs layout)      ║
 ║  Simulator            : Icarus / Verilator / Questa                      ║
 ║  Formal / SAT         : Yosys sat, SymbiYosys, SBY                       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
@@ -94,7 +94,7 @@ Precision RTL, Genus, Design Compiler เป็นเครื่องมือ
 ╚═══════════╤══════╝  └──────────────────────────────────────┘
             │ netlist (.v) + SDF
             ▼
-╔═══════════════════╗
+╔══════════════════╗
 ║  OPENROAD        ║  Floorplan ─► PDN ─► Placement ─► CTS
 ║  Place & Route   ║  ─► Global Route ─► Detailed Route ─► Extraction
 ╚═══════════╤══════╝
@@ -171,7 +171,7 @@ Precision RTL, Genus, Design Compiler เป็นเครื่องมือ
         ▼                                   ▼
    ┌─────────────┐                   ┌──────────────┐
    │  Passes     │                   │  Back-end    │
-   │  (ปรับแต่ง)    │                   │  (เขียนไฟล์)    │
+   │  (ปรับแต่ง)   │                   │  (เขียนไฟล์)   │
    └─────────────┘                   └──────────────┘
         │                                   │
         ├─ proc    : process → logic        ├─ write_verilog
@@ -268,14 +268,14 @@ read_verilog -formal rtl/properties.sv  # สำหรับ formal verification
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  ทางเลือกที่ใช้ได้จริง                                                            ║
+║  ทางเลือกที่ใช้ได้จริง                                                         ║
 ╠══════════════════════════════════════════════════════════════════════════╣
 ║  (A) GHDL standalone  : VHDL --synth--> Verilog --read_verilog--> Yosys  ║
-║      ติดตั้งง่าย:  apt install ghdl                                           ║
+║      ติดตั้งง่าย:  apt install ghdl                                          ║
 ║                                                                          ║
-║  (B) yosys-ghdl plugin: อ่าน VHDL ใน Yosys โดยตรง                           ║
+║  (B) yosys-ghdl plugin: อ่าน VHDL ใน Yosys โดยตรง                         ║
 ║      yosys -m ghdl -p "ghdl --std=08 file.vhd -e top; synth -top top"    ║
-║      ต้องติดตั้ง yosys ที่มาพร้อม plugin                                          ║
+║      ต้องติดตั้ง yosys ที่มาพร้อม plugin                                       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -675,11 +675,11 @@ equiv_status -assert
 ### 14.2 เมื่อไหร่ควรใช้อันไหน
 
 ```
-╔══════════════════════════════════════════════════════════════════╗
-║  ต้องการ sign-off ที่องค์กรยอมรับ    →  Precision RTL (มี license)        ║
-║  ต้องการเรียนรู้กระบวนการข้างใน      →  Yosys (เปิด source อ่านได้)             ║
-║  ต้องการ flow จบถึง GDSII ฟรี         →  Yosys + LibreLane            ║
-║  ต้องการ RTL-to-GDSII ใน 1 คำสั่ง       →  LibreLane                  ║
+╔═════════════════════════════════════════════════════════════════╗
+║  ต้องการ sign-off ที่องค์กรยอมรับ    →  Precision RTL (มี license)    ║
+║  ต้องการเรียนรู้กระบวนการข้างใน      →  Yosys (เปิด source อ่านได้)       ║
+║  ต้องการ flow จบถึง GDSII ฟรี         →  Yosys + LibreLane          ║
+║  ต้องการ RTL-to-GDSII ใน 1 คำสั่ง       →  LibreLane                ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
@@ -832,18 +832,18 @@ make sky130 SKY130_LIB=$SKY130_LIB
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  ช่วงที่ 1: RTL → Netlist (Yosys)                    stage 1-9               ║
+║  ช่วงที่ 1: RTL → Netlist (Yosys)                    stage 1-9              ║
 ║    Verilator lint → Yosys synthesis → checks                             ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  ช่วงที่ 2: Floorplan → CTS                           stage 10-38            ║
+║  ช่วงที่ 2: Floorplan → CTS                           stage 10-38           ║
 ║    SDC check → floorplan → PDN → IO placement → global placement         ║
 ║    → detailed placement → CTS → resizer timing                           ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  ช่วงที่ 3: Routing → RC Extraction                  stage 39-60             ║
+║  ช่วงที่ 3: Routing → RC Extraction                  stage 39-60            ║
 ║    global route → antenna check → detailed route → parasitics            ║
 ║    → GDS generation                                                      ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  ช่วงที่ 4: Sign-off                                stage 61-80              ║
+║  ช่วงที่ 4: Sign-off                                stage 61-80             ║
 ║    GDS merge (KLayout) → DRC (Magic) → LVS (Netgen) → checkers           ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 ```
