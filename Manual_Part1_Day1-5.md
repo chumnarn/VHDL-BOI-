@@ -104,16 +104,16 @@ System/Behavioral ──► RTL ──► Logic Gate-Level ──► Physical La
 #### 1.1.3 ASIC Design Flow (Front-End vs Back-End)
 
 ```
-┌────────────────── FRONT-END (ออกแบบเชิงตรรกะ) ──────────────────┐
+┌────────────────── FRONT-END (ออกแบบเชิงตรรกะ) ─────────────────────┐
 │                                                                   │
-│  Spec ──► RTL Design ──► Functional Verification ──► Synthesis     │
-│                                (Simulation)           (Netlist)    │
+│  Spec ──► RTL Design ──► Functional Verification ──► Synthesis    │
+│                                (Simulation)           (Netlist)   │
 └───────────────────────────────────────────────────────────────────┘
                               │
 ┌────────────────── BACK-END (ออกแบบทางกายภาพ) ────────────────────┐
 │                                                                   │
-│  Floorplan ──► Placement ──► CTS ──► Routing ──► Sign-off          │
-│                                                  (DRC, LVS, STA) │
+│  Floorplan ──► Placement ──► CTS ──► Routing ──► Sign-off         │
+│                                                   (DRC, LVS, STA) │
 └───────────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -1076,13 +1076,13 @@ Open-source ตอบโจทย์นี้ได้ด้วยชุดเ�
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║  Open-source ASIC Stack                                           ║
+║  Open-source ASIC Stack                                              ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  สังเคราะห์ Logic  : Yosys            (RTL → netlist)             ║
-║  Place & Route     : OpenROAD         (floorplan → routing)        ║
-║  DRC               : Magic / KLayout                              ║
-║  LVS               : Netgen           (schematic ↔ layout)         ║
-║  Simulator         : Icarus / Verilator / Questa                   ║
+║  สังเคราะห์ Logic  : Yosys            (RTL → netlist)                   ║
+║  Place & Route     : OpenROAD         (floorplan → routing)          ║
+║  DRC               : Magic / KLayout                                 ║
+║  LVS               : Netgen           (schematic ↔ layout)           ║
+║  Simulator         : Icarus / Verilator / Questa                     ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -2081,22 +2081,22 @@ set_false_path -from [get_ports rst]
                    │
     ┌──────────────▼───────────────┐
     │ Verilator lint               │  syntax, width, undriven
-    │ Yosys synthesis               │  RTL → RTLIL → netlist
+    │ Yosys synthesis              │  RTL → RTLIL → netlist
     └──────────────┬───────────────┘
                    │  netlist (standard cell)
     ┌──────────────▼───────────────┐
     │ OpenROAD                     │
     │   ├ floorplan                │  core/die, PDN, rows
     │   ├ global + detailed place  │  จัดวาง cell
-    │   ├ CTS                       │  สร้าง clock tree + balance skew
+    │   ├ CTS                      │  สร้าง clock tree + balance skew
     │   ├ global + detailed routing│  เชื่อมต่อ + DRC
-    │   └ fill insertion            │  เติม dummy cell
+    │   └ fill insertion           │  เติม dummy cell
     └──────────────┬───────────────┘
                    │
     ┌──────────────▼───────────────┐
-    │ Magic / KLayout               │  DRC, GDSII stream-out, render
-    │ Netgen                        │  LVS (netlist ↔ layout)
-    │ OpenSTA                       │  multi-corner timing
+    │ Magic / KLayout              │  DRC, GDSII stream-out, render
+    │ Netgen                       │  LVS (netlist ↔ layout)
+    │ OpenSTA                      │  multi-corner timing
     └──────────────┬───────────────┘
                    │
         ┌──────────▼──────────┐
@@ -2207,9 +2207,9 @@ pdk::sky130*:
 
 ```
    ┌───────────────────────────────────────────┐
-   │ ══════════════════════════════════════════ │ ← M2 horizontal (VDD)
+   │ ═════════════════════════════════════════ │ ← M2 horizontal (VDD)
    │ ───────────────────────────────────────── │ ← M1 vertical  (VSS)
-   │ ══════════════════════════════════════════ │ ← M2 horizontal (VDD)
+   │ ═════════════════════════════════════════ │ ← M2 horizontal (VDD)
    │ ───────────────────────────────────────── │ ← M1 vertical  (VSS)
    └───────────────────────────────────────────┘
         power ring รอบ core
