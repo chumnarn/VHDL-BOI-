@@ -28,17 +28,17 @@
 ```
    ┌──────────────────────────────────────────────────┐
    │                                                  │
-   │    ┌─────────┐                                  │
+   │    ┌─────────┐                                   │
    │    │         │      ┌─────────┐                  │
    │    │ Current ├─────►│ Next    │                  │
-   │    │ State   │      │ State   │──► FF register    │
+   │    │ State   │      │ State   │──► FF register   │
    │    │         │◄─────┤ (combinational)            │
    │    └────┬────┘      └─────────┘                  │
-   │         │                                         │
-   │         ▼                                         │
+   │         │                                        │
+   │         ▼                                        │
    │    ┌─────────┐                                   │
    │    │ Output  │ (Moore: function of state only)   │
-   │    │ Logic   │ (Mealy: function of state+input)   │
+   │    │ Logic   │ (Mealy: function of state+input)  │
    │    └─────────┘                                   │
    │                                                  │
    │    ┌─────────┐                                   │
@@ -73,7 +73,7 @@
 
 ```
    Inputs        Current         Next         Output
-   ─────►  ┌──────────┐   ┌──────────┐  ┌──────────┐
+    ─────►  ┌──────────┐   ┌──────────┐  ┌──────────┐
           │ │ next     │   │  State   │  │  Output  │────►
           │ │ state    ├──►│  Register├──┤  Logic   │ (combinational)
           │ │ logic    │   └──────┬───┘  └──────────┘
@@ -137,16 +137,16 @@ State transition:
 
 ```
    Inputs        Current         Next         Output
-   ─────►  ┌──────────┐   ┌──────────┐  ┌──────────┐
+    ─────►  ┌──────────┐   ┌──────────┐  ┌──────────┐
           │ │ next     │   │  State   │  │  Output  │────►
    ──────►│ │ state    ├──►│  Register├──┤  Logic   │ (combinational,
           │ │ logic    │   └──────┬───┘  └──────────┘  depends on state
           │ └──────┬───┘          │              ▲       + input)
-          │        │             clk              │
+          │        │             clk             │
           │        │              │              │
           │        └──────────────┘              │
-          │                                       │
-          └───────────────────────────────────────┘
+          │                                      │
+          └──────────────────────────────────────┘
                 (input also affects output)
 ```
 
@@ -236,7 +236,7 @@ State transition (Mealy):
    clk:      ─┐    ┌──┐    ┌──┐    ┌──┐    ┌──┐
               └────┘  └────┘  └────┘  └────┘
 
-   din:    ──┐       ┌─┐         ┌─┐         ┌──
+    din:    ──┐       ┌─┐        ┌─┐        ┌──
               └───────┘ └────────┘ └────────┘
               ↑ '1'    ↑ '0'      ↑ '1'
                         (pattern 101 detected)
@@ -255,7 +255,7 @@ State transition (Mealy):
    clk:      ─┐    ┌──┐    ┌──┐    ┌──┐    ┌──┐
               └────┘  └────┘  └────┘  └────┘
 
-   din:    ──┐       ┌─┐         ┌─┐         ┌──
+    din:    ──┐       ┌─┐        ┌─┐        ┌──
               └───────┘ └────────┘ └────────┘
                         ↑ '0'      ↑ '1'
 
