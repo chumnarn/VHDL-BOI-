@@ -487,15 +487,15 @@ Back-End คือการแปลง netlist → layout จริงบนซ
 
 ```
     ┌─────────────────────────────────────┐
-    │  P P P P P P P P P P P P P P P P   │   ← Pad ring (top)
-    │  P  ┌─────────────────────────┐    P
-    │  P  │  SRAM    │     SRAM     │  P
-    │  P  ├──────────┼───────────────┤  P   ← Core area
-    │  P  │  Logic   │   Analog/PLL  │  P
-    │  P  │          │               │  P
-    │  P  │  Logic   │   Logic       │  P
-    │  P  └─────────────────────────┘  P
-    │  P P P P P P P P P P P P P P P P   │   ← Pad ring (bottom)
+    │  P P P P P P P P P P P P P P P P P  │   ← Pad ring (top)
+    │  P  ┌─────────────────────────┐  P  |
+    │  P  │  SRAM    │     SRAM     │  P  |
+    │  P  ├──────────┼──────────────┤  P  |   ← Core area
+    │  P  │  Logic   │   Analog/PLL │  P  |
+    │  P  │          │              │  P  |
+    │  P  │  Logic   │   Logic      │  P  |
+    │  P  └─────────────────────────┘  P  |
+    │  P P P P P P P P P P P P P P P P P  │   ← Pad ring (bottom)
     └─────────────────────────────────────┘
 ```
 
@@ -537,11 +537,11 @@ Back-End คือการแปลง netlist → layout จริงบนซ
                    /    \
                   /      \
                  /        \
-                B          B         (clock buffers)
+                B          B       (clock buffers)
                / \        / \
-              B   B    B   B
-             /\ /\    /\ /\
-            F F F F  F F F F        (FF leaves)
+              B   B      B   B
+             /\  /\     /\  /\
+            F  F F F   F F  F F   (FF leaves)
 ```
 
 **Metrics:**
@@ -594,7 +594,7 @@ Back-End คือการแปลง netlist → layout จริงบนซ
    FF_A latch data              FF_B capture data
         │      ─── delay ───►      │
         │      (data arrival)      │
-        │                           │
+        │                          │
         └────── slack = T - delay - T_setup ≥ 0  ──────┘
 ```
 
