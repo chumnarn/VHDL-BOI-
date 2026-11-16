@@ -27,17 +27,17 @@
          ┌──────────────┐           ┌──────────────┐
          │  SIMULATION  │           │  SYNTHESIS   │
          │              │           │              │
-         │ Tool:        │ Tool:     │              │
-         │ Questa /     │ Precision │              │
-         │ ModelSim     │ /Genus/DC │              │
+         │ Tool:        │           │    Tool:     │
+         │ Questa /     │           │   Precision  │
+         │ ModelSim     │           │ /Genus/DC    │
          │              │           │              │
-         │ Output:      │ Output:   │              │
-         │ waveform,    │ netlist,  │              │
-         │ report       │ area,     │              │
-         │              │ timing    │              │
-         │ Goal:        │ Goal:     │              │
-         │ correctness  │ Goal:gold │              │
-         │ (logic)      │ (real hw) │              │
+         │ Output:      │           │  Output:     │
+         │ waveform,    │           │  netlist,    │
+         │ report       │           │    area,     │
+         │              │           │   timing     │
+         │ Goal:        │           │              │
+         │ correctness  │           │Goal:gold     │
+         │ (logic)      │           │   (real hw)  │
          └──────────────┘           └──────────────┘
 ```
 
@@ -55,7 +55,7 @@
    │ Bind    │───►│ all     │───►│ time    │───►│ waveform│
    │ library │    │ signals │    │ advance │    │ + report│
    │ (build  │    │ to      │    │ events  │    │         │
-   │hierarchy)│   │ initial │    │  (delta │    │   │     │
+   │hierarchy)│   │ initial │    │  (delta │    │         │
    └─────────┘    │ values  │    │  cycle) │    └─────────┘
                   └─────────┘    └─────────┘
 ```
@@ -623,25 +623,25 @@ exit
 
 ```
    ┌──────────────────────────────────────────────────────────────┐
-   │ RTL Design                                                     │
-   │   ↓                                                            │
-   │ Compile (vcom) → 0 errors?                                    │
-   │   ↓                                                            │
-   │ Elaborate + Simulate (Questa)                                  │
-   │   ↓                                                            │
-   │ Test pass? ─── No → Fix RTL → loop back                       │
-   │   ↓ Yes                                                         │
-   │ Functional Coverage = 100%? ─── No → Add test cases → loop    │
-   │   ↓ Yes                                                         │
-   │ Formal Verification (Equivalence check RTL ↔ Netlist)         │
-   │   ↓                                                            │
-   │ Synthesis (Precision RTL)                                      │
-   │   ↓                                                            │
-   │ Area/Timing report OK? ─── No → Optimize RTL → loop back       │
-   │   ↓ Yes                                                         │
-   │ Gate-Level Simulation (Questa + Netlist + SDF)                │
-   │   ↓                                                            │
-   │ Sign-off (STA, LVS, DRC) ──────────────────────────────────── │
+   │ RTL Design                                                   │
+   │   ↓                                                          │
+   │ Compile (vcom) → 0 errors?                                   │
+   │   ↓                                                          │
+   │ Elaborate + Simulate (Questa)                                │
+   │   ↓                                                          │
+   │ Test pass? ─── No → Fix RTL → loop back                      │
+   │   ↓ Yes                                                      │
+   │ Functional Coverage = 100%? ─── No → Add test cases → loop   │
+   │   ↓ Yes                                                      │
+   │ Formal Verification (Equivalence check RTL ↔ Netlist)        │
+   │   ↓                                                          │
+   │ Synthesis (Precision RTL)                                    │
+   │   ↓                                                          │
+   │ Area/Timing report OK? ─── No → Optimize RTL → loop back     │
+   │   ↓ Yes                                                      │
+   │ Gate-Level Simulation (Questa + Netlist + SDF)               │
+   │   ↓                                                          │
+   │ Sign-off (STA, LVS, DRC) ─────────────────────────────────── │
    └──────────────────────────────────────────────────────────────┘
 ```
 
