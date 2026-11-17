@@ -206,7 +206,7 @@ begin
 end architecture dataflow;
 ```
 
-### เขียน 2-to-1 MUX ด้วย `if ... else...` ใน VHDL
+### ตัวอย่างโค้ด 2-to-1 MUX ด้วย `if ... else...` ใน VHDL
 
 2-to-1 Multiplexer เลือกอินพุต `d0` หรือ `d1` ไปยังเอาต์พุต `y` ตามสัญญาณเลือก `sel`
 
