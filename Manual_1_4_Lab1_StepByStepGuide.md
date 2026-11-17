@@ -719,6 +719,76 @@ else
     report "SOME TESTS FAILED!" severity failure;
 end if;
 ```
+---
+### ตัวอย่าง `tb_and_gate.vhd` — Testbench แบบ Direct Input
+
+กำหนดค่า `a` และ `b` โดยตรงใน `stimulus` process ครบทั้ง 4 คู่ ค้างคู่ละ 10 ns แล้วตรวจ `y` ใน Wave window
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_and_gate is
+end entity tb_and_gate;
+
+architecture sim of tb_and_gate is
+    signal a, b : std_logic;
+    signal y    : std_logic;
+begin
+    dut : entity work.and_gate(dataflow)
+        port map (
+            a => a,
+            b => b,
+            y => y
+        );
+
+    stimulus : process
+    begin
+        -- 0 ns: 0 AND 0 = 0
+        a <= '0';
+        b <= '0';
+        wait for 10 ns;
+
+        -- 10 ns: 0 AND 1 = 0
+        a <= '0';
+        b <= '1';
+        wait for 10 ns;
+
+        -- 20 ns: 1 AND 0 = 0
+        a <= '1';
+        b <= '0';
+        wait for 10 ns;
+
+        -- 30 ns: 1 AND 1 = 1
+        a <= '1';
+        b <= '1';
+        wait for 10 ns;
+
+        wait;  -- พัก process ที่เวลา 40 ns
+    end process stimulus;
+end architecture sim;
+```
+
+### รันใน QuestaSim หรือ ModelSim
+
+เปิด Transcript จากโฟลเดอร์ที่มี `and_gate.vhd` และ `tb_and_gate.vhd` แล้วรัน
+
+```tcl
+vlib work
+vcom -2008 and_gate.vhd tb_and_gate.vhd
+vsim work.tb_and_gate
+add wave sim:/tb_and_gate/*
+run 40 ns
+```
+
+| ช่วงเวลา (ns) | `a` | `b` | `y` ที่คาดหวัง |
+|---|---:|---:|---:|
+| 0 ถึงก่อน 10 | 0 | 0 | 0 |
+| 10 ถึงก่อน 20 | 0 | 1 | 0 |
+| 20 ถึงก่อน 30 | 1 | 0 | 0 |
+| 30 ถึง 40 | 1 | 1 | 1 |
+
+ใน Wave window สัญญาณ `y` ควรขึ้นเป็น `1` ที่ **30 ns** เมื่อ `a` และ `b` เป็น `1` พร้อมกัน หลังจาก simulator ประมวลผล delta cycles ณ เวลานั้นแล้ว
 
 ---
 
@@ -830,7 +900,7 @@ procedure check_mux(...)
 
 **Fix:** เพิ่ม `use IEEE.NUMERIC_STD.ALL;`
 
-### Error 8: `std.env` पर với VHDL-93
+### Error 8: `std.env` par with VHDL-93
 
 ```
 ** Error: Unknown identifier "std.env".
