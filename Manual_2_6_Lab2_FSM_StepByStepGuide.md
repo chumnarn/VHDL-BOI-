@@ -35,7 +35,7 @@ cd E:\lab\VHDL(BOI)\lab2_work
          din=1              din=0             din=1
    ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
    │             ▼  │             ▼  │             ▼
-   S0 ────────────► S1 ────────────► S2 ────────────► S3
+   S0 ────────────► S1 ──────────► S2 ──────────► S3
    (initial)        (saw '1')      (saw '10')      (saw '101', detected=1)
    detected           │                    │
    = '0'              │din=1              │din=0
@@ -147,7 +147,357 @@ end architecture rtl;
 - ✅ Output ขึ้นกับ state (Moore)
 
 ---
+### `tb_seq_det_moore.vhd` — Testbench แบบ Direct Inputs
 
+กำหนด `din` โดยตรงทีละบิตที่ **ขอบขาลงของ `clk`** เพื่อให้ค่าคงที่ก่อนที่ FSM จะรับข้อมูลที่ **ขอบขาขึ้น** ใช้ clock period 10 ns และคง `rst_n = '0'` ผ่านขอบขาขึ้นแรกเพื่อให้ synchronous reset ทำงาน
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_seq_det_moore is
+end entity tb_seq_det_moore;
+
+architecture sim of tb_seq_det_moore is
+    constant CLK_PERIOD : time := 10 ns;
+
+    signal clk      : std_logic := '0';
+    signal rst_n    : std_logic := '0';
+    signal din      : std_logic := '0';
+    signal detected : std_logic;
+    signal done     : boolean   := false;
+begin
+    dut : entity work.seq_det_moore(rtl)
+        port map (
+            clk      => clk,
+            rst_n    => rst_n,
+            din      => din,
+            detected => detected
+        );
+
+    clock_gen : process
+    begin
+        while not done loop
+            wait for CLK_PERIOD / 2;
+            clk <= not clk;
+        end loop;
+        wait;
+    end process clock_gen;
+
+    stimulus : process
+    begin
+        -- Reset is sampled at the first rising edge (5 ns).
+        rst_n <= '0';
+        din   <= '0';
+
+        -- Apply 10101 on consecutive falling edges.
+        wait until falling_edge(clk);       -- 10 ns
+        rst_n <= '1';
+        din   <= '1';                        -- Sampled at 15 ns
+
+        wait until falling_edge(clk);       -- 20 ns
+        din <= '0';                          -- Sampled at 25 ns
+
+        wait until falling_edge(clk);       -- 30 ns
+        din <= '1';                          -- Sampled at 35 ns
+
+        wait until falling_edge(clk);       -- 40 ns
+        din <= '0';                          -- Sampled at 45 ns
+
+        wait until falling_edge(clk);       -- 50 ns
+        din <= '1';                          -- Sampled at 55 ns
+
+        wait until falling_edge(clk);       -- 60 ns
+        done <= true;
+        wait;
+    end process stimulus;
+end architecture sim;
+```
+
+### รันใน QuestaSim หรือ ModelSim
+
+```tcl
+vlib work
+vcom -2008 seq_det_moore.vhd tb_seq_det_moore.vhd
+vsim work.tb_seq_det_moore
+add wave sim:/tb_seq_det_moore/clk
+add wave sim:/tb_seq_det_moore/rst_n
+add wave sim:/tb_seq_det_moore/din
+add wave sim:/tb_seq_det_moore/detected
+run -all
+```
+
+### ผลที่คาดหวังจาก RTL ที่ให้มา
+
+อ่านค่า `detected` หลังจาก state และ output อัปเดตใน delta cycles ของขอบขาขึ้นแต่ละครั้ง
+
+| ขอบขาขึ้น | `rst_n` | `din` | State หลังขอบขาขึ้น | `detected` |
+|---:|:---:|:---:|:---:|:---:|
+| 5 ns | `0` | `0` | `S0` | `0` |
+| 15 ns | `1` | `1` | `S1` | `0` |
+| 25 ns | `1` | `0` | `S2` | `0` |
+| 35 ns | `1` | `1` | `S3` | `1` |
+| 45 ns | `1` | `0` | `S0` | `0` |
+| 55 ns | `1` | `1` | `S1` | `0` |
+
+**กรณี overlap ที่ `10101`** ควรตรวจพบ `101` ที่บิต 1–3 และบิต 3–5 หากสเปกกำหนดให้ตรวจแบบซ้อนทับ แต่ RTL ปัจจุบันให้พัลส์เดียวช่วง **35–45 ns** เพราะเมื่ออยู่ใน `S3` แล้วรับ `0` จะกลับไป `S0` หากต้องการให้ตรวจพบครั้งที่สองที่ **55 ns** ให้เปลี่ยน transition ของ `S3` เมื่อ `din = '0'` ไปที่ `S2` เพื่อเก็บ `10` ที่เกิดจากบิตท้ายของ pattern เดิมรวมกับบิตใหม่
+
+---
+
+### Moore FSM ตรวจจับ `101` แบบซ้อนทับ
+
+แก้ transition ของ `S3` ใน `seq_det_moore.vhd` ให้ไป **`S2` เมื่อ `din = '0'`** เพราะบิต `1` ตัวท้ายของ `101` ใช้เป็นบิตแรกของ pattern ถัดไปได้ เมื่อรับ `0` ต่อ จะมี suffix `10` และพร้อมตรวจพบ `101` อีกครั้งเมื่อรับ `1`
+
+```vhdl
+when S3 =>
+    detected <= '1';
+
+    if din = '1' then
+        next_state <= S1;  -- Suffix "1"
+    else
+        next_state <= S2;  -- Suffix "10" for din = '0'
+    end if;
+```
+
+`detected` ยังเป็นเอาต์พุตแบบ Moore โดยมีค่า `'1'` ตลอดช่วงที่ state ปัจจุบันเป็น `S3`
+
+### Testbench แบบ Direct Inputs
+
+ใช้ `tb_seq_det_moore.vhd` เดิมที่ป้อน `10101` แล้วแทนบรรทัด `wait until falling_edge(clk); -- 60 ns` จนถึง `wait;` ท้าย `stimulus` ด้วยโค้ดนี้ เพื่อให้เห็นพัลส์ที่สองครบหนึ่งคาบ
+
+```vhdl
+        wait until falling_edge(clk);  -- 60 ns
+        din <= '0';                    -- Sampled at 65 ns, S3 -> S2
+
+        wait until falling_edge(clk);  -- 70 ns
+        done <= true;
+        wait;
+```
+
+| ขอบขาขึ้น | `din` | State หลังขอบขาขึ้น | `detected` |
+|---:|:---:|:---:|:---:|
+| 15 ns | `1` | `S1` | `0` |
+| 25 ns | `0` | `S2` | `0` |
+| 35 ns | `1` | `S3` | `1` |
+| 45 ns | `0` | `S2` | `0` |
+| 55 ns | `1` | `S3` | `1` |
+| 65 ns | `0` | `S2` | `0` |
+
+ใน Wave window ควรเห็น `detected` เป็น `'1'` สองช่วงคือ **35–45 ns** และ **55–65 ns** ตรงกับ `101` ที่บิต **1–3** และ **3–5** ของ `10101` โดยใช้บิตที่ 3 ร่วมกัน
+
+---
+
+ตัวอย่างโค้ด RTL และ testbench แบบ **Direct Inputs** สำหรับ Moore FSM ตรวจจับ `101` แบบซ้อนทับ เมื่อป้อน `10101` จะตรวจพบที่บิต **1–3** และ **3–5** โดยใช้บิตที่ 3 ร่วมกัน
+
+### 1. `seq_det_moore.vhd`
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity seq_det_moore is
+    port (
+        clk      : in  std_logic;
+        rst_n    : in  std_logic;
+        din      : in  std_logic;
+        detected : out std_logic
+    );
+end entity seq_det_moore;
+
+architecture rtl of seq_det_moore is
+    type state_t is (S0, S1, S2, S3);
+    signal state, next_state : state_t;
+begin
+    -- Active-low synchronous reset
+    state_register : process (clk)
+    begin
+        if rising_edge(clk) then
+            if rst_n = '0' then
+                state <= S0;
+            else
+                state <= next_state;
+            end if;
+        end if;
+    end process state_register;
+
+    -- Moore output depends only on the current state.
+    detected <= '1' when state = S3 else '0';
+
+    next_state_logic : process (state, din)
+    begin
+        case state is
+            when S0 =>                      -- No matching prefix
+                if din = '1' then
+                    next_state <= S1;
+                else
+                    next_state <= S0;
+                end if;
+
+            when S1 =>                      -- Matched "1"
+                if din = '0' then
+                    next_state <= S2;
+                else
+                    next_state <= S1;
+                end if;
+
+            when S2 =>                      -- Matched "10"
+                if din = '1' then
+                    next_state <= S3;
+                else
+                    next_state <= S0;
+                end if;
+
+            when S3 =>                      -- Detected "101"
+                if din = '0' then
+                    next_state <= S2;       -- Keep the suffix "10"
+                else
+                    next_state <= S1;       -- Keep the suffix "1"
+                end if;
+        end case;
+    end process next_state_logic;
+end architecture rtl;
+```
+
+### 2. `tb_seq_det_moore.vhd`
+
+Testbench กำหนด `din` โดยตรงที่ขอบขาลงทีละบิต และใช้ `assert` ตรวจ `detected` หลังขอบขาขึ้น 1 ns เพื่อให้ state และเอาต์พุตอัปเดตเรียบร้อยก่อนตรวจ
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_seq_det_moore is
+end entity tb_seq_det_moore;
+
+architecture sim of tb_seq_det_moore is
+    constant CLK_PERIOD : time := 10 ns;
+
+    signal clk      : std_logic := '0';
+    signal rst_n    : std_logic := '0';
+    signal din      : std_logic := '0';
+    signal detected : std_logic;
+    signal done     : boolean := false;
+begin
+    dut : entity work.seq_det_moore(rtl)
+        port map (
+            clk      => clk,
+            rst_n    => rst_n,
+            din      => din,
+            detected => detected
+        );
+
+    -- Wake on done so the clock stops without an extra edge.
+    clock_gen : process
+    begin
+        loop
+            wait until done for CLK_PERIOD / 2;
+            exit when done;
+            clk <= not clk;
+        end loop;
+        wait;
+    end process clock_gen;
+
+    stimulus : process
+    begin
+        -- Reset is sampled at 5 ns.
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '0'
+            report "Reset check failed"
+            severity failure;
+
+        -- Bit 1, sampled at 15 ns
+        wait until falling_edge(clk);
+        rst_n <= '1';
+        din   <= '1';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '0'
+            report "Bit 1: unexpected detection"
+            severity failure;
+
+        -- Bit 2, sampled at 25 ns
+        wait until falling_edge(clk);
+        din <= '0';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '0'
+            report "Bit 2: unexpected detection"
+            severity failure;
+
+        -- Bit 3, sampled at 35 ns
+        wait until falling_edge(clk);
+        din <= '1';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '1'
+            report "Bit 3: first 101 was not detected"
+            severity failure;
+
+        -- Bit 4, sampled at 45 ns
+        wait until falling_edge(clk);
+        din <= '0';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '0'
+            report "Bit 4: first detection pulse did not clear"
+            severity failure;
+
+        -- Bit 5, sampled at 55 ns
+        wait until falling_edge(clk);
+        din <= '1';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '1'
+            report "Bit 5: overlapping 101 was not detected"
+            severity failure;
+
+        -- Extra bit, sampled at 65 ns, to check the second pulse clears.
+        wait until falling_edge(clk);
+        din <= '0';
+        wait until rising_edge(clk);
+        wait for 1 ns;
+        assert detected = '0'
+            report "Second detection pulse did not clear"
+            severity failure;
+
+        wait until falling_edge(clk);
+        report "PASS: 10101 produced two overlapping detections"
+            severity note;
+        done <= true;
+        wait;
+    end process stimulus;
+end architecture sim;
+```
+
+### 3. รันใน QuestaSim หรือ ModelSim
+
+บันทึกทั้งสองไฟล์ในโฟลเดอร์เดียวกัน แล้วรันใน Transcript
+
+```tcl
+vlib work
+vcom -2008 seq_det_moore.vhd tb_seq_det_moore.vhd
+vsim work.tb_seq_det_moore
+add wave sim:/tb_seq_det_moore/clk
+add wave sim:/tb_seq_det_moore/rst_n
+add wave sim:/tb_seq_det_moore/din
+add wave sim:/tb_seq_det_moore/detected
+run -all
+```
+
+| ขอบขาขึ้น | `din` | State หลังขอบขาขึ้น | `detected` ที่คาดหวัง |
+|---:|:---:|:---:|:---:|
+| 5 ns | `0` | `S0` (reset) | `0` |
+| 15 ns | `1` | `S1` | `0` |
+| 25 ns | `0` | `S2` | `0` |
+| 35 ns | `1` | `S3` | **`1`** |
+| 45 ns | `0` | `S2` | `0` |
+| 55 ns | `1` | `S3` | **`1`** |
+| 65 ns | `0` | `S2` | `0` |
+
+ผลที่คาดหวังคือ `detected` ขึ้นสองพัลส์ที่ **35–45 ns** และ **55–65 ns** แล้ว Transcript แสดง `PASS: 10101 produced two overlapping detections` ที่ **70 ns** โค้ดชุดนี้ยังไม่ได้รันยืนยันด้วย simulator ในเซสชันนี้
+
+---
 ## Step 2: เขียน Mealy Sequence Detector "101"
 
 ### 2.1 State Diagram (Mealy)
@@ -156,7 +506,7 @@ end architecture rtl;
            din=1/0             din=0/0             din=1/1
    ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
    │             ▼  │             ▼  │             ▼
-   (S0) ──────► (S1) ──────► (S2) ──────► (S1)
+   (S0)  ──────► (S1) ──────────► (S2) ──────────► (S1)
    init          saw '1'      saw '10'    detected=1!
                  │              │           (combinational)
                  │              │
@@ -518,7 +868,7 @@ end architecture sim;
    rst_n: ────┐
               └──────────────────────────
 
-   din:    ─┐       ┌─┐         ┌─┐         ┌──
+     din:    ─┐       ┌─┐        ┌─┐        ┌──
               └───────┘ └────────┘ └────────┘
 
    state:   [S0] [S1] [S2] [S3] [S1] [S0]  [S1] [S2] [S1]
