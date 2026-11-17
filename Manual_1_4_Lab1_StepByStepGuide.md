@@ -928,5 +928,4 @@ end entity;
 
 ---
 
-> **ต่อไป:** Lab 2 (Day 1 เย็น) — ออกแบบ FSM Moore/Mealy + Testbench + HDL Designer Block Diagram
-> หรือ ข้ามไป Day 2: Synchronous Design + Reset Strategy
+> **ต่อไป:** Lab 2 — ออกแบบ FSM Moore/Mealy + Testbench
