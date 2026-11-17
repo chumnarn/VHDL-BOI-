@@ -206,6 +206,44 @@ begin
 end architecture dataflow;
 ```
 
+### เขียน 2-to-1 MUX ด้วย `if ... else...` ใน VHDL
+
+2-to-1 Multiplexer เลือกอินพุต `d0` หรือ `d1` ไปยังเอาต์พุต `y` ตามสัญญาณเลือก `sel`
+
+| `sel` | `y` |
+|---|---|
+| `'0'` | `d0` |
+| `'1'` | `d1` |
+
+### `mux2to1.vhd`
+
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux2to1 is
+    port (
+        d0, d1 : in  std_logic;
+        sel    : in  std_logic;
+        y      : out std_logic
+    );
+end entity mux2to1;
+
+architecture rtl of mux2to1 is
+begin
+    mux_logic : process (all)
+    begin
+        if sel = '0' then
+            y <= d0;
+        else
+            y <= d1;
+        end if;
+    end process mux_logic;
+end architecture rtl;
+```
+
+ `process (all)` เป็นไวยากรณ์ VHDL-2008 ที่ทำให้ process ประเมินใหม่เมื่อ `d0`, `d1` หรือ `sel` เปลี่ยน ทั้งสองแขนงกำหนดค่า `y` ครบ จึงสังเคราะห์เป็นวงจร combinational โดยไม่เกิด latch สำหรับ RTL นี้ ถ้า `sel` มีค่าอย่าง `'X'` หรือ `'U'` ใน simulation จะเข้าแขนง `else` เช่นเดียวกับ `'1'`
+
 ---
 
 ## Step 4: เขียน 2-to-4 Decoder (Behavioral Style)
