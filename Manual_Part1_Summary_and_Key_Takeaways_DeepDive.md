@@ -379,15 +379,15 @@ exit
 
 ```
    ┌─────────────────────────────────────┐
-   │  UART TX Top                          │
-   │                                      │
+   │  UART TX Top                        │
+   │                                     │
    │  ┌─────────────┐  ┌──────────────┐  │
    │  │ Baud Gen    │─►│ FSM + Shift  │  │
    │  └─────────────┘  └──────────────┘  │
-   │                         │             │
-   │                         ├─ tx         │
-   │                         ├─ tx_done    │
-   │                         ├─ din_rdy    │
+   │                         │           │
+   │                         ├─ tx       │
+   │                         ├─ tx_done  │
+   │                         ├─ din_rdy  │
    └─────────────────────────────────────┘
 ```
 
@@ -426,16 +426,16 @@ exit
 
 ```
    ┌────────────────────────────────────────────┐
-   │  Digital IC Designer (ASIC + FPGA)            │
-   │                                                │
-   │  [OK] VHDL RTL Design (Intermediate)         │
-   │  [OK] VHDL Testbench Development                │
-   │  [OK] Synthesis (Precision RTL)              │
-   │  [OK] Gate-Level Simulation                    │
-   │  [OK] Functional Verification                  │
-   │  [OK] Assertion-based Verification              │
-   │  [OK] Multi-corner Verification                    │
-   │  [OK] Documentation & Sign-off               │
+   │  Digital IC Designer (ASIC + FPGA)         │
+   │                                            │
+   │  [OK] VHDL RTL Design (Intermediate)       │
+   │  [OK] VHDL Testbench Development           │
+   │  [OK] Synthesis (Precision RTL)            │
+   │  [OK] Gate-Level Simulation                │
+   │  [OK] Functional Verification              │
+   │  [OK] Assertion-based Verification         │
+   │  [OK] Multi-corner Verification            │
+   │  [OK] Documentation & Sign-off             │
    └────────────────────────────────────────────┘
 ```
 
@@ -607,8 +607,8 @@ exit
    ║  Advanced Digital IC Design & Verification     ║
    ║  Part 1: Digital IC Design (Day 1-5)           ║
    ║                                                ║
-   ║  You are now ready for:                         ║
-   ║  - Industry work (ASIC/FPGA Design Engineer)    ║
+   ║  You are now ready for:                        ║
+   ║  - Industry work (ASIC/FPGA Design Engineer)   ║
    ║  - Part 2: IC Layout + MEMS Design             ║
    ║  - Advanced study                              ║
    ╚════════════════════════════════════════════════╝
@@ -618,12 +618,12 @@ exit
 
 ```
    ╔════════════════════════════════════════════════╗
-   ║  "Verification is the key to silicon success"   ║
+   ║  "Verification is the key to silicon success"  ║
    ║                                                ║
-   ║  - Verification: 50-70% of project cost       ║
-   ║  - Coverage-driven verification: systematic     ║
-   ║  - Multi-corner GLS: for silicon reliability     ║
-   ║  - Documentation: for team collaboration        ║
+   ║  - Verification: 50-70% of project cost        ║
+   ║  - Coverage-driven verification: systematic    ║
+   ║  - Multi-corner GLS: for silicon reliability   ║
+   ║  - Documentation: for team collaboration       ║
    ╚════════════════════════════════════════════════╝
 ```
 
@@ -692,9 +692,6 @@ exit
 
 ---
 
-> **หมายเหตุ:** เนื้อหานี้เป็นส่วนปิดท้ายของ Part 1 (Day 1-5) ออกแบบให้บรรยาย 60-90 นาที สรุปทุกสิ่งที่เรียนมาพร้อม action items สำหรับผู้เรียน
-
----
 
 > ## END OF PART 1: Digital IC Design & Verification
 > 
