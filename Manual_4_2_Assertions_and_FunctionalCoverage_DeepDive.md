@@ -1224,5 +1224,3 @@ endclass
 - Spear, P. "SystemVerilog for Verification," Springer, 2006.
 
 ---
-
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 90-120 นาที รวม ASCII diagrams, code examples (PSL, SVA, VHDL workaround, SystemVerilog covergroup) พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 4 เย็น หรือแบ่งเป็น 2 mini-lectures (Assertions 60 นาที + Functional Coverage 60 นาที)
