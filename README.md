@@ -50,54 +50,55 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  PART 1 — Digital IC Design & Verification (วันที่ 1-5)  ✅ จัดทำครบ        ║
+║  PART 1 — Digital IC Design & Verification (วันที่ 1-5)  ✅ จัดทำครบ          ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  Day 1  Fundamentals of VHDL and Digital IC Design          [คู่มือหลัก]    ║
-║    1.1 Digital IC Design Flow                            ✅ มี deep dive ║
-║    1.2 พื้นฐานภาษา VHDL (ASIC vs FPGA + Building Blocks)  ✅ มี deep dive ║
-║    1.3 Simulation vs Synthesis + Data Types              ✅ มี deep dive ║
-║    1.4 LAB 1 — AND/OR/MUX/Decoder + Simulation         ✅ มี step-by-step║
-║                                                                         ║
-║  Day 2  Advanced RTL Design Using VHDL                        [คู่มือหลัก] ║
-║    2.1 Synchronous Design & Reset Strategy              ✅ มี deep dive ║
-║    2.2 FSM — Moore vs Mealy                             ✅ มี deep dive ║
-║    2.3 Structural vs Behavioral Modeling                  ✅ ในคู่มือหลัก ║
-║    2.4 RTL Design Guidelines (Latch, CDC)               ✅ มี deep dive ║
-║    2.5 Testbench                                        ✅ มี deep dive ║
-║    2.6 LAB 2 — FSM + Testbench + HDL Designer         ✅ มี step-by-step║
-║                                                                         ║
-║  Day 3  RTL Synthesis and Optimization (Precision RTL)        [คู่มือหลัก] ║
-║    3.1 Synthesis Flow                                      ✅ ในคู่มือหลัก ║
-║    3.2 Constraints (SDC)                                   ✅ ในคู่มือหลัก ║
-║    3.3 Timing Analysis เบื้องต้น                              ✅ ในคู่มือหลัก ║
-║    3.4 Optimization Techniques                             ✅ ในคู่มือหลัก ║
-║    3.5 การสังเคราะห์ด้วย Yosys (Open-source)                ✅ มี deep dive ║
-║    3.6 LAB 3B — Yosys & LibreLane (RTL → GDSII)       ✅ มี step-by-step║
-║    3.7 LAB 3 — 8-bit Adder variants + Synthesis           ✅ ในคู่มือหลัก ║
-║                                                                         ║
-║  Day 4  Design Verification Using Questa                      [คู่มือหลัก] ║
-║    4.1 Verification Methodology                         ✅ มี deep dive ║
-║    4.2 Assertions & Functional Coverage                 ✅ มี deep dive ║
-║    4.3 Gate-Level Simulation & SDF                      ✅ มี deep dive ║
-║    4.4 LAB 4 — ALU Verification + GLS                 ✅ มี step-by-step║
-║                                                                         ║
-║  Day 5  Mini Project — UART TX                                [คู่มือหลัก] ║
-║    5.1 ASIC Flow Integration                            ✅ มี deep dive ║
-║    5.2 Verification Plan & Sign-off                     ✅ มี deep dive ║
-║    5.3 Mini Project — RTL Design                        ✅ มี deep dive ║
-║    5.4 RTL-to-GDSII Full Chip Flow (LibreLane)          ✅ มี deep dive ║
-║    5.5 LAB 5B — Mini Project จนถึง GDSII               ✅ มี step-by-step║
-║    5.6 สรุปและประเด็นสำคัญ (ปิดท้าย Part 1)                 ✅ มี deep dive ║
-╚═════════════════════════════════════════════════════════════════════════╝
+║  Day 1  Fundamentals of VHDL and Digital IC Design          [คู่มือหลัก]      ║
+║    1.1 Digital IC Design Flow                             ✅ มี deep dive ║
+║    1.2 พื้นฐานภาษา VHDL (ASIC vs FPGA + Building Blocks)     ✅ มี deep dive ║
+║    1.3 Simulation vs Synthesis + Data Types               ✅ มี deep dive ║
+║    1.4 LAB 1 — AND/OR/MUX/Decoder + Simulation          ✅ มี step-by-step║
+║                                                                          ║
+║  Day 2  Advanced RTL Design Using VHDL                           [คู่มือหลัก] ║
+║    2.1 Synchronous Design & Reset Strategy                ✅ มี deep dive ║
+║    2.2 FSM — Moore vs Mealy                               ✅ มี deep dive ║
+║    2.3 Structural vs Behavioral Modeling                      ✅ ในคู่มือหลัก ║
+║    2.4 RTL Design Guidelines (Latch, CDC)                 ✅ มี deep dive ║
+║    2.5 Testbench                                          ✅ มี deep dive ║
+║    2.6 LAB 2 — FSM + Testbench + HDL Designer           ✅ มี step-by-step║
+║    2.7 VHDL Testbench เชิงลึก (simulation cycle / delta cycle)  มี deep dive ║
+║                                                                          ║
+║  Day 3  RTL Synthesis and Optimization (Precision RTL)           [คู่มือหลัก] ║
+║    3.1 Synthesis Flow                                         ✅ ในคู่มือหลัก ║
+║    3.2 Constraints (SDC)                                      ✅ ในคู่มือหลัก ║
+║    3.3 Timing Analysis เบื้องต้น                                  ✅ ในคู่มือหลัก ║
+║    3.4 Optimization Techniques                                ✅ ในคู่มือหลัก ║
+║    3.5 การสังเคราะห์ด้วย Yosys (Open-source)                     ✅ มี deep dive ║
+║    3.6 LAB 3B — Yosys & LibreLane (RTL → GDSII)          ✅ มี step-by-step║
+║    3.7 LAB 3 — 8-bit Adder variants + Synthesis                ✅ ในคู่มือหลัก ║
+║                                                                           ║
+║  Day 4  Design Verification Using Questa                          [คู่มือหลัก] ║
+║    4.1 Verification Methodology                             ✅ มี deep dive ║
+║    4.2 Assertions & Functional Coverage                     ✅ มี deep dive ║
+║    4.3 Gate-Level Simulation & SDF                          ✅ มี deep dive ║
+║    4.4 LAB 4 — ALU Verification + GLS                     ✅ มี step-by-step║
+║                                                                             ║
+║  Day 5  Mini Project — UART TX                                     [คู่มือหลัก] ║
+║    5.1 ASIC Flow Integration                                 ✅ มี deep dive ║
+║    5.2 Verification Plan & Sign-off                          ✅ มี deep dive ║
+║    5.3 Mini Project — RTL Design                             ✅ มี deep dive ║
+║    5.4 RTL-to-GDSII Full Chip Flow (LibreLane)               ✅ มี deep dive ║
+║    5.5 LAB 5B — Mini Project จนถึง GDSII                     ✅ มี step-by-step║
+║    5.6 สรุปและประเด็นสำคัญ (ปิดท้าย Part 1)                          ✅ มี deep dive ║
+╚═════════════════════════════════════════════════════════════════════════════╝
 
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  PART 2 — IC Layout + MEMS Design (วันที่ 6-10)  ❌ ยังไม่ได้จัดทำ             ║
+║  PART 2 — IC Layout + MEMS Design (วันที่ 6-10)  ❌ ยังไม่ได้จัดทำ                ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  Day 6   Basic IC Design / Tanner Tools                        ❌       ║
-║  Day 7   CMOS Layout / L-Edit                                  ❌       ║
-║  Day 8   MEMS Layout / L-Edit                                   ❌      ║
-║  Day 9   MEMS Design / FEM / Ansys                              ❌      ║
-║  Day 10  Advanced MEMS Simulation                              ❌       ║
+║  Day 6   Basic IC Design / Tanner Tools                    ❌            ║
+║  Day 7   CMOS Layout / L-Edit                              ❌            ║
+║  Day 8   MEMS Layout / L-Edit                              ❌            ║
+║  Day 9   MEMS Design / FEM / Ansys                         ❌            ║
+║  Day 10  Advanced MEMS Simulation                          ❌            ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -128,7 +129,7 @@ bash run_yosys_lab.sh
 ```
 
 ใช้เครื่องมือ open-source ทั้งหมด (ไม่ต้องมี license หรือ PDK ขององค์กร) — สังเคราะห์ได้ตั้งแต่
-RTL → netlist → GDSII พร้อม DRC/LVS ดูวิธีติดตั้งใน [ข้อ 7.1.1](#711-เครื่องมือ-open-source-สำหรับ-lab-3b--5b--ไม่ต้องมี-license)
+RTL → netlist → GDSII พร้อม DRC/LVS ดูวิธีติดตั้งใน [ข้อ 7.1.1](#711-เครื่องมือ-open-source-สำหรับ-lab-3b--5b-และหัวข้อ-27--38--ไม่ต้องมี-license)
 
 ### 3.4 ทำข้อสอบ
 
@@ -150,13 +151,14 @@ E:\lab\VHDL(BOI)\
 │
 ├── Manual_Part1_Day1-5.md                 คู่มือหลักสูตร วันที่ 1-5 (~74 KB, ~1,740 บรรทัด)
 │
-├── ── เนื้อหาเชิงลึก (Deep Dive) — 17 ไฟล์ ──────────────────────────────
+├── ── เนื้อหาเชิงลึก (Deep Dive) — 18 ไฟล์ ──────────────────────────────
 ├── Manual_1_1_0_DigitalICDesignFlow_DeepDive.md
 ├── Manual_1_1_2_ASIC_vs_FPGA_and_VHDL_BuildingBlocks_DeepDive.md
 ├── Manual_1_2_4_and_1_3_Simulation_vs_Synthesis_DataTypes_DeepDive.md
 ├── Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md
 ├── Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md
 ├── Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md
+├── Manual_2_7_VHDL_Testbench_DeepDive.md
 ├── Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md
 ├── Manual_4_1_Verification_Methodology_DeepDive.md
 ├── Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md
@@ -184,7 +186,9 @@ E:\lab\VHDL(BOI)\
 │   ├── README.md
 │   ├── day1/   8 design + 6 testbench + run_lab1.do                  (15 ไฟล์)
 │   ├── day2/   6 design + 4 testbench + run_lab2.do                  (11 ไฟล์)
-│   ├── day3/   4 design + 3 testbench + SDC + Tcl + 1 .do            (10 ไฟล์)
+│   ├── day2_testbench/  VHDL Testbench เชิงลึก (หัวข้อ 2.7) + README (24 ไฟล์)
+│   ├── day3/   Lab 3A (Precision RTL) — rtl/ tb/ sdc/ scripts/ + README (27 ไฟล์)
+│   ├── day3_synthesis/  VHDL Synthesis เชิงลึก (หัวข้อ 3.8) + README (25 ไฟล์)
 │   ├── day3_yosys/  Yosys + LibreLane (Lab 3B) + README              (18 ไฟล์)
 │   ├── day4/   3 design + 2 testbench + 1 SystemVerilog + 3 .do       (9 ไฟล์)
 │   ├── day5/   3 design + 1 testbench + SDC + Tcl + 2 .do + report   (10 ไฟล์)
@@ -221,7 +225,9 @@ E:\lab\VHDL(BOI)\
 | [`Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md`](Manual_2_1_SynchronousDesign_ResetStrategy_DeepDive.md) | 2.1 | 90–120 นาที | 15 |
 | [`Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md`](Manual_2_2_FSM_Moore_vs_Mealy_DeepDive.md) | 2.2 | 90–120 นาที | 14 |
 | [`Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md`](Manual_2_4_2_5_RTL_Guidelines_and_Testbench_DeepDive.md) | 2.4 + 2.5 | 90–120 นาที | 26 |
+| [`Manual_2_7_VHDL_Testbench_DeepDive.md`](Manual_2_7_VHDL_Testbench_DeepDive.md) | 2.7 VHDL Testbench เชิงลึก | 90–120 นาที | 20 |
 | [`Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md`](Manual_3_5_Yosys_and_LibreLane_Synthesis_DeepDive.md) | 3.5 การสังเคราะห์ด้วย Yosys (Open-source) | 90–120 นาที | 24 |
+| [`Manual_3_8_VHDL_Synthesis_DeepDive.md`](Manual_3_8_VHDL_Synthesis_DeepDive.md) | 3.8 VHDL Synthesis เชิงลึก (ภาษา → ฮาร์ดแวร์) | 90–120 นาที | 20 |
 | [`Manual_4_1_Verification_Methodology_DeepDive.md`](Manual_4_1_Verification_Methodology_DeepDive.md) | 4.1 | 90–120 นาที | 21 |
 | [`Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md`](Manual_4_2_Assertions_and_FunctionalCoverage_DeepDive.md) | 4.2 | 90–120 นาที | 26 |
 | [`Manual_4_3_GateLevelSimulation_SDF_DeepDive.md`](Manual_4_3_GateLevelSimulation_SDF_DeepDive.md) | 4.3 | 90–120 นาที | 28 |
@@ -239,6 +245,7 @@ E:\lab\VHDL(BOI)\
 | --- | --- | --- | --- |
 | [`Manual_1_4_Lab1_StepByStepGuide.md`](Manual_1_4_Lab1_StepByStepGuide.md) | Lab 1 — โมดูลตรรกะพื้นฐาน | 1.5–2 ชม. | 10 |
 | [`Manual_2_6_Lab2_FSM_StepByStepGuide.md`](Manual_2_6_Lab2_FSM_StepByStepGuide.md) | Lab 2 — FSM + Testbench + HDL Designer | 2–2.5 ชม. | 10 |
+| [`Manual_3_7_Lab3A_Precision_RTL_Synthesis_StepByStepGuide.md`](Manual_3_7_Lab3A_Precision_RTL_Synthesis_StepByStepGuide.md) | Lab 3A — Precision RTL Synthesis (commercial) | 1.5–2 ชม. | 14 |
 | [`Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md`](Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md) | Lab 3B — Yosys + LibreLane (RTL → GDSII) | 2.5–3 ชม. | 12 |
 | [`Manual_4_4_Lab4_GLS_AssertionBasedTB_StepByStepGuide.md`](Manual_4_4_Lab4_GLS_AssertionBasedTB_StepByStepGuide.md) | Lab 4 — Verification + GLS + Assertion TB | 2.5–3 ชม. | 12 |
 | [`Manual_5_5_Lab5_MiniProject_GLS_Debug_Report_StepByStepGuide.md`](Manual_5_5_Lab5_MiniProject_GLS_Debug_Report_StepByStepGuide.md) | Lab 5 — Mini Project End-to-End | 2.5–3 ชม. | 12 |
@@ -284,6 +291,102 @@ E:\lab\VHDL(BOI)\
 > ของแต่ละ testbench ด้วย จึงจับกรณี `run` time สั้นเกินไปจน simulation หยุดกลางคัน
 > แต่ยังดูเหมือนผ่านได้ (กรณีนี้เคยเกิดกับ `tb_adder4` และ `tb_add_sub_shared`
 > ที่รันได้แค่ 40 / 511 patterns จากทั้งหมด 512)
+
+#### 6.1.1 ผลการตรวจสอบชุดตัวอย่างหัวข้อ 2.7 — VHDL Testbench เชิงลึก (`lab_code/day2_testbench/`)
+
+ตรวจสอบด้วย **GHDL 5.0.1 (WSL Ubuntu 26.04)** และ **ModelSim/Questa 2026.1 (Windows)**
+ผลลัพธ์ตรงกันทั้งสองเครื่องมือ — มี **17 รายการตรวจ ผ่านทั้งหมด (TOTAL FAIL: 0)**
+
+| ตัวอย่าง | สิ่งที่พิสูจน์ | ผลจริง |
+| --- | --- | --- |
+| `ex01_delta_cycle` | อ่าน signal ที่เพิ่ง assign ได้ค่าเก่า · chain 3 ชั้นใช้เวลา 0 ns | `sig_a='0'` → `'1'` หลัง `wait for 0 ns` · ทั้ง 3 ชั้นที่ `t=10 ns` |
+| `ex02_signal_vs_variable` | ตัวนับ signal รายงานค่าเก่า | `var_cnt=10` / `sig_cnt=0` · protected shared var = 10 |
+| `ex03_wait_statements` | wait ทั้ง 4 แบบ + handshake | `[B1]` → `[B2]` → `[C2]` ครบที่ `t=5 ns` |
+| `ex04_clock_bug` | นาฬิกาไม่ init → ไม่มี edge | **rising edges = 0**, `clk='U'` |
+| `ex04_clock_fixed` | แก้แล้ว | **rising edges = 20** ใน 200 ns (คาบ 10 ns) |
+| `ex05_procedure_checker` | procedure / impure function / TB package | `PASS=3 FAIL=0` |
+| `ex06_random_stimulus` | seed เดิม → ลำดับเดิม (ทั้ง 2 เครื่องมือ) | `seed=12345, vectors=200, checksum=365623, count=98` · `PASS=200` |
+| `ex07_uart_scoreboard` | decode UART + เทียบ queue | 5 เฟรม · `PASS=5 FAIL=0` · queue หมด |
+| `ex08_file_io` | อ่าน vector + เขียนรายงาน | `vectors read = 12` · `PASS=12 FAIL=0` |
+| `ex09_assertion_severity` | severity → พฤติกรรมของแต่ละเครื่องมือ | note/warning/error/failure ตรงตามคาดทั้ง 2 เครื่องมือ |
+| `ex10_external_name` | อ่าน signal ภายใน DUT | `output port cnt = 5` = `internal cnt_i = 5` |
+| `ex11_configuration` | สลับ architecture ของ DUT | `cfg_using_rtl` → **5** · `cfg_using_alt` → **10** |
+| `ex12_event_log` | เขียน timeline ลงไฟล์ | `final count = 3` · ได้ทั้ง `.txt` และ `.vcd` |
+
+**บั๊กจริงที่จับได้ระหว่างทำตัวอย่าง (12 จุด)** — รายละเอียดใน
+[`Manual_2_7_VHDL_Testbench_DeepDive.md`](Manual_2_7_VHDL_Testbench_DeepDive.md):
+นาฬิกาไม่เคยตี · อ่าน signal ได้ค่าเก่า · ตัวนับ signal → false PASS ·
+`wait until` ไม่ทำงานทันทีเมื่อเงื่อนไขเป็นจริงแล้ว (ยืนยันตรงกัน 2 เครื่องมือ) ·
+baud tick เป็น square wave · UART LSB-first · `hread` อ่าน comment ·
+`HREAD` มาตรฐานรองรับแค่ `BIT_VECTOR` · `numeric_std` ไม่รองรับ `+` บน `std_logic_vector` ·
+ไม่มี `std.env.stop` → simulation ค้าง · external name ชี้ signal ใน process ไม่ได้ ·
+`report` string ใส่ภาษาไทยไม่ได้
+
+> รันชุดตัวอย่างได้ด้วย `bash lab_code/day2_testbench/run_all.sh` (GHDL)
+> หรือ `powershell -File lab_code/day2_testbench/run_modelsim_regression.ps1` (Questa)
+> รายละเอียด: [`lab_code/day2_testbench/README.md`](lab_code/day2_testbench/README.md)
+
+#### 6.1.2 ผลการตรวจสอบชุดตัวอย่างหัวข้อ 3.8 — VHDL Synthesis เชิงลึก (`lab_code/day3_synthesis/`)
+
+ตรวจสอบด้วย **GHDL 5.0.1 · Yosys 0.52 · Icarus Verilog 12.0 · PDK sky130A** บน WSL Ubuntu 26.04
+ผลลัพธ์: **PASS=10 / FAIL=2** (FAIL ทั้ง 2 คือเคสที่ตั้งใจให้ GHDL ปฏิเสศ) และ **GLS ตรงตามคาด 4/4 เคส**
+
+| ตัวอย่าง | สิ่งที่พิสูจน์ | generic cells | sky130 area | ผลพิสูจน์ |
+| --- | --- | ---: | ---: | --- |
+| `alu4` | `case` → priority mux + `numeric_std` | 57 | 208.950400 | miter ✅ · equiv ✅ · GLS ✅ |
+| `counter_sync` | sync reset + clock enable → DFF | 24 | 280.268800 | equiv ✅ (miter ❌) |
+| `fsm_seq` | Yosys recode binary → **one-hot** (2 → 3 FF) | 26 | 106.352000 | equiv ✅ (miter ❌) |
+| `adder8` | `resize` ก่อนบวก → carry chain | 49 | 205.196800 | miter ✅ · equiv ✅ · GLS ✅ |
+| `mult8` | `unsigned * unsigned` → partial-product array | 354 | 1904.326400 | equiv ✅ (miter ⏱ timeout) |
+| `shifter` | variable shift → mux tree 3 ระดับ | 146 | 721.942400 | miter ✅ · equiv ✅ |
+| `lfsr16` | LFSR Galois → XOR + FF | 35 | 569.296000 | equiv ✅ (miter ❌) |
+| `latch_bad` | ❌ `if` ไม่ครบ path | – | – | GHDL ปฏิเสศจริง |
+| `latch_bad_latched` | ⚠️ **netlist ผิด โดยไม่มีเครื่องมือเตือน** | 0 | – | miter ✅ · equiv ✅ · **GLS ❌** |
+| `latch_good` | ✅ แก้แล้ว → mux 1 บิต | 1 | 6.256000 | miter ✅ · equiv ✅ |
+| `rom_16x8` | constant array → ROM → mux tree | 25 | 113.859200 | miter ✅ · equiv ✅ |
+| `std_logic_arith_bad` | ❌ package ของ Synopsys | – | – | GHDL ปฏิเสศจริง |
+
+**ข้อค้นพบสำคัญที่สุด** — เมื่อเปิด `--latches` แล้ว GHDL จะเขียน Verilog เป็น `always @(e)`
+แต่ Yosys ตีความรูปแบบนี้เป็น **combinational block** (`Note: Assuming pure combinatorial block`)
+แล้ว **ทิ้ง enable ไปทั้งก้อน** ผลลัพธ์คือ `assign q = d;` ซึ่งผิดความหมาย
+
+| การตรวจ | ผล |
+| --- | --- |
+| `check -assert` ของ Yosys | ผ่าน (ไม่เตือน) |
+| `miter` + `sat` | SUCCESS (ทั้งสองฝั่งถูกแปลงผิดเหมือนกัน) |
+| `equiv_make` + `equiv_induct` | Equivalence successfully proven! |
+| **GLS** | **FAIL** ✅ — จับได้เคสนี้ |
+
+> รันได้ด้วย `bash lab_code/day3_synthesis/run_everything.sh` (ใช้เวลา ~6–8 นาที)
+> รายละเอียด: [`lab_code/day3_synthesis/README.md`](lab_code/day3_synthesis/README.md)
+
+#### 6.1.3 ผลการตรวจสอบชุดตัวอย่างหัวข้อ 3.7 — Lab 3A (Precision RTL) (`lab_code/day3/`)
+
+> ⚠️ **Precision RTL Synthesis ไม่ได้ติดตั้งในเครื่องที่ทดสอบ**
+> (ตรวจแล้ว: ไม่มี `precision.exe` ใน `C:\Siemens\Custom IC\Custom IC 2025.4\x64`,
+> ไม่มีใน `PATH`, ไม่มีใน `C:\Program Files\Siemens` / `C:\MentorGraphics`)
+> ตัวเลขทุกตัวด้านล่างจึงมาจาก **reference flow แบบ open-source ที่รันจริง**
+> — ไม่ใช่ตัวเลขของ Precision RTL และคู่มือไม่ใส่ตัวเลขที่ไม่ได้รันจริง
+
+ตรวจสอบด้วย **Questa 2026.1 (RTL sim)** และ
+**GHDL 5.0.1 · Yosys 0.52 · OpenSTA 2.7.0 · Icarus 12.0 · PDK sky130A** (reference flow)
+
+| ขั้นตอน | ผลการตรวจสอบ |
+| --- | --- |
+| RTL simulation (`run_lab3.do`) | ✅ **4/4 testbench ผ่าน** — `tb_adder8` · `tb_add_sub_shared` (PASS=512 FAIL=0) · `tb_adder8_pipelined` · `tb_top` (CHECKS=80 FAIL=0) |
+| ตัวตรวจ SDC ↔ entity (`check_sdc_ports.py`) | ✅ `0 error(s)` ทั้ง 4 design |
+| ตัวตรวจ SDC ย้อนหลัง (`--selftest`) | ✅ `SELFTEST PASSED` — จับบั๊กเดิม 3 errors |
+| ตัวตรวจสคริปต์ Tcl (`check_precision_tcl.py`) | ✅ `0 error(s)` ทั้ง 4 สคริปต์ |
+| ตัวตรวจ Tcl ย้อนหลัง (`--selftest`) | ✅ `SELFTEST PASSED` — จับไฟล์ที่หาย 3 errors |
+| Yosys generic synthesis | ✅ 40 / 98 / 86 / 224 cells (`adder8` / `adder8_pipelined` / `add_sub_shared` / `top`) |
+| Yosys → sky130A | ✅ area 290.278400 / 954.665600 / 419.152000 / 1664.096000 µm² |
+| OpenSTA (setup / hold) | ✅ 2.94·2.08 · 7.67·0.45 · 3.32·2.08 · 2.94·0.45 ns |
+| Formal equivalence (`equiv_make` + `equiv_induct`) | ✅ **Equivalence successfully proven** ทั้ง 4 design |
+| Gate-Level Simulation (sky130A cell models) | ✅ PASS ทั้ง 4 design — 65,536 / 16 / 131,072 / 64 checks |
+| ผลรวม reference flow | ✅ **4 design · 0 failures** |
+
+> รันได้ด้วย `bash lab_code/day3/scripts/run_reference_flow.sh`
+> รายละเอียด: [`lab_code/day3/README.md`](lab_code/day3/README.md)
 
 ### 6.2 ผลการตรวจสอบ Lab 3B (Yosys + LibreLane)
 
@@ -338,6 +441,7 @@ E:\lab\VHDL(BOI)\
 | 2 | 8-bit Counter with CE + load | ✅ พร้อมใช้ | Synchronous reset |
 | 2 | Sequence Detector (Moore + Mealy) | ✅ พร้อมใช้ | Self-checking TB + overlapping |
 | 2 | 4-bit Adder (Structural) | ✅ พร้อมใช้ | Exhaustive 256×256 |
+| 2 | **ชุดตัวอย่าง VHDL Testbench เชิงลึก (หัวข้อ 2.7)** | ✅ รันจริงผ่าน | 13 ตัวอย่าง · GHDL + Questa ผ่านทั้งหมด · จับบั๊กจริง 12 จุด |
 | 3 | 8-bit Ripple Carry Adder | ✅ พร้อมใช้ | |
 | 3 | 8-bit Pipelined Adder | ✅ พร้อมใช้ | Latency = 1 cycle |
 | 3 | ADD/SUB Resource Sharing | ✅ พร้อมใช้ | Exhaustive pattern + signed overflow |
@@ -374,21 +478,28 @@ E:\lab\VHDL(BOI)\
 
 ทุกเครื่องมือมาจาก **Siemens EDA** (เดิม Mentor Graphics) ซึ่ง **HENISWARE Co., Ltd.** เป็นตัวแทนจำหน่ายในประเทศไทย
 
-### 7.1.1 เครื่องมือ Open-source (สำหรับ Lab 3B / 5B — ไม่ต้องมี license)
+### 7.1.1 เครื่องมือ Open-source (สำหรับ Lab 3B / 5B และหัวข้อ 2.7 / 3.8 — ไม่ต้องมี license)
 
-Lab 3B (Yosys + LibreLane) และ Lab 5B (RTL-to-GDSII Full Chip Flow) ใช้ชุดเครื่องมือที่ **ฟรีทั้งหมด** ติดตั้งบน Linux / WSL
+Lab 3B (Yosys + LibreLane), Lab 5B (RTL-to-GDSII Full Chip Flow),
+ชุดตัวอย่างหัวข้อ 2.7 (VHDL Testbench เชิงลึก), หัวข้อ 3.8 (VHDL Synthesis เชิงลึก)
+และ **reference flow ของ Lab 3A** (Precision RTL — สำหรับนักศึกษาที่ไม่มี license)
+ใช้ชุดเครื่องมือที่ **ฟรีทั้งหมด** ติดตั้งบน Linux / WSL
 
 | เครื่องมือ | ใช้สำหรับ | วิธีติดตั้ง |
 | --- | --- | --- |
-| Yosys 0.52 | RTL → netlist synthesis | `sudo apt install yosys` |
+| Yosys 0.52 | RTL → netlist synthesis + formal equivalence | `sudo apt install yosys` |
 | Icarus Verilog 12.0 | RTL / Gate-Level Simulation | `sudo apt install iverilog` |
-| GHDL 5.0.1 | สะพาน VHDL → Verilog | `sudo apt install ghdl` |
+| GHDL 5.0.1 | สะพาน VHDL → Verilog + จำลอง testbench หัวข้อ 2.7 | `sudo apt install ghdl` |
+| OpenSTA 2.7.0 | Static Timing Analysis ของ reference flow (Lab 3A) | `nix profile install nixpkgs#opensta` |
 | LibreLane v3.0.17 | Open-source ASIC flow (RTL → GDSII) | `nix profile install nixpkgs#librelane` |
 | PDK sky130A | Target library (open-source) | ดาวน์โหลดอัตโนมัติผ่าน `--volare-pdk` |
 
 > Nix ดึง **OpenROAD, Magic, KLayout, Netgen, Yosys, yosys-ghdl** มาให้ใน closure เดียวกัน
 > รายละเอียดการติดตั้งและการเปลี่ยน PDK: [`lab_code/day3_yosys/librelane/README.md`](lab_code/day3_yosys/librelane/README.md)
 > และ [`lab_code/day5_yosys/librelane/README.md`](lab_code/day5_yosys/librelane/README.md)
+> ส่วนชุดตัวอย่าง testbench: [`lab_code/day2_testbench/README.md`](lab_code/day2_testbench/README.md)
+> ส่วนชุดตัวอย่าง synthesis: [`lab_code/day3_synthesis/README.md`](lab_code/day3_synthesis/README.md)
+> ส่วน reference flow ของ Lab 3A: [`lab_code/day3/README.md`](lab_code/day3/README.md)
 
 ### 7.2 ตั้งค่า PATH สำหรับ ModelSim/Questa
 
@@ -479,14 +590,28 @@ add wave *
 run 300 us
 ```
 
-### 8.4 สังเคราะห์ด้วย Precision RTL (Day 3 / Day 5)
+### 8.4 สังเคราะห์ด้วย Precision RTL (Lab 3A / Day 3 / Day 5)
 
-```powershell
-cd E:\lab\VHDL(BOI)\lab_code\day3
-precision -shell -file synth.tcl
+> ⚠️ ต้องมี license ขององค์กร ถ้าไม่มีให้ใช้ reference flow แบบ open-source แทน (หัวข้อ 8.6)
+
+```bash
+# 1) แก้ set tech_lib ให้ชี้ไปที่ PDK ขององค์กร
+#    lab_code/day3/scripts/synth_top.tcl
+# 2) สังเคราะห์
+cd /path/to/lab_code/day3
+precision -shell -file scripts/synth_top.tcl
 ```
 
-ผลลัพธ์จะอยู่ใน `reports/` และ `netlist/` — ต้องแก้ `tech_lib` ก่อนตาม [ข้อ 7.3](#73-การตั้งค่า-pdk-สำหรับ-synthesis)
+ผลลัพธ์จะอยู่ใน `lab_code/day3/reports/` (area / timing / power / constraints)
+และ `lab_code/day3/netlist/` (netlist Verilog + SDF)
+
+ก่อนรัน ควรตรวจ constraint กับ RTL ด้วยตัวตรวจที่มากับแล็บ:
+
+```bash
+cd /path/to/lab_code/day3
+python3 scripts/check_sdc_ports.py         # SDC ↔ entity
+python3 scripts/check_precision_tcl.py     # สคริปต์ Tcl
+```
 
 ### 8.5 Gate-Level Simulation (Day 4 / Day 5)
 
@@ -549,6 +674,65 @@ klayout "$RUN/final/klayout_gds/uart_top.klayout.gds"
 ls "$RUN/final/render/"
 ```
 
+### 8.8 รันชุดตัวอย่างหัวข้อ 2.7 — VHDL Testbench เชิงลึก
+
+**ด้วย GHDL (Linux / WSL):**
+
+```bash
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench"
+bash run_all.sh
+```
+
+**ด้วย ModelSim / Questa (Windows):**
+
+```powershell
+cd E:\lab\VHDL(BOI)\lab_code\day2_testbench
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_modelsim_regression.ps1
+```
+
+ทั้งสองสคริปต์จะรันทุกตัวอย่าง พิมพ์ exit code ของแต่ละเคส และสรุปผลท้ายสุด
+
+```
+TOTAL FAIL: 0
+```
+
+> ⚠️ **ระวัง:** ModelSim/Questa คืน exit code 0 แม้จะมี severity failure
+> สคริปต์จึงตรวจข้อความ `Errors: N` และ `** Failure:` ใน log แทน
+> ดูรายละเอียดที่ [`lab_code/day2_testbench/README.md`](lab_code/day2_testbench/README.md)
+
+### 8.9 รัน reference flow ของ Lab 3A — Precision RTL (open-source, ไม่ต้องมี license)
+
+```bash
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day3"
+bash scripts/run_reference_flow.sh              # ทุก design
+bash scripts/run_reference_flow.sh top          # design เดียว
+```
+
+ผลลัพธ์: `reports/summary.txt` (ตารางสรุป) + report ราย design
+
+> ต้องมี GHDL, Yosys, OpenSTA, Icarus และ PDK sky130A
+> ดูคู่มือ: [`Manual_3_7_Lab3A_Precision_RTL_Synthesis_StepByStepGuide.md`](Manual_3_7_Lab3A_Precision_RTL_Synthesis_StepByStepGuide.md)
+
+### 8.10 รันชุดตัวอย่างหัวข้อ 3.8 — VHDL Synthesis เชิงลึก
+
+**Linux / WSL (GHDL + Yosys + Icarus + PDK sky130A):**
+
+```bash
+cd "/mnt/e/lab/VHDL(BOI)/lab_code/day3_synthesis"
+bash run_everything.sh
+```
+
+ใช้เวลาประมาณ **6–8 นาที** ผลลัพธ์อยู่ใน `reports/` และ `reports/summary.txt`
+
+```text
+PASS=10  FAIL=2  (ทั้งหมด 12 รายการ)
+GLS SUMMARY: ตรงตามคาด 4 เคส / ไม่ตรง 0 เคส (ทั้งหมด 4 เคส)
+```
+
+> `FAIL=2` คือเคสที่ **ตั้งใจให้ GHDL ปฏิเสศ** (`latch_bad`, `std_logic_arith_bad`)
+> เพื่อเก็บข้อความ error จริงมาสาธิต
+> รายละเอียด: [`lab_code/day3_synthesis/README.md`](lab_code/day3_synthesis/README.md)
+
 ---
 
 ## 9. Troubleshooting: ปัญหาที่พบบ่อย
@@ -583,6 +767,60 @@ ls "$RUN/final/render/"
 | `flow complete` แต่ไม่มี `final/` | รันไม่จบ | ดู `error.log` และ `flow.log` ใน `runs/RUN_*/` |
 | path มีวงเล็บทำให้คำสั่งพัง | shell ไม่ escape | ห่อด้วย `"` เช่น `cd "/mnt/e/lab/VHDL(BOI)/..."` |
 
+### 9.1.2 ปัญหาที่พบจากการทำชุดตัวอย่าง VHDL Testbench (หัวข้อ 2.7)
+
+| อาการ | สาเหตุ | วิธีแก้ |
+| --- | --- | --- |
+| นาฬิกาไม่เดิน / rising edge = 0 | `signal clk : std_logic;` ไม่มี initial value | ประกาศ `:= '0'` และใส่ edge counter ใน TB เพื่อตรวจ |
+| อ่าน output ได้ค่าเก่า | signal เปลี่ยนค่าท้าย delta cycle | ใช้ `variable` หรือรอ `wait for 1 ns` หลัง `rising_edge(clk)` |
+| สรุปว่า `FAIL=0` ทั้งที่มี FAIL | ตัวนับเป็น signal → รายงานค่าเก่า | ใช้ `variable` เก็บตัวนับ pass/fail |
+| `wait until` ค้างแม้เงื่อนไขเป็นจริง | `wait until` ต้องมี event บน signal ก่อน | รอการเปลี่ยนแปลง (`wait until din_rdy = '0'`) ไม่ใช่รอค่า |
+| `wait statement not allowed in a sensitized process` | process มี sensitivity list | ย้าย `wait until` ไป process ที่ไม่มี sensitivity list |
+| `signal parameter requires a signal name` | ใช้ `rising_edge(c)` โดย c เป็น formal parameter | ประกาศ procedure ที่ architecture แล้วอ้างถึง signal จริง |
+| `cannot resolve overloading` ตอน `hread(l, v)` | `IEEE.TEXTIO` มี `HREAD` เฉพาะ `BIT_VECTOR` | อ่านเป็น `bit_vector` แล้วแปลงเอง หรือใช้ `IEEE.STD_LOGIC_TEXTIO` |
+| `hexa bit_vector read failure` | บรรทัดนั้นเป็น comment ไม่ใช่เลขฐาน 16 | กรองด้วยฟังก์ชันตรวจเลขฐาน 16 ก่อนอ่าน |
+| `no function declarations for operator "+"` | `numeric_std` ไม่รองรับ `+` บน `std_logic_vector` | ใช้ `unsigned` / `signed` |
+| `invalid character not allowed, even in a string` | `report` string ใส่ภาษาไทย | ใช้ ASCII ใน string literal (คอมเมนต์ไทยได้) |
+| `ghdl:error: overflow detected` | คูณใน checksum ล้น `integer` | ใช้ modulus เล็กพอ |
+| simulation ค้างจน timeout | ไม่มี `std.env.stop` / `std.env.finish` | เพิ่มท้าย testbench |
+| `External reference to or into a VHDL process is not allowed.` | external name ชี้ signal ที่ประกาศใน process | ย้าย signal ไประดับ architecture |
+| `component name expected` ตอนใช้ configuration | ใช้ direct entity instantiation | ประกาศ component ใน TB |
+| Questa คืน exit code 0 ทั้งที่ severity failure | ModelSim ไม่สะท้อนผลใน exit code | ตรวจ `Errors: N` ใน log (ดู `run_modelsim_regression.ps1`) |
+
+### 9.1.3 ปัญหาที่พบจากการทำชุดตัวอย่าง VHDL Synthesis (หัวข้อ 3.8)
+
+| อาการ | สาเหตุ | วิธีแก้ |
+| --- | --- | --- |
+| `error: latch infered for net "s" (use --latches)` | `if` ไม่ครอบทุก path | เติม `else` ให้ครบทุก path — อย่าใช้ `--latches` เพื่อกลบปัญหา |
+| `error: use of synopsys package "std_logic_arith" needs the -fsynopsys option` | ใช้ package ที่ไม่ใช่มาตรฐาน IEEE | เปลี่ยนเป็น `ieee.numeric_std` |
+| `error: no declaration for "to_integer"` | ลืม `use ieee.numeric_std.all` | เพิ่ม import |
+| `unknown command option '-e'` หลังใส่ `--workdir` | `--workdir` ชี้ไปที่ dir ที่ยังไม่มี | สร้าง dir ก่อน หรือตัด `--workdir` ออก |
+| `ERROR: Module 'xxx' not found!` | ชื่อ top ใน Yosys ไม่ตรง entity | ตรวจ `grep '^module '` ในไฟล์ Verilog ที่ GHDL ออกมา |
+| **netlist ทำงานผิด โดยไม่มีเครื่องมือไหนเตือน** | Yosys ตีความ `always @(e)` เป็น combinational → ทิ้ง enable | ตรวจ GLS เสมอ — ดูคู่มือข้อ 3.8.6 |
+| `ERROR: Failed to import cell ... (type $dff) to SAT database` | ลืมใส่ `-seq N` ใน `sat` | เพิ่ม `-seq <N>` |
+| `ERROR: Called with -verify and proof did fail!` บน FSM | `-set-init-zero` ขัดกับ one-hot recode | ใช้ `equiv_make` + `equiv_induct` |
+| `ERROR: Failed to import cell gold.n13 (type $mem_v2)` | ฝั่ง gold ยังเป็น memory | `memory_map` ทั้งสองฝั่งก่อนเทียบ |
+| `sat` แก้ไม่จบ (multiplier 8×8) | bounded SAT แก้ไม่จบใน 90 วินาที | ใช้ `equiv_induct` และจำกัดเวลา |
+| จำนวน FF ไม่ตรงกับที่คาด | Yosys `fsm` recode binary → one-hot | ระบุ flow ที่ใช้ หรือใช้ `fsm -norecode` |
+| map เข้า PDK แล้ว area แย่กว่าเดิม | `abc` ทำงานสองรอบซ้อนกัน | ใช้ `synth -noabc` ก่อน `abc -liberty` |
+
+#### 9.1.4 ปัญหาที่พบจากการทำ Lab 3A (Precision RTL)
+
+ทั้ง 6 ข้อนี้ **พิสูจน์ได้ด้วยการรันจริง** ไม่ใช่การเดา — รายละเอียดอยู่ในคู่มือ Lab 3A หัวข้อ 3.7.8
+
+| อาการ | สาเหตุ | วิธีจับได้ |
+| --- | --- | --- |
+| **timing report ว่างเปล่า ไม่มี error** | `get_ports clk` ของ port ที่ไม่มีใน entity คืน collection ว่าง → constraint ถูกทิ้งเงียบ | `scripts/check_sdc_ports.py` |
+| **สคริปต์ Tcl ตายที่คำสั่งแรก** | `add_source` ชี้ไฟล์ที่อยู่คนละโฟลเดอร์ | `scripts/check_precision_tcl.py` |
+| **GLS ได้ X ทุกบิต ทั้งที่ netlist ถูก** | PDK คอมไพล์ *timing* model ที่มี `specify` → `CLK_delayed` เป็น X (Icarus ไม่รองรับ timing check) | warning ของ iverilog → แก้ด้วย `-D FUNCTIONAL` |
+| **GLS error `Unknown module type: ...udp_dff$...`** | ไม่ได้ใส่ `primitives.v` (ไฟล์ UDP ของ PDK) | error ของ iverilog |
+| **netlist คำนวณผิด แต่ `check -assert` ผ่าน** | `abc` เลือก `lpflow_inputiso1p_1` (isolation cell) มาแทน OR gate | GLS / formal เท่านั้น → ต้องมี `dont_use` |
+| **testbench อ่านค่าเก่า** | อ่าน signal ที่เพิ่ง assign ใน process เดียวกัน (delta cycle) | assert fail → เก็บค่าไว้ใน variable |
+
+> **บันทึกไว้เป็นบทเรียน:** สองข้อแรกคือ *silent failure* ที่ไม่มีเครื่องมือไหนเตือน
+> และข้อที่ 5 คือกรณีที่ `check -assert` กับ area report ผ่านหมด แต่วงจรคำนวณผิด
+> → **ต้องมี GLS หรือ formal equivalence เสมอ**
+
 ### 9.2 ปัญหาที่อาจเจอระหว่างสอน
 
 | อาการ | วิธีแก้ |
@@ -602,8 +840,9 @@ ls "$RUN/final/render/"
 
 | รายการ | สถานะ | หมายเหตุ |
 | --- | --- | --- |
-| Lab 3 (Precision RTL) Step-by-Step Guide | ⚠️ **ยังไม่มี** | เนื้อหา Lab 3 อยู่ใน `Manual_Part1_Day1-5.md` หัวข้อ 3.7 และมีโค้ดครบใน `lab_code/day3/` แล้ว แต่ยังไม่ได้เขียนเป็นคู่มือ step-by-step แยก |
-| Lab 3 runnable script | ✅ มี | `lab_code/day3/run_lab3.do` รันผ่าน 3/3 testbench |
+| **Lab 3A (Precision RTL) Step-by-Step Guide** | ✅ **มี** | `Manual_3_7_Lab3A_Precision_RTL_Synthesis_StepByStepGuide.md` — 14 หัวข้อ พร้อมผลจากการรันจริง |
+| **Lab 3A runnable script** | ✅ **มี** | `lab_code/day3/run_lab3.do` รันผ่าน **4/4 testbench** + `lab_code/day3/scripts/run_reference_flow.sh` รันผ่าน 4 design (0 failures) |
+| Precision RTL บนเครื่องที่มี license | ⚠️ **ยังไม่ได้รัน** | เครื่องที่ใช้ทดสอบไม่มี Precision RTL Synthesis — ตัวเลขในคู่มือมาจาก reference flow แบบ open-source ทั้งหมด |
 | **Lab 3B (Yosys + LibreLane) Step-by-Step Guide** | ✅ **มี** | `Manual_3_6_Lab3B_Yosys_LibreLane_StepByStepGuide.md` — 12 ขั้นตอน พร้อมผลจากการรันจริง |
 | **Lab 3B runnable script** | ✅ **มี** | `lab_code/day3_yosys/run_yosys_lab.sh` — รันผ่านครบทุกขั้น รวม LibreLane 80/80 stages |
 | **Lab 5B (RTL-to-GDSII Full Chip Flow) Step-by-Step Guide** | ✅ **มี** | `Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md` — 12 ขั้นตอน จนถึง GDSII |
@@ -612,6 +851,12 @@ ls "$RUN/final/render/"
 | GLS จริง (netlist + SDF) | ⚠️ ต้องมี PDK | ต้องสังเคราะห์ใน Day 3 ก่อน (หรือใช้ netlist จาก Lab 3B ที่มีอยู่แล้ว) |
 | Precision RTL report จริง | ⚠️ ต้องมี PDK | ไม่มีตัวเลขที่สังเคราะห์จริงถูกระบุไว้ในเอกสาร — มีแต่ผลของ open-source flow ที่รันจริง |
 | Open-source ASIC flow (RTL → GDSII) | ✅ **มี** | `lab_code/day3_yosys/librelane/` — DRC/LVS/Antenna ผ่าน ได้ GDSII จริง |
+| **หัวข้อ 2.7 — VHDL Testbench เชิงลึก (Deep Dive)** | ✅ **มี** | `Manual_2_7_VHDL_Testbench_DeepDive.md` — 21 หัวข้อ พร้อมหลักฐานจากการรันจริง |
+| **ชุดตัวอย่าง testbench หัวข้อ 2.7** | ✅ **มี** | `lab_code/day2_testbench/` — 13 ตัวอย่าง · รันผ่านทั้ง GHDL 5.0.1 และ ModelSim 2026.1 |
+| **Regression script ของชุดตัวอย่าง 2.7** | ✅ **มี** | `run_all.sh` (GHDL) และ `run_modelsim_regression.ps1` (Questa) — สรุป `TOTAL FAIL: 0` |
+| **หัวข้อ 3.8 — VHDL Synthesis เชิงลึก (Deep Dive)** | ✅ **มี** | `Manual_3_8_VHDL_Synthesis_DeepDive.md` — 20 หัวข้อ พร้อมหลักฐานจากการรันจริง |
+| **ชุดตัวอย่าง synthesis หัวข้อ 3.8** | ✅ **มี** | `lab_code/day3_synthesis/` — 11 ตัวอย่าง · map เข้า sky130A · GLS + formal proof |
+| **ตัวเลข area จริงจาก PDK sky130A** | ✅ **มี** | `reports/summary.txt` — 9 design · area ตั้งแต่ 6.256000 (mux 1 บิต) ถึง 1904.326400 (multiplier 8×8) |
 
 ### 10.2 Part 2 — IC Layout + MEMS (วันที่ 6-10)
 
