@@ -1,7 +1,5 @@
 # รายละเอียดเชิงลึก: Gate-Level Simulation (GLS) & SDF
 
-> เนื้อหานี้ออกแบบมาให้นำไปแทรกเป็นส่วนขยายในหัวข้อ **4.3 ภาคทฤษฎี: GD&T Level Simulation (GLS)** ของคู่มือหลักสูตร (วันที่ 4)
-> เหมาะสำหรับการบรรยาย 90–120 นาที
 
 ---
 
@@ -717,7 +715,7 @@ SDF 4.0 vs 5.0 vs 5.1 มี syntax ต่างกันเล็กน้อ�
    ┌────────────────────────────────────┐
    │  Synthesis (Precision RTL)         │
    │  - Netlist (Verilog)               │
-   │  - SDF (typ/fast/slow)              │
+   │  - SDF (typ/fast/slow)             │
    │  - Reports (area, timing, power)   │
    └────────────┬───────────────────────┘
                 │
@@ -1152,5 +1150,3 @@ vsim> run 1 ns        -- clk edge!
 - "Calibre xACT Manual" — RC Extraction for SDF.
 
 ---
-
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 90-120 นาที รวม SDF format examples, Questa commands, GLS workflow, common issues + solutions พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 4 บ่าย หรือแบ่งเป็น 2 mini-lectures (GLS 60 นาที + SDF 60 นาที)
