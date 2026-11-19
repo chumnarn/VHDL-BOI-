@@ -1,0 +1,482 @@
+
+-- Running command `
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v
+                prep -top add_sub_shared -flatten
+                memory_map
+                opt_clean
+                design -stash gold
+
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_generic.v
+                prep -top add_sub_shared -flatten
+                memory_map
+                opt_clean
+                design -stash gate
+
+                design -copy-from gold -as gold add_sub_shared
+                design -copy-from gate -as gate add_sub_shared
+                equiv_make gold gate equiv
+                hierarchy -top equiv
+                equiv_simple -seq 5
+    equiv_induct -seq 5
+                equiv_status -assert
+             ' --
+
+1. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v' to AST representation.
+Generating RTLIL representation for module `\add_sub_shared'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \add_sub_shared
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \add_sub_shared
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+Removed 0 unused cells and 10 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module add_sub_shared...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \add_sub_shared..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~3 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \add_sub_shared.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 9) from port A of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:36$3 ($add).
+Removed top 1 bits (of 9) from port B of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:36$3 ($add).
+Removed top 8 bits (of 9) from port B of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:38$4 ($add).
+Removed top 1 bits (of 9) from mux cell add_sub_shared.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:44$6 ($mux).
+Removed top 1 bits (of 9) from port Y of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:38$4 ($add).
+Removed top 1 bits (of 9) from port A of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:38$4 ($add).
+Removed top 1 bits (of 9) from port Y of cell add_sub_shared.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:36$3 ($add).
+Removed top 1 bits (of 9) from wire add_sub_shared.n10_o.
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== add_sub_shared ===
+
+   Number of wires:                 23
+   Number of wire bits:            120
+   Number of public wires:          23
+   Number of public wire bits:     120
+   Number of ports:                  5
+   Number of port bits:             26
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  9
+     $add                            2
+     $and                            1
+     $eq                             1
+     $mux                            3
+     $ne                             1
+     $not                            1
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module add_sub_shared...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+5. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_generic.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_generic.v' to AST representation.
+Generating RTLIL representation for module `\add_sub_shared'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \add_sub_shared
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \add_sub_shared
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+<suppressed ~4 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+Removed 4 unused cells and 94 unused wires.
+<suppressed ~5 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module add_sub_shared...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \add_sub_shared..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \add_sub_shared.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module add_sub_shared.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\add_sub_shared'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== add_sub_shared ===
+
+   Number of wires:                122
+   Number of wire bits:            205
+   Number of public wires:          92
+   Number of public wire bits:     175
+   Number of ports:                  5
+   Number of port bits:             26
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                112
+     $and                           18
+     $mux                            7
+     $not                           39
+     $or                            16
+     $xor                           32
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module add_sub_shared...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \add_sub_shared..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: n12_o_gold (\n12_o_gold), n12_o_gate ({ 1'x \n12_o_gate [7:0] }) -> n12_o
+  Skipping signal bit n12_o_gate [0]: undriven on gate side.
+  Skipping signal bit n12_o_gate [1]: undriven on gate side.
+  Skipping signal bit n12_o_gate [2]: undriven on gate side.
+  Skipping signal bit n12_o_gate [3]: undriven on gate side.
+  Skipping signal bit n12_o_gate [4]: undriven on gate side.
+  Skipping signal bit n12_o_gate [5]: undriven on gate side.
+  Skipping signal bit n12_o_gate [6]: undriven on gate side.
+  Skipping signal bit n12_o_gate [7]: undriven on gate side.
+  Skipping signal bit n12_o_gold [8]: undriven on gold side.
+Presumably equivalent wires: n13_o_gold ({ 1'0 \n7_o_gold }), n13_o_gate ({ 1'0 \n13_o_gate [7:0] }) -> n13_o
+  Skipping signal bit n13_o_gate [0]: undriven on gate side.
+  Skipping signal bit n13_o_gate [1]: undriven on gate side.
+  Skipping signal bit n13_o_gate [2]: undriven on gate side.
+  Skipping signal bit n13_o_gate [3]: undriven on gate side.
+  Skipping signal bit n13_o_gate [4]: undriven on gate side.
+  Skipping signal bit n13_o_gate [5]: undriven on gate side.
+  Skipping signal bit n13_o_gate [6]: undriven on gate side.
+  Skipping signal bit n13_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n14_o_gold ({ \n14_o_gold [8] \n10_o_gold }), n14_o_gate ({ 1'x \n14_o_gate [7:0] }) -> n14_o
+  Skipping signal bit n14_o_gate [0]: undriven on gate side.
+  Skipping signal bit n14_o_gate [1]: undriven on gate side.
+  Skipping signal bit n14_o_gate [2]: undriven on gate side.
+  Skipping signal bit n14_o_gate [3]: undriven on gate side.
+  Skipping signal bit n14_o_gate [4]: undriven on gate side.
+  Skipping signal bit n14_o_gate [5]: undriven on gate side.
+  Skipping signal bit n14_o_gate [6]: undriven on gate side.
+  Skipping signal bit n14_o_gate [7]: undriven on gate side.
+  Skipping signal bit n14_o_gold [8]: undriven on gold side.
+Presumably equivalent wires: n15_o_gold ({ 1'x \y_gold }), n15_o_gate ({ 1'x \n21_o_gate \y_gate [6:0] }) -> n15_o
+Presumably equivalent wires: n16_o_gold (\y_gold), n16_o_gate ({ \n21_o_gate \y_gate [6:0] }) -> n16_o
+Presumably equivalent wires: n17_o_gold (\a_gold [7]), n17_o_gate (\a_gate [7]) -> n17_o
+Presumably equivalent wires: n18_o_gold (\n7_o_gold [7]), n18_o_gate (\n13_o_gate [7]) -> n18_o
+  Skipping signal bit n18_o_gate [0]: undriven on gate side.
+Presumably equivalent wires: n20_o_gold (\a_gold [7]), n20_o_gate (\a_gate [7]) -> n20_o
+Presumably equivalent wires: n21_o_gold (\y_gold [7]), n21_o_gate (\n21_o_gate) -> n21_o
+Presumably equivalent wires: n23_o_gold (\n23_o_gold), n23_o_gate (\ovf_gate) -> n23_o
+Presumably equivalent wires: n26_o_gold (\ovf_gold), n26_o_gate (\ovf_gate) -> n26_o
+Presumably equivalent wires: n7_o_gold (\n7_o_gold), n7_o_gate (\n13_o_gate [7:0]) -> n7_o
+  Skipping signal bit n7_o_gate [0]: undriven on gate side.
+  Skipping signal bit n7_o_gate [1]: undriven on gate side.
+  Skipping signal bit n7_o_gate [2]: undriven on gate side.
+  Skipping signal bit n7_o_gate [3]: undriven on gate side.
+  Skipping signal bit n7_o_gate [4]: undriven on gate side.
+  Skipping signal bit n7_o_gate [5]: undriven on gate side.
+  Skipping signal bit n7_o_gate [6]: undriven on gate side.
+  Skipping signal bit n7_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n8_o_gold ({ 1'0 \a_gold }), n8_o_gate ({ 1'0 \a_gate }) -> n8_o
+Presumably equivalent wires: n9_o_gold ({ 1'0 \n7_o_gold }), n9_o_gate ({ 1'0 \n13_o_gate [7:0] }) -> n9_o
+  Skipping signal bit n9_o_gate [0]: undriven on gate side.
+  Skipping signal bit n9_o_gate [1]: undriven on gate side.
+  Skipping signal bit n9_o_gate [2]: undriven on gate side.
+  Skipping signal bit n9_o_gate [3]: undriven on gate side.
+  Skipping signal bit n9_o_gate [4]: undriven on gate side.
+  Skipping signal bit n9_o_gate [5]: undriven on gate side.
+  Skipping signal bit n9_o_gate [6]: undriven on gate side.
+  Skipping signal bit n9_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: op_gold (\op_gold), op_gate (\op_gate) -> op
+Presumably equivalent wires: ovf_gold (\ovf_gold), ovf_gate (\ovf_gate) -> ovf
+Presumably equivalent wires: y_gold (\y_gold), y_gate ({ \n21_o_gate \y_gate [6:0] }) -> y
+Changing input B of cell $ne$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:58$8_gold ($ne): \y_gold [7] -> \y [7]
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/add_sub_shared_vhdl.v:62$10_gold ($mux): \n23_o_gold -> \n23_o
+Setting undriven nets to undef: \n7_o
+Setting undriven nets to undef: \n9_o [7:0]
+Setting undriven nets to undef: \n12_o
+Setting undriven nets to undef: \n13_o [7:0]
+Setting undriven nets to undef: \n14_o
+Setting undriven nets to undef: \n18_o
+Setting undriven nets to undef: \n12_o_gate [7:0]
+Setting undriven nets to undef: \n13_o_gate [7:0]
+Setting undriven nets to undef: \n14_o_gate [7:0]
+Setting undriven nets to undef: \n12_o_gold [8]
+Setting undriven nets to undef: \n14_o_gold [8]
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 42 unproven $equiv cells (12 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]: success!
+  Trying to prove $equiv for \y [1]: success!
+  Trying to prove $equiv for \y [2]: success!
+  Trying to prove $equiv for \y [3]: success!
+  Trying to prove $equiv for \y [4]: success!
+  Trying to prove $equiv for \y [5]: success!
+  Trying to prove $equiv for \y [6]: success!
+  Trying to prove $equiv for \y [7]: success!
+  Trying to prove $equiv for \ovf: success!
+ Grouping SAT models for \n8_o:
+  Trying to prove $equiv for \n8_o [0]: success!
+  Trying to prove $equiv for \n8_o [1]: success!
+  Trying to prove $equiv for \n8_o [2]: success!
+  Trying to prove $equiv for \n8_o [3]: success!
+  Trying to prove $equiv for \n8_o [4]: success!
+  Trying to prove $equiv for \n8_o [5]: success!
+  Trying to prove $equiv for \n8_o [6]: success!
+  Trying to prove $equiv for \n8_o [7]: success!
+  Trying to prove $equiv for \n8_o [8]: success!
+  Trying to prove $equiv for \n9_o [8]: success!
+  Trying to prove $equiv for \n13_o [8]: success!
+ Grouping SAT models for \n15_o:
+  Trying to prove $equiv for \n15_o [0]: success!
+  Trying to prove $equiv for \n15_o [1]: success!
+  Trying to prove $equiv for \n15_o [2]: success!
+  Trying to prove $equiv for \n15_o [3]: success!
+  Trying to prove $equiv for \n15_o [4]: success!
+  Trying to prove $equiv for \n15_o [5]: success!
+  Trying to prove $equiv for \n15_o [6]: success!
+  Trying to prove $equiv for \n15_o [7]: success!
+  Trying to prove $equiv for \n15_o [8]: success!
+ Grouping SAT models for \n16_o:
+  Trying to prove $equiv for \n16_o [0]: success!
+  Trying to prove $equiv for \n16_o [1]: success!
+  Trying to prove $equiv for \n16_o [2]: success!
+  Trying to prove $equiv for \n16_o [3]: success!
+  Trying to prove $equiv for \n16_o [4]: success!
+  Trying to prove $equiv for \n16_o [5]: success!
+  Trying to prove $equiv for \n16_o [6]: success!
+  Trying to prove $equiv for \n16_o [7]: success!
+  Trying to prove $equiv for \n17_o: success!
+  Trying to prove $equiv for \n20_o: success!
+  Trying to prove $equiv for \n21_o: success!
+  Trying to prove $equiv for \n23_o: success!
+  Trying to prove $equiv for \n26_o: success!
+Proved 42 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 42 $equiv cells in equiv:
+  Of those cells 42 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 11fc2c0527, CPU: user 0.35s system 0.06s, MEM: 16.71 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 39% 1x equiv_simple (0 sec), 16% 10x opt_clean (0 sec), ...

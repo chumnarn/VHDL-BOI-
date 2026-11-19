@@ -1,0 +1,867 @@
+
+-- Running command `
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v
+                prep -top adder8_pipelined -flatten
+                memory_map
+                opt_clean
+                design -stash gold
+
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v
+                prep -top adder8_pipelined -flatten
+                memory_map
+                opt_clean
+                design -stash gate
+
+                design -copy-from gold -as gold adder8_pipelined
+                design -copy-from gate -as gate adder8_pipelined
+                equiv_make gold gate equiv
+                hierarchy -top equiv
+                equiv_simple -seq 5
+    equiv_induct -seq 5
+                equiv_status -assert
+             ' --
+
+1. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v' to AST representation.
+Generating RTLIL representation for module `\adder8_pipelined'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \adder8_pipelined
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \adder8_pipelined
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 5 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:115$18'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:112$17'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:109$16'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:106$15'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:103$14'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\adder8_pipelined.\n62_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:115$18'.
+  created $dff cell `$procdff$19' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:112$17'.
+  created $dff cell `$procdff$20' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n60_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:109$16'.
+  created $dff cell `$procdff$21' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:106$15'.
+  created $dff cell `$procdff$22' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:103$14'.
+  created $dff cell `$procdff$23' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:115$18'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:112$17'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:109$16'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:106$15'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:103$14'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+Removed 0 unused cells and 18 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module adder8_pipelined...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \adder8_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \adder8_pipelined.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 5 bits (of 9) from port A of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:66$4 ($add).
+Removed top 5 bits (of 9) from port B of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:66$4 ($add).
+Removed top 4 bits (of 9) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:66$4 ($add).
+Removed top 4 bits (of 9) from port A of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:68$5 ($add).
+Removed top 8 bits (of 9) from port B of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:68$5 ($add).
+Removed top 3 bits (of 9) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:68$5 ($add).
+Removed top 4 bits (of 9) from mux cell adder8_pipelined.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:72$7 ($mux).
+Removed top 5 bits (of 9) from port A of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:86$8 ($add).
+Removed top 5 bits (of 9) from port B of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:86$8 ($add).
+Removed top 4 bits (of 9) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:86$8 ($add).
+Removed top 4 bits (of 9) from port A of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:88$9 ($add).
+Removed top 8 bits (of 9) from port B of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:88$9 ($add).
+Removed top 3 bits (of 9) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:88$9 ($add).
+Removed top 4 bits (of 9) from mux cell adder8_pipelined.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:92$11 ($mux).
+Removed top 1 bits (of 6) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:68$5 ($add).
+Removed top 1 bits (of 6) from port Y of cell adder8_pipelined.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:88$9 ($add).
+Removed top 4 bits (of 9) from wire adder8_pipelined.n23_o.
+Removed top 4 bits (of 9) from wire adder8_pipelined.n25_o.
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== adder8_pipelined ===
+
+   Number of wires:                 41
+   Number of wire bits:            231
+   Number of public wires:          41
+   Number of public wire bits:     231
+   Number of ports:                  7
+   Number of port bits:             28
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 16
+     $add                            4
+     $dff                            5
+     $mux                            7
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module adder8_pipelined...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+5. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v' to AST representation.
+Generating RTLIL representation for module `\adder8_pipelined'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \adder8_pipelined
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \adder8_pipelined
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:254$160 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:251$159 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:248$158 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:245$157 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:242$156 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:239$155 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:236$154 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:233$153 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:230$152 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:227$151 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:224$150 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:221$149 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:218$148 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:215$147 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:212$146 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:209$145 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:206$144 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:203$143 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:200$142 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:197$141 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:194$140 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:191$139 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:188$138 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:185$137 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:182$136 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:179$135 in module adder8_pipelined.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 26 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~26 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:254$160'.
+     1/1: $0\n59_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:251$159'.
+     1/1: $0\n59_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:248$158'.
+     1/1: $0\n59_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:245$157'.
+     1/1: $0\n59_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:242$156'.
+     1/1: $0\n59_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:239$155'.
+     1/1: $0\n59_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:236$154'.
+     1/1: $0\n59_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:233$153'.
+     1/1: $0\n59_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:230$152'.
+     1/1: $0\n60_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:227$151'.
+     1/1: $0\n61_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:224$150'.
+     1/1: $0\n61_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:221$149'.
+     1/1: $0\n61_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:218$148'.
+     1/1: $0\n61_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:215$147'.
+     1/1: $0\n61_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:212$146'.
+     1/1: $0\n61_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:209$145'.
+     1/1: $0\n61_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:206$144'.
+     1/1: $0\n61_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:203$143'.
+     1/1: $0\n62_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:200$142'.
+     1/1: $0\n58_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:197$141'.
+     1/1: $0\n58_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:194$140'.
+     1/1: $0\n58_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:191$139'.
+     1/1: $0\n58_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:188$138'.
+     1/1: $0\n58_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:185$137'.
+     1/1: $0\n58_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:182$136'.
+     1/1: $0\n58_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:179$135'.
+     1/1: $0\n58_q[0:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\adder8_pipelined.\n59_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:254$160'.
+  created $dff cell `$procdff$239' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:251$159'.
+  created $dff cell `$procdff$240' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:248$158'.
+  created $dff cell `$procdff$241' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:245$157'.
+  created $dff cell `$procdff$242' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:242$156'.
+  created $dff cell `$procdff$243' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:239$155'.
+  created $dff cell `$procdff$244' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:236$154'.
+  created $dff cell `$procdff$245' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n59_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:233$153'.
+  created $dff cell `$procdff$246' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n60_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:230$152'.
+  created $dff cell `$procdff$247' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:227$151'.
+  created $dff cell `$procdff$248' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:224$150'.
+  created $dff cell `$procdff$249' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:221$149'.
+  created $dff cell `$procdff$250' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:218$148'.
+  created $dff cell `$procdff$251' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:215$147'.
+  created $dff cell `$procdff$252' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:212$146'.
+  created $dff cell `$procdff$253' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:209$145'.
+  created $dff cell `$procdff$254' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n61_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:206$144'.
+  created $dff cell `$procdff$255' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n62_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:203$143'.
+  created $dff cell `$procdff$256' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:200$142'.
+  created $dff cell `$procdff$257' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:197$141'.
+  created $dff cell `$procdff$258' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:194$140'.
+  created $dff cell `$procdff$259' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:191$139'.
+  created $dff cell `$procdff$260' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:188$138'.
+  created $dff cell `$procdff$261' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:185$137'.
+  created $dff cell `$procdff$262' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:182$136'.
+  created $dff cell `$procdff$263' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n58_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:179$135'.
+  created $dff cell `$procdff$264' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:254$160'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:254$160'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:251$159'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:251$159'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:248$158'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:248$158'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:245$157'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:245$157'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:242$156'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:242$156'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:239$155'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:239$155'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:236$154'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:236$154'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:233$153'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:233$153'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:230$152'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:230$152'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:227$151'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:227$151'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:224$150'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:224$150'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:221$149'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:221$149'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:218$148'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:218$148'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:215$147'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:215$147'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:212$146'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:212$146'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:209$145'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:209$145'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:206$144'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:206$144'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:203$143'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:203$143'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:200$142'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:200$142'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:197$141'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:197$141'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:194$140'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:194$140'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:191$139'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:191$139'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:188$138'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:188$138'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:185$137'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:185$137'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:182$136'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:182$136'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:179$135'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:179$135'.
+Cleaned up 26 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+<suppressed ~7 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+Removed 4 unused cells and 135 unused wires.
+<suppressed ~5 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module adder8_pipelined...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \adder8_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~27 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \adder8_pipelined.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+6.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \adder8_pipelined..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~27 debug messages>
+
+6.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \adder8_pipelined.
+Performed a total of 0 changes.
+
+6.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+Removed a total of 0 cells.
+
+6.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+6.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+6.8.14. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8_pipelined.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8_pipelined'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== adder8_pipelined ===
+
+   Number of wires:                146
+   Number of wire bits:            295
+   Number of public wires:          92
+   Number of public wire bits:     241
+   Number of ports:                  7
+   Number of port bits:             28
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                148
+     $and                           24
+     $dff                           26
+     $mux                           34
+     $not                           30
+     $or                            10
+     $xor                           24
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module adder8_pipelined...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8_pipelined..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: cin_gold (\cin_gold), cin_gate (\cin_gate) -> cin
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Presumably equivalent wires: cout_gold (\n62_q_gold), cout_gate (\n62_q_gate) -> cout
+Presumably equivalent wires: n19_o_gold (\n58_q_gold [3:0]), n19_o_gate (\n58_q_gate [3:0]) -> n19_o
+Presumably equivalent wires: n20_o_gold ({ 5'00000 \n58_q_gold [3:0] }), n20_o_gate ({ 5'00000 \n58_q_gate [3:0] }) -> n20_o
+Presumably equivalent wires: n21_o_gold (\n59_q_gold [3:0]), n21_o_gate (\n59_q_gate [3:0]) -> n21_o
+Presumably equivalent wires: n22_o_gold ({ 5'00000 \n59_q_gold [3:0] }), n22_o_gate ({ 5'00000 \n59_q_gate [3:0] }) -> n22_o
+Presumably equivalent wires: n26_o_gold ({ 4'0000 \n23_o_gold }), n26_o_gate ({ 4'0000 \n26_o_gate [4:0] }) -> n26_o
+  Skipping signal bit n26_o_gate [0]: undriven on gate side.
+  Skipping signal bit n26_o_gate [1]: undriven on gate side.
+  Skipping signal bit n26_o_gate [2]: undriven on gate side.
+  Skipping signal bit n26_o_gate [3]: undriven on gate side.
+  Skipping signal bit n26_o_gate [4]: undriven on gate side.
+Presumably equivalent wires: n27_o_gold ({ 4'x \n27_o_gold [4:0] }), n27_o_gate ({ 4'x \n27_o_gate [4:0] }) -> n27_o
+  Skipping signal bit n27_o_gate [4]: undriven on gate side.
+Presumably equivalent wires: n28_o_gold (\n27_o_gold [3:0]), n28_o_gate (\n27_o_gate [3:0]) -> n28_o
+Presumably equivalent wires: n29_o_gold (\n58_q_gold [7:4]), n29_o_gate (\n58_q_gate [7:4]) -> n29_o
+Presumably equivalent wires: n30_o_gold ({ 5'00000 \n58_q_gold [7:4] }), n30_o_gate ({ 5'00000 \n58_q_gate [7:4] }) -> n30_o
+Presumably equivalent wires: n31_o_gold (\n59_q_gold [7:4]), n31_o_gate (\n59_q_gate [7:4]) -> n31_o
+Presumably equivalent wires: n32_o_gold ({ 5'00000 \n59_q_gold [7:4] }), n32_o_gate ({ 5'00000 \n59_q_gate [7:4] }) -> n32_o
+Presumably equivalent wires: n33_o_gold (\n27_o_gold [4]), n33_o_gate (\n27_o_gate [4]) -> n33_o
+  Skipping signal bit n33_o_gate [0]: undriven on gate side.
+Presumably equivalent wires: n34_o_gold ({ 4'0000 \n34_o_gold [4:0] }), n34_o_gate ({ 4'0000 \n34_o_gate [4:0] }) -> n34_o
+  Skipping signal bit n34_o_gate [0]: undriven on gate side.
+  Skipping signal bit n34_o_gate [1]: undriven on gate side.
+  Skipping signal bit n34_o_gate [2]: undriven on gate side.
+  Skipping signal bit n34_o_gate [3]: undriven on gate side.
+  Skipping signal bit n34_o_gate [4]: undriven on gate side.
+Presumably equivalent wires: n37_o_gold ({ 4'0000 \n34_o_gold [4:0] }), n37_o_gate ({ 4'0000 \n34_o_gate [4:0] }) -> n37_o
+  Skipping signal bit n37_o_gate [0]: undriven on gate side.
+  Skipping signal bit n37_o_gate [1]: undriven on gate side.
+  Skipping signal bit n37_o_gate [2]: undriven on gate side.
+  Skipping signal bit n37_o_gate [3]: undriven on gate side.
+  Skipping signal bit n37_o_gate [4]: undriven on gate side.
+Presumably equivalent wires: n39_o_gold (\n38_o_gold [3:0]), n39_o_gate (\n38_o_gate [3:0]) -> n39_o
+Presumably equivalent wires: n40_o_gold (\n38_o_gold [4]), n40_o_gate (\n40_o_gate) -> n40_o
+Presumably equivalent wires: n41_o_gold ({ \n38_o_gold [3:0] \n27_o_gold [3:0] }), n41_o_gate ({ \n38_o_gate [3:0] \n27_o_gate [3:0] }) -> n41_o
+Presumably equivalent wires: n58_q_gold (\n58_q_gold), n58_q_gate (\n58_q_gate) -> n58_q
+Presumably equivalent wires: n59_q_gold (\n59_q_gold), n59_q_gate (\n59_q_gate) -> n59_q
+Presumably equivalent wires: n60_q_gold (\n60_q_gold), n60_q_gate (\n60_q_gate) -> n60_q
+Presumably equivalent wires: n61_q_gold (\n61_q_gold), n61_q_gate (\n61_q_gate) -> n61_q
+Presumably equivalent wires: n62_q_gold (\n62_q_gold), n62_q_gate (\n62_q_gate) -> n62_q
+Presumably equivalent wires: r1_a_gold (\n58_q_gold), r1_a_gate (\n58_q_gate) -> r1_a
+Presumably equivalent wires: r1_b_gold (\n59_q_gold), r1_b_gate (\n59_q_gate) -> r1_b
+Presumably equivalent wires: r1_cin_gold (\n60_q_gold), r1_cin_gate (\n60_q_gate) -> r1_cin
+Presumably equivalent wires: rst_gold (\rst_gold), rst_gate (\rst_gate) -> rst
+Presumably equivalent wires: sum_gold (\n61_q_gold), sum_gate (\n61_q_gate) -> sum
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:118$40_gate ($and): \n58_q_gate [1] -> \n58_q [1]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:118$40_gate ($and): \n59_q_gate [1] -> \n59_q [1]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:127$55_gate ($and): \n58_q_gate [2] -> \n58_q [2]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:127$55_gate ($and): \n59_q_gate [2] -> \n59_q [2]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:135$68_gate ($and): \n58_q_gate [3] -> \n58_q [3]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:135$68_gate ($and): \n59_q_gate [3] -> \n59_q [3]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:147$87_gate ($and): \n58_q_gate [4] -> \n58_q [4]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:147$87_gate ($and): \n59_q_gate [4] -> \n59_q [4]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:153$94_gate ($and): \n58_q_gate [5] -> \n58_q [5]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:153$94_gate ($and): \n59_q_gate [5] -> \n59_q [5]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:162$109_gate ($and): \n58_q_gate [6] -> \n58_q [6]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:162$109_gate ($and): \n59_q_gate [6] -> \n59_q [6]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:169$120_gate ($and): \n58_q_gate [7] -> \n58_q [7]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:169$120_gate ($and): \n59_q_gate [7] -> \n59_q [7]
+Changing input A of cell $not$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:107$26_gate ($not): \n60_q_gate -> \n60_q
+Changing input A of cell $procmux$201_gate ($mux): \n27_o_gate [3] -> \n27_o [3]
+Changing input A of cell $procmux$204_gate ($mux): \n27_o_gate [2] -> \n27_o [2]
+Changing input A of cell $procmux$207_gate ($mux): \n27_o_gate [1] -> \n27_o [1]
+Changing input A of cell $procmux$210_gate ($mux): \n27_o_gate [0] -> \n27_o [0]
+Changing input A of cell $procmux$213_gate ($mux): \n40_o_gate -> \n40_o
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:115$36_gate ($mux): \n60_q_gate -> \n60_q
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:125$52_gate ($mux): \n60_q_gate -> \n60_q
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:133$65_gate ($mux): \n60_q_gate -> \n60_q
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:144$84_gate ($mux): \n60_q_gate -> \n60_q
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:108$27_gate ($xor): \n58_q_gate [0] -> \n58_q [0]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:108$27_gate ($xor): \n59_q_gate [0] -> \n59_q [0]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:110$30_gate ($xor): \n58_q_gate [1] -> \n58_q [1]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:110$30_gate ($xor): \n59_q_gate [1] -> \n59_q [1]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:116$37_gate ($xor): \n58_q_gate [2] -> \n58_q [2]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:116$37_gate ($xor): \n59_q_gate [2] -> \n59_q [2]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:126$53_gate ($xor): \n58_q_gate [3] -> \n58_q [3]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:126$53_gate ($xor): \n59_q_gate [3] -> \n59_q [3]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:134$66_gate ($xor): \n58_q_gate [4] -> \n58_q [4]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:134$66_gate ($xor): \n59_q_gate [4] -> \n59_q [4]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:146$86_gate ($xor): \n58_q_gate [5] -> \n58_q [5]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:146$86_gate ($xor): \n59_q_gate [5] -> \n59_q [5]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:152$93_gate ($xor): \n58_q_gate [6] -> \n58_q [6]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:152$93_gate ($xor): \n59_q_gate [6] -> \n59_q [6]
+Changing input A of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:161$107_gate ($xor): \n58_q_gate [7] -> \n58_q [7]
+Changing input B of cell $xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:161$107_gate ($xor): \n59_q_gate [7] -> \n59_q [7]
+Changing input A of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:111$31_gate ($and): \n58_q_gate [0] -> \n58_q [0]
+Changing input B of cell $and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_generic.v:111$31_gate ($and): \n59_q_gate [0] -> \n59_q [0]
+Changing input A of cell $add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:86$8_gold ($add): \n58_q_gold [7:4] -> \n58_q [7:4]
+Changing input B of cell $add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:86$8_gold ($add): \n59_q_gold [7:4] -> \n59_q [7:4]
+Changing input S of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:72$7_gold ($mux): \n60_q_gold -> \n60_q
+Changing input A of cell $ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:99$12_gold ($mux): { \n38_o_gold [3:0] \n27_o_gold [3:0] } -> { \n38_o_gold [3:0] \n27_o [3:0] }
+Changing input A of cell $add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:66$4_gold ($add): \n58_q_gold [3:0] -> \n58_q [3:0]
+Changing input B of cell $add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_pipelined_vhdl.v:66$4_gold ($add): \n59_q_gold [3:0] -> \n59_q [3:0]
+Setting undriven nets to undef: \n26_o [4:0]
+Setting undriven nets to undef: \n27_o [4]
+Setting undriven nets to undef: \n33_o
+Setting undriven nets to undef: \n34_o [4:0]
+Setting undriven nets to undef: \n37_o [4:0]
+Setting undriven nets to undef: \n26_o_gate [4:0]
+Setting undriven nets to undef: \n27_o_gate [4]
+Setting undriven nets to undef: \n34_o_gate [4:0]
+Setting undriven nets to undef: \n36_o_gold [5]
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 141 unproven $equiv cells (26 groups) in equiv:
+ Grouping SAT models for \sum:
+  Trying to prove $equiv for \sum [0]: success!
+  Trying to prove $equiv for \sum [1]: success!
+  Trying to prove $equiv for \sum [2]: success!
+  Trying to prove $equiv for \sum [3]: success!
+  Trying to prove $equiv for \sum [4]: success!
+  Trying to prove $equiv for \sum [5]: success!
+  Trying to prove $equiv for \sum [6]: success!
+  Trying to prove $equiv for \sum [7]: success!
+  Trying to prove $equiv for \cout: success!
+ Grouping SAT models for \r1_a:
+  Trying to prove $equiv for \r1_a [0]: success!
+  Trying to prove $equiv for \r1_a [1]: success!
+  Trying to prove $equiv for \r1_a [2]: success!
+  Trying to prove $equiv for \r1_a [3]: success!
+  Trying to prove $equiv for \r1_a [4]: success!
+  Trying to prove $equiv for \r1_a [5]: success!
+  Trying to prove $equiv for \r1_a [6]: success!
+  Trying to prove $equiv for \r1_a [7]: success!
+ Grouping SAT models for \r1_b:
+  Trying to prove $equiv for \r1_b [0]: success!
+  Trying to prove $equiv for \r1_b [1]: success!
+  Trying to prove $equiv for \r1_b [2]: success!
+  Trying to prove $equiv for \r1_b [3]: success!
+  Trying to prove $equiv for \r1_b [4]: success!
+  Trying to prove $equiv for \r1_b [5]: success!
+  Trying to prove $equiv for \r1_b [6]: success!
+  Trying to prove $equiv for \r1_b [7]: success!
+  Trying to prove $equiv for \r1_cin: success!
+ Grouping SAT models for \n19_o:
+  Trying to prove $equiv for \n19_o [0]: success!
+  Trying to prove $equiv for \n19_o [1]: success!
+  Trying to prove $equiv for \n19_o [2]: success!
+  Trying to prove $equiv for \n19_o [3]: success!
+ Grouping SAT models for \n20_o:
+  Trying to prove $equiv for \n20_o [0]: success!
+  Trying to prove $equiv for \n20_o [1]: success!
+  Trying to prove $equiv for \n20_o [2]: success!
+  Trying to prove $equiv for \n20_o [3]: success!
+  Trying to prove $equiv for \n20_o [4]: success!
+  Trying to prove $equiv for \n20_o [5]: success!
+  Trying to prove $equiv for \n20_o [6]: success!
+  Trying to prove $equiv for \n20_o [7]: success!
+  Trying to prove $equiv for \n20_o [8]: success!
+ Grouping SAT models for \n21_o:
+  Trying to prove $equiv for \n21_o [0]: success!
+  Trying to prove $equiv for \n21_o [1]: success!
+  Trying to prove $equiv for \n21_o [2]: success!
+  Trying to prove $equiv for \n21_o [3]: success!
+ Grouping SAT models for \n22_o:
+  Trying to prove $equiv for \n22_o [0]: success!
+  Trying to prove $equiv for \n22_o [1]: success!
+  Trying to prove $equiv for \n22_o [2]: success!
+  Trying to prove $equiv for \n22_o [3]: success!
+  Trying to prove $equiv for \n22_o [4]: success!
+  Trying to prove $equiv for \n22_o [5]: success!
+  Trying to prove $equiv for \n22_o [6]: success!
+  Trying to prove $equiv for \n22_o [7]: success!
+  Trying to prove $equiv for \n22_o [8]: success!
+ Grouping SAT models for \n26_o [8:5]:
+  Trying to prove $equiv for \n26_o [5]: success!
+  Trying to prove $equiv for \n26_o [6]: success!
+  Trying to prove $equiv for \n26_o [7]: success!
+  Trying to prove $equiv for \n26_o [8]: success!
+ Grouping SAT models for { \n27_o [8:5] \n27_o [3:0] }:
+  Trying to prove $equiv for \n27_o [0]: success!
+  Trying to prove $equiv for \n27_o [1]: success!
+  Trying to prove $equiv for \n27_o [2]: success!
+  Trying to prove $equiv for \n27_o [3]: success!
+  Trying to prove $equiv for \n27_o [5]: success!
+  Trying to prove $equiv for \n27_o [6]: success!
+  Trying to prove $equiv for \n27_o [7]: success!
+  Trying to prove $equiv for \n27_o [8]: success!
+ Grouping SAT models for \n28_o:
+  Trying to prove $equiv for \n28_o [0]: success!
+  Trying to prove $equiv for \n28_o [1]: success!
+  Trying to prove $equiv for \n28_o [2]: success!
+  Trying to prove $equiv for \n28_o [3]: success!
+ Grouping SAT models for \n29_o:
+  Trying to prove $equiv for \n29_o [0]: success!
+  Trying to prove $equiv for \n29_o [1]: success!
+  Trying to prove $equiv for \n29_o [2]: success!
+  Trying to prove $equiv for \n29_o [3]: success!
+ Grouping SAT models for \n30_o:
+  Trying to prove $equiv for \n30_o [0]: success!
+  Trying to prove $equiv for \n30_o [1]: success!
+  Trying to prove $equiv for \n30_o [2]: success!
+  Trying to prove $equiv for \n30_o [3]: success!
+  Trying to prove $equiv for \n30_o [4]: success!
+  Trying to prove $equiv for \n30_o [5]: success!
+  Trying to prove $equiv for \n30_o [6]: success!
+  Trying to prove $equiv for \n30_o [7]: success!
+  Trying to prove $equiv for \n30_o [8]: success!
+ Grouping SAT models for \n31_o:
+  Trying to prove $equiv for \n31_o [0]: success!
+  Trying to prove $equiv for \n31_o [1]: success!
+  Trying to prove $equiv for \n31_o [2]: success!
+  Trying to prove $equiv for \n31_o [3]: success!
+ Grouping SAT models for \n32_o:
+  Trying to prove $equiv for \n32_o [0]: success!
+  Trying to prove $equiv for \n32_o [1]: success!
+  Trying to prove $equiv for \n32_o [2]: success!
+  Trying to prove $equiv for \n32_o [3]: success!
+  Trying to prove $equiv for \n32_o [4]: success!
+  Trying to prove $equiv for \n32_o [5]: success!
+  Trying to prove $equiv for \n32_o [6]: success!
+  Trying to prove $equiv for \n32_o [7]: success!
+  Trying to prove $equiv for \n32_o [8]: success!
+ Grouping SAT models for \n34_o [8:5]:
+  Trying to prove $equiv for \n34_o [5]: success!
+  Trying to prove $equiv for \n34_o [6]: success!
+  Trying to prove $equiv for \n34_o [7]: success!
+  Trying to prove $equiv for \n34_o [8]: success!
+ Grouping SAT models for \n37_o [8:5]:
+  Trying to prove $equiv for \n37_o [5]: success!
+  Trying to prove $equiv for \n37_o [6]: success!
+  Trying to prove $equiv for \n37_o [7]: success!
+  Trying to prove $equiv for \n37_o [8]: success!
+ Grouping SAT models for \n39_o:
+  Trying to prove $equiv for \n39_o [0]: success!
+  Trying to prove $equiv for \n39_o [1]: success!
+  Trying to prove $equiv for \n39_o [2]: success!
+  Trying to prove $equiv for \n39_o [3]: success!
+  Trying to prove $equiv for \n40_o: success!
+ Grouping SAT models for \n41_o:
+  Trying to prove $equiv for \n41_o [0]: success!
+  Trying to prove $equiv for \n41_o [1]: success!
+  Trying to prove $equiv for \n41_o [2]: success!
+  Trying to prove $equiv for \n41_o [3]: success!
+  Trying to prove $equiv for \n41_o [4]: success!
+  Trying to prove $equiv for \n41_o [5]: success!
+  Trying to prove $equiv for \n41_o [6]: success!
+  Trying to prove $equiv for \n41_o [7]: success!
+ Grouping SAT models for \n58_q:
+  Trying to prove $equiv for \n58_q [0]: success!
+  Trying to prove $equiv for \n58_q [1]: success!
+  Trying to prove $equiv for \n58_q [2]: success!
+  Trying to prove $equiv for \n58_q [3]: success!
+  Trying to prove $equiv for \n58_q [4]: success!
+  Trying to prove $equiv for \n58_q [5]: success!
+  Trying to prove $equiv for \n58_q [6]: success!
+  Trying to prove $equiv for \n58_q [7]: success!
+ Grouping SAT models for \n59_q:
+  Trying to prove $equiv for \n59_q [0]: success!
+  Trying to prove $equiv for \n59_q [1]: success!
+  Trying to prove $equiv for \n59_q [2]: success!
+  Trying to prove $equiv for \n59_q [3]: success!
+  Trying to prove $equiv for \n59_q [4]: success!
+  Trying to prove $equiv for \n59_q [5]: success!
+  Trying to prove $equiv for \n59_q [6]: success!
+  Trying to prove $equiv for \n59_q [7]: success!
+  Trying to prove $equiv for \n60_q: success!
+ Grouping SAT models for \n61_q:
+  Trying to prove $equiv for \n61_q [0]: success!
+  Trying to prove $equiv for \n61_q [1]: success!
+  Trying to prove $equiv for \n61_q [2]: success!
+  Trying to prove $equiv for \n61_q [3]: success!
+  Trying to prove $equiv for \n61_q [4]: success!
+  Trying to prove $equiv for \n61_q [5]: success!
+  Trying to prove $equiv for \n61_q [6]: success!
+  Trying to prove $equiv for \n61_q [7]: success!
+  Trying to prove $equiv for \n62_q: success!
+Proved 141 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 141 $equiv cells in equiv:
+  Of those cells 141 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 5c2bcb8e91, CPU: user 0.70s system 0.11s, MEM: 18.43 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 51% 1x equiv_simple (0 sec), 11% 11x opt_clean (0 sec), ...

@@ -1,0 +1,41 @@
+# ** Note: (vsim-220) 'C:/Siemens/modelsim_dlx64_2026.1/win64pe/../modelsim.ini' is used as the ini file.
+# vsim -c -do "add wave *; run 5 us; quit -f" work.tb_top 
+# Start time: 22:28:56 on Nov 17,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_top(sim)
+# Loading work.top(struct)
+# Loading work.adder8(struct)
+# Loading work.full_adder_struct(struct)
+# Loading work.xor_gate(dataflow)
+# Loading work.and_gate(dataflow)
+# Loading work.or_gate(dataflow)
+# Loading work.adder8_pipelined(rtl)
+# Loading work.add_sub_shared(rtl)
+# add wave *
+#  run 5 us
+# ** Note: tb_top: CHECKS=80 FAIL=0
+#    Time: 266 ns  Iteration: 0  Instance: /tb_top
+# ** Note: tb_top: ALL TESTS PASSED
+#    Time: 266 ns  Iteration: 0  Instance: /tb_top
+# Break in Process line__36 at tb/tb_top.vhd line 138
+# Stopped at tb/tb_top.vhd line 138
+#  quit -f
+# End time: 22:29:13 on Nov 17,2026, Elapsed time: 0:00:17
+# Errors: 0, Warnings: 0

@@ -1,5 +1,5 @@
 # run_lab3.do
-# Questa/ModelSim batch script for Day 3 labs (Adder variants)
+# Questa/ModelSim batch script for Day 3 / Lab 3A (adder variants + chip top)
 # Usage (command line):  vsim -do run_lab3.do -c
 # Usage (Questa GUI):     File -> Source -> run_lab3.do
 #
@@ -21,20 +21,25 @@ if {![file exists work]} {
 
 # ---------------------------------------------------------------------------
 # 2. Compile design units
-#    Day 2 full_adder_struct is a dependency (structural adder8 instantiates it)
+#    full_adder_struct.vhd must be compiled FIRST: adder8.vhd declares a
+#    `component full_adder_struct` that is bound to that entity.
 # ---------------------------------------------------------------------------
-vcom -2008 -work work ../day2/full_adder_struct.vhd
-vcom -2008 -work work adder8.vhd adder8_pipelined.vhd add_sub_shared.vhd top.vhd
-vcom -2008 -work work tb_adder8.vhd tb_add_sub_shared.vhd tb_adder8_pipelined.vhd
+vcom -2008 -work work rtl/full_adder_struct.vhd
+vcom -2008 -work work rtl/adder8.vhd rtl/adder8_pipelined.vhd
+vcom -2008 -work work rtl/add_sub_shared.vhd rtl/top.vhd
+vcom -2008 -work work tb/tb_adder8.vhd tb/tb_add_sub_shared.vhd
+vcom -2008 -work work tb/tb_adder8_pipelined.vhd tb/tb_top.vhd
 
 # ---------------------------------------------------------------------------
 # 3. Run every testbench
 #    tb_add_sub_shared needs ~2.6 us (2 x 16 x 16 patterns x 5 ns)
+#    tb_top needs ~1 us (16 combinational vectors x 5 ns + 8 pipelined vectors)
 # ---------------------------------------------------------------------------
 set TestList [list \
   [list tb_adder8           "8-bit Ripple Carry Adder"   "1 us" "ALL TESTS PASSED"] \
   [list tb_add_sub_shared   "ADD/SUB Resource Sharing"    "10 us" "ALL EXHAUSTIVE PATTERNS PASS"] \
   [list tb_adder8_pipelined "Pipelined 8-bit Adder"      "2 us" "ALL TESTS PASSED"] \
+  [list tb_top              "Chip top (clk/rst + 3 DUTs)" "5 us" "ALL TESTS PASSED"] \
 ]
 
 set total [llength $TestList]
@@ -75,6 +80,9 @@ if {$failed == 0} {
     puts "Day 3 labs finished with $failed failure(s) out of $total testbenches."
 }
 puts ""
-puts "To synthesize with Precision RTL, run:"
-puts "  precision -shell -file synth.tcl"
+puts "Next step - synthesise with Precision RTL:"
+puts "  precision -shell -file scripts/synth_top.tcl"
+puts ""
+puts "Reference flow (open source, no licence needed):"
+puts "  bash scripts/run_reference_flow.sh"
 quit -f

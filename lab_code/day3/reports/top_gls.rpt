@@ -1,0 +1,2 @@
+GLS top: PASS (16 vectors, 4 checks each)
+tb/tb_gls_top.v:100: $finish called at 346000 (1ps)

@@ -1,0 +1,2 @@
+GLS adder8: PASS (65536 patterns)
+tb/tb_gls_adder8.v:61: $finish called at 65536000 (1ps)

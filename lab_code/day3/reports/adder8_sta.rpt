@@ -1,0 +1,599 @@
+==============================================================
+ OpenSTA static timing analysis
+   top     : adder8
+   netlist : /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_sky130.v
+   liberty : /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/sky130_filtered.lib
+   sdc     : /mnt/e/lab/VHDL(BOI)/lab_code/day3/sdc/adder8.sdc
+==============================================================
+
+---------------- MAX (setup) --------------------------------
+Warning: run_sta.tcl line 1, report_checks -group_count is deprecated. Use -group_path_count instead.
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: cout (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.3632 v gen_n4_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.5763 v gen_n4_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.7258 v gen_n5_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.9388 v gen_n5_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.0883 v gen_n6_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    4.3014 v gen_n6_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.4509 v gen_n7_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    4.6640 v gen_n7_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.8135 v gen_n8_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2426    5.0560 v gen_n8_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.0000    5.0560 v cout (out)
+             5.0560   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -5.0560   data arrival time
+-------------------------------------------------------------
+             2.9440   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[7] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.3632 v gen_n4_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.5763 v gen_n4_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.7258 v gen_n5_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.9388 v gen_n5_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.0883 v gen_n6_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    4.3014 v gen_n6_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.4509 v gen_n7_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    4.6640 v gen_n7_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    4.8975 ^ gen_n8_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    4.8975 ^ sum[7] (out)
+             4.8975   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -4.8975   data arrival time
+-------------------------------------------------------------
+             3.1025   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[6] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.3632 v gen_n4_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.5763 v gen_n4_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.7258 v gen_n5_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.9388 v gen_n5_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    4.0883 v gen_n6_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    4.3014 v gen_n6_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    4.5350 ^ gen_n7_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    4.5350 ^ sum[6] (out)
+             4.5350   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -4.5350   data arrival time
+-------------------------------------------------------------
+             3.4650   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[5] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.3632 v gen_n4_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.5763 v gen_n4_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.7258 v gen_n5_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.9388 v gen_n5_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    4.1724 ^ gen_n6_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    4.1724 ^ sum[5] (out)
+             4.1724   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -4.1724   data arrival time
+-------------------------------------------------------------
+             3.8276   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[4] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.3632 v gen_n4_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.5763 v gen_n4_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    3.8099 ^ gen_n5_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    3.8099 ^ sum[4] (out)
+             3.8099   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -3.8099   data arrival time
+-------------------------------------------------------------
+             4.1901   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[3] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    3.0007 v gen_n3_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    3.2137 v gen_n3_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    3.4473 ^ gen_n4_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    3.4473 ^ sum[3] (out)
+             3.4473   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -3.4473   data arrival time
+-------------------------------------------------------------
+             4.5527   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[2] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.1495    2.6381 v gen_n2_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.8512 v gen_n2_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    3.0847 ^ gen_n3_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    3.0847 ^ sum[2] (out)
+             3.0847   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -3.0847   data arrival time
+-------------------------------------------------------------
+             4.9153   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[1] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1509    2.1509 v gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1246    2.2755 v gen_n1_u/u4/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.2131    2.4886 v gen_n1_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.2336    2.7222 ^ gen_n2_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    2.7222 ^ sum[1] (out)
+             2.7222   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -2.7222   data arrival time
+-------------------------------------------------------------
+             5.2778   slack (MET)
+
+
+Startpoint: a[0] (input port clocked by io_clk)
+Endpoint: sum[0] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: max
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   2.0000    2.0000 v input external delay
+   0.0000    2.0000 v a[0] (in)
+   0.1685    2.1685 ^ gen_n1_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.2548    2.4233 ^ gen_n1_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    2.4233 ^ sum[0] (out)
+             2.4233   data arrival time
+
+  10.0000   10.0000   clock io_clk (rise edge)
+   0.0000   10.0000   clock network delay (ideal)
+   0.0000   10.0000   clock reconvergence pessimism
+  -2.0000    8.0000   output external delay
+             8.0000   data required time
+-------------------------------------------------------------
+             8.0000   data required time
+            -2.4233   data arrival time
+-------------------------------------------------------------
+             5.5767   slack (MET)
+
+
+
+---------------- MIN (hold) ---------------------------------
+Warning: run_sta.tcl line 1, report_checks -group_count is deprecated. Use -group_path_count instead.
+Startpoint: cin (input port clocked by io_clk)
+Endpoint: sum[0] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ cin (in)
+   0.0760    1.0760 v gen_n1_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.0760 v sum[0] (out)
+             1.0760   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.0760   data arrival time
+-------------------------------------------------------------
+             2.0760   slack (MET)
+
+
+Startpoint: b[1] (input port clocked by io_clk)
+Endpoint: sum[1] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[1] (in)
+   0.0553    1.0553 v gen_n2_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n2_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[1] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[2] (input port clocked by io_clk)
+Endpoint: sum[2] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[2] (in)
+   0.0553    1.0553 v gen_n3_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n3_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[2] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[3] (input port clocked by io_clk)
+Endpoint: sum[3] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[3] (in)
+   0.0553    1.0553 v gen_n4_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n4_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[3] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[4] (input port clocked by io_clk)
+Endpoint: sum[4] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[4] (in)
+   0.0553    1.0553 v gen_n5_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n5_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[4] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[5] (input port clocked by io_clk)
+Endpoint: sum[5] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[5] (in)
+   0.0553    1.0553 v gen_n6_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n6_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[5] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[6] (input port clocked by io_clk)
+Endpoint: sum[6] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[6] (in)
+   0.0553    1.0553 v gen_n7_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n7_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[6] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: b[7] (input port clocked by io_clk)
+Endpoint: sum[7] (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ b[7] (in)
+   0.0553    1.0553 v gen_n8_u/u1/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.1865    1.2418 v gen_n8_u/u2/_0_/X (sky130_fd_sc_hd__xor2_1)
+   0.0000    1.2418 v sum[7] (out)
+             1.2418   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2418   data arrival time
+-------------------------------------------------------------
+             2.2418   slack (MET)
+
+
+Startpoint: a[7] (input port clocked by io_clk)
+Endpoint: cout (output port clocked by io_clk)
+Path Group: io_clk
+Path Type: min
+
+    Delay      Time   Description
+-------------------------------------------------------------
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   1.0000    1.0000 ^ input external delay
+   0.0000    1.0000 ^ a[7] (in)
+   0.0847    1.0847 ^ gen_n8_u/u3/_0_/X (sky130_fd_sc_hd__and2_0)
+   0.1725    1.2572 ^ gen_n8_u/u5/_0_/X (sky130_fd_sc_hd__or2_0)
+   0.0000    1.2572 ^ cout (out)
+             1.2572   data arrival time
+
+   0.0000    0.0000   clock io_clk (rise edge)
+   0.0000    0.0000   clock network delay (ideal)
+   0.0000    0.0000   clock reconvergence pessimism
+  -1.0000   -1.0000   output external delay
+            -1.0000   data required time
+-------------------------------------------------------------
+            -1.0000   data required time
+            -1.2572   data arrival time
+-------------------------------------------------------------
+             2.2572   slack (MET)
+
+
+
+---------------- SUMMARY ------------------------------------
+worst_slack_max:
+worst slack max 2.94
+worst_slack_min:
+worst slack min 2.08
+tns_max:
+tns max 0.00
+tns_min:
+tns min 0.00
+
+==============================================================

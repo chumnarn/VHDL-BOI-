@@ -1,0 +1,1994 @@
+
+-- Running command `
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v
+                prep -top top -flatten
+                memory_map
+                opt_clean
+                design -stash gold
+
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v
+                prep -top top -flatten
+                memory_map
+                opt_clean
+                design -stash gate
+
+                design -copy-from gold -as gold top
+                design -copy-from gate -as gate top
+                equiv_make gold gate equiv
+                hierarchy -top equiv
+                equiv_simple -seq 5
+    equiv_induct -seq 5
+                equiv_status -assert
+             ' --
+
+1. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v' to AST representation.
+Generating RTLIL representation for module `\or_gate'.
+Generating RTLIL representation for module `\and_gate'.
+Generating RTLIL representation for module `\xor_gate'.
+Generating RTLIL representation for module `\full_adder_struct'.
+Generating RTLIL representation for module `\add_sub_shared'.
+Generating RTLIL representation for module `\adder8_pipelined'.
+Generating RTLIL representation for module `\adder8'.
+Generating RTLIL representation for module `\top'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \add_sub_shared
+Used module:     \adder8_pipelined
+Used module:     \adder8
+Used module:         \full_adder_struct
+Used module:             \or_gate
+Used module:             \and_gate
+Used module:             \xor_gate
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \add_sub_shared
+Used module:     \adder8_pipelined
+Used module:     \adder8
+Used module:         \full_adder_struct
+Used module:             \or_gate
+Used module:             \and_gate
+Used module:             \xor_gate
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 5 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:258$31'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:255$30'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:252$29'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:249$28'.
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:246$27'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\adder8_pipelined.\n151_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:258$31'.
+  created $dff cell `$procdff$32' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:255$30'.
+  created $dff cell `$procdff$33' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n149_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:252$29'.
+  created $dff cell `$procdff$34' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:249$28'.
+  created $dff cell `$procdff$35' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:246$27'.
+  created $dff cell `$procdff$36' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:258$31'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:255$30'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:252$29'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:249$28'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:246$27'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module adder8.
+Optimizing module adder8_pipelined.
+Optimizing module add_sub_shared.
+Optimizing module full_adder_struct.
+Optimizing module xor_gate.
+Optimizing module and_gate.
+Optimizing module or_gate.
+
+2.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module adder8.
+Deleting now unused module adder8_pipelined.
+Deleting now unused module add_sub_shared.
+Deleting now unused module full_adder_struct.
+Deleting now unused module xor_gate.
+Deleting now unused module and_gate.
+Deleting now unused module or_gate.
+<suppressed ~16 debug messages>
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 68 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~10 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 4 bits (of 9) from mux cell top.$flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:235$24 ($mux).
+Removed top 8 bits (of 9) from port B of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:231$22 ($add).
+Removed top 4 bits (of 9) from port Y of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:231$22 ($add).
+Removed top 4 bits (of 9) from port A of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:231$22 ($add).
+Removed top 5 bits (of 9) from port A of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:229$21 ($add).
+Removed top 5 bits (of 9) from port B of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:229$21 ($add).
+Removed top 4 bits (of 9) from port Y of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:229$21 ($add).
+Removed top 4 bits (of 9) from mux cell top.$flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:215$20 ($mux).
+Removed top 8 bits (of 9) from port B of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:211$18 ($add).
+Removed top 4 bits (of 9) from port Y of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:211$18 ($add).
+Removed top 4 bits (of 9) from port A of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:211$18 ($add).
+Removed top 5 bits (of 9) from port A of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:209$17 ($add).
+Removed top 5 bits (of 9) from port B of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:209$17 ($add).
+Removed top 4 bits (of 9) from port Y of cell top.$flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:209$17 ($add).
+Removed top 1 bits (of 9) from mux cell top.$flatten\u_addsub.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:123$9 ($mux).
+Removed top 8 bits (of 9) from port B of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:117$7 ($add).
+Removed top 1 bits (of 9) from port Y of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:117$7 ($add).
+Removed top 1 bits (of 9) from port A of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:117$7 ($add).
+Removed top 1 bits (of 9) from port A of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:115$6 ($add).
+Removed top 1 bits (of 9) from port B of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:115$6 ($add).
+Removed top 1 bits (of 9) from port Y of cell top.$flatten\u_addsub.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:115$6 ($add).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== top ===
+
+   Number of wires:                411
+   Number of wire bits:            807
+   Number of public wires:         411
+   Number of public wire bits:     807
+   Number of ports:                 12
+   Number of port bits:             47
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                116
+     $add                            6
+     $and                           17
+     $dff                            5
+     $eq                             1
+     $mux                           10
+     $ne                             1
+     $not                            1
+     $or                             8
+     $scopeinfo                     51
+     $xor                           16
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+5. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v' to AST representation.
+Generating RTLIL representation for module `\add_sub_shared'.
+Generating RTLIL representation for module `\adder8'.
+Generating RTLIL representation for module `\adder8_pipelined'.
+Generating RTLIL representation for module `\and_gate'.
+Generating RTLIL representation for module `\full_adder_struct'.
+Generating RTLIL representation for module `\or_gate'.
+Generating RTLIL representation for module `\top'.
+Generating RTLIL representation for module `\xor_gate'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \adder8_pipelined
+Used module:     \add_sub_shared
+Used module:     \adder8
+Used module:         \full_adder_struct
+Used module:             \or_gate
+Used module:             \and_gate
+Used module:             \xor_gate
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \adder8_pipelined
+Used module:     \add_sub_shared
+Used module:     \adder8
+Used module:         \full_adder_struct
+Used module:             \or_gate
+Used module:             \and_gate
+Used module:             \xor_gate
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:627$307 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:624$306 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:621$305 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:618$304 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:615$303 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:612$302 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:609$301 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:606$300 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:603$299 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:600$298 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:597$297 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:594$296 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:591$295 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:588$294 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:585$293 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:582$292 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:579$291 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:576$290 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:573$289 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:570$288 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:567$287 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:564$286 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:561$285 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:558$284 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:555$283 in module adder8_pipelined.
+Marked 1 switch rules as full_case in process $proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:552$282 in module adder8_pipelined.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 26 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~26 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:627$307'.
+     1/1: $0\n148_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:624$306'.
+     1/1: $0\n148_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:621$305'.
+     1/1: $0\n148_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:618$304'.
+     1/1: $0\n148_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:615$303'.
+     1/1: $0\n148_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:612$302'.
+     1/1: $0\n148_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:609$301'.
+     1/1: $0\n148_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:606$300'.
+     1/1: $0\n148_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:603$299'.
+     1/1: $0\n149_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:600$298'.
+     1/1: $0\n150_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:597$297'.
+     1/1: $0\n150_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:594$296'.
+     1/1: $0\n150_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:591$295'.
+     1/1: $0\n150_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:588$294'.
+     1/1: $0\n150_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:585$293'.
+     1/1: $0\n150_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:582$292'.
+     1/1: $0\n150_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:579$291'.
+     1/1: $0\n150_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:576$290'.
+     1/1: $0\n151_q[0:0]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:573$289'.
+     1/1: $0\n147_q[7:7]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:570$288'.
+     1/1: $0\n147_q[6:6]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:567$287'.
+     1/1: $0\n147_q[5:5]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:564$286'.
+     1/1: $0\n147_q[4:4]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:561$285'.
+     1/1: $0\n147_q[3:3]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:558$284'.
+     1/1: $0\n147_q[2:2]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:555$283'.
+     1/1: $0\n147_q[1:1]
+Creating decoders for process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:552$282'.
+     1/1: $0\n147_q[0:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\adder8_pipelined.\n148_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:627$307'.
+  created $dff cell `$procdff$389' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:624$306'.
+  created $dff cell `$procdff$390' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:621$305'.
+  created $dff cell `$procdff$391' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:618$304'.
+  created $dff cell `$procdff$392' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:615$303'.
+  created $dff cell `$procdff$393' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:612$302'.
+  created $dff cell `$procdff$394' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:609$301'.
+  created $dff cell `$procdff$395' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n148_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:606$300'.
+  created $dff cell `$procdff$396' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n149_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:603$299'.
+  created $dff cell `$procdff$397' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:600$298'.
+  created $dff cell `$procdff$398' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:597$297'.
+  created $dff cell `$procdff$399' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:594$296'.
+  created $dff cell `$procdff$400' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:591$295'.
+  created $dff cell `$procdff$401' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:588$294'.
+  created $dff cell `$procdff$402' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:585$293'.
+  created $dff cell `$procdff$403' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:582$292'.
+  created $dff cell `$procdff$404' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n150_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:579$291'.
+  created $dff cell `$procdff$405' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n151_q' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:576$290'.
+  created $dff cell `$procdff$406' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [7]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:573$289'.
+  created $dff cell `$procdff$407' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [6]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:570$288'.
+  created $dff cell `$procdff$408' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [5]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:567$287'.
+  created $dff cell `$procdff$409' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [4]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:564$286'.
+  created $dff cell `$procdff$410' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [3]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:561$285'.
+  created $dff cell `$procdff$411' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [2]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:558$284'.
+  created $dff cell `$procdff$412' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [1]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:555$283'.
+  created $dff cell `$procdff$413' with positive edge clock.
+Creating register for signal `\adder8_pipelined.\n147_q [0]' using process `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:552$282'.
+  created $dff cell `$procdff$414' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:627$307'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:627$307'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:624$306'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:624$306'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:621$305'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:621$305'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:618$304'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:618$304'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:615$303'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:615$303'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:612$302'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:612$302'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:609$301'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:609$301'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:606$300'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:606$300'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:603$299'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:603$299'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:600$298'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:600$298'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:597$297'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:597$297'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:594$296'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:594$296'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:591$295'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:591$295'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:588$294'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:588$294'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:585$293'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:585$293'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:582$292'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:582$292'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:579$291'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:579$291'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:576$290'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:576$290'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:573$289'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:573$289'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:570$288'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:570$288'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:567$287'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:567$287'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:564$286'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:564$286'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:561$285'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:561$285'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:558$284'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:558$284'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:555$283'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:555$283'.
+Found and cleaned up 1 empty switch in `\adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:552$282'.
+Removing empty process `adder8_pipelined.$proc$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:552$282'.
+Cleaned up 26 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xor_gate.
+Optimizing module top.
+Optimizing module or_gate.
+Optimizing module full_adder_struct.
+Optimizing module and_gate.
+Optimizing module adder8_pipelined.
+<suppressed ~7 debug messages>
+Optimizing module adder8.
+Optimizing module add_sub_shared.
+<suppressed ~4 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module xor_gate.
+Deleting now unused module or_gate.
+Deleting now unused module full_adder_struct.
+Deleting now unused module and_gate.
+Deleting now unused module adder8_pipelined.
+Deleting now unused module adder8.
+Deleting now unused module add_sub_shared.
+<suppressed ~16 debug messages>
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Removed 8 unused cells and 269 unused wires.
+<suppressed ~17 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+6.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~34 debug messages>
+
+6.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top.
+Performed a total of 0 changes.
+
+6.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+6.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+6.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+6.8.14. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== top ===
+
+   Number of wires:                611
+   Number of wire bits:            916
+   Number of public wires:         527
+   Number of public wire bits:     832
+   Number of ports:                 12
+   Number of port bits:             47
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                351
+     $and                           58
+     $dff                           26
+     $mux                           41
+     $not                           69
+     $or                            34
+     $scopeinfo                     51
+     $xor                           72
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: cin_gold (\cin_gold), cin_gate (\cin_gate) -> cin
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Presumably equivalent wires: cout_gold (\cout_gold), cout_gate (\cout_gate) -> cout
+Presumably equivalent wires: op_gold (\op_gold), op_gate (\op_gate) -> op
+Presumably equivalent wires: ovf_gold (\ovf_gold), ovf_gate (\ovf_gate) -> ovf
+Presumably equivalent wires: pcout_gold (\u_pipe.n151_q_gold), pcout_gate (\u_pipe.n151_q_gate) -> pcout
+Presumably equivalent wires: psum_gold (\u_pipe.n150_q_gold), psum_gate (\u_pipe.n150_q_gate) -> psum
+Presumably equivalent wires: rst_gold (\rst_gold), rst_gate (\rst_gate) -> rst
+Presumably equivalent wires: sum_gold ({ \u_adder.gen_n8_u.sum_gold \u_adder.gen_n7_u.sum_gold \u_adder.gen_n6_u.sum_gold \u_adder.gen_n5_u.sum_gold \u_adder.gen_n4_u.sum_gold \u_adder.gen_n3_u.sum_gold \u_adder.gen_n2_u.sum_gold \u_adder.gen_n1_u.sum_gold }), sum_gate ({ \u_adder.gen_n8_u.sum_gate \u_adder.gen_n7_u.sum_gate \u_adder.gen_n6_u.sum_gate \u_adder.gen_n5_u.sum_gate \u_adder.gen_n4_u.sum_gate \u_adder.gen_n3_u.sum_gate \u_adder.gen_n2_u.sum_gate \u_adder.gen_n1_u.sum_gate }) -> sum
+Presumably equivalent wires: sy_gold (\sy_gold), sy_gate ({ \u_addsub.n173_o_gate \sy_gate [6:0] }) -> sy
+Presumably equivalent wires: u_adder.a_gold (\a_gold), u_adder.a_gate (\a_gate) -> u_adder.a
+Presumably equivalent wires: u_adder.b_gold (\b_gold), u_adder.b_gate (\b_gate) -> u_adder.b
+Presumably equivalent wires: u_adder.c_gold ({ \cout_gold \u_adder.gen_n8_u.u2.b_gold \u_adder.gen_n7_u.u2.b_gold \u_adder.gen_n6_u.u2.b_gold \u_adder.gen_n5_u.u2.b_gold \u_adder.gen_n4_u.u2.b_gold \u_adder.gen_n3_u.u2.b_gold \u_adder.gen_n2_u.u2.b_gold \cin_gold }), u_adder.c_gate ({ \cout_gate \u_adder.gen_n8_u.u2.b_gate \u_adder.gen_n7_u.u2.b_gate \u_adder.gen_n6_u.u2.b_gate \u_adder.gen_n5_u.u2.b_gate \u_adder.gen_n4_u.u2.b_gate \u_adder.gen_n3_u.u2.b_gate \u_adder.gen_n2_u.u2.b_gate \cin_gate }) -> u_adder.c
+Presumably equivalent wires: u_adder.cin_gold (\cin_gold), u_adder.cin_gate (\cin_gate) -> u_adder.cin
+Presumably equivalent wires: u_adder.cout_gold (\cout_gold), u_adder.cout_gate (\cout_gate) -> u_adder.cout
+Presumably equivalent wires: u_adder.gen_n1_u.a_gold (\a_gold [0]), u_adder.gen_n1_u.a_gate (\a_gate [0]) -> u_adder.gen_n1_u.a
+Presumably equivalent wires: u_adder.gen_n1_u.b_gold (\b_gold [0]), u_adder.gen_n1_u.b_gate (\b_gate [0]) -> u_adder.gen_n1_u.b
+Presumably equivalent wires: u_adder.gen_n1_u.cin_gold (\cin_gold), u_adder.gen_n1_u.cin_gate (\cin_gate) -> u_adder.gen_n1_u.cin
+Presumably equivalent wires: u_adder.gen_n1_u.cout_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u.cout_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u.cout
+Presumably equivalent wires: u_adder.gen_n1_u.s1_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.s1_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.s1
+Presumably equivalent wires: u_adder.gen_n1_u.s2_gold (\u_adder.gen_n1_u.u5.a_gold), u_adder.gen_n1_u.s2_gate (\u_adder.gen_n1_u.u5.a_gate) -> u_adder.gen_n1_u.s2
+Presumably equivalent wires: u_adder.gen_n1_u.s3_gold (\u_adder.gen_n1_u.u5.b_gold), u_adder.gen_n1_u.s3_gate (\u_adder.gen_n1_u.u5.b_gate) -> u_adder.gen_n1_u.s3
+Presumably equivalent wires: u_adder.gen_n1_u.sum_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u.sum_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u.sum
+Presumably equivalent wires: u_adder.gen_n1_u.u1.a_gold (\a_gold [0]), u_adder.gen_n1_u.u1.a_gate (\a_gate [0]) -> u_adder.gen_n1_u.u1.a
+Presumably equivalent wires: u_adder.gen_n1_u.u1.b_gold (\b_gold [0]), u_adder.gen_n1_u.u1.b_gate (\b_gate [0]) -> u_adder.gen_n1_u.u1.b
+Presumably equivalent wires: u_adder.gen_n1_u.u1.n188_o_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.u1.n188_o_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n1_u.u1.y_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.u1.y_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.u1.y
+Presumably equivalent wires: u_adder.gen_n1_u.u1_y_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.u1_y_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.u1_y
+Presumably equivalent wires: u_adder.gen_n1_u.u2.a_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.u2.a_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.u2.a
+Presumably equivalent wires: u_adder.gen_n1_u.u2.b_gold (\cin_gold), u_adder.gen_n1_u.u2.b_gate (\cin_gate) -> u_adder.gen_n1_u.u2.b
+Presumably equivalent wires: u_adder.gen_n1_u.u2.n188_o_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u.u2.n188_o_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n1_u.u2.y_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u.u2.y_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u.u2.y
+Presumably equivalent wires: u_adder.gen_n1_u.u2_y_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u.u2_y_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u.u2_y
+Presumably equivalent wires: u_adder.gen_n1_u.u3.a_gold (\a_gold [0]), u_adder.gen_n1_u.u3.a_gate (\a_gate [0]) -> u_adder.gen_n1_u.u3.a
+Presumably equivalent wires: u_adder.gen_n1_u.u3.b_gold (\b_gold [0]), u_adder.gen_n1_u.u3.b_gate (\b_gate [0]) -> u_adder.gen_n1_u.u3.b
+Presumably equivalent wires: u_adder.gen_n1_u.u3.n190_o_gold (\u_adder.gen_n1_u.u5.a_gold), u_adder.gen_n1_u.u3.n190_o_gate (\u_adder.gen_n1_u.u5.a_gate) -> u_adder.gen_n1_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n1_u.u3.y_gold (\u_adder.gen_n1_u.u5.a_gold), u_adder.gen_n1_u.u3.y_gate (\u_adder.gen_n1_u.u5.a_gate) -> u_adder.gen_n1_u.u3.y
+Presumably equivalent wires: u_adder.gen_n1_u.u3_y_gold (\u_adder.gen_n1_u.u5.a_gold), u_adder.gen_n1_u.u3_y_gate (\u_adder.gen_n1_u.u5.a_gate) -> u_adder.gen_n1_u.u3_y
+Presumably equivalent wires: u_adder.gen_n1_u.u4.a_gold (\u_adder.gen_n1_u.u2.a_gold), u_adder.gen_n1_u.u4.a_gate (\u_adder.gen_n1_u.u2.a_gate) -> u_adder.gen_n1_u.u4.a
+Presumably equivalent wires: u_adder.gen_n1_u.u4.b_gold (\cin_gold), u_adder.gen_n1_u.u4.b_gate (\cin_gate) -> u_adder.gen_n1_u.u4.b
+Presumably equivalent wires: u_adder.gen_n1_u.u4.n190_o_gold (\u_adder.gen_n1_u.u5.b_gold), u_adder.gen_n1_u.u4.n190_o_gate (\u_adder.gen_n1_u.u5.b_gate) -> u_adder.gen_n1_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n1_u.u4.y_gold (\u_adder.gen_n1_u.u5.b_gold), u_adder.gen_n1_u.u4.y_gate (\u_adder.gen_n1_u.u5.b_gate) -> u_adder.gen_n1_u.u4.y
+Presumably equivalent wires: u_adder.gen_n1_u.u4_y_gold (\u_adder.gen_n1_u.u5.b_gold), u_adder.gen_n1_u.u4_y_gate (\u_adder.gen_n1_u.u5.b_gate) -> u_adder.gen_n1_u.u4_y
+Presumably equivalent wires: u_adder.gen_n1_u.u5.a_gold (\u_adder.gen_n1_u.u5.a_gold), u_adder.gen_n1_u.u5.a_gate (\u_adder.gen_n1_u.u5.a_gate) -> u_adder.gen_n1_u.u5.a
+Presumably equivalent wires: u_adder.gen_n1_u.u5.b_gold (\u_adder.gen_n1_u.u5.b_gold), u_adder.gen_n1_u.u5.b_gate (\u_adder.gen_n1_u.u5.b_gate) -> u_adder.gen_n1_u.u5.b
+Presumably equivalent wires: u_adder.gen_n1_u.u5.n192_o_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u.u5.n192_o_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n1_u.u5.y_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u.u5.y_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u.u5.y
+Presumably equivalent wires: u_adder.gen_n1_u.u5_y_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u.u5_y_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u.u5_y
+Presumably equivalent wires: u_adder.gen_n1_u_cout_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u_cout_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u_cout
+Presumably equivalent wires: u_adder.gen_n1_u_n17_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u_n17_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u_n17
+Presumably equivalent wires: u_adder.gen_n1_u_n18_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n1_u_n18_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n1_u_n18
+Presumably equivalent wires: u_adder.gen_n1_u_sum_gold (\u_adder.gen_n1_u.sum_gold), u_adder.gen_n1_u_sum_gate (\u_adder.gen_n1_u.sum_gate) -> u_adder.gen_n1_u_sum
+Presumably equivalent wires: u_adder.gen_n2_u.a_gold (\a_gold [1]), u_adder.gen_n2_u.a_gate (\a_gate [1]) -> u_adder.gen_n2_u.a
+Presumably equivalent wires: u_adder.gen_n2_u.b_gold (\b_gold [1]), u_adder.gen_n2_u.b_gate (\b_gate [1]) -> u_adder.gen_n2_u.b
+Presumably equivalent wires: u_adder.gen_n2_u.cin_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n2_u.cin_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n2_u.cin
+Presumably equivalent wires: u_adder.gen_n2_u.cout_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u.cout_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u.cout
+Presumably equivalent wires: u_adder.gen_n2_u.s1_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.s1_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.s1
+Presumably equivalent wires: u_adder.gen_n2_u.s2_gold (\u_adder.gen_n2_u.u5.a_gold), u_adder.gen_n2_u.s2_gate (\u_adder.gen_n2_u.u5.a_gate) -> u_adder.gen_n2_u.s2
+Presumably equivalent wires: u_adder.gen_n2_u.s3_gold (\u_adder.gen_n2_u.u5.b_gold), u_adder.gen_n2_u.s3_gate (\u_adder.gen_n2_u.u5.b_gate) -> u_adder.gen_n2_u.s3
+Presumably equivalent wires: u_adder.gen_n2_u.sum_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u.sum_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u.sum
+Presumably equivalent wires: u_adder.gen_n2_u.u1.a_gold (\a_gold [1]), u_adder.gen_n2_u.u1.a_gate (\a_gate [1]) -> u_adder.gen_n2_u.u1.a
+Presumably equivalent wires: u_adder.gen_n2_u.u1.b_gold (\b_gold [1]), u_adder.gen_n2_u.u1.b_gate (\b_gate [1]) -> u_adder.gen_n2_u.u1.b
+Presumably equivalent wires: u_adder.gen_n2_u.u1.n188_o_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.u1.n188_o_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n2_u.u1.y_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.u1.y_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.u1.y
+Presumably equivalent wires: u_adder.gen_n2_u.u1_y_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.u1_y_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.u1_y
+Presumably equivalent wires: u_adder.gen_n2_u.u2.a_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.u2.a_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.u2.a
+Presumably equivalent wires: u_adder.gen_n2_u.u2.b_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n2_u.u2.b_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n2_u.u2.b
+Presumably equivalent wires: u_adder.gen_n2_u.u2.n188_o_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u.u2.n188_o_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n2_u.u2.y_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u.u2.y_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u.u2.y
+Presumably equivalent wires: u_adder.gen_n2_u.u2_y_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u.u2_y_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u.u2_y
+Presumably equivalent wires: u_adder.gen_n2_u.u3.a_gold (\a_gold [1]), u_adder.gen_n2_u.u3.a_gate (\a_gate [1]) -> u_adder.gen_n2_u.u3.a
+Presumably equivalent wires: u_adder.gen_n2_u.u3.b_gold (\b_gold [1]), u_adder.gen_n2_u.u3.b_gate (\b_gate [1]) -> u_adder.gen_n2_u.u3.b
+Presumably equivalent wires: u_adder.gen_n2_u.u3.n190_o_gold (\u_adder.gen_n2_u.u5.a_gold), u_adder.gen_n2_u.u3.n190_o_gate (\u_adder.gen_n2_u.u5.a_gate) -> u_adder.gen_n2_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n2_u.u3.y_gold (\u_adder.gen_n2_u.u5.a_gold), u_adder.gen_n2_u.u3.y_gate (\u_adder.gen_n2_u.u5.a_gate) -> u_adder.gen_n2_u.u3.y
+Presumably equivalent wires: u_adder.gen_n2_u.u3_y_gold (\u_adder.gen_n2_u.u5.a_gold), u_adder.gen_n2_u.u3_y_gate (\u_adder.gen_n2_u.u5.a_gate) -> u_adder.gen_n2_u.u3_y
+Presumably equivalent wires: u_adder.gen_n2_u.u4.a_gold (\u_adder.gen_n2_u.u2.a_gold), u_adder.gen_n2_u.u4.a_gate (\u_adder.gen_n2_u.u2.a_gate) -> u_adder.gen_n2_u.u4.a
+Presumably equivalent wires: u_adder.gen_n2_u.u4.b_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.gen_n2_u.u4.b_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.gen_n2_u.u4.b
+Presumably equivalent wires: u_adder.gen_n2_u.u4.n190_o_gold (\u_adder.gen_n2_u.u5.b_gold), u_adder.gen_n2_u.u4.n190_o_gate (\u_adder.gen_n2_u.u5.b_gate) -> u_adder.gen_n2_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n2_u.u4.y_gold (\u_adder.gen_n2_u.u5.b_gold), u_adder.gen_n2_u.u4.y_gate (\u_adder.gen_n2_u.u5.b_gate) -> u_adder.gen_n2_u.u4.y
+Presumably equivalent wires: u_adder.gen_n2_u.u4_y_gold (\u_adder.gen_n2_u.u5.b_gold), u_adder.gen_n2_u.u4_y_gate (\u_adder.gen_n2_u.u5.b_gate) -> u_adder.gen_n2_u.u4_y
+Presumably equivalent wires: u_adder.gen_n2_u.u5.a_gold (\u_adder.gen_n2_u.u5.a_gold), u_adder.gen_n2_u.u5.a_gate (\u_adder.gen_n2_u.u5.a_gate) -> u_adder.gen_n2_u.u5.a
+Presumably equivalent wires: u_adder.gen_n2_u.u5.b_gold (\u_adder.gen_n2_u.u5.b_gold), u_adder.gen_n2_u.u5.b_gate (\u_adder.gen_n2_u.u5.b_gate) -> u_adder.gen_n2_u.u5.b
+Presumably equivalent wires: u_adder.gen_n2_u.u5.n192_o_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u.u5.n192_o_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n2_u.u5.y_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u.u5.y_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u.u5.y
+Presumably equivalent wires: u_adder.gen_n2_u.u5_y_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u.u5_y_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u.u5_y
+Presumably equivalent wires: u_adder.gen_n2_u_cout_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u_cout_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u_cout
+Presumably equivalent wires: u_adder.gen_n2_u_n26_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u_n26_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u_n26
+Presumably equivalent wires: u_adder.gen_n2_u_n27_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n2_u_n27_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n2_u_n27
+Presumably equivalent wires: u_adder.gen_n2_u_sum_gold (\u_adder.gen_n2_u.sum_gold), u_adder.gen_n2_u_sum_gate (\u_adder.gen_n2_u.sum_gate) -> u_adder.gen_n2_u_sum
+Presumably equivalent wires: u_adder.gen_n3_u.a_gold (\a_gold [2]), u_adder.gen_n3_u.a_gate (\a_gate [2]) -> u_adder.gen_n3_u.a
+Presumably equivalent wires: u_adder.gen_n3_u.b_gold (\b_gold [2]), u_adder.gen_n3_u.b_gate (\b_gate [2]) -> u_adder.gen_n3_u.b
+Presumably equivalent wires: u_adder.gen_n3_u.cin_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n3_u.cin_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n3_u.cin
+Presumably equivalent wires: u_adder.gen_n3_u.cout_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u.cout_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u.cout
+Presumably equivalent wires: u_adder.gen_n3_u.s1_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.s1_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.s1
+Presumably equivalent wires: u_adder.gen_n3_u.s2_gold (\u_adder.gen_n3_u.u5.a_gold), u_adder.gen_n3_u.s2_gate (\u_adder.gen_n3_u.u5.a_gate) -> u_adder.gen_n3_u.s2
+Presumably equivalent wires: u_adder.gen_n3_u.s3_gold (\u_adder.gen_n3_u.u5.b_gold), u_adder.gen_n3_u.s3_gate (\u_adder.gen_n3_u.u5.b_gate) -> u_adder.gen_n3_u.s3
+Presumably equivalent wires: u_adder.gen_n3_u.sum_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u.sum_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u.sum
+Presumably equivalent wires: u_adder.gen_n3_u.u1.a_gold (\a_gold [2]), u_adder.gen_n3_u.u1.a_gate (\a_gate [2]) -> u_adder.gen_n3_u.u1.a
+Presumably equivalent wires: u_adder.gen_n3_u.u1.b_gold (\b_gold [2]), u_adder.gen_n3_u.u1.b_gate (\b_gate [2]) -> u_adder.gen_n3_u.u1.b
+Presumably equivalent wires: u_adder.gen_n3_u.u1.n188_o_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.u1.n188_o_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n3_u.u1.y_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.u1.y_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.u1.y
+Presumably equivalent wires: u_adder.gen_n3_u.u1_y_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.u1_y_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.u1_y
+Presumably equivalent wires: u_adder.gen_n3_u.u2.a_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.u2.a_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.u2.a
+Presumably equivalent wires: u_adder.gen_n3_u.u2.b_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n3_u.u2.b_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n3_u.u2.b
+Presumably equivalent wires: u_adder.gen_n3_u.u2.n188_o_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u.u2.n188_o_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n3_u.u2.y_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u.u2.y_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u.u2.y
+Presumably equivalent wires: u_adder.gen_n3_u.u2_y_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u.u2_y_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u.u2_y
+Presumably equivalent wires: u_adder.gen_n3_u.u3.a_gold (\a_gold [2]), u_adder.gen_n3_u.u3.a_gate (\a_gate [2]) -> u_adder.gen_n3_u.u3.a
+Presumably equivalent wires: u_adder.gen_n3_u.u3.b_gold (\b_gold [2]), u_adder.gen_n3_u.u3.b_gate (\b_gate [2]) -> u_adder.gen_n3_u.u3.b
+Presumably equivalent wires: u_adder.gen_n3_u.u3.n190_o_gold (\u_adder.gen_n3_u.u5.a_gold), u_adder.gen_n3_u.u3.n190_o_gate (\u_adder.gen_n3_u.u5.a_gate) -> u_adder.gen_n3_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n3_u.u3.y_gold (\u_adder.gen_n3_u.u5.a_gold), u_adder.gen_n3_u.u3.y_gate (\u_adder.gen_n3_u.u5.a_gate) -> u_adder.gen_n3_u.u3.y
+Presumably equivalent wires: u_adder.gen_n3_u.u3_y_gold (\u_adder.gen_n3_u.u5.a_gold), u_adder.gen_n3_u.u3_y_gate (\u_adder.gen_n3_u.u5.a_gate) -> u_adder.gen_n3_u.u3_y
+Presumably equivalent wires: u_adder.gen_n3_u.u4.a_gold (\u_adder.gen_n3_u.u2.a_gold), u_adder.gen_n3_u.u4.a_gate (\u_adder.gen_n3_u.u2.a_gate) -> u_adder.gen_n3_u.u4.a
+Presumably equivalent wires: u_adder.gen_n3_u.u4.b_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.gen_n3_u.u4.b_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.gen_n3_u.u4.b
+Presumably equivalent wires: u_adder.gen_n3_u.u4.n190_o_gold (\u_adder.gen_n3_u.u5.b_gold), u_adder.gen_n3_u.u4.n190_o_gate (\u_adder.gen_n3_u.u5.b_gate) -> u_adder.gen_n3_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n3_u.u4.y_gold (\u_adder.gen_n3_u.u5.b_gold), u_adder.gen_n3_u.u4.y_gate (\u_adder.gen_n3_u.u5.b_gate) -> u_adder.gen_n3_u.u4.y
+Presumably equivalent wires: u_adder.gen_n3_u.u4_y_gold (\u_adder.gen_n3_u.u5.b_gold), u_adder.gen_n3_u.u4_y_gate (\u_adder.gen_n3_u.u5.b_gate) -> u_adder.gen_n3_u.u4_y
+Presumably equivalent wires: u_adder.gen_n3_u.u5.a_gold (\u_adder.gen_n3_u.u5.a_gold), u_adder.gen_n3_u.u5.a_gate (\u_adder.gen_n3_u.u5.a_gate) -> u_adder.gen_n3_u.u5.a
+Presumably equivalent wires: u_adder.gen_n3_u.u5.b_gold (\u_adder.gen_n3_u.u5.b_gold), u_adder.gen_n3_u.u5.b_gate (\u_adder.gen_n3_u.u5.b_gate) -> u_adder.gen_n3_u.u5.b
+Presumably equivalent wires: u_adder.gen_n3_u.u5.n192_o_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u.u5.n192_o_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n3_u.u5.y_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u.u5.y_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u.u5.y
+Presumably equivalent wires: u_adder.gen_n3_u.u5_y_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u.u5_y_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u.u5_y
+Presumably equivalent wires: u_adder.gen_n3_u_cout_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u_cout_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u_cout
+Presumably equivalent wires: u_adder.gen_n3_u_n35_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u_n35_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u_n35
+Presumably equivalent wires: u_adder.gen_n3_u_n36_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n3_u_n36_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n3_u_n36
+Presumably equivalent wires: u_adder.gen_n3_u_sum_gold (\u_adder.gen_n3_u.sum_gold), u_adder.gen_n3_u_sum_gate (\u_adder.gen_n3_u.sum_gate) -> u_adder.gen_n3_u_sum
+Presumably equivalent wires: u_adder.gen_n4_u.a_gold (\a_gold [3]), u_adder.gen_n4_u.a_gate (\a_gate [3]) -> u_adder.gen_n4_u.a
+Presumably equivalent wires: u_adder.gen_n4_u.b_gold (\b_gold [3]), u_adder.gen_n4_u.b_gate (\b_gate [3]) -> u_adder.gen_n4_u.b
+Presumably equivalent wires: u_adder.gen_n4_u.cin_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n4_u.cin_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n4_u.cin
+Presumably equivalent wires: u_adder.gen_n4_u.cout_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u.cout_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u.cout
+Presumably equivalent wires: u_adder.gen_n4_u.s1_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.s1_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.s1
+Presumably equivalent wires: u_adder.gen_n4_u.s2_gold (\u_adder.gen_n4_u.u5.a_gold), u_adder.gen_n4_u.s2_gate (\u_adder.gen_n4_u.u5.a_gate) -> u_adder.gen_n4_u.s2
+Presumably equivalent wires: u_adder.gen_n4_u.s3_gold (\u_adder.gen_n4_u.u5.b_gold), u_adder.gen_n4_u.s3_gate (\u_adder.gen_n4_u.u5.b_gate) -> u_adder.gen_n4_u.s3
+Presumably equivalent wires: u_adder.gen_n4_u.sum_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u.sum_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u.sum
+Presumably equivalent wires: u_adder.gen_n4_u.u1.a_gold (\a_gold [3]), u_adder.gen_n4_u.u1.a_gate (\a_gate [3]) -> u_adder.gen_n4_u.u1.a
+Presumably equivalent wires: u_adder.gen_n4_u.u1.b_gold (\b_gold [3]), u_adder.gen_n4_u.u1.b_gate (\b_gate [3]) -> u_adder.gen_n4_u.u1.b
+Presumably equivalent wires: u_adder.gen_n4_u.u1.n188_o_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.u1.n188_o_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n4_u.u1.y_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.u1.y_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.u1.y
+Presumably equivalent wires: u_adder.gen_n4_u.u1_y_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.u1_y_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.u1_y
+Presumably equivalent wires: u_adder.gen_n4_u.u2.a_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.u2.a_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.u2.a
+Presumably equivalent wires: u_adder.gen_n4_u.u2.b_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n4_u.u2.b_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n4_u.u2.b
+Presumably equivalent wires: u_adder.gen_n4_u.u2.n188_o_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u.u2.n188_o_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n4_u.u2.y_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u.u2.y_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u.u2.y
+Presumably equivalent wires: u_adder.gen_n4_u.u2_y_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u.u2_y_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u.u2_y
+Presumably equivalent wires: u_adder.gen_n4_u.u3.a_gold (\a_gold [3]), u_adder.gen_n4_u.u3.a_gate (\a_gate [3]) -> u_adder.gen_n4_u.u3.a
+Presumably equivalent wires: u_adder.gen_n4_u.u3.b_gold (\b_gold [3]), u_adder.gen_n4_u.u3.b_gate (\b_gate [3]) -> u_adder.gen_n4_u.u3.b
+Presumably equivalent wires: u_adder.gen_n4_u.u3.n190_o_gold (\u_adder.gen_n4_u.u5.a_gold), u_adder.gen_n4_u.u3.n190_o_gate (\u_adder.gen_n4_u.u5.a_gate) -> u_adder.gen_n4_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n4_u.u3.y_gold (\u_adder.gen_n4_u.u5.a_gold), u_adder.gen_n4_u.u3.y_gate (\u_adder.gen_n4_u.u5.a_gate) -> u_adder.gen_n4_u.u3.y
+Presumably equivalent wires: u_adder.gen_n4_u.u3_y_gold (\u_adder.gen_n4_u.u5.a_gold), u_adder.gen_n4_u.u3_y_gate (\u_adder.gen_n4_u.u5.a_gate) -> u_adder.gen_n4_u.u3_y
+Presumably equivalent wires: u_adder.gen_n4_u.u4.a_gold (\u_adder.gen_n4_u.u2.a_gold), u_adder.gen_n4_u.u4.a_gate (\u_adder.gen_n4_u.u2.a_gate) -> u_adder.gen_n4_u.u4.a
+Presumably equivalent wires: u_adder.gen_n4_u.u4.b_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.gen_n4_u.u4.b_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.gen_n4_u.u4.b
+Presumably equivalent wires: u_adder.gen_n4_u.u4.n190_o_gold (\u_adder.gen_n4_u.u5.b_gold), u_adder.gen_n4_u.u4.n190_o_gate (\u_adder.gen_n4_u.u5.b_gate) -> u_adder.gen_n4_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n4_u.u4.y_gold (\u_adder.gen_n4_u.u5.b_gold), u_adder.gen_n4_u.u4.y_gate (\u_adder.gen_n4_u.u5.b_gate) -> u_adder.gen_n4_u.u4.y
+Presumably equivalent wires: u_adder.gen_n4_u.u4_y_gold (\u_adder.gen_n4_u.u5.b_gold), u_adder.gen_n4_u.u4_y_gate (\u_adder.gen_n4_u.u5.b_gate) -> u_adder.gen_n4_u.u4_y
+Presumably equivalent wires: u_adder.gen_n4_u.u5.a_gold (\u_adder.gen_n4_u.u5.a_gold), u_adder.gen_n4_u.u5.a_gate (\u_adder.gen_n4_u.u5.a_gate) -> u_adder.gen_n4_u.u5.a
+Presumably equivalent wires: u_adder.gen_n4_u.u5.b_gold (\u_adder.gen_n4_u.u5.b_gold), u_adder.gen_n4_u.u5.b_gate (\u_adder.gen_n4_u.u5.b_gate) -> u_adder.gen_n4_u.u5.b
+Presumably equivalent wires: u_adder.gen_n4_u.u5.n192_o_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u.u5.n192_o_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n4_u.u5.y_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u.u5.y_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u.u5.y
+Presumably equivalent wires: u_adder.gen_n4_u.u5_y_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u.u5_y_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u.u5_y
+Presumably equivalent wires: u_adder.gen_n4_u_cout_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u_cout_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u_cout
+Presumably equivalent wires: u_adder.gen_n4_u_n44_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u_n44_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u_n44
+Presumably equivalent wires: u_adder.gen_n4_u_n45_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n4_u_n45_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n4_u_n45
+Presumably equivalent wires: u_adder.gen_n4_u_sum_gold (\u_adder.gen_n4_u.sum_gold), u_adder.gen_n4_u_sum_gate (\u_adder.gen_n4_u.sum_gate) -> u_adder.gen_n4_u_sum
+Presumably equivalent wires: u_adder.gen_n5_u.a_gold (\a_gold [4]), u_adder.gen_n5_u.a_gate (\a_gate [4]) -> u_adder.gen_n5_u.a
+Presumably equivalent wires: u_adder.gen_n5_u.b_gold (\b_gold [4]), u_adder.gen_n5_u.b_gate (\b_gate [4]) -> u_adder.gen_n5_u.b
+Presumably equivalent wires: u_adder.gen_n5_u.cin_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n5_u.cin_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n5_u.cin
+Presumably equivalent wires: u_adder.gen_n5_u.cout_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u.cout_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u.cout
+Presumably equivalent wires: u_adder.gen_n5_u.s1_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.s1_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.s1
+Presumably equivalent wires: u_adder.gen_n5_u.s2_gold (\u_adder.gen_n5_u.u5.a_gold), u_adder.gen_n5_u.s2_gate (\u_adder.gen_n5_u.u5.a_gate) -> u_adder.gen_n5_u.s2
+Presumably equivalent wires: u_adder.gen_n5_u.s3_gold (\u_adder.gen_n5_u.u5.b_gold), u_adder.gen_n5_u.s3_gate (\u_adder.gen_n5_u.u5.b_gate) -> u_adder.gen_n5_u.s3
+Presumably equivalent wires: u_adder.gen_n5_u.sum_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u.sum_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u.sum
+Presumably equivalent wires: u_adder.gen_n5_u.u1.a_gold (\a_gold [4]), u_adder.gen_n5_u.u1.a_gate (\a_gate [4]) -> u_adder.gen_n5_u.u1.a
+Presumably equivalent wires: u_adder.gen_n5_u.u1.b_gold (\b_gold [4]), u_adder.gen_n5_u.u1.b_gate (\b_gate [4]) -> u_adder.gen_n5_u.u1.b
+Presumably equivalent wires: u_adder.gen_n5_u.u1.n188_o_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.u1.n188_o_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n5_u.u1.y_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.u1.y_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.u1.y
+Presumably equivalent wires: u_adder.gen_n5_u.u1_y_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.u1_y_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.u1_y
+Presumably equivalent wires: u_adder.gen_n5_u.u2.a_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.u2.a_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.u2.a
+Presumably equivalent wires: u_adder.gen_n5_u.u2.b_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n5_u.u2.b_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n5_u.u2.b
+Presumably equivalent wires: u_adder.gen_n5_u.u2.n188_o_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u.u2.n188_o_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n5_u.u2.y_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u.u2.y_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u.u2.y
+Presumably equivalent wires: u_adder.gen_n5_u.u2_y_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u.u2_y_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u.u2_y
+Presumably equivalent wires: u_adder.gen_n5_u.u3.a_gold (\a_gold [4]), u_adder.gen_n5_u.u3.a_gate (\a_gate [4]) -> u_adder.gen_n5_u.u3.a
+Presumably equivalent wires: u_adder.gen_n5_u.u3.b_gold (\b_gold [4]), u_adder.gen_n5_u.u3.b_gate (\b_gate [4]) -> u_adder.gen_n5_u.u3.b
+Presumably equivalent wires: u_adder.gen_n5_u.u3.n190_o_gold (\u_adder.gen_n5_u.u5.a_gold), u_adder.gen_n5_u.u3.n190_o_gate (\u_adder.gen_n5_u.u5.a_gate) -> u_adder.gen_n5_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n5_u.u3.y_gold (\u_adder.gen_n5_u.u5.a_gold), u_adder.gen_n5_u.u3.y_gate (\u_adder.gen_n5_u.u5.a_gate) -> u_adder.gen_n5_u.u3.y
+Presumably equivalent wires: u_adder.gen_n5_u.u3_y_gold (\u_adder.gen_n5_u.u5.a_gold), u_adder.gen_n5_u.u3_y_gate (\u_adder.gen_n5_u.u5.a_gate) -> u_adder.gen_n5_u.u3_y
+Presumably equivalent wires: u_adder.gen_n5_u.u4.a_gold (\u_adder.gen_n5_u.u2.a_gold), u_adder.gen_n5_u.u4.a_gate (\u_adder.gen_n5_u.u2.a_gate) -> u_adder.gen_n5_u.u4.a
+Presumably equivalent wires: u_adder.gen_n5_u.u4.b_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.gen_n5_u.u4.b_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.gen_n5_u.u4.b
+Presumably equivalent wires: u_adder.gen_n5_u.u4.n190_o_gold (\u_adder.gen_n5_u.u5.b_gold), u_adder.gen_n5_u.u4.n190_o_gate (\u_adder.gen_n5_u.u5.b_gate) -> u_adder.gen_n5_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n5_u.u4.y_gold (\u_adder.gen_n5_u.u5.b_gold), u_adder.gen_n5_u.u4.y_gate (\u_adder.gen_n5_u.u5.b_gate) -> u_adder.gen_n5_u.u4.y
+Presumably equivalent wires: u_adder.gen_n5_u.u4_y_gold (\u_adder.gen_n5_u.u5.b_gold), u_adder.gen_n5_u.u4_y_gate (\u_adder.gen_n5_u.u5.b_gate) -> u_adder.gen_n5_u.u4_y
+Presumably equivalent wires: u_adder.gen_n5_u.u5.a_gold (\u_adder.gen_n5_u.u5.a_gold), u_adder.gen_n5_u.u5.a_gate (\u_adder.gen_n5_u.u5.a_gate) -> u_adder.gen_n5_u.u5.a
+Presumably equivalent wires: u_adder.gen_n5_u.u5.b_gold (\u_adder.gen_n5_u.u5.b_gold), u_adder.gen_n5_u.u5.b_gate (\u_adder.gen_n5_u.u5.b_gate) -> u_adder.gen_n5_u.u5.b
+Presumably equivalent wires: u_adder.gen_n5_u.u5.n192_o_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u.u5.n192_o_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n5_u.u5.y_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u.u5.y_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u.u5.y
+Presumably equivalent wires: u_adder.gen_n5_u.u5_y_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u.u5_y_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u.u5_y
+Presumably equivalent wires: u_adder.gen_n5_u_cout_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u_cout_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u_cout
+Presumably equivalent wires: u_adder.gen_n5_u_n53_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u_n53_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u_n53
+Presumably equivalent wires: u_adder.gen_n5_u_n54_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n5_u_n54_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n5_u_n54
+Presumably equivalent wires: u_adder.gen_n5_u_sum_gold (\u_adder.gen_n5_u.sum_gold), u_adder.gen_n5_u_sum_gate (\u_adder.gen_n5_u.sum_gate) -> u_adder.gen_n5_u_sum
+Presumably equivalent wires: u_adder.gen_n6_u.a_gold (\a_gold [5]), u_adder.gen_n6_u.a_gate (\a_gate [5]) -> u_adder.gen_n6_u.a
+Presumably equivalent wires: u_adder.gen_n6_u.b_gold (\b_gold [5]), u_adder.gen_n6_u.b_gate (\b_gate [5]) -> u_adder.gen_n6_u.b
+Presumably equivalent wires: u_adder.gen_n6_u.cin_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n6_u.cin_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n6_u.cin
+Presumably equivalent wires: u_adder.gen_n6_u.cout_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u.cout_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u.cout
+Presumably equivalent wires: u_adder.gen_n6_u.s1_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.s1_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.s1
+Presumably equivalent wires: u_adder.gen_n6_u.s2_gold (\u_adder.gen_n6_u.u5.a_gold), u_adder.gen_n6_u.s2_gate (\u_adder.gen_n6_u.u5.a_gate) -> u_adder.gen_n6_u.s2
+Presumably equivalent wires: u_adder.gen_n6_u.s3_gold (\u_adder.gen_n6_u.u5.b_gold), u_adder.gen_n6_u.s3_gate (\u_adder.gen_n6_u.u5.b_gate) -> u_adder.gen_n6_u.s3
+Presumably equivalent wires: u_adder.gen_n6_u.sum_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u.sum_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u.sum
+Presumably equivalent wires: u_adder.gen_n6_u.u1.a_gold (\a_gold [5]), u_adder.gen_n6_u.u1.a_gate (\a_gate [5]) -> u_adder.gen_n6_u.u1.a
+Presumably equivalent wires: u_adder.gen_n6_u.u1.b_gold (\b_gold [5]), u_adder.gen_n6_u.u1.b_gate (\b_gate [5]) -> u_adder.gen_n6_u.u1.b
+Presumably equivalent wires: u_adder.gen_n6_u.u1.n188_o_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.u1.n188_o_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n6_u.u1.y_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.u1.y_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.u1.y
+Presumably equivalent wires: u_adder.gen_n6_u.u1_y_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.u1_y_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.u1_y
+Presumably equivalent wires: u_adder.gen_n6_u.u2.a_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.u2.a_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.u2.a
+Presumably equivalent wires: u_adder.gen_n6_u.u2.b_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n6_u.u2.b_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n6_u.u2.b
+Presumably equivalent wires: u_adder.gen_n6_u.u2.n188_o_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u.u2.n188_o_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n6_u.u2.y_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u.u2.y_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u.u2.y
+Presumably equivalent wires: u_adder.gen_n6_u.u2_y_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u.u2_y_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u.u2_y
+Presumably equivalent wires: u_adder.gen_n6_u.u3.a_gold (\a_gold [5]), u_adder.gen_n6_u.u3.a_gate (\a_gate [5]) -> u_adder.gen_n6_u.u3.a
+Presumably equivalent wires: u_adder.gen_n6_u.u3.b_gold (\b_gold [5]), u_adder.gen_n6_u.u3.b_gate (\b_gate [5]) -> u_adder.gen_n6_u.u3.b
+Presumably equivalent wires: u_adder.gen_n6_u.u3.n190_o_gold (\u_adder.gen_n6_u.u5.a_gold), u_adder.gen_n6_u.u3.n190_o_gate (\u_adder.gen_n6_u.u5.a_gate) -> u_adder.gen_n6_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n6_u.u3.y_gold (\u_adder.gen_n6_u.u5.a_gold), u_adder.gen_n6_u.u3.y_gate (\u_adder.gen_n6_u.u5.a_gate) -> u_adder.gen_n6_u.u3.y
+Presumably equivalent wires: u_adder.gen_n6_u.u3_y_gold (\u_adder.gen_n6_u.u5.a_gold), u_adder.gen_n6_u.u3_y_gate (\u_adder.gen_n6_u.u5.a_gate) -> u_adder.gen_n6_u.u3_y
+Presumably equivalent wires: u_adder.gen_n6_u.u4.a_gold (\u_adder.gen_n6_u.u2.a_gold), u_adder.gen_n6_u.u4.a_gate (\u_adder.gen_n6_u.u2.a_gate) -> u_adder.gen_n6_u.u4.a
+Presumably equivalent wires: u_adder.gen_n6_u.u4.b_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.gen_n6_u.u4.b_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.gen_n6_u.u4.b
+Presumably equivalent wires: u_adder.gen_n6_u.u4.n190_o_gold (\u_adder.gen_n6_u.u5.b_gold), u_adder.gen_n6_u.u4.n190_o_gate (\u_adder.gen_n6_u.u5.b_gate) -> u_adder.gen_n6_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n6_u.u4.y_gold (\u_adder.gen_n6_u.u5.b_gold), u_adder.gen_n6_u.u4.y_gate (\u_adder.gen_n6_u.u5.b_gate) -> u_adder.gen_n6_u.u4.y
+Presumably equivalent wires: u_adder.gen_n6_u.u4_y_gold (\u_adder.gen_n6_u.u5.b_gold), u_adder.gen_n6_u.u4_y_gate (\u_adder.gen_n6_u.u5.b_gate) -> u_adder.gen_n6_u.u4_y
+Presumably equivalent wires: u_adder.gen_n6_u.u5.a_gold (\u_adder.gen_n6_u.u5.a_gold), u_adder.gen_n6_u.u5.a_gate (\u_adder.gen_n6_u.u5.a_gate) -> u_adder.gen_n6_u.u5.a
+Presumably equivalent wires: u_adder.gen_n6_u.u5.b_gold (\u_adder.gen_n6_u.u5.b_gold), u_adder.gen_n6_u.u5.b_gate (\u_adder.gen_n6_u.u5.b_gate) -> u_adder.gen_n6_u.u5.b
+Presumably equivalent wires: u_adder.gen_n6_u.u5.n192_o_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u.u5.n192_o_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n6_u.u5.y_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u.u5.y_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u.u5.y
+Presumably equivalent wires: u_adder.gen_n6_u.u5_y_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u.u5_y_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u.u5_y
+Presumably equivalent wires: u_adder.gen_n6_u_cout_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u_cout_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u_cout
+Presumably equivalent wires: u_adder.gen_n6_u_n62_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u_n62_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u_n62
+Presumably equivalent wires: u_adder.gen_n6_u_n63_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n6_u_n63_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n6_u_n63
+Presumably equivalent wires: u_adder.gen_n6_u_sum_gold (\u_adder.gen_n6_u.sum_gold), u_adder.gen_n6_u_sum_gate (\u_adder.gen_n6_u.sum_gate) -> u_adder.gen_n6_u_sum
+Presumably equivalent wires: u_adder.gen_n7_u.a_gold (\a_gold [6]), u_adder.gen_n7_u.a_gate (\a_gate [6]) -> u_adder.gen_n7_u.a
+Presumably equivalent wires: u_adder.gen_n7_u.b_gold (\b_gold [6]), u_adder.gen_n7_u.b_gate (\b_gate [6]) -> u_adder.gen_n7_u.b
+Presumably equivalent wires: u_adder.gen_n7_u.cin_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n7_u.cin_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n7_u.cin
+Presumably equivalent wires: u_adder.gen_n7_u.cout_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u.cout_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u.cout
+Presumably equivalent wires: u_adder.gen_n7_u.s1_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.s1_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.s1
+Presumably equivalent wires: u_adder.gen_n7_u.s2_gold (\u_adder.gen_n7_u.u5.a_gold), u_adder.gen_n7_u.s2_gate (\u_adder.gen_n7_u.u5.a_gate) -> u_adder.gen_n7_u.s2
+Presumably equivalent wires: u_adder.gen_n7_u.s3_gold (\u_adder.gen_n7_u.u5.b_gold), u_adder.gen_n7_u.s3_gate (\u_adder.gen_n7_u.u5.b_gate) -> u_adder.gen_n7_u.s3
+Presumably equivalent wires: u_adder.gen_n7_u.sum_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u.sum_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u.sum
+Presumably equivalent wires: u_adder.gen_n7_u.u1.a_gold (\a_gold [6]), u_adder.gen_n7_u.u1.a_gate (\a_gate [6]) -> u_adder.gen_n7_u.u1.a
+Presumably equivalent wires: u_adder.gen_n7_u.u1.b_gold (\b_gold [6]), u_adder.gen_n7_u.u1.b_gate (\b_gate [6]) -> u_adder.gen_n7_u.u1.b
+Presumably equivalent wires: u_adder.gen_n7_u.u1.n188_o_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.u1.n188_o_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n7_u.u1.y_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.u1.y_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.u1.y
+Presumably equivalent wires: u_adder.gen_n7_u.u1_y_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.u1_y_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.u1_y
+Presumably equivalent wires: u_adder.gen_n7_u.u2.a_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.u2.a_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.u2.a
+Presumably equivalent wires: u_adder.gen_n7_u.u2.b_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n7_u.u2.b_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n7_u.u2.b
+Presumably equivalent wires: u_adder.gen_n7_u.u2.n188_o_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u.u2.n188_o_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n7_u.u2.y_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u.u2.y_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u.u2.y
+Presumably equivalent wires: u_adder.gen_n7_u.u2_y_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u.u2_y_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u.u2_y
+Presumably equivalent wires: u_adder.gen_n7_u.u3.a_gold (\a_gold [6]), u_adder.gen_n7_u.u3.a_gate (\a_gate [6]) -> u_adder.gen_n7_u.u3.a
+Presumably equivalent wires: u_adder.gen_n7_u.u3.b_gold (\b_gold [6]), u_adder.gen_n7_u.u3.b_gate (\b_gate [6]) -> u_adder.gen_n7_u.u3.b
+Presumably equivalent wires: u_adder.gen_n7_u.u3.n190_o_gold (\u_adder.gen_n7_u.u5.a_gold), u_adder.gen_n7_u.u3.n190_o_gate (\u_adder.gen_n7_u.u5.a_gate) -> u_adder.gen_n7_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n7_u.u3.y_gold (\u_adder.gen_n7_u.u5.a_gold), u_adder.gen_n7_u.u3.y_gate (\u_adder.gen_n7_u.u5.a_gate) -> u_adder.gen_n7_u.u3.y
+Presumably equivalent wires: u_adder.gen_n7_u.u3_y_gold (\u_adder.gen_n7_u.u5.a_gold), u_adder.gen_n7_u.u3_y_gate (\u_adder.gen_n7_u.u5.a_gate) -> u_adder.gen_n7_u.u3_y
+Presumably equivalent wires: u_adder.gen_n7_u.u4.a_gold (\u_adder.gen_n7_u.u2.a_gold), u_adder.gen_n7_u.u4.a_gate (\u_adder.gen_n7_u.u2.a_gate) -> u_adder.gen_n7_u.u4.a
+Presumably equivalent wires: u_adder.gen_n7_u.u4.b_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.gen_n7_u.u4.b_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.gen_n7_u.u4.b
+Presumably equivalent wires: u_adder.gen_n7_u.u4.n190_o_gold (\u_adder.gen_n7_u.u5.b_gold), u_adder.gen_n7_u.u4.n190_o_gate (\u_adder.gen_n7_u.u5.b_gate) -> u_adder.gen_n7_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n7_u.u4.y_gold (\u_adder.gen_n7_u.u5.b_gold), u_adder.gen_n7_u.u4.y_gate (\u_adder.gen_n7_u.u5.b_gate) -> u_adder.gen_n7_u.u4.y
+Presumably equivalent wires: u_adder.gen_n7_u.u4_y_gold (\u_adder.gen_n7_u.u5.b_gold), u_adder.gen_n7_u.u4_y_gate (\u_adder.gen_n7_u.u5.b_gate) -> u_adder.gen_n7_u.u4_y
+Presumably equivalent wires: u_adder.gen_n7_u.u5.a_gold (\u_adder.gen_n7_u.u5.a_gold), u_adder.gen_n7_u.u5.a_gate (\u_adder.gen_n7_u.u5.a_gate) -> u_adder.gen_n7_u.u5.a
+Presumably equivalent wires: u_adder.gen_n7_u.u5.b_gold (\u_adder.gen_n7_u.u5.b_gold), u_adder.gen_n7_u.u5.b_gate (\u_adder.gen_n7_u.u5.b_gate) -> u_adder.gen_n7_u.u5.b
+Presumably equivalent wires: u_adder.gen_n7_u.u5.n192_o_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u.u5.n192_o_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n7_u.u5.y_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u.u5.y_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u.u5.y
+Presumably equivalent wires: u_adder.gen_n7_u.u5_y_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u.u5_y_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u.u5_y
+Presumably equivalent wires: u_adder.gen_n7_u_cout_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u_cout_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u_cout
+Presumably equivalent wires: u_adder.gen_n7_u_n71_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u_n71_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u_n71
+Presumably equivalent wires: u_adder.gen_n7_u_n72_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n7_u_n72_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n7_u_n72
+Presumably equivalent wires: u_adder.gen_n7_u_sum_gold (\u_adder.gen_n7_u.sum_gold), u_adder.gen_n7_u_sum_gate (\u_adder.gen_n7_u.sum_gate) -> u_adder.gen_n7_u_sum
+Presumably equivalent wires: u_adder.gen_n8_u.a_gold (\a_gold [7]), u_adder.gen_n8_u.a_gate (\a_gate [7]) -> u_adder.gen_n8_u.a
+Presumably equivalent wires: u_adder.gen_n8_u.b_gold (\b_gold [7]), u_adder.gen_n8_u.b_gate (\b_gate [7]) -> u_adder.gen_n8_u.b
+Presumably equivalent wires: u_adder.gen_n8_u.cin_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n8_u.cin_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n8_u.cin
+Presumably equivalent wires: u_adder.gen_n8_u.cout_gold (\cout_gold), u_adder.gen_n8_u.cout_gate (\cout_gate) -> u_adder.gen_n8_u.cout
+Presumably equivalent wires: u_adder.gen_n8_u.s1_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.s1_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.s1
+Presumably equivalent wires: u_adder.gen_n8_u.s2_gold (\u_adder.gen_n8_u.u5.a_gold), u_adder.gen_n8_u.s2_gate (\u_adder.gen_n8_u.u5.a_gate) -> u_adder.gen_n8_u.s2
+Presumably equivalent wires: u_adder.gen_n8_u.s3_gold (\u_adder.gen_n8_u.u5.b_gold), u_adder.gen_n8_u.s3_gate (\u_adder.gen_n8_u.u5.b_gate) -> u_adder.gen_n8_u.s3
+Presumably equivalent wires: u_adder.gen_n8_u.sum_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u.sum_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u.sum
+Presumably equivalent wires: u_adder.gen_n8_u.u1.a_gold (\a_gold [7]), u_adder.gen_n8_u.u1.a_gate (\a_gate [7]) -> u_adder.gen_n8_u.u1.a
+Presumably equivalent wires: u_adder.gen_n8_u.u1.b_gold (\b_gold [7]), u_adder.gen_n8_u.u1.b_gate (\b_gate [7]) -> u_adder.gen_n8_u.u1.b
+Presumably equivalent wires: u_adder.gen_n8_u.u1.n188_o_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.u1.n188_o_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.u1.n188_o
+Presumably equivalent wires: u_adder.gen_n8_u.u1.y_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.u1.y_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.u1.y
+Presumably equivalent wires: u_adder.gen_n8_u.u1_y_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.u1_y_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.u1_y
+Presumably equivalent wires: u_adder.gen_n8_u.u2.a_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.u2.a_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.u2.a
+Presumably equivalent wires: u_adder.gen_n8_u.u2.b_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n8_u.u2.b_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n8_u.u2.b
+Presumably equivalent wires: u_adder.gen_n8_u.u2.n188_o_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u.u2.n188_o_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u.u2.n188_o
+Presumably equivalent wires: u_adder.gen_n8_u.u2.y_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u.u2.y_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u.u2.y
+Presumably equivalent wires: u_adder.gen_n8_u.u2_y_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u.u2_y_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u.u2_y
+Presumably equivalent wires: u_adder.gen_n8_u.u3.a_gold (\a_gold [7]), u_adder.gen_n8_u.u3.a_gate (\a_gate [7]) -> u_adder.gen_n8_u.u3.a
+Presumably equivalent wires: u_adder.gen_n8_u.u3.b_gold (\b_gold [7]), u_adder.gen_n8_u.u3.b_gate (\b_gate [7]) -> u_adder.gen_n8_u.u3.b
+Presumably equivalent wires: u_adder.gen_n8_u.u3.n190_o_gold (\u_adder.gen_n8_u.u5.a_gold), u_adder.gen_n8_u.u3.n190_o_gate (\u_adder.gen_n8_u.u5.a_gate) -> u_adder.gen_n8_u.u3.n190_o
+Presumably equivalent wires: u_adder.gen_n8_u.u3.y_gold (\u_adder.gen_n8_u.u5.a_gold), u_adder.gen_n8_u.u3.y_gate (\u_adder.gen_n8_u.u5.a_gate) -> u_adder.gen_n8_u.u3.y
+Presumably equivalent wires: u_adder.gen_n8_u.u3_y_gold (\u_adder.gen_n8_u.u5.a_gold), u_adder.gen_n8_u.u3_y_gate (\u_adder.gen_n8_u.u5.a_gate) -> u_adder.gen_n8_u.u3_y
+Presumably equivalent wires: u_adder.gen_n8_u.u4.a_gold (\u_adder.gen_n8_u.u2.a_gold), u_adder.gen_n8_u.u4.a_gate (\u_adder.gen_n8_u.u2.a_gate) -> u_adder.gen_n8_u.u4.a
+Presumably equivalent wires: u_adder.gen_n8_u.u4.b_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.gen_n8_u.u4.b_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.gen_n8_u.u4.b
+Presumably equivalent wires: u_adder.gen_n8_u.u4.n190_o_gold (\u_adder.gen_n8_u.u5.b_gold), u_adder.gen_n8_u.u4.n190_o_gate (\u_adder.gen_n8_u.u5.b_gate) -> u_adder.gen_n8_u.u4.n190_o
+Presumably equivalent wires: u_adder.gen_n8_u.u4.y_gold (\u_adder.gen_n8_u.u5.b_gold), u_adder.gen_n8_u.u4.y_gate (\u_adder.gen_n8_u.u5.b_gate) -> u_adder.gen_n8_u.u4.y
+Presumably equivalent wires: u_adder.gen_n8_u.u4_y_gold (\u_adder.gen_n8_u.u5.b_gold), u_adder.gen_n8_u.u4_y_gate (\u_adder.gen_n8_u.u5.b_gate) -> u_adder.gen_n8_u.u4_y
+Presumably equivalent wires: u_adder.gen_n8_u.u5.a_gold (\u_adder.gen_n8_u.u5.a_gold), u_adder.gen_n8_u.u5.a_gate (\u_adder.gen_n8_u.u5.a_gate) -> u_adder.gen_n8_u.u5.a
+Presumably equivalent wires: u_adder.gen_n8_u.u5.b_gold (\u_adder.gen_n8_u.u5.b_gold), u_adder.gen_n8_u.u5.b_gate (\u_adder.gen_n8_u.u5.b_gate) -> u_adder.gen_n8_u.u5.b
+Presumably equivalent wires: u_adder.gen_n8_u.u5.n192_o_gold (\cout_gold), u_adder.gen_n8_u.u5.n192_o_gate (\cout_gate) -> u_adder.gen_n8_u.u5.n192_o
+Presumably equivalent wires: u_adder.gen_n8_u.u5.y_gold (\cout_gold), u_adder.gen_n8_u.u5.y_gate (\cout_gate) -> u_adder.gen_n8_u.u5.y
+Presumably equivalent wires: u_adder.gen_n8_u.u5_y_gold (\cout_gold), u_adder.gen_n8_u.u5_y_gate (\cout_gate) -> u_adder.gen_n8_u.u5_y
+Presumably equivalent wires: u_adder.gen_n8_u_cout_gold (\cout_gold), u_adder.gen_n8_u_cout_gate (\cout_gate) -> u_adder.gen_n8_u_cout
+Presumably equivalent wires: u_adder.gen_n8_u_n80_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u_n80_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u_n80
+Presumably equivalent wires: u_adder.gen_n8_u_n81_gold (\cout_gold), u_adder.gen_n8_u_n81_gate (\cout_gate) -> u_adder.gen_n8_u_n81
+Presumably equivalent wires: u_adder.gen_n8_u_sum_gold (\u_adder.gen_n8_u.sum_gold), u_adder.gen_n8_u_sum_gate (\u_adder.gen_n8_u.sum_gate) -> u_adder.gen_n8_u_sum
+Presumably equivalent wires: u_adder.n14_o_gold (\a_gold [0]), u_adder.n14_o_gate (\a_gate [0]) -> u_adder.n14_o
+Presumably equivalent wires: u_adder.n15_o_gold (\b_gold [0]), u_adder.n15_o_gate (\b_gate [0]) -> u_adder.n15_o
+Presumably equivalent wires: u_adder.n16_o_gold (\cin_gold), u_adder.n16_o_gate (\cin_gate) -> u_adder.n16_o
+Presumably equivalent wires: u_adder.n23_o_gold (\a_gold [1]), u_adder.n23_o_gate (\a_gate [1]) -> u_adder.n23_o
+Presumably equivalent wires: u_adder.n24_o_gold (\b_gold [1]), u_adder.n24_o_gate (\b_gate [1]) -> u_adder.n24_o
+Presumably equivalent wires: u_adder.n25_o_gold (\u_adder.gen_n2_u.u2.b_gold), u_adder.n25_o_gate (\u_adder.gen_n2_u.u2.b_gate) -> u_adder.n25_o
+Presumably equivalent wires: u_adder.n32_o_gold (\a_gold [2]), u_adder.n32_o_gate (\a_gate [2]) -> u_adder.n32_o
+Presumably equivalent wires: u_adder.n33_o_gold (\b_gold [2]), u_adder.n33_o_gate (\b_gate [2]) -> u_adder.n33_o
+Presumably equivalent wires: u_adder.n34_o_gold (\u_adder.gen_n3_u.u2.b_gold), u_adder.n34_o_gate (\u_adder.gen_n3_u.u2.b_gate) -> u_adder.n34_o
+Presumably equivalent wires: u_adder.n41_o_gold (\a_gold [3]), u_adder.n41_o_gate (\a_gate [3]) -> u_adder.n41_o
+Presumably equivalent wires: u_adder.n42_o_gold (\b_gold [3]), u_adder.n42_o_gate (\b_gate [3]) -> u_adder.n42_o
+Presumably equivalent wires: u_adder.n43_o_gold (\u_adder.gen_n4_u.u2.b_gold), u_adder.n43_o_gate (\u_adder.gen_n4_u.u2.b_gate) -> u_adder.n43_o
+Presumably equivalent wires: u_adder.n50_o_gold (\a_gold [4]), u_adder.n50_o_gate (\a_gate [4]) -> u_adder.n50_o
+Presumably equivalent wires: u_adder.n51_o_gold (\b_gold [4]), u_adder.n51_o_gate (\b_gate [4]) -> u_adder.n51_o
+Presumably equivalent wires: u_adder.n52_o_gold (\u_adder.gen_n5_u.u2.b_gold), u_adder.n52_o_gate (\u_adder.gen_n5_u.u2.b_gate) -> u_adder.n52_o
+Presumably equivalent wires: u_adder.n59_o_gold (\a_gold [5]), u_adder.n59_o_gate (\a_gate [5]) -> u_adder.n59_o
+Presumably equivalent wires: u_adder.n60_o_gold (\b_gold [5]), u_adder.n60_o_gate (\b_gate [5]) -> u_adder.n60_o
+Presumably equivalent wires: u_adder.n61_o_gold (\u_adder.gen_n6_u.u2.b_gold), u_adder.n61_o_gate (\u_adder.gen_n6_u.u2.b_gate) -> u_adder.n61_o
+Presumably equivalent wires: u_adder.n68_o_gold (\a_gold [6]), u_adder.n68_o_gate (\a_gate [6]) -> u_adder.n68_o
+Presumably equivalent wires: u_adder.n69_o_gold (\b_gold [6]), u_adder.n69_o_gate (\b_gate [6]) -> u_adder.n69_o
+Presumably equivalent wires: u_adder.n70_o_gold (\u_adder.gen_n7_u.u2.b_gold), u_adder.n70_o_gate (\u_adder.gen_n7_u.u2.b_gate) -> u_adder.n70_o
+Presumably equivalent wires: u_adder.n77_o_gold (\a_gold [7]), u_adder.n77_o_gate (\a_gate [7]) -> u_adder.n77_o
+Presumably equivalent wires: u_adder.n78_o_gold (\b_gold [7]), u_adder.n78_o_gate (\b_gate [7]) -> u_adder.n78_o
+Presumably equivalent wires: u_adder.n79_o_gold (\u_adder.gen_n8_u.u2.b_gold), u_adder.n79_o_gate (\u_adder.gen_n8_u.u2.b_gate) -> u_adder.n79_o
+Presumably equivalent wires: u_adder.n86_o_gold (\cout_gold), u_adder.n86_o_gate (\cout_gate) -> u_adder.n86_o
+Presumably equivalent wires: u_adder.n87_o_gold ({ \cout_gold \u_adder.gen_n8_u.u2.b_gold \u_adder.gen_n7_u.u2.b_gold \u_adder.gen_n6_u.u2.b_gold \u_adder.gen_n5_u.u2.b_gold \u_adder.gen_n4_u.u2.b_gold \u_adder.gen_n3_u.u2.b_gold \u_adder.gen_n2_u.u2.b_gold \cin_gold }), u_adder.n87_o_gate ({ \cout_gate \u_adder.gen_n8_u.u2.b_gate \u_adder.gen_n7_u.u2.b_gate \u_adder.gen_n6_u.u2.b_gate \u_adder.gen_n5_u.u2.b_gate \u_adder.gen_n4_u.u2.b_gate \u_adder.gen_n3_u.u2.b_gate \u_adder.gen_n2_u.u2.b_gate \cin_gate }) -> u_adder.n87_o
+Presumably equivalent wires: u_adder.n88_o_gold ({ \u_adder.gen_n8_u.sum_gold \u_adder.gen_n7_u.sum_gold \u_adder.gen_n6_u.sum_gold \u_adder.gen_n5_u.sum_gold \u_adder.gen_n4_u.sum_gold \u_adder.gen_n3_u.sum_gold \u_adder.gen_n2_u.sum_gold \u_adder.gen_n1_u.sum_gold }), u_adder.n88_o_gate ({ \u_adder.gen_n8_u.sum_gate \u_adder.gen_n7_u.sum_gate \u_adder.gen_n6_u.sum_gate \u_adder.gen_n5_u.sum_gate \u_adder.gen_n4_u.sum_gate \u_adder.gen_n3_u.sum_gate \u_adder.gen_n2_u.sum_gate \u_adder.gen_n1_u.sum_gate }) -> u_adder.n88_o
+Presumably equivalent wires: u_adder.sum_gold ({ \u_adder.gen_n8_u.sum_gold \u_adder.gen_n7_u.sum_gold \u_adder.gen_n6_u.sum_gold \u_adder.gen_n5_u.sum_gold \u_adder.gen_n4_u.sum_gold \u_adder.gen_n3_u.sum_gold \u_adder.gen_n2_u.sum_gold \u_adder.gen_n1_u.sum_gold }), u_adder.sum_gate ({ \u_adder.gen_n8_u.sum_gate \u_adder.gen_n7_u.sum_gate \u_adder.gen_n6_u.sum_gate \u_adder.gen_n5_u.sum_gate \u_adder.gen_n4_u.sum_gate \u_adder.gen_n3_u.sum_gate \u_adder.gen_n2_u.sum_gate \u_adder.gen_n1_u.sum_gate }) -> u_adder.sum
+Presumably equivalent wires: u_adder_cout_gold (\cout_gold), u_adder_cout_gate (\cout_gate) -> u_adder_cout
+Presumably equivalent wires: u_adder_sum_gold ({ \u_adder.gen_n8_u.sum_gold \u_adder.gen_n7_u.sum_gold \u_adder.gen_n6_u.sum_gold \u_adder.gen_n5_u.sum_gold \u_adder.gen_n4_u.sum_gold \u_adder.gen_n3_u.sum_gold \u_adder.gen_n2_u.sum_gold \u_adder.gen_n1_u.sum_gold }), u_adder_sum_gate ({ \u_adder.gen_n8_u.sum_gate \u_adder.gen_n7_u.sum_gate \u_adder.gen_n6_u.sum_gate \u_adder.gen_n5_u.sum_gate \u_adder.gen_n4_u.sum_gate \u_adder.gen_n3_u.sum_gate \u_adder.gen_n2_u.sum_gate \u_adder.gen_n1_u.sum_gate }) -> u_adder_sum
+Presumably equivalent wires: u_addsub.a_gold (\a_gold), u_addsub.a_gate (\a_gate) -> u_addsub.a
+Presumably equivalent wires: u_addsub.b_gold (\b_gold), u_addsub.b_gate (\b_gate) -> u_addsub.b
+Presumably equivalent wires: u_addsub.n160_o_gold ({ 1'0 \a_gold }), u_addsub.n160_o_gate ({ 1'0 \a_gate }) -> u_addsub.n160_o
+Presumably equivalent wires: u_addsub.n161_o_gold ({ 1'0 \u_addsub.n159_o_gold }), u_addsub.n161_o_gate ({ 1'0 \u_addsub.n161_o_gate [7:0] }) -> u_addsub.n161_o
+  Skipping signal bit u_addsub.n161_o_gate [0]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [1]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [2]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [3]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [4]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [5]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [6]: undriven on gate side.
+  Skipping signal bit u_addsub.n161_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: u_addsub.n164_o_gold (\u_addsub.n164_o_gold), u_addsub.n164_o_gate ({ 1'x \u_addsub.n164_o_gate [7:0] }) -> u_addsub.n164_o
+  Skipping signal bit u_addsub.n164_o_gate [0]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [1]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [2]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [3]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [4]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [5]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [6]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gate [7]: undriven on gate side.
+  Skipping signal bit u_addsub.n164_o_gold [8]: undriven on gold side.
+Presumably equivalent wires: u_addsub.n165_o_gold ({ 1'0 \u_addsub.n159_o_gold }), u_addsub.n165_o_gate ({ 1'0 \u_addsub.n165_o_gate [7:0] }) -> u_addsub.n165_o
+  Skipping signal bit u_addsub.n165_o_gate [0]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [1]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [2]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [3]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [4]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [5]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [6]: undriven on gate side.
+  Skipping signal bit u_addsub.n165_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: u_addsub.n166_o_gold (\u_addsub.n162_o_gold), u_addsub.n166_o_gate ({ 1'x \u_addsub.n166_o_gate [7:0] }) -> u_addsub.n166_o
+  Skipping signal bit u_addsub.n166_o_gate [0]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [1]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [2]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [3]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [4]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [5]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [6]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gate [7]: undriven on gate side.
+  Skipping signal bit u_addsub.n166_o_gold [8]: undriven on gold side.
+Presumably equivalent wires: u_addsub.n167_o_gold ({ 1'x \sy_gold }), u_addsub.n167_o_gate ({ 1'x \u_addsub.n173_o_gate \sy_gate [6:0] }) -> u_addsub.n167_o
+Presumably equivalent wires: u_addsub.n168_o_gold (\sy_gold), u_addsub.n168_o_gate ({ \u_addsub.n173_o_gate \sy_gate [6:0] }) -> u_addsub.n168_o
+Presumably equivalent wires: u_addsub.n169_o_gold (\a_gold [7]), u_addsub.n169_o_gate (\a_gate [7]) -> u_addsub.n169_o
+Presumably equivalent wires: u_addsub.n172_o_gold (\a_gold [7]), u_addsub.n172_o_gate (\a_gate [7]) -> u_addsub.n172_o
+Presumably equivalent wires: u_addsub.n173_o_gold (\sy_gold [7]), u_addsub.n173_o_gate (\u_addsub.n173_o_gate) -> u_addsub.n173_o
+Presumably equivalent wires: u_addsub.n175_o_gold (\u_addsub.n175_o_gold), u_addsub.n175_o_gate (\ovf_gate) -> u_addsub.n175_o
+Presumably equivalent wires: u_addsub.n178_o_gold (\ovf_gold), u_addsub.n178_o_gate (\ovf_gate) -> u_addsub.n178_o
+Presumably equivalent wires: u_addsub.op_gold (\op_gold), u_addsub.op_gate (\op_gate) -> u_addsub.op
+Presumably equivalent wires: u_addsub.ovf_gold (\ovf_gold), u_addsub.ovf_gate (\ovf_gate) -> u_addsub.ovf
+Presumably equivalent wires: u_addsub.y_gold (\sy_gold), u_addsub.y_gate ({ \u_addsub.n173_o_gate \sy_gate [6:0] }) -> u_addsub.y
+Presumably equivalent wires: u_addsub_ovf_gold (\ovf_gold), u_addsub_ovf_gate (\ovf_gate) -> u_addsub_ovf
+Presumably equivalent wires: u_addsub_y_gold (\sy_gold), u_addsub_y_gate ({ \u_addsub.n173_o_gate \sy_gate [6:0] }) -> u_addsub_y
+Presumably equivalent wires: u_pipe.a_gold (\a_gold), u_pipe.a_gate (\a_gate) -> u_pipe.a
+Presumably equivalent wires: u_pipe.b_gold (\b_gold), u_pipe.b_gate (\b_gate) -> u_pipe.b
+Presumably equivalent wires: u_pipe.cin_gold (\cin_gold), u_pipe.cin_gate (\cin_gate) -> u_pipe.cin
+Presumably equivalent wires: u_pipe.clk_gold (\clk_gold), u_pipe.clk_gate (\clk_gate) -> u_pipe.clk
+Presumably equivalent wires: u_pipe.cout_gold (\u_pipe.n151_q_gold), u_pipe.cout_gate (\u_pipe.n151_q_gate) -> u_pipe.cout
+Presumably equivalent wires: u_pipe.n108_o_gold (\u_pipe.n147_q_gold [3:0]), u_pipe.n108_o_gate (\u_pipe.n147_q_gate [3:0]) -> u_pipe.n108_o
+Presumably equivalent wires: u_pipe.n109_o_gold ({ 5'00000 \u_pipe.n147_q_gold [3:0] }), u_pipe.n109_o_gate ({ 5'00000 \u_pipe.n147_q_gate [3:0] }) -> u_pipe.n109_o
+Presumably equivalent wires: u_pipe.n110_o_gold (\u_pipe.n148_q_gold [3:0]), u_pipe.n110_o_gate (\u_pipe.n148_q_gate [3:0]) -> u_pipe.n110_o
+Presumably equivalent wires: u_pipe.n111_o_gold ({ 5'00000 \u_pipe.n148_q_gold [3:0] }), u_pipe.n111_o_gate ({ 5'00000 \u_pipe.n148_q_gate [3:0] }) -> u_pipe.n111_o
+Presumably equivalent wires: u_pipe.n115_o_gold (\u_pipe.n112_o_gold), u_pipe.n115_o_gate ({ 4'0000 \u_pipe.n115_o_gate [4:0] }) -> u_pipe.n115_o
+  Skipping signal bit u_pipe.n115_o_gate [0]: undriven on gate side.
+  Skipping signal bit u_pipe.n115_o_gate [1]: undriven on gate side.
+  Skipping signal bit u_pipe.n115_o_gate [2]: undriven on gate side.
+  Skipping signal bit u_pipe.n115_o_gate [3]: undriven on gate side.
+  Skipping signal bit u_pipe.n115_o_gate [4]: undriven on gate side.
+  Skipping signal bit u_pipe.n115_o_gold [5]: undriven on gold side.
+  Skipping signal bit u_pipe.n115_o_gold [6]: undriven on gold side.
+  Skipping signal bit u_pipe.n115_o_gold [7]: undriven on gold side.
+  Skipping signal bit u_pipe.n115_o_gold [8]: undriven on gold side.
+Presumably equivalent wires: u_pipe.n117_o_gold (\u_pipe.n116_o_gold [3:0]), u_pipe.n117_o_gate (\u_pipe.n116_o_gate [3:0]) -> u_pipe.n117_o
+Presumably equivalent wires: u_pipe.n118_o_gold (\u_pipe.n147_q_gold [7:4]), u_pipe.n118_o_gate (\u_pipe.n147_q_gate [7:4]) -> u_pipe.n118_o
+Presumably equivalent wires: u_pipe.n119_o_gold ({ 5'00000 \u_pipe.n147_q_gold [7:4] }), u_pipe.n119_o_gate ({ 5'00000 \u_pipe.n147_q_gate [7:4] }) -> u_pipe.n119_o
+Presumably equivalent wires: u_pipe.n120_o_gold (\u_pipe.n148_q_gold [7:4]), u_pipe.n120_o_gate (\u_pipe.n148_q_gate [7:4]) -> u_pipe.n120_o
+Presumably equivalent wires: u_pipe.n121_o_gold ({ 5'00000 \u_pipe.n148_q_gold [7:4] }), u_pipe.n121_o_gate ({ 5'00000 \u_pipe.n148_q_gate [7:4] }) -> u_pipe.n121_o
+Presumably equivalent wires: u_pipe.n122_o_gold (\u_pipe.n116_o_gold [4]), u_pipe.n122_o_gate (\u_pipe.n116_o_gate [4]) -> u_pipe.n122_o
+  Skipping signal bit u_pipe.n122_o_gate [0]: undriven on gate side.
+Presumably equivalent wires: u_pipe.n127_o_gold ({ 4'x \u_pipe.n127_o_gold [4:0] }), u_pipe.n127_o_gate ({ 4'x \u_pipe.n129_o_gate \u_pipe.n127_o_gate [3:0] }) -> u_pipe.n127_o
+Presumably equivalent wires: u_pipe.n128_o_gold (\u_pipe.n127_o_gold [3:0]), u_pipe.n128_o_gate (\u_pipe.n127_o_gate [3:0]) -> u_pipe.n128_o
+Presumably equivalent wires: u_pipe.n129_o_gold (\u_pipe.n127_o_gold [4]), u_pipe.n129_o_gate (\u_pipe.n129_o_gate) -> u_pipe.n129_o
+Presumably equivalent wires: u_pipe.n147_q_gold (\u_pipe.n147_q_gold), u_pipe.n147_q_gate (\u_pipe.n147_q_gate) -> u_pipe.n147_q
+Presumably equivalent wires: u_pipe.n148_q_gold (\u_pipe.n148_q_gold), u_pipe.n148_q_gate (\u_pipe.n148_q_gate) -> u_pipe.n148_q
+Presumably equivalent wires: u_pipe.n149_q_gold (\u_pipe.n149_q_gold), u_pipe.n149_q_gate (\u_pipe.n149_q_gate) -> u_pipe.n149_q
+Presumably equivalent wires: u_pipe.n150_q_gold (\u_pipe.n150_q_gold), u_pipe.n150_q_gate (\u_pipe.n150_q_gate) -> u_pipe.n150_q
+Presumably equivalent wires: u_pipe.n151_q_gold (\u_pipe.n151_q_gold), u_pipe.n151_q_gate (\u_pipe.n151_q_gate) -> u_pipe.n151_q
+Presumably equivalent wires: u_pipe.r1_a_gold (\u_pipe.n147_q_gold), u_pipe.r1_a_gate (\u_pipe.n147_q_gate) -> u_pipe.r1_a
+Presumably equivalent wires: u_pipe.r1_b_gold (\u_pipe.n148_q_gold), u_pipe.r1_b_gate (\u_pipe.n148_q_gate) -> u_pipe.r1_b
+Presumably equivalent wires: u_pipe.r1_cin_gold (\u_pipe.n149_q_gold), u_pipe.r1_cin_gate (\u_pipe.n149_q_gate) -> u_pipe.r1_cin
+Presumably equivalent wires: u_pipe.rst_gold (\rst_gold), u_pipe.rst_gate (\rst_gate) -> u_pipe.rst
+Presumably equivalent wires: u_pipe.sum_gold (\u_pipe.n150_q_gold), u_pipe.sum_gate (\u_pipe.n150_q_gate) -> u_pipe.sum
+Presumably equivalent wires: u_pipe_cout_gold (\u_pipe.n151_q_gold), u_pipe_cout_gate (\u_pipe.n151_q_gate) -> u_pipe_cout
+Presumably equivalent wires: u_pipe_sum_gold (\u_pipe.n150_q_gold), u_pipe_sum_gate (\u_pipe.n150_q_gate) -> u_pipe_sum
+Changing input B of cell $flatten\u_adder.\gen_n1_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n1_u.u2.a_gate -> \u_adder.gen_n1_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n1_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n1_u.u2.a_gate -> \u_adder.gen_n1_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n1_u.u5.b_gate -> \u_adder.gen_n1_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n1_u.u5.a_gate -> \u_adder.gen_n1_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n2_u.u2.b_gate -> \u_adder.gen_n2_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n2_u.u2.a_gate -> \u_adder.gen_n2_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n2_u.u2.b_gate -> \u_adder.gen_n2_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n2_u.u2.a_gate -> \u_adder.gen_n2_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n2_u.u5.b_gate -> \u_adder.gen_n2_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n2_u.u5.a_gate -> \u_adder.gen_n2_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n3_u.u2.b_gate -> \u_adder.gen_n3_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n3_u.u2.a_gate -> \u_adder.gen_n3_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n3_u.u2.b_gate -> \u_adder.gen_n3_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n3_u.u2.a_gate -> \u_adder.gen_n3_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n3_u.u5.b_gate -> \u_adder.gen_n3_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n3_u.u5.a_gate -> \u_adder.gen_n3_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n4_u.u2.b_gate -> \u_adder.gen_n4_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n4_u.u2.a_gate -> \u_adder.gen_n4_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n4_u.u2.b_gate -> \u_adder.gen_n4_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n4_u.u2.a_gate -> \u_adder.gen_n4_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n4_u.u5.b_gate -> \u_adder.gen_n4_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n4_u.u5.a_gate -> \u_adder.gen_n4_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n5_u.u2.b_gate -> \u_adder.gen_n5_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n5_u.u2.a_gate -> \u_adder.gen_n5_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n5_u.u2.b_gate -> \u_adder.gen_n5_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n5_u.u2.a_gate -> \u_adder.gen_n5_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n5_u.u5.b_gate -> \u_adder.gen_n5_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n5_u.u5.a_gate -> \u_adder.gen_n5_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n6_u.u2.b_gate -> \u_adder.gen_n6_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n6_u.u2.a_gate -> \u_adder.gen_n6_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n6_u.u2.b_gate -> \u_adder.gen_n6_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n6_u.u2.a_gate -> \u_adder.gen_n6_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n6_u.u5.b_gate -> \u_adder.gen_n6_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n6_u.u5.a_gate -> \u_adder.gen_n6_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n7_u.u2.b_gate -> \u_adder.gen_n7_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n7_u.u2.a_gate -> \u_adder.gen_n7_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n7_u.u2.b_gate -> \u_adder.gen_n7_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n7_u.u2.a_gate -> \u_adder.gen_n7_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n7_u.u5.b_gate -> \u_adder.gen_n7_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n7_u.u5.a_gate -> \u_adder.gen_n7_u.u5.a
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n8_u.u2.b_gate -> \u_adder.gen_n8_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:796$310_gate ($xor): \u_adder.gen_n8_u.u2.a_gate -> \u_adder.gen_n8_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n8_u.u2.b_gate -> \u_adder.gen_n8_u.u2.b
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:659$308_gate ($and): \u_adder.gen_n8_u.u2.a_gate -> \u_adder.gen_n8_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n8_u.u5.b_gate -> \u_adder.gen_n8_u.u5.b
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:722$309_gate ($or): \u_adder.gen_n8_u.u5.a_gate -> \u_adder.gen_n8_u.u5.a
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:484$178_gate ($and): \u_pipe.n147_q_gate [0] -> \u_pipe.n147_q [0]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:484$178_gate ($and): \u_pipe.n148_q_gate [0] -> \u_pipe.n148_q [0]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:491$187_gate ($and): \u_pipe.n147_q_gate [1] -> \u_pipe.n147_q [1]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:491$187_gate ($and): \u_pipe.n148_q_gate [1] -> \u_pipe.n148_q [1]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:500$202_gate ($and): \u_pipe.n147_q_gate [2] -> \u_pipe.n147_q [2]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:500$202_gate ($and): \u_pipe.n148_q_gate [2] -> \u_pipe.n148_q [2]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:508$215_gate ($and): \u_pipe.n147_q_gate [3] -> \u_pipe.n147_q [3]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:508$215_gate ($and): \u_pipe.n148_q_gate [3] -> \u_pipe.n148_q [3]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:520$234_gate ($and): \u_pipe.n147_q_gate [4] -> \u_pipe.n147_q [4]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:520$234_gate ($and): \u_pipe.n148_q_gate [4] -> \u_pipe.n148_q [4]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:526$241_gate ($and): \u_pipe.n147_q_gate [5] -> \u_pipe.n147_q [5]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:526$241_gate ($and): \u_pipe.n148_q_gate [5] -> \u_pipe.n148_q [5]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:535$256_gate ($and): \u_pipe.n147_q_gate [6] -> \u_pipe.n147_q [6]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:535$256_gate ($and): \u_pipe.n148_q_gate [6] -> \u_pipe.n148_q [6]
+Changing input A of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:542$267_gate ($and): \u_pipe.n147_q_gate [7] -> \u_pipe.n147_q [7]
+Changing input B of cell $flatten\u_pipe.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:542$267_gate ($and): \u_pipe.n148_q_gate [7] -> \u_pipe.n148_q [7]
+Changing input A of cell $flatten\u_pipe.$not$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:480$173_gate ($not): \u_pipe.n149_q_gate -> \u_pipe.n149_q
+Changing input A of cell $flatten\u_pipe.$procmux$339_gate ($mux): \u_pipe.n127_o_gate [3] -> \u_pipe.n127_o [3]
+Changing input A of cell $flatten\u_pipe.$procmux$342_gate ($mux): \u_pipe.n127_o_gate [2] -> \u_pipe.n127_o [2]
+Changing input A of cell $flatten\u_pipe.$procmux$345_gate ($mux): \u_pipe.n127_o_gate [1] -> \u_pipe.n127_o [1]
+Changing input A of cell $flatten\u_pipe.$procmux$348_gate ($mux): \u_pipe.n127_o_gate [0] -> \u_pipe.n127_o [0]
+Changing input A of cell $flatten\u_pipe.$procmux$363_gate ($mux): \u_pipe.n129_o_gate -> \u_pipe.n129_o
+Changing input S of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:488$183_gate ($mux): \u_pipe.n149_q_gate -> \u_pipe.n149_q
+Changing input S of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:498$199_gate ($mux): \u_pipe.n149_q_gate -> \u_pipe.n149_q
+Changing input S of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:506$212_gate ($mux): \u_pipe.n149_q_gate -> \u_pipe.n149_q
+Changing input S of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:517$231_gate ($mux): \u_pipe.n149_q_gate -> \u_pipe.n149_q
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:481$174_gate ($xor): \u_pipe.n147_q_gate [0] -> \u_pipe.n147_q [0]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:481$174_gate ($xor): \u_pipe.n148_q_gate [0] -> \u_pipe.n148_q [0]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:483$177_gate ($xor): \u_pipe.n147_q_gate [1] -> \u_pipe.n147_q [1]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:483$177_gate ($xor): \u_pipe.n148_q_gate [1] -> \u_pipe.n148_q [1]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:489$184_gate ($xor): \u_pipe.n147_q_gate [2] -> \u_pipe.n147_q [2]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:489$184_gate ($xor): \u_pipe.n148_q_gate [2] -> \u_pipe.n148_q [2]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:499$200_gate ($xor): \u_pipe.n147_q_gate [3] -> \u_pipe.n147_q [3]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:499$200_gate ($xor): \u_pipe.n148_q_gate [3] -> \u_pipe.n148_q [3]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:507$213_gate ($xor): \u_pipe.n147_q_gate [4] -> \u_pipe.n147_q [4]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:507$213_gate ($xor): \u_pipe.n148_q_gate [4] -> \u_pipe.n148_q [4]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:519$233_gate ($xor): \u_pipe.n147_q_gate [5] -> \u_pipe.n147_q [5]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:519$233_gate ($xor): \u_pipe.n148_q_gate [5] -> \u_pipe.n148_q [5]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:525$240_gate ($xor): \u_pipe.n147_q_gate [6] -> \u_pipe.n147_q [6]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:525$240_gate ($xor): \u_pipe.n148_q_gate [6] -> \u_pipe.n148_q [6]
+Changing input A of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:534$254_gate ($xor): \u_pipe.n147_q_gate [7] -> \u_pipe.n147_q [7]
+Changing input B of cell $flatten\u_pipe.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_generic.v:534$254_gate ($xor): \u_pipe.n148_q_gate [7] -> \u_pipe.n148_q [7]
+Changing input A of cell $flatten\u_adder.\gen_n1_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n1_u.u2.a_gold -> \u_adder.gen_n1_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n1_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n1_u.u2.a_gold -> \u_adder.gen_n1_u.u2.a
+Changing input A of cell $flatten\u_adder.\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n1_u.u5.a_gold -> \u_adder.gen_n1_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n1_u.u5.b_gold -> \u_adder.gen_n1_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n2_u.u2.a_gold -> \u_adder.gen_n2_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n2_u.u2.b_gold -> \u_adder.gen_n2_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n2_u.u2.a_gold -> \u_adder.gen_n2_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n2_u.u2.b_gold -> \u_adder.gen_n2_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n2_u.u5.a_gold -> \u_adder.gen_n2_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n2_u.u5.b_gold -> \u_adder.gen_n2_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n3_u.u2.a_gold -> \u_adder.gen_n3_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n3_u.u2.b_gold -> \u_adder.gen_n3_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n3_u.u2.a_gold -> \u_adder.gen_n3_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n3_u.u2.b_gold -> \u_adder.gen_n3_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n3_u.u5.a_gold -> \u_adder.gen_n3_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n3_u.u5.b_gold -> \u_adder.gen_n3_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n4_u.u2.a_gold -> \u_adder.gen_n4_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n4_u.u2.b_gold -> \u_adder.gen_n4_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n4_u.u2.a_gold -> \u_adder.gen_n4_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n4_u.u2.b_gold -> \u_adder.gen_n4_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n4_u.u5.a_gold -> \u_adder.gen_n4_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n4_u.u5.b_gold -> \u_adder.gen_n4_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n5_u.u2.a_gold -> \u_adder.gen_n5_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n5_u.u2.b_gold -> \u_adder.gen_n5_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n5_u.u2.a_gold -> \u_adder.gen_n5_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n5_u.u2.b_gold -> \u_adder.gen_n5_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n5_u.u5.a_gold -> \u_adder.gen_n5_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n5_u.u5.b_gold -> \u_adder.gen_n5_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n6_u.u2.a_gold -> \u_adder.gen_n6_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n6_u.u2.b_gold -> \u_adder.gen_n6_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n6_u.u2.a_gold -> \u_adder.gen_n6_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n6_u.u2.b_gold -> \u_adder.gen_n6_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n6_u.u5.a_gold -> \u_adder.gen_n6_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n6_u.u5.b_gold -> \u_adder.gen_n6_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n7_u.u2.a_gold -> \u_adder.gen_n7_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n7_u.u2.b_gold -> \u_adder.gen_n7_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n7_u.u2.a_gold -> \u_adder.gen_n7_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n7_u.u2.b_gold -> \u_adder.gen_n7_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n7_u.u5.a_gold -> \u_adder.gen_n7_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n7_u.u5.b_gold -> \u_adder.gen_n7_u.u5.b
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n8_u.u2.a_gold -> \u_adder.gen_n8_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:28$3_gold ($xor): \u_adder.gen_n8_u.u2.b_gold -> \u_adder.gen_n8_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n8_u.u2.a_gold -> \u_adder.gen_n8_u.u2.a
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:18$2_gold ($and): \u_adder.gen_n8_u.u2.b_gold -> \u_adder.gen_n8_u.u2.b
+Changing input A of cell $flatten\u_adder.\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n8_u.u5.a_gold -> \u_adder.gen_n8_u.u5.a
+Changing input B of cell $flatten\u_adder.\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:8$1_gold ($or): \u_adder.gen_n8_u.u5.b_gold -> \u_adder.gen_n8_u.u5.b
+Changing input B of cell $flatten\u_addsub.$ne$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:137$11_gold ($ne): \sy_gold [7] -> \u_addsub.n173_o
+Changing input S of cell $flatten\u_addsub.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:141$13_gold ($mux): \u_addsub.n175_o_gold -> \u_addsub.n175_o
+Changing input A of cell $flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:209$17_gold ($add): \u_pipe.n147_q_gold [3:0] -> \u_pipe.n147_q [3:0]
+Changing input B of cell $flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:209$17_gold ($add): \u_pipe.n148_q_gold [3:0] -> \u_pipe.n148_q [3:0]
+Changing input A of cell $flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:229$21_gold ($add): \u_pipe.n147_q_gold [7:4] -> \u_pipe.n147_q [7:4]
+Changing input B of cell $flatten\u_pipe.$add$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:229$21_gold ($add): \u_pipe.n148_q_gold [7:4] -> \u_pipe.n148_q [7:4]
+Changing input S of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:215$20_gold ($mux): \u_pipe.n149_q_gold -> \u_pipe.n149_q
+Changing input A of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:242$25_gold ($mux): { \u_pipe.n127_o_gold [3:0] \u_pipe.n116_o_gold [3:0] } -> { \u_pipe.n127_o [3:0] \u_pipe.n116_o_gold [3:0] }
+Changing input A of cell $flatten\u_pipe.$ternary$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/top_vhdl.v:244$26_gold ($mux): \u_pipe.n127_o_gold [4] -> \u_pipe.n127_o [4]
+Presumably equivalent cells: u_adder_gold u_adder_gate ($scopeinfo) -> u_adder
+Presumably equivalent cells: u_adder.gen_n1_u_gold u_adder.gen_n1_u_gate ($scopeinfo) -> u_adder.gen_n1_u
+Presumably equivalent cells: u_adder.gen_n1_u.u1_gold u_adder.gen_n1_u.u1_gate ($scopeinfo) -> u_adder.gen_n1_u.u1
+Presumably equivalent cells: u_adder.gen_n1_u.u2_gold u_adder.gen_n1_u.u2_gate ($scopeinfo) -> u_adder.gen_n1_u.u2
+Presumably equivalent cells: u_adder.gen_n1_u.u3_gold u_adder.gen_n1_u.u3_gate ($scopeinfo) -> u_adder.gen_n1_u.u3
+Presumably equivalent cells: u_adder.gen_n1_u.u4_gold u_adder.gen_n1_u.u4_gate ($scopeinfo) -> u_adder.gen_n1_u.u4
+Presumably equivalent cells: u_adder.gen_n1_u.u5_gold u_adder.gen_n1_u.u5_gate ($scopeinfo) -> u_adder.gen_n1_u.u5
+Presumably equivalent cells: u_adder.gen_n2_u_gold u_adder.gen_n2_u_gate ($scopeinfo) -> u_adder.gen_n2_u
+Presumably equivalent cells: u_adder.gen_n2_u.u1_gold u_adder.gen_n2_u.u1_gate ($scopeinfo) -> u_adder.gen_n2_u.u1
+Presumably equivalent cells: u_adder.gen_n2_u.u2_gold u_adder.gen_n2_u.u2_gate ($scopeinfo) -> u_adder.gen_n2_u.u2
+Presumably equivalent cells: u_adder.gen_n2_u.u3_gold u_adder.gen_n2_u.u3_gate ($scopeinfo) -> u_adder.gen_n2_u.u3
+Presumably equivalent cells: u_adder.gen_n2_u.u4_gold u_adder.gen_n2_u.u4_gate ($scopeinfo) -> u_adder.gen_n2_u.u4
+Presumably equivalent cells: u_adder.gen_n2_u.u5_gold u_adder.gen_n2_u.u5_gate ($scopeinfo) -> u_adder.gen_n2_u.u5
+Presumably equivalent cells: u_adder.gen_n3_u_gold u_adder.gen_n3_u_gate ($scopeinfo) -> u_adder.gen_n3_u
+Presumably equivalent cells: u_adder.gen_n3_u.u1_gold u_adder.gen_n3_u.u1_gate ($scopeinfo) -> u_adder.gen_n3_u.u1
+Presumably equivalent cells: u_adder.gen_n3_u.u2_gold u_adder.gen_n3_u.u2_gate ($scopeinfo) -> u_adder.gen_n3_u.u2
+Presumably equivalent cells: u_adder.gen_n3_u.u3_gold u_adder.gen_n3_u.u3_gate ($scopeinfo) -> u_adder.gen_n3_u.u3
+Presumably equivalent cells: u_adder.gen_n3_u.u4_gold u_adder.gen_n3_u.u4_gate ($scopeinfo) -> u_adder.gen_n3_u.u4
+Presumably equivalent cells: u_adder.gen_n3_u.u5_gold u_adder.gen_n3_u.u5_gate ($scopeinfo) -> u_adder.gen_n3_u.u5
+Presumably equivalent cells: u_adder.gen_n4_u_gold u_adder.gen_n4_u_gate ($scopeinfo) -> u_adder.gen_n4_u
+Presumably equivalent cells: u_adder.gen_n4_u.u1_gold u_adder.gen_n4_u.u1_gate ($scopeinfo) -> u_adder.gen_n4_u.u1
+Presumably equivalent cells: u_adder.gen_n4_u.u2_gold u_adder.gen_n4_u.u2_gate ($scopeinfo) -> u_adder.gen_n4_u.u2
+Presumably equivalent cells: u_adder.gen_n4_u.u3_gold u_adder.gen_n4_u.u3_gate ($scopeinfo) -> u_adder.gen_n4_u.u3
+Presumably equivalent cells: u_adder.gen_n4_u.u4_gold u_adder.gen_n4_u.u4_gate ($scopeinfo) -> u_adder.gen_n4_u.u4
+Presumably equivalent cells: u_adder.gen_n4_u.u5_gold u_adder.gen_n4_u.u5_gate ($scopeinfo) -> u_adder.gen_n4_u.u5
+Presumably equivalent cells: u_adder.gen_n5_u_gold u_adder.gen_n5_u_gate ($scopeinfo) -> u_adder.gen_n5_u
+Presumably equivalent cells: u_adder.gen_n5_u.u1_gold u_adder.gen_n5_u.u1_gate ($scopeinfo) -> u_adder.gen_n5_u.u1
+Presumably equivalent cells: u_adder.gen_n5_u.u2_gold u_adder.gen_n5_u.u2_gate ($scopeinfo) -> u_adder.gen_n5_u.u2
+Presumably equivalent cells: u_adder.gen_n5_u.u3_gold u_adder.gen_n5_u.u3_gate ($scopeinfo) -> u_adder.gen_n5_u.u3
+Presumably equivalent cells: u_adder.gen_n5_u.u4_gold u_adder.gen_n5_u.u4_gate ($scopeinfo) -> u_adder.gen_n5_u.u4
+Presumably equivalent cells: u_adder.gen_n5_u.u5_gold u_adder.gen_n5_u.u5_gate ($scopeinfo) -> u_adder.gen_n5_u.u5
+Presumably equivalent cells: u_adder.gen_n6_u_gold u_adder.gen_n6_u_gate ($scopeinfo) -> u_adder.gen_n6_u
+Presumably equivalent cells: u_adder.gen_n6_u.u1_gold u_adder.gen_n6_u.u1_gate ($scopeinfo) -> u_adder.gen_n6_u.u1
+Presumably equivalent cells: u_adder.gen_n6_u.u2_gold u_adder.gen_n6_u.u2_gate ($scopeinfo) -> u_adder.gen_n6_u.u2
+Presumably equivalent cells: u_adder.gen_n6_u.u3_gold u_adder.gen_n6_u.u3_gate ($scopeinfo) -> u_adder.gen_n6_u.u3
+Presumably equivalent cells: u_adder.gen_n6_u.u4_gold u_adder.gen_n6_u.u4_gate ($scopeinfo) -> u_adder.gen_n6_u.u4
+Presumably equivalent cells: u_adder.gen_n6_u.u5_gold u_adder.gen_n6_u.u5_gate ($scopeinfo) -> u_adder.gen_n6_u.u5
+Presumably equivalent cells: u_adder.gen_n7_u_gold u_adder.gen_n7_u_gate ($scopeinfo) -> u_adder.gen_n7_u
+Presumably equivalent cells: u_adder.gen_n7_u.u1_gold u_adder.gen_n7_u.u1_gate ($scopeinfo) -> u_adder.gen_n7_u.u1
+Presumably equivalent cells: u_adder.gen_n7_u.u2_gold u_adder.gen_n7_u.u2_gate ($scopeinfo) -> u_adder.gen_n7_u.u2
+Presumably equivalent cells: u_adder.gen_n7_u.u3_gold u_adder.gen_n7_u.u3_gate ($scopeinfo) -> u_adder.gen_n7_u.u3
+Presumably equivalent cells: u_adder.gen_n7_u.u4_gold u_adder.gen_n7_u.u4_gate ($scopeinfo) -> u_adder.gen_n7_u.u4
+Presumably equivalent cells: u_adder.gen_n7_u.u5_gold u_adder.gen_n7_u.u5_gate ($scopeinfo) -> u_adder.gen_n7_u.u5
+Presumably equivalent cells: u_adder.gen_n8_u_gold u_adder.gen_n8_u_gate ($scopeinfo) -> u_adder.gen_n8_u
+Presumably equivalent cells: u_adder.gen_n8_u.u1_gold u_adder.gen_n8_u.u1_gate ($scopeinfo) -> u_adder.gen_n8_u.u1
+Presumably equivalent cells: u_adder.gen_n8_u.u2_gold u_adder.gen_n8_u.u2_gate ($scopeinfo) -> u_adder.gen_n8_u.u2
+Presumably equivalent cells: u_adder.gen_n8_u.u3_gold u_adder.gen_n8_u.u3_gate ($scopeinfo) -> u_adder.gen_n8_u.u3
+Presumably equivalent cells: u_adder.gen_n8_u.u4_gold u_adder.gen_n8_u.u4_gate ($scopeinfo) -> u_adder.gen_n8_u.u4
+Presumably equivalent cells: u_adder.gen_n8_u.u5_gold u_adder.gen_n8_u.u5_gate ($scopeinfo) -> u_adder.gen_n8_u.u5
+Presumably equivalent cells: u_addsub_gold u_addsub_gate ($scopeinfo) -> u_addsub
+Presumably equivalent cells: u_pipe_gold u_pipe_gate ($scopeinfo) -> u_pipe
+Setting undriven nets to undef: \u_pipe.n116_o_gate [4]
+Setting undriven nets to undef: \u_pipe.n115_o_gate [4:0]
+Setting undriven nets to undef: \u_pipe.n122_o
+Setting undriven nets to undef: \u_pipe.n115_o
+Setting undriven nets to undef: \u_addsub.n166_o
+Setting undriven nets to undef: \u_addsub.n165_o [7:0]
+Setting undriven nets to undef: \u_addsub.n164_o
+Setting undriven nets to undef: \u_addsub.n161_o [7:0]
+Setting undriven nets to undef: \u_addsub.n161_o_gate [7:0]
+Setting undriven nets to undef: \u_addsub.n164_o_gate [7:0]
+Setting undriven nets to undef: \u_addsub.n165_o_gate [7:0]
+Setting undriven nets to undef: \u_addsub.n166_o_gate [7:0]
+Setting undriven nets to undef: \u_addsub.n162_o_gold [8]
+Setting undriven nets to undef: \u_addsub.n164_o_gold [8]
+Setting undriven nets to undef: \u_pipe.n112_o_gold [8:5]
+Setting undriven nets to undef: \u_pipe.n114_o_gold [8:5]
+Setting undriven nets to undef: \u_pipe.n123_o_gold [8:5]
+Setting undriven nets to undef: \u_pipe.n125_o_gold [8:5]
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 627 unproven $equiv cells (383 groups) in equiv:
+ Grouping SAT models for \sum:
+  Trying to prove $equiv for \sum [0]: success!
+  Trying to prove $equiv for \sum [1]: success!
+  Trying to prove $equiv for \sum [2]: success!
+  Trying to prove $equiv for \sum [3]: success!
+  Trying to prove $equiv for \sum [4]: success!
+  Trying to prove $equiv for \sum [5]: success!
+  Trying to prove $equiv for \sum [6]: success!
+  Trying to prove $equiv for \sum [7]: success!
+  Trying to prove $equiv for \cout: success!
+  Trying to prove $equiv for \ovf: success!
+ Grouping SAT models for \psum:
+  Trying to prove $equiv for \psum [0]: success!
+  Trying to prove $equiv for \psum [1]: success!
+  Trying to prove $equiv for \psum [2]: success!
+  Trying to prove $equiv for \psum [3]: success!
+  Trying to prove $equiv for \psum [4]: success!
+  Trying to prove $equiv for \psum [5]: success!
+  Trying to prove $equiv for \psum [6]: success!
+  Trying to prove $equiv for \psum [7]: success!
+  Trying to prove $equiv for \pcout: success!
+ Grouping SAT models for \sy:
+  Trying to prove $equiv for \sy [0]: success!
+  Trying to prove $equiv for \sy [1]: success!
+  Trying to prove $equiv for \sy [2]: success!
+  Trying to prove $equiv for \sy [3]: success!
+  Trying to prove $equiv for \sy [4]: success!
+  Trying to prove $equiv for \sy [5]: success!
+  Trying to prove $equiv for \sy [6]: success!
+  Trying to prove $equiv for \sy [7]: success!
+ Grouping SAT models for \u_adder_sum:
+  Trying to prove $equiv for \u_adder_sum [0]: success!
+  Trying to prove $equiv for \u_adder_sum [1]: success!
+  Trying to prove $equiv for \u_adder_sum [2]: success!
+  Trying to prove $equiv for \u_adder_sum [3]: success!
+  Trying to prove $equiv for \u_adder_sum [4]: success!
+  Trying to prove $equiv for \u_adder_sum [5]: success!
+  Trying to prove $equiv for \u_adder_sum [6]: success!
+  Trying to prove $equiv for \u_adder_sum [7]: success!
+  Trying to prove $equiv for \u_adder_cout: success!
+ Grouping SAT models for \u_pipe_sum:
+  Trying to prove $equiv for \u_pipe_sum [0]: success!
+  Trying to prove $equiv for \u_pipe_sum [1]: success!
+  Trying to prove $equiv for \u_pipe_sum [2]: success!
+  Trying to prove $equiv for \u_pipe_sum [3]: success!
+  Trying to prove $equiv for \u_pipe_sum [4]: success!
+  Trying to prove $equiv for \u_pipe_sum [5]: success!
+  Trying to prove $equiv for \u_pipe_sum [6]: success!
+  Trying to prove $equiv for \u_pipe_sum [7]: success!
+  Trying to prove $equiv for \u_pipe_cout: success!
+ Grouping SAT models for \u_addsub_y:
+  Trying to prove $equiv for \u_addsub_y [0]: success!
+  Trying to prove $equiv for \u_addsub_y [1]: success!
+  Trying to prove $equiv for \u_addsub_y [2]: success!
+  Trying to prove $equiv for \u_addsub_y [3]: success!
+  Trying to prove $equiv for \u_addsub_y [4]: success!
+  Trying to prove $equiv for \u_addsub_y [5]: success!
+  Trying to prove $equiv for \u_addsub_y [6]: success!
+  Trying to prove $equiv for \u_addsub_y [7]: success!
+  Trying to prove $equiv for \u_addsub_ovf: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u.u5.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.cin: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.sum: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.cout: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.s1: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.s2: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.s3: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u1_y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u2_y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u3_y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u4_y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u5_y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u1.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u1.y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u1.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u1.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u2.n188_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u2.y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u2.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u2.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u3.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u3.y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u3.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u3.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u4.n190_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u4.y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u4.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u4.a: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u5.n192_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u5.y: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u5.b: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u.u5.a: success!
+ Grouping SAT models for \u_adder.n88_o:
+  Trying to prove $equiv for \u_adder.n88_o [0]: success!
+  Trying to prove $equiv for \u_adder.n88_o [1]: success!
+  Trying to prove $equiv for \u_adder.n88_o [2]: success!
+  Trying to prove $equiv for \u_adder.n88_o [3]: success!
+  Trying to prove $equiv for \u_adder.n88_o [4]: success!
+  Trying to prove $equiv for \u_adder.n88_o [5]: success!
+  Trying to prove $equiv for \u_adder.n88_o [6]: success!
+  Trying to prove $equiv for \u_adder.n88_o [7]: success!
+ Grouping SAT models for \u_adder.n87_o:
+  Trying to prove $equiv for \u_adder.n87_o [0]: success!
+  Trying to prove $equiv for \u_adder.n87_o [1]: success!
+  Trying to prove $equiv for \u_adder.n87_o [2]: success!
+  Trying to prove $equiv for \u_adder.n87_o [3]: success!
+  Trying to prove $equiv for \u_adder.n87_o [4]: success!
+  Trying to prove $equiv for \u_adder.n87_o [5]: success!
+  Trying to prove $equiv for \u_adder.n87_o [6]: success!
+  Trying to prove $equiv for \u_adder.n87_o [7]: success!
+  Trying to prove $equiv for \u_adder.n87_o [8]: success!
+  Trying to prove $equiv for \u_adder.n86_o: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u_n81: success!
+  Trying to prove $equiv for \u_adder.gen_n8_u_n80: success!
+  Trying to prove $equiv for \u_adder.n79_o: success!
+  Trying to prove $equiv for \u_adder.n78_o: success!
+  Trying to prove $equiv for \u_adder.n77_o: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u_n72: success!
+  Trying to prove $equiv for \u_adder.gen_n7_u_n71: success!
+  Trying to prove $equiv for \u_adder.n70_o: success!
+  Trying to prove $equiv for \u_adder.n69_o: success!
+  Trying to prove $equiv for \u_adder.n68_o: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u_n63: success!
+  Trying to prove $equiv for \u_adder.gen_n6_u_n62: success!
+  Trying to prove $equiv for \u_adder.n61_o: success!
+  Trying to prove $equiv for \u_adder.n60_o: success!
+  Trying to prove $equiv for \u_adder.n59_o: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u_n54: success!
+  Trying to prove $equiv for \u_adder.gen_n5_u_n53: success!
+  Trying to prove $equiv for \u_adder.n52_o: success!
+  Trying to prove $equiv for \u_adder.n51_o: success!
+  Trying to prove $equiv for \u_adder.n50_o: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u_n45: success!
+  Trying to prove $equiv for \u_adder.gen_n4_u_n44: success!
+  Trying to prove $equiv for \u_adder.n43_o: success!
+  Trying to prove $equiv for \u_adder.n42_o: success!
+  Trying to prove $equiv for \u_adder.n41_o: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u_n36: success!
+  Trying to prove $equiv for \u_adder.gen_n3_u_n35: success!
+  Trying to prove $equiv for \u_adder.n34_o: success!
+  Trying to prove $equiv for \u_adder.n33_o: success!
+  Trying to prove $equiv for \u_adder.n32_o: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u_n27: success!
+  Trying to prove $equiv for \u_adder.gen_n2_u_n26: success!
+  Trying to prove $equiv for \u_adder.n25_o: success!
+  Trying to prove $equiv for \u_adder.n24_o: success!
+  Trying to prove $equiv for \u_adder.n23_o: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u_cout: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u_sum: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u_n18: success!
+  Trying to prove $equiv for \u_adder.gen_n1_u_n17: success!
+  Trying to prove $equiv for \u_adder.n16_o: success!
+  Trying to prove $equiv for \u_adder.n15_o: success!
+  Trying to prove $equiv for \u_adder.n14_o: success!
+ Grouping SAT models for \u_adder.c:
+  Trying to prove $equiv for \u_adder.c [0]: success!
+  Trying to prove $equiv for \u_adder.c [1]: success!
+  Trying to prove $equiv for \u_adder.c [2]: success!
+  Trying to prove $equiv for \u_adder.c [3]: success!
+  Trying to prove $equiv for \u_adder.c [4]: success!
+  Trying to prove $equiv for \u_adder.c [5]: success!
+  Trying to prove $equiv for \u_adder.c [6]: success!
+  Trying to prove $equiv for \u_adder.c [7]: success!
+  Trying to prove $equiv for \u_adder.c [8]: success!
+  Trying to prove $equiv for \u_adder.cout: success!
+ Grouping SAT models for \u_adder.sum:
+  Trying to prove $equiv for \u_adder.sum [0]: success!
+  Trying to prove $equiv for \u_adder.sum [1]: success!
+  Trying to prove $equiv for \u_adder.sum [2]: success!
+  Trying to prove $equiv for \u_adder.sum [3]: success!
+  Trying to prove $equiv for \u_adder.sum [4]: success!
+  Trying to prove $equiv for \u_adder.sum [5]: success!
+  Trying to prove $equiv for \u_adder.sum [6]: success!
+  Trying to prove $equiv for \u_adder.sum [7]: success!
+  Trying to prove $equiv for \u_adder.cin: success!
+ Grouping SAT models for \u_adder.b:
+  Trying to prove $equiv for \u_adder.b [0]: success!
+  Trying to prove $equiv for \u_adder.b [1]: success!
+  Trying to prove $equiv for \u_adder.b [2]: success!
+  Trying to prove $equiv for \u_adder.b [3]: success!
+  Trying to prove $equiv for \u_adder.b [4]: success!
+  Trying to prove $equiv for \u_adder.b [5]: success!
+  Trying to prove $equiv for \u_adder.b [6]: success!
+  Trying to prove $equiv for \u_adder.b [7]: success!
+ Grouping SAT models for \u_adder.a:
+  Trying to prove $equiv for \u_adder.a [0]: success!
+  Trying to prove $equiv for \u_adder.a [1]: success!
+  Trying to prove $equiv for \u_adder.a [2]: success!
+  Trying to prove $equiv for \u_adder.a [3]: success!
+  Trying to prove $equiv for \u_adder.a [4]: success!
+  Trying to prove $equiv for \u_adder.a [5]: success!
+  Trying to prove $equiv for \u_adder.a [6]: success!
+  Trying to prove $equiv for \u_adder.a [7]: success!
+  Trying to prove $equiv for \u_pipe.n151_q: success!
+ Grouping SAT models for \u_pipe.n150_q:
+  Trying to prove $equiv for \u_pipe.n150_q [0]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [1]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [2]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [3]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [4]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [5]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [6]: success!
+  Trying to prove $equiv for \u_pipe.n150_q [7]: success!
+  Trying to prove $equiv for \u_pipe.n149_q: success!
+ Grouping SAT models for \u_pipe.n148_q:
+  Trying to prove $equiv for \u_pipe.n148_q [0]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [1]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [2]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [3]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [4]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [5]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [6]: success!
+  Trying to prove $equiv for \u_pipe.n148_q [7]: success!
+ Grouping SAT models for \u_pipe.n147_q:
+  Trying to prove $equiv for \u_pipe.n147_q [0]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [1]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [2]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [3]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [4]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [5]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [6]: success!
+  Trying to prove $equiv for \u_pipe.n147_q [7]: success!
+  Trying to prove $equiv for \u_pipe.n129_o: success!
+ Grouping SAT models for \u_pipe.n128_o:
+  Trying to prove $equiv for \u_pipe.n128_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n128_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n128_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n128_o [3]: success!
+ Grouping SAT models for \u_pipe.n127_o:
+  Trying to prove $equiv for \u_pipe.n127_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [3]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [4]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [5]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [6]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [7]: success!
+  Trying to prove $equiv for \u_pipe.n127_o [8]: success!
+ Grouping SAT models for \u_pipe.n121_o:
+  Trying to prove $equiv for \u_pipe.n121_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [3]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [4]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [5]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [6]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [7]: success!
+  Trying to prove $equiv for \u_pipe.n121_o [8]: success!
+ Grouping SAT models for \u_pipe.n120_o:
+  Trying to prove $equiv for \u_pipe.n120_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n120_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n120_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n120_o [3]: success!
+ Grouping SAT models for \u_pipe.n119_o:
+  Trying to prove $equiv for \u_pipe.n119_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [3]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [4]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [5]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [6]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [7]: success!
+  Trying to prove $equiv for \u_pipe.n119_o [8]: success!
+ Grouping SAT models for \u_pipe.n118_o:
+  Trying to prove $equiv for \u_pipe.n118_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n118_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n118_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n118_o [3]: success!
+ Grouping SAT models for \u_pipe.n117_o:
+  Trying to prove $equiv for \u_pipe.n117_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n117_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n117_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n117_o [3]: success!
+ Grouping SAT models for \u_pipe.n111_o:
+  Trying to prove $equiv for \u_pipe.n111_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [3]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [4]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [5]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [6]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [7]: success!
+  Trying to prove $equiv for \u_pipe.n111_o [8]: success!
+ Grouping SAT models for \u_pipe.n110_o:
+  Trying to prove $equiv for \u_pipe.n110_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n110_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n110_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n110_o [3]: success!
+ Grouping SAT models for \u_pipe.n109_o:
+  Trying to prove $equiv for \u_pipe.n109_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [3]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [4]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [5]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [6]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [7]: success!
+  Trying to prove $equiv for \u_pipe.n109_o [8]: success!
+ Grouping SAT models for \u_pipe.n108_o:
+  Trying to prove $equiv for \u_pipe.n108_o [0]: success!
+  Trying to prove $equiv for \u_pipe.n108_o [1]: success!
+  Trying to prove $equiv for \u_pipe.n108_o [2]: success!
+  Trying to prove $equiv for \u_pipe.n108_o [3]: success!
+  Trying to prove $equiv for \u_pipe.r1_cin: success!
+ Grouping SAT models for \u_pipe.r1_b:
+  Trying to prove $equiv for \u_pipe.r1_b [0]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [1]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [2]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [3]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [4]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [5]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [6]: success!
+  Trying to prove $equiv for \u_pipe.r1_b [7]: success!
+ Grouping SAT models for \u_pipe.r1_a:
+  Trying to prove $equiv for \u_pipe.r1_a [0]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [1]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [2]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [3]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [4]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [5]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [6]: success!
+  Trying to prove $equiv for \u_pipe.r1_a [7]: success!
+  Trying to prove $equiv for \u_pipe.cout: success!
+ Grouping SAT models for \u_pipe.sum:
+  Trying to prove $equiv for \u_pipe.sum [0]: success!
+  Trying to prove $equiv for \u_pipe.sum [1]: success!
+  Trying to prove $equiv for \u_pipe.sum [2]: success!
+  Trying to prove $equiv for \u_pipe.sum [3]: success!
+  Trying to prove $equiv for \u_pipe.sum [4]: success!
+  Trying to prove $equiv for \u_pipe.sum [5]: success!
+  Trying to prove $equiv for \u_pipe.sum [6]: success!
+  Trying to prove $equiv for \u_pipe.sum [7]: success!
+  Trying to prove $equiv for \u_pipe.cin: success!
+ Grouping SAT models for \u_pipe.b:
+  Trying to prove $equiv for \u_pipe.b [0]: success!
+  Trying to prove $equiv for \u_pipe.b [1]: success!
+  Trying to prove $equiv for \u_pipe.b [2]: success!
+  Trying to prove $equiv for \u_pipe.b [3]: success!
+  Trying to prove $equiv for \u_pipe.b [4]: success!
+  Trying to prove $equiv for \u_pipe.b [5]: success!
+  Trying to prove $equiv for \u_pipe.b [6]: success!
+  Trying to prove $equiv for \u_pipe.b [7]: success!
+ Grouping SAT models for \u_pipe.a:
+  Trying to prove $equiv for \u_pipe.a [0]: success!
+  Trying to prove $equiv for \u_pipe.a [1]: success!
+  Trying to prove $equiv for \u_pipe.a [2]: success!
+  Trying to prove $equiv for \u_pipe.a [3]: success!
+  Trying to prove $equiv for \u_pipe.a [4]: success!
+  Trying to prove $equiv for \u_pipe.a [5]: success!
+  Trying to prove $equiv for \u_pipe.a [6]: success!
+  Trying to prove $equiv for \u_pipe.a [7]: success!
+  Trying to prove $equiv for \u_pipe.rst: success!
+  Trying to prove $equiv for \u_pipe.clk: success!
+  Trying to prove $equiv for \u_addsub.n178_o: success!
+  Trying to prove $equiv for \u_addsub.n175_o: success!
+  Trying to prove $equiv for \u_addsub.n173_o: success!
+  Trying to prove $equiv for \u_addsub.n172_o: success!
+  Trying to prove $equiv for \u_addsub.n169_o: success!
+ Grouping SAT models for \u_addsub.n168_o:
+  Trying to prove $equiv for \u_addsub.n168_o [0]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [1]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [2]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [3]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [4]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [5]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [6]: success!
+  Trying to prove $equiv for \u_addsub.n168_o [7]: success!
+ Grouping SAT models for \u_addsub.n167_o:
+  Trying to prove $equiv for \u_addsub.n167_o [0]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [1]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [2]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [3]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [4]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [5]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [6]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [7]: success!
+  Trying to prove $equiv for \u_addsub.n167_o [8]: success!
+  Trying to prove $equiv for \u_addsub.n165_o [8]: success!
+  Trying to prove $equiv for \u_addsub.n161_o [8]: success!
+ Grouping SAT models for \u_addsub.n160_o:
+  Trying to prove $equiv for \u_addsub.n160_o [0]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [1]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [2]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [3]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [4]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [5]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [6]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [7]: success!
+  Trying to prove $equiv for \u_addsub.n160_o [8]: success!
+  Trying to prove $equiv for \u_addsub.ovf: success!
+ Grouping SAT models for \u_addsub.y:
+  Trying to prove $equiv for \u_addsub.y [0]: success!
+  Trying to prove $equiv for \u_addsub.y [1]: success!
+  Trying to prove $equiv for \u_addsub.y [2]: success!
+  Trying to prove $equiv for \u_addsub.y [3]: success!
+  Trying to prove $equiv for \u_addsub.y [4]: success!
+  Trying to prove $equiv for \u_addsub.y [5]: success!
+  Trying to prove $equiv for \u_addsub.y [6]: success!
+  Trying to prove $equiv for \u_addsub.y [7]: success!
+  Trying to prove $equiv for \u_addsub.op: success!
+ Grouping SAT models for \u_addsub.b:
+  Trying to prove $equiv for \u_addsub.b [0]: success!
+  Trying to prove $equiv for \u_addsub.b [1]: success!
+  Trying to prove $equiv for \u_addsub.b [2]: success!
+  Trying to prove $equiv for \u_addsub.b [3]: success!
+  Trying to prove $equiv for \u_addsub.b [4]: success!
+  Trying to prove $equiv for \u_addsub.b [5]: success!
+  Trying to prove $equiv for \u_addsub.b [6]: success!
+  Trying to prove $equiv for \u_addsub.b [7]: success!
+ Grouping SAT models for \u_addsub.a:
+  Trying to prove $equiv for \u_addsub.a [0]: success!
+  Trying to prove $equiv for \u_addsub.a [1]: success!
+  Trying to prove $equiv for \u_addsub.a [2]: success!
+  Trying to prove $equiv for \u_addsub.a [3]: success!
+  Trying to prove $equiv for \u_addsub.a [4]: success!
+  Trying to prove $equiv for \u_addsub.a [5]: success!
+  Trying to prove $equiv for \u_addsub.a [6]: success!
+  Trying to prove $equiv for \u_addsub.a [7]: success!
+Proved 627 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 627 $equiv cells in equiv:
+  Of those cells 627 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 1dd7cea28c, CPU: user 1.03s system 0.04s, MEM: 21.29 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 68% 1x equiv_simple (0 sec), 9% 11x opt_clean (0 sec), ...

@@ -1,0 +1,2 @@
+GLS adder8_pipelined: PASS (16 vectors)
+tb/tb_gls_adder8_pipelined.v:70: $finish called at 346000 (1ps)
