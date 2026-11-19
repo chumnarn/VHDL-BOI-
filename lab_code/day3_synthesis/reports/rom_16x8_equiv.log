@@ -1,0 +1,470 @@
+
+-- Running command `
+  read_verilog build/rom_16x8.v
+  prep -top rom_16x8 -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/rom_16x8_generic.v
+  prep -top rom_16x8 -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold rom_16x8
+  design -copy-from gate -as gate rom_16x8
+  equiv_make gold gate equiv
+  hierarchy -top equiv
+  equiv_simple -seq 5
+    equiv_induct -seq 5
+  equiv_status -assert
+' --
+
+1. Executing Verilog-2005 frontend: build/rom_16x8.v
+Parsing Verilog input from `build/rom_16x8.v' to AST representation.
+Generating RTLIL representation for module `\rom_16x8'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \rom_16x8
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \rom_16x8
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 16 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:18$1_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:19$2_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:20$3_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:21$4_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:22$5_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:23$6_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:24$7_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:25$8_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:26$9_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:27$10_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:28$11_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:29$12_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:30$13_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:31$14_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:32$15_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+No latch inferred for signal `\rom_16x8.$memwr$\n13$build/rom_16x8.v:33$16_EN' from process `\rom_16x8.$proc$build/rom_16x8.v:0$35'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `rom_16x8.$proc$build/rom_16x8.v:0$35'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+Removed 0 unused cells and 34 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module rom_16x8...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rom_16x8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rom_16x8.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:18$19 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:19$20 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:20$21 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:21$22 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:22$23 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:23$24 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:24$25 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:25$26 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:26$27 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:27$28 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:28$29 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:29$30 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:30$31 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:31$32 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:32$33 (n13).
+Removed top 28 address bits (of 32) from memory init port rom_16x8.$meminit$\n13$build/rom_16x8.v:33$34 (n13).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== rom_16x8 ===
+
+   Number of wires:                  6
+   Number of wire bits:             59
+   Number of public wires:           6
+   Number of public wire bits:      59
+   Number of ports:                  2
+   Number of port bits:             12
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     $mem_v2                         1
+     $sub                            1
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module rom_16x8...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \n13 in module \rom_16x8:
+  created 16 $dff cells and 0 static cells of width 8.
+  read interface: 0 $dff and 15 $mux cells.
+  write interface: 0 write mux blocks.
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+Removed 0 unused cells and 16 unused wires.
+<suppressed ~1 debug messages>
+
+5. Executing Verilog-2005 frontend: build/rom_16x8_generic.v
+Parsing Verilog input from `build/rom_16x8_generic.v' to AST representation.
+Generating RTLIL representation for module `\rom_16x8'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \rom_16x8
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \rom_16x8
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+<suppressed ~3 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+Removed 2 unused cells and 30 unused wires.
+<suppressed ~3 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module rom_16x8...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rom_16x8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rom_16x8.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+6.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \rom_16x8..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~5 debug messages>
+
+6.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \rom_16x8.
+Performed a total of 0 changes.
+
+6.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+6.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+6.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+6.8.14. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module rom_16x8.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\rom_16x8'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== rom_16x8 ===
+
+   Number of wires:                 25
+   Number of wire bits:             75
+   Number of public wires:          21
+   Number of public wire bits:      71
+   Number of ports:                  2
+   Number of port bits:             12
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 27
+     $and                           10
+     $mux                           10
+     $not                            5
+     $or                             2
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module rom_16x8...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rom_16x8..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: addr_gold (\addr_gold), addr_gate (\addr_gate) -> addr
+Presumably equivalent wires: dout_gold (\dout_gold), dout_gate ({ \dout_gate [7:1] \addr_gate [0] }) -> dout
+Presumably equivalent wires: n14_data_gold (\dout_gold), n14_data_gate ({ \dout_gate [7:1] \addr_gate [0] }) -> n14_data
+Presumably equivalent wires: n4_o_gold ({ 27'000000000000000000000000000 \addr_gold }), n4_o_gate ({ 27'000000000000000000000000000 \addr_gate }) -> n4_o
+Presumably equivalent wires: n6_o_gold (\addr_gold), n6_o_gate (\addr_gate) -> n6_o
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 51 unproven $equiv cells (4 groups) in equiv:
+ Grouping SAT models for \dout:
+  Trying to prove $equiv for \dout [0]: success!
+  Trying to prove $equiv for \dout [1]: success!
+  Trying to prove $equiv for \dout [2]: success!
+  Trying to prove $equiv for \dout [3]: success!
+  Trying to prove $equiv for \dout [4]: success!
+  Trying to prove $equiv for \dout [5]: success!
+  Trying to prove $equiv for \dout [6]: success!
+  Trying to prove $equiv for \dout [7]: success!
+ Grouping SAT models for \n4_o:
+  Trying to prove $equiv for \n4_o [0]: success!
+  Trying to prove $equiv for \n4_o [1]: success!
+  Trying to prove $equiv for \n4_o [2]: success!
+  Trying to prove $equiv for \n4_o [3]: success!
+  Trying to prove $equiv for \n4_o [4]: success!
+  Trying to prove $equiv for \n4_o [5]: success!
+  Trying to prove $equiv for \n4_o [6]: success!
+  Trying to prove $equiv for \n4_o [7]: success!
+  Trying to prove $equiv for \n4_o [8]: success!
+  Trying to prove $equiv for \n4_o [9]: success!
+  Trying to prove $equiv for \n4_o [10]: success!
+  Trying to prove $equiv for \n4_o [11]: success!
+  Trying to prove $equiv for \n4_o [12]: success!
+  Trying to prove $equiv for \n4_o [13]: success!
+  Trying to prove $equiv for \n4_o [14]: success!
+  Trying to prove $equiv for \n4_o [15]: success!
+  Trying to prove $equiv for \n4_o [16]: success!
+  Trying to prove $equiv for \n4_o [17]: success!
+  Trying to prove $equiv for \n4_o [18]: success!
+  Trying to prove $equiv for \n4_o [19]: success!
+  Trying to prove $equiv for \n4_o [20]: success!
+  Trying to prove $equiv for \n4_o [21]: success!
+  Trying to prove $equiv for \n4_o [22]: success!
+  Trying to prove $equiv for \n4_o [23]: success!
+  Trying to prove $equiv for \n4_o [24]: success!
+  Trying to prove $equiv for \n4_o [25]: success!
+  Trying to prove $equiv for \n4_o [26]: success!
+  Trying to prove $equiv for \n4_o [27]: success!
+  Trying to prove $equiv for \n4_o [28]: success!
+  Trying to prove $equiv for \n4_o [29]: success!
+  Trying to prove $equiv for \n4_o [30]: success!
+ Grouping SAT models for \n6_o:
+  Trying to prove $equiv for \n6_o [0]: success!
+  Trying to prove $equiv for \n6_o [1]: success!
+  Trying to prove $equiv for \n6_o [2]: success!
+  Trying to prove $equiv for \n6_o [3]: success!
+ Grouping SAT models for \n14_data:
+  Trying to prove $equiv for \n14_data [0]: success!
+  Trying to prove $equiv for \n14_data [1]: success!
+  Trying to prove $equiv for \n14_data [2]: success!
+  Trying to prove $equiv for \n14_data [3]: success!
+  Trying to prove $equiv for \n14_data [4]: success!
+  Trying to prove $equiv for \n14_data [5]: success!
+  Trying to prove $equiv for \n14_data [6]: success!
+  Trying to prove $equiv for \n14_data [7]: success!
+Proved 51 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 51 $equiv cells in equiv:
+  Of those cells 51 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 6e5f5dea53, CPU: user 0.08s system 0.04s, MEM: 15.64 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 24% 1x equiv_simple (0 sec), 17% 11x opt_expr (0 sec), ...

@@ -1,0 +1,360 @@
+########################################################################
+#  VHDL SYNTHESIS — RUN EVERYTHING
+#  date : 2026-11-14 10:52:19 UTC
+########################################################################
+
+########## PART 1: environment probe ##########
+==================================================================
+ ENVIRONMENT PROBE — VHDL Synthesis
+==================================================================
+
+--- GHDL ---
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+ Compiled with GNAT Version: 14.2.0
+ static elaboration, mcode JIT code generator
+ghdl path : /usr/bin/ghdl
+
+--- GHDL synth (ตัวแปลง VHDL -> Verilog) ---
+/usr/bin/ghdl-mcode:error: unknown command option '--help'
+
+--- Yosys ---
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+yosys path: /usr/bin/yosys
+
+--- Yosys: plugin ที่เกี่ยวกับ VHDL ---
+
+-- Running command `help ghdl' --
+No such command or cell type: ghdl
+
+End of script. Logfile hash: b12a5daad5, CPU: user 0.01s system 0.01s, MEM: 8.92 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 100% 1x help (0 sec)
+
+--- Icarus Verilog (สำหรับ gate-level simulation) ---
+Icarus Verilog version 12.0 (stable) ()
+
+
+--- Verilator ---
+Verilator 5.032 2025-01-01 rev (Debian 5.032-1)
+
+--- Liberty files ที่มีในเครื่อง ---
+FOUND   /usr/share/yosys/cells.lib
+FOUND   /usr/share/yosys/abc9_map.v
+
+--- nix profile (LibreLane) ---
+FOUND   /root/.nix-profile/bin/librelane
+LibreLane v3.0.17
+
+
+--- ModelSim (Windows) ---
+FOUND   /mnt/c/Siemens/modelsim_dlx64_2026.1/win64pe/vcom.exe
+
+DONE
+
+########## PART 2: synthesis ทุกตัวอย่าง ##########
+########################################################################
+#  VHDL SYNTHESIS — RUN ALL
+#  date : 2026-11-14 10:52:23 UTC
+########################################################################
+
+------------------------------------------------------------------
+  ==============================================================
+   TAG : alu4   TOP: alu4   FLAGS: <none>
+   SRC : rtl/alu4.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_XNOR_                         2
+              $_XOR_                          8
+              $_ANDNOT_                      15
+              $_AND_                          3
+              $_MUX_                          7
+              $_NAND_                         3
+              $_NOR_                          3
+              $_NOT_                          4
+              $_ORNOT_                        1
+              $_OR_                          11
+              $_XNOR_                         2
+              $_XOR_                          8
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 57   sky130 area = 208.950400
+------------------------------------------------------------------
+  ==============================================================
+   TAG : counter_sync   TOP: counter_sync   FLAGS: <none>
+   SRC : rtl/counter_sync.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_NOT_                          1
+              $_OR_                           2
+              $_SDFFE_PP0P_                   8
+              $_XNOR_                         3
+              $_XOR_                          4
+              $_ANDNOT_                       3
+              $_NAND_                         3
+              $_NOT_                          1
+              $_OR_                           2
+              $_SDFFE_PP0P_                   8
+              $_XNOR_                         3
+              $_XOR_                          4
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : FAIL (exit 1)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 3 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 24   sky130 area = 280.268800
+------------------------------------------------------------------
+  ==============================================================
+   TAG : fsm_seq   TOP: fsm_seq   FLAGS: <none>
+   SRC : rtl/fsm_seq.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_NOR_                          1
+              $_NOT_                          1
+              $_ORNOT_                        2
+              $_OR_                           8
+              $_ANDNOT_                       9
+              $_DFF_P_                        3
+              $_MUX_                          1
+              $_NAND_                         1
+              $_NOR_                          1
+              $_NOT_                          1
+              $_ORNOT_                        2
+              $_OR_                           8
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : FAIL (exit 1)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 6 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 26   sky130 area = 106.352000
+------------------------------------------------------------------
+  ==============================================================
+   TAG : adder8   TOP: adder8   FLAGS: <none>
+   SRC : rtl/adder8.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_ORNOT_                        2
+              $_OR_                           3
+              $_XNOR_                         5
+              $_XOR_                         10
+              $_ANDNOT_                      15
+              $_AND_                          2
+              $_NAND_                         7
+              $_NOR_                          5
+              $_ORNOT_                        2
+              $_OR_                           3
+              $_XNOR_                         5
+              $_XOR_                         10
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 49   sky130 area = 205.196800
+------------------------------------------------------------------
+  ==============================================================
+   TAG : mult8   TOP: mult8   FLAGS: <none>
+   SRC : rtl/mult8.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_OR_                          37
+              $_XNOR_                        25
+              $_XOR_                         86
+              $_ANDNOT_                      97
+              $_AND_                         55
+              $_NAND_                        25
+              $_NOR_                         12
+              $_NOT_                          7
+              $_ORNOT_                       10
+              $_OR_                          37
+              $_XNOR_                        25
+              $_XOR_                         86
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : TIMEOUT (exit 124)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 354   sky130 area = 1904.326400
+------------------------------------------------------------------
+  ==============================================================
+   TAG : shifter   TOP: shifter   FLAGS: <none>
+   SRC : rtl/shifter.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_MUX_                        107
+              $_NAND_                         4
+              $_NOT_                          5
+              $_ORNOT_                        1
+              $_OR_                           9
+              $_ANDNOT_                      19
+              $_AND_                          1
+              $_MUX_                        107
+              $_NAND_                         4
+              $_NOT_                          5
+              $_ORNOT_                        1
+              $_OR_                           9
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 146   sky130 area = 721.942400
+------------------------------------------------------------------
+  ==============================================================
+   TAG : lfsr16   TOP: lfsr16   FLAGS: <none>
+   SRC : rtl/lfsr16.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_MUX_                         16
+              $_SDFF_PP0_                    16
+              $_XNOR_                         2
+              $_XOR_                          1
+              $_MUX_                         16
+              $_SDFF_PP0_                    16
+              $_XNOR_                         2
+              $_XOR_                          1
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : FAIL (exit 1)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 3 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 35   sky130 area = 569.296000
+------------------------------------------------------------------
+  ==============================================================
+   TAG : latch_bad   TOP: latch_bad   FLAGS: <none>
+   SRC : rtl/latch_bad.vhd
+  ==============================================================
+    -> GHDL SYNTH FAILED (exit 1)
+         rtl/latch_bad.vhd:17:3:error: latch infered for net "s" (use --latches)
+------------------------------------------------------------------
+  ==============================================================
+   TAG : latch_bad_latched   TOP: latch_bad   FLAGS: --latches
+   SRC : rtl/latch_bad.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 0   sky130 area = n/a
+------------------------------------------------------------------
+  ==============================================================
+   TAG : latch_good   TOP: latch_good   FLAGS: <none>
+   SRC : rtl/latch_good.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_AND_                          1
+              $_AND_                          1
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 1 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 1   sky130 area = 6.256000
+------------------------------------------------------------------
+  ==============================================================
+   TAG : rom_16x8   TOP: rom_16x8   FLAGS: <none>
+   SRC : rtl/rom_16x8.vhd
+  ==============================================================
+    -> Yosys generic synth exit = 0
+              $_MUX_                         10
+              $_NAND_                         2
+              $_NOT_                          2
+              $_ORNOT_                        1
+              $_OR_                           1
+              $_ANDNOT_                       7
+              $_AND_                          2
+              $_MUX_                         10
+              $_NAND_                         2
+              $_NOT_                          2
+              $_ORNOT_                        1
+              $_OR_                           1
+    -> Yosys sky130 map exit = 0
+    -> miter + sat -seq 12 : PASS (exit 0)
+    -> เลือกวิธีพิสูจน์: sequential (equiv_simple + equiv_induct) (พบ DFF 3 จุด)
+    -> equiv_make + sequential (equiv_simple + equiv_induct) : PASS (exit 0)
+    -> generic cells = 25   sky130 area = 113.859200
+------------------------------------------------------------------
+  ==============================================================
+   TAG : std_logic_arith_bad   TOP: std_logic_arith_bad   FLAGS: <none>
+   SRC : rtl/std_logic_arith_bad.vhd
+  ==============================================================
+    -> GHDL SYNTH FAILED (exit 1)
+         rtl/std_logic_arith_bad.vhd:6:10:error: use of synopsys package "std_logic_arith" needs the -fsynopsys option
+
+------------------------------------------------------------------
+PASS=10  FAIL=2  (ทั้งหมด 12 รายการ)
+
+สรุป: reports/summary.txt
+DONE
+
+########## PART 3: gate-level simulation ##########
+==================================================================
+ GATE-LEVEL SIMULATION (Icarus Verilog)
+==================================================================
+  (สังเคราะห์ latch_ok จาก verilog/latch_ok.v แล้ว)
+
+--- alu4 : build/alu4_generic.v + tb/tb_alu4.v  (คาดหวัง PASS) ---
+    GLS tb_alu4: checked 1024 combinations, errors = 0
+    GLS RESULT: PASS
+    tb/tb_alu4.v:50: $finish called at 1024000 (1ps)
+    -> ตรงตามที่คาดหวัง (PASS) — iverilog exit 0
+
+--- adder8 : build/adder8_generic.v + tb/tb_adder8.v  (คาดหวัง PASS) ---
+    GLS tb_adder8: checked 65536 combinations, errors = 0
+    GLS RESULT: PASS
+    tb/tb_adder8.v:40: $finish called at 65536000 (1ps)
+    -> ตรงตามที่คาดหวัง (PASS) — iverilog exit 0
+
+--- latch_bad_latched : build/latch_bad_latched_generic.v + tb/tb_latch_bad.v  (คาดหวัง FAIL) ---
+    FAIL phase2: latch should HOLD 1 after e=0, got q=0
+    GLS tb_latch_bad: errors = 1
+    GLS RESULT: FAIL
+    tb/tb_latch_bad.v:37: $finish called at 2000 (1ps)
+    -> ตรงตามที่คาดหวัง (FAIL) — iverilog exit 0
+
+--- latch_ok : build/latch_ok_generic.v + tb/tb_latch_ok.v  (คาดหวัง PASS) ---
+    GLS tb_latch_ok: errors = 0
+    GLS RESULT: PASS
+    tb/tb_latch_ok.v:34: $finish called at 2000 (1ps)
+    -> ตรงตามที่คาดหวัง (PASS) — iverilog exit 0
+
+==================================================================
+ GLS SUMMARY: ตรงตามคาด 4 เคส / ไม่ตรง 0 เคส (ทั้งหมด 4 เคส)
+==================================================================
+หมายเหตุ: latch_bad_latched คาดหวัง FAIL โดยตั้งใจ
+         เพราะพิสูจน์ว่า netlist ที่ได้จาก GHDL --latches ทำงานผิด
+         (ดูคู่มือข้อ 3.8.6.7)
+DONE
+
+########## PART 4: สรุปจาก reports/summary.txt ##########
+VHDL SYNTHESIS SUMMARY
+generated: 2026-11-14 10:52:23 UTC
+ghdl     : GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+yosys    : Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+---------------------+-------+---------+--------------+---------+---------+-------------------------
+alu4                 | 0     | 57      | 208.950400    | PASS    | PASS    | ALU 4-bit combinational (case + numeric_std)
+                     | latch cells in generic netlist = 0
+counter_sync         | 0     | 24      | 280.268800    | FAIL    | PASS    | Counter 8-bit sync reset + clock enable
+                     | latch cells in generic netlist = 0
+fsm_seq              | 0     | 26      | 106.352000    | FAIL    | PASS    | FSM 3 สถานะแบบ Moore
+                     | latch cells in generic netlist = 0
+adder8               | 0     | 49      | 205.196800    | PASS    | PASS    | Adder 8-bit unsigned + carry out
+                     | latch cells in generic netlist = 0
+mult8                | 0     | 354     | 1904.326400   | TIMEOUT | PASS    | Multiplier 8x8 unsigned
+                     | latch cells in generic netlist = 0
+shifter              | 0     | 146     | 721.942400    | PASS    | PASS    | Barrel shifter 8-bit
+                     | latch cells in generic netlist = 0
+lfsr16               | 0     | 35      | 569.296000    | FAIL    | PASS    | LFSR 16-bit Galois form
+                     | latch cells in generic netlist = 0
+latch_bad            | 1     | -       | -             | n/a     | FAIL    | ตั้งใจสร้าง LATCH — GHDL ต้องการ --latches
+                     | latch cells in generic netlist = 0
+latch_bad_latched    | 0     | 0       | -             | PASS    | PASS    | เปิด --latches — ได้ latch จริง
+                     | latch cells in generic netlist = 0
+latch_good           | 0     | 1       | 6.256000      | PASS    | PASS    | เวอร์ชันที่แก้แล้ว — ไม่มี latch
+                     | latch cells in generic netlist = 0
+rom_16x8             | 0     | 25      | 113.859200    | PASS    | PASS    | ROM 16x8 จาก constant array
+                     | latch cells in generic netlist = 0
+std_logic_arith_bad  | 1     | -       | -             | n/a     | FAIL    | ใช้ std_logic_arith — คาดว่าจะไม่ผ่าน
+                     | latch cells in generic netlist = 0
+
+PASS=10  FAIL=2  (ทั้งหมด 12 รายการ)
+  จากนั้น FAIL=2 รายการ แยกเป็น:
+    - ตั้งใจให้ GHDL synth ล้มเหลว (latch_bad, std_logic_arith_bad) = ผลที่ถูกต้อง
+    - เปิด --latches (latch_bad_latched) ได้ latch จริง
+    - TIMEOUT=1 รายการ (SAT แบบ bounded แก้ไม่จบในเวลาที่กำหนด)

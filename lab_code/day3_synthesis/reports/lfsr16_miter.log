@@ -1,0 +1,519 @@
+
+-- Running command `
+  read_verilog build/lfsr16.v
+  prep -top lfsr16 -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/lfsr16_generic.v
+  prep -top lfsr16 -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold lfsr16
+  design -copy-from gate -as gate lfsr16
+  miter -equiv -flatten -make_assert gold gate miter
+  hierarchy -top miter
+  sat -verify -prove-asserts -seq 12 miter
+' --
+
+1. Executing Verilog-2005 frontend: build/lfsr16.v
+Parsing Verilog input from `build/lfsr16.v' to AST representation.
+Generating RTLIL representation for module `\lfsr16'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \lfsr16
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \lfsr16
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lfsr16.$proc$build/lfsr16.v:46$6'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\lfsr16.\n18_q' using process `\lfsr16.$proc$build/lfsr16.v:46$6'.
+  created $dff cell `$procdff$7' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `lfsr16.$proc$build/lfsr16.v:46$6'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfsr16..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfsr16.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== lfsr16 ===
+
+   Number of wires:                 18
+   Number of wire bits:            137
+   Number of public wires:          18
+   Number of public wire bits:     137
+   Number of ports:                  5
+   Number of port bits:             35
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $dff                            1
+     $mux                            2
+     $xor                            3
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+5. Executing Verilog-2005 frontend: build/lfsr16_generic.v
+Parsing Verilog input from `build/lfsr16_generic.v' to AST representation.
+Generating RTLIL representation for module `\lfsr16'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \lfsr16
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \lfsr16
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:90$44 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:87$43 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:84$42 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:81$41 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:78$40 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:75$39 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:72$38 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:69$37 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:66$36 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:63$35 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:60$34 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:57$33 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:54$32 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:51$31 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:48$30 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:45$29 in module lfsr16.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 16 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~16 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+     1/1: $0\n18_q[15:15]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+     1/1: $0\n18_q[14:14]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+     1/1: $0\n18_q[13:13]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+     1/1: $0\n18_q[12:12]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+     1/1: $0\n18_q[11:11]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+     1/1: $0\n18_q[10:10]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+     1/1: $0\n18_q[9:9]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+     1/1: $0\n18_q[8:8]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+     1/1: $0\n18_q[7:7]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+     1/1: $0\n18_q[6:6]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+     1/1: $0\n18_q[5:5]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+     1/1: $0\n18_q[4:4]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+     1/1: $0\n18_q[3:3]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+     1/1: $0\n18_q[2:2]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+     1/1: $0\n18_q[1:1]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+     1/1: $0\n18_q[0:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\lfsr16.\n18_q [15]' using process `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+  created $dff cell `$procdff$93' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [14]' using process `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+  created $dff cell `$procdff$94' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [13]' using process `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+  created $dff cell `$procdff$95' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [12]' using process `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+  created $dff cell `$procdff$96' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [11]' using process `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+  created $dff cell `$procdff$97' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [10]' using process `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+  created $dff cell `$procdff$98' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [9]' using process `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+  created $dff cell `$procdff$99' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [8]' using process `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+  created $dff cell `$procdff$100' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [7]' using process `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+  created $dff cell `$procdff$101' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [6]' using process `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+  created $dff cell `$procdff$102' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [5]' using process `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+  created $dff cell `$procdff$103' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [4]' using process `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+  created $dff cell `$procdff$104' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [3]' using process `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+  created $dff cell `$procdff$105' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [2]' using process `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+  created $dff cell `$procdff$106' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [1]' using process `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+  created $dff cell `$procdff$107' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [0]' using process `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+  created $dff cell `$procdff$108' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+Cleaned up 16 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+Removed 0 unused cells and 51 unused wires.
+<suppressed ~1 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfsr16..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfsr16.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== lfsr16 ===
+
+   Number of wires:                 35
+   Number of wire bits:            139
+   Number of public wires:          17
+   Number of public wire bits:     121
+   Number of ports:                  5
+   Number of port bits:             35
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 53
+     $dff                           16
+     $mux                           32
+     $not                            2
+     $xor                            3
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+9. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold" and gate cell "gate".
+
+9.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+9.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+<suppressed ~1 debug messages>
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \miter
+
+10.2. Analyzing design hierarchy..
+Top module:  \miter
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+Module miter directly or indirectly contains formal properties -> setting "keep" attribute.
+
+11. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+No constraints for initial state found.
+
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 7:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 8:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 9:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 10:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 11:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Setting up time step 12:
+Final constraint equation: { } = { }
+Imported 64 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$110 when 1'1.
+
+Solving problem with 7755 variables and 20228 clauses..
+ERROR: Called with -verify and proof did fail!

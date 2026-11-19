@@ -1,0 +1,11 @@
+### ghdl synth  --std=08 --out=verilog rtl/alu4.vhd -e alu4
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+
+### ghdl synth exit code = 0
+### Verilog output size  = 1112 bytes
+### module names in output:
+###   module alu4
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):
+###   36:  always @*

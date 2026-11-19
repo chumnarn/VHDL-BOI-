@@ -1,0 +1,624 @@
+
+-- Running command `
+  read_verilog build/lfsr16.v
+  prep -top lfsr16 -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/lfsr16_generic.v
+  prep -top lfsr16 -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold lfsr16
+  design -copy-from gate -as gate lfsr16
+  equiv_make gold gate equiv
+  hierarchy -top equiv
+  equiv_simple -seq 5
+    equiv_induct -seq 5
+  equiv_status -assert
+' --
+
+1. Executing Verilog-2005 frontend: build/lfsr16.v
+Parsing Verilog input from `build/lfsr16.v' to AST representation.
+Generating RTLIL representation for module `\lfsr16'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \lfsr16
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \lfsr16
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lfsr16.$proc$build/lfsr16.v:46$6'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\lfsr16.\n18_q' using process `\lfsr16.$proc$build/lfsr16.v:46$6'.
+  created $dff cell `$procdff$7' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `lfsr16.$proc$build/lfsr16.v:46$6'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfsr16..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfsr16.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== lfsr16 ===
+
+   Number of wires:                 18
+   Number of wire bits:            137
+   Number of public wires:          18
+   Number of public wire bits:     137
+   Number of ports:                  5
+   Number of port bits:             35
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $dff                            1
+     $mux                            2
+     $xor                            3
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+5. Executing Verilog-2005 frontend: build/lfsr16_generic.v
+Parsing Verilog input from `build/lfsr16_generic.v' to AST representation.
+Generating RTLIL representation for module `\lfsr16'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \lfsr16
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \lfsr16
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:90$44 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:87$43 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:84$42 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:81$41 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:78$40 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:75$39 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:72$38 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:69$37 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:66$36 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:63$35 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:60$34 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:57$33 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:54$32 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:51$31 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:48$30 in module lfsr16.
+Marked 1 switch rules as full_case in process $proc$build/lfsr16_generic.v:45$29 in module lfsr16.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 16 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~16 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+     1/1: $0\n18_q[15:15]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+     1/1: $0\n18_q[14:14]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+     1/1: $0\n18_q[13:13]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+     1/1: $0\n18_q[12:12]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+     1/1: $0\n18_q[11:11]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+     1/1: $0\n18_q[10:10]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+     1/1: $0\n18_q[9:9]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+     1/1: $0\n18_q[8:8]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+     1/1: $0\n18_q[7:7]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+     1/1: $0\n18_q[6:6]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+     1/1: $0\n18_q[5:5]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+     1/1: $0\n18_q[4:4]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+     1/1: $0\n18_q[3:3]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+     1/1: $0\n18_q[2:2]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+     1/1: $0\n18_q[1:1]
+Creating decoders for process `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+     1/1: $0\n18_q[0:0]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\lfsr16.\n18_q [15]' using process `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+  created $dff cell `$procdff$93' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [14]' using process `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+  created $dff cell `$procdff$94' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [13]' using process `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+  created $dff cell `$procdff$95' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [12]' using process `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+  created $dff cell `$procdff$96' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [11]' using process `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+  created $dff cell `$procdff$97' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [10]' using process `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+  created $dff cell `$procdff$98' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [9]' using process `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+  created $dff cell `$procdff$99' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [8]' using process `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+  created $dff cell `$procdff$100' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [7]' using process `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+  created $dff cell `$procdff$101' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [6]' using process `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+  created $dff cell `$procdff$102' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [5]' using process `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+  created $dff cell `$procdff$103' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [4]' using process `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+  created $dff cell `$procdff$104' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [3]' using process `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+  created $dff cell `$procdff$105' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [2]' using process `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+  created $dff cell `$procdff$106' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [1]' using process `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+  created $dff cell `$procdff$107' with positive edge clock.
+Creating register for signal `\lfsr16.\n18_q [0]' using process `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+  created $dff cell `$procdff$108' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:90$44'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:87$43'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:84$42'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:81$41'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:78$40'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:75$39'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:72$38'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:69$37'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:66$36'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:63$35'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:60$34'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:57$33'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:54$32'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:51$31'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:48$30'.
+Found and cleaned up 1 empty switch in `\lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+Removing empty process `lfsr16.$proc$build/lfsr16_generic.v:45$29'.
+Cleaned up 16 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+Removed 0 unused cells and 51 unused wires.
+<suppressed ~1 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lfsr16..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~16 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lfsr16.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lfsr16.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lfsr16'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== lfsr16 ===
+
+   Number of wires:                 35
+   Number of wire bits:            139
+   Number of public wires:          17
+   Number of public wire bits:     121
+   Number of ports:                  5
+   Number of port bits:             35
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 53
+     $dff                           16
+     $mux                           32
+     $not                            2
+     $xor                            3
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module lfsr16...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lfsr16..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Presumably equivalent wires: din_gold (\din_gold), din_gate (\din_gate) -> din
+Presumably equivalent wires: load_gold (\load_gold), load_gate (\load_gate) -> load
+Presumably equivalent wires: n10_o_gold (\n18_q_gold [10]), n10_o_gate (\n18_q_gate [10]) -> n10_o
+Presumably equivalent wires: n12_o_gold ({ \n18_q_gold [14:0] \n11_o_gold }), n12_o_gate ({ \n18_q_gate [14:0] \n12_o_gate [0] }) -> n12_o
+  Skipping signal bit n12_o_gate [0]: undriven on gate side.
+Presumably equivalent wires: n13_o_gold (\n13_o_gold), n13_o_gate (\n13_o_gate) -> n13_o
+Presumably equivalent wires: n18_q_gold (\n18_q_gold), n18_q_gate (\n18_q_gate) -> n18_q
+Presumably equivalent wires: n4_o_gold (\n18_q_gold [14:0]), n4_o_gate (\n18_q_gate [14:0]) -> n4_o
+Presumably equivalent wires: n5_o_gold (\n18_q_gold [15]), n5_o_gate (\n18_q_gate [15]) -> n5_o
+Presumably equivalent wires: n6_o_gold (\n18_q_gold [13]), n6_o_gate (\n18_q_gate [13]) -> n6_o
+Presumably equivalent wires: n8_o_gold (\n18_q_gold [12]), n8_o_gate (\n18_q_gate [12]) -> n8_o
+Presumably equivalent wires: q_gold (\n18_q_gold), q_gate (\n18_q_gate) -> q
+Presumably equivalent wires: rst_gold (\rst_gold), rst_gate (\rst_gate) -> rst
+Presumably equivalent wires: s_gold (\n18_q_gold), s_gate (\n18_q_gate) -> s
+Changing input A of cell $procmux$46_gate ($mux): \n13_o_gate [15] -> \n13_o [15]
+Changing input A of cell $procmux$49_gate ($mux): \n13_o_gate [14] -> \n13_o [14]
+Changing input A of cell $procmux$52_gate ($mux): \n13_o_gate [13] -> \n13_o [13]
+Changing input A of cell $procmux$55_gate ($mux): \n13_o_gate [12] -> \n13_o [12]
+Changing input A of cell $procmux$58_gate ($mux): \n13_o_gate [11] -> \n13_o [11]
+Changing input A of cell $procmux$61_gate ($mux): \n13_o_gate [10] -> \n13_o [10]
+Changing input A of cell $procmux$64_gate ($mux): \n13_o_gate [9] -> \n13_o [9]
+Changing input A of cell $procmux$67_gate ($mux): \n13_o_gate [8] -> \n13_o [8]
+Changing input A of cell $procmux$70_gate ($mux): \n13_o_gate [7] -> \n13_o [7]
+Changing input A of cell $procmux$73_gate ($mux): \n13_o_gate [6] -> \n13_o [6]
+Changing input A of cell $procmux$76_gate ($mux): \n13_o_gate [5] -> \n13_o [5]
+Changing input A of cell $procmux$79_gate ($mux): \n13_o_gate [4] -> \n13_o [4]
+Changing input A of cell $procmux$82_gate ($mux): \n13_o_gate [3] -> \n13_o [3]
+Changing input A of cell $procmux$85_gate ($mux): \n13_o_gate [2] -> \n13_o [2]
+Changing input A of cell $procmux$88_gate ($mux): \n13_o_gate [1] -> \n13_o [1]
+Changing input A of cell $procmux$91_gate ($mux): \n13_o_gate [0] -> \n13_o [0]
+Changing input A of cell $ternary$build/lfsr16_generic.v:26$8_gate ($mux): \n18_q_gate [10] -> \q [10]
+Changing input A of cell $ternary$build/lfsr16_generic.v:27$9_gate ($mux): \n18_q_gate [11] -> \q [11]
+Changing input A of cell $ternary$build/lfsr16_generic.v:28$10_gate ($mux): \n18_q_gate [12] -> \q [12]
+Changing input A of cell $ternary$build/lfsr16_generic.v:29$11_gate ($mux): \n18_q_gate [13] -> \q [13]
+Changing input A of cell $ternary$build/lfsr16_generic.v:30$12_gate ($mux): \n18_q_gate [14] -> \q [14]
+Changing input A of cell $ternary$build/lfsr16_generic.v:35$19_gate ($mux): \n18_q_gate [0] -> \q [0]
+Changing input A of cell $ternary$build/lfsr16_generic.v:36$20_gate ($mux): \n18_q_gate [1] -> \q [1]
+Changing input A of cell $ternary$build/lfsr16_generic.v:37$21_gate ($mux): \n18_q_gate [2] -> \q [2]
+Changing input A of cell $ternary$build/lfsr16_generic.v:38$22_gate ($mux): \n18_q_gate [3] -> \q [3]
+Changing input A of cell $ternary$build/lfsr16_generic.v:39$23_gate ($mux): \n18_q_gate [4] -> \q [4]
+Changing input A of cell $ternary$build/lfsr16_generic.v:40$24_gate ($mux): \n18_q_gate [5] -> \q [5]
+Changing input A of cell $ternary$build/lfsr16_generic.v:41$25_gate ($mux): \n18_q_gate [6] -> \q [6]
+Changing input A of cell $ternary$build/lfsr16_generic.v:42$26_gate ($mux): \n18_q_gate [7] -> \q [7]
+Changing input A of cell $ternary$build/lfsr16_generic.v:43$27_gate ($mux): \n18_q_gate [8] -> \q [8]
+Changing input A of cell $ternary$build/lfsr16_generic.v:44$28_gate ($mux): \n18_q_gate [9] -> \q [9]
+Changing input A of cell $xor$build/lfsr16_generic.v:31$13_gate ($xor): \n18_q_gate [15] -> \q [15]
+Changing input B of cell $xor$build/lfsr16_generic.v:31$13_gate ($xor): \n18_q_gate [13] -> \q [13]
+Changing input B of cell $xor$build/lfsr16_generic.v:32$15_gate ($xor): \n18_q_gate [12] -> \q [12]
+Changing input B of cell $xor$build/lfsr16_generic.v:33$17_gate ($xor): \n18_q_gate [10] -> \q [10]
+Changing input A of cell $ternary$build/lfsr16.v:42$4_gold ($mux): { \n18_q_gold [14:0] \n11_o_gold } -> { \q [14:0] \n11_o_gold }
+Changing input A of cell $ternary$build/lfsr16.v:44$5_gold ($mux): \n13_o_gold -> \n13_o
+Changing input A of cell $xor$build/lfsr16.v:30$1_gold ($xor): \n18_q_gold [15] -> \q [15]
+Changing input B of cell $xor$build/lfsr16.v:30$1_gold ($xor): \n18_q_gold [13] -> \q [13]
+Changing input B of cell $xor$build/lfsr16.v:34$2_gold ($xor): \n18_q_gold [12] -> \q [12]
+Changing input B of cell $xor$build/lfsr16.v:38$3_gold ($xor): \n18_q_gold [10] -> \q [10]
+Setting undriven nets to undef: \n12_o [0]
+Setting undriven nets to undef: \n12_o_gate [0]
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 98 unproven $equiv cells (10 groups) in equiv:
+ Grouping SAT models for \q:
+  Trying to prove $equiv for \q [0]: success!
+  Trying to prove $equiv for \q [1]: success!
+  Trying to prove $equiv for \q [2]: success!
+  Trying to prove $equiv for \q [3]: success!
+  Trying to prove $equiv for \q [4]: success!
+  Trying to prove $equiv for \q [5]: success!
+  Trying to prove $equiv for \q [6]: success!
+  Trying to prove $equiv for \q [7]: success!
+  Trying to prove $equiv for \q [8]: success!
+  Trying to prove $equiv for \q [9]: success!
+  Trying to prove $equiv for \q [10]: success!
+  Trying to prove $equiv for \q [11]: success!
+  Trying to prove $equiv for \q [12]: success!
+  Trying to prove $equiv for \q [13]: success!
+  Trying to prove $equiv for \q [14]: success!
+  Trying to prove $equiv for \q [15]: success!
+ Grouping SAT models for \s:
+  Trying to prove $equiv for \s [0]: success!
+  Trying to prove $equiv for \s [1]: success!
+  Trying to prove $equiv for \s [2]: success!
+  Trying to prove $equiv for \s [3]: success!
+  Trying to prove $equiv for \s [4]: success!
+  Trying to prove $equiv for \s [5]: success!
+  Trying to prove $equiv for \s [6]: success!
+  Trying to prove $equiv for \s [7]: success!
+  Trying to prove $equiv for \s [8]: success!
+  Trying to prove $equiv for \s [9]: success!
+  Trying to prove $equiv for \s [10]: success!
+  Trying to prove $equiv for \s [11]: success!
+  Trying to prove $equiv for \s [12]: success!
+  Trying to prove $equiv for \s [13]: success!
+  Trying to prove $equiv for \s [14]: success!
+  Trying to prove $equiv for \s [15]: success!
+ Grouping SAT models for \n4_o:
+  Trying to prove $equiv for \n4_o [0]: success!
+  Trying to prove $equiv for \n4_o [1]: success!
+  Trying to prove $equiv for \n4_o [2]: success!
+  Trying to prove $equiv for \n4_o [3]: success!
+  Trying to prove $equiv for \n4_o [4]: success!
+  Trying to prove $equiv for \n4_o [5]: success!
+  Trying to prove $equiv for \n4_o [6]: success!
+  Trying to prove $equiv for \n4_o [7]: success!
+  Trying to prove $equiv for \n4_o [8]: success!
+  Trying to prove $equiv for \n4_o [9]: success!
+  Trying to prove $equiv for \n4_o [10]: success!
+  Trying to prove $equiv for \n4_o [11]: success!
+  Trying to prove $equiv for \n4_o [12]: success!
+  Trying to prove $equiv for \n4_o [13]: success!
+  Trying to prove $equiv for \n4_o [14]: success!
+  Trying to prove $equiv for \n5_o: success!
+  Trying to prove $equiv for \n6_o: success!
+  Trying to prove $equiv for \n8_o: success!
+  Trying to prove $equiv for \n10_o: success!
+ Grouping SAT models for \n12_o [15:1]:
+  Trying to prove $equiv for \n12_o [1]: success!
+  Trying to prove $equiv for \n12_o [2]: success!
+  Trying to prove $equiv for \n12_o [3]: success!
+  Trying to prove $equiv for \n12_o [4]: success!
+  Trying to prove $equiv for \n12_o [5]: success!
+  Trying to prove $equiv for \n12_o [6]: success!
+  Trying to prove $equiv for \n12_o [7]: success!
+  Trying to prove $equiv for \n12_o [8]: success!
+  Trying to prove $equiv for \n12_o [9]: success!
+  Trying to prove $equiv for \n12_o [10]: success!
+  Trying to prove $equiv for \n12_o [11]: success!
+  Trying to prove $equiv for \n12_o [12]: success!
+  Trying to prove $equiv for \n12_o [13]: success!
+  Trying to prove $equiv for \n12_o [14]: success!
+  Trying to prove $equiv for \n12_o [15]: success!
+ Grouping SAT models for \n13_o:
+  Trying to prove $equiv for \n13_o [0]: success!
+  Trying to prove $equiv for \n13_o [1]: success!
+  Trying to prove $equiv for \n13_o [2]: success!
+  Trying to prove $equiv for \n13_o [3]: success!
+  Trying to prove $equiv for \n13_o [4]: success!
+  Trying to prove $equiv for \n13_o [5]: success!
+  Trying to prove $equiv for \n13_o [6]: success!
+  Trying to prove $equiv for \n13_o [7]: success!
+  Trying to prove $equiv for \n13_o [8]: success!
+  Trying to prove $equiv for \n13_o [9]: success!
+  Trying to prove $equiv for \n13_o [10]: success!
+  Trying to prove $equiv for \n13_o [11]: success!
+  Trying to prove $equiv for \n13_o [12]: success!
+  Trying to prove $equiv for \n13_o [13]: success!
+  Trying to prove $equiv for \n13_o [14]: success!
+  Trying to prove $equiv for \n13_o [15]: success!
+ Grouping SAT models for \n18_q:
+  Trying to prove $equiv for \n18_q [0]: success!
+  Trying to prove $equiv for \n18_q [1]: success!
+  Trying to prove $equiv for \n18_q [2]: success!
+  Trying to prove $equiv for \n18_q [3]: success!
+  Trying to prove $equiv for \n18_q [4]: success!
+  Trying to prove $equiv for \n18_q [5]: success!
+  Trying to prove $equiv for \n18_q [6]: success!
+  Trying to prove $equiv for \n18_q [7]: success!
+  Trying to prove $equiv for \n18_q [8]: success!
+  Trying to prove $equiv for \n18_q [9]: success!
+  Trying to prove $equiv for \n18_q [10]: success!
+  Trying to prove $equiv for \n18_q [11]: success!
+  Trying to prove $equiv for \n18_q [12]: success!
+  Trying to prove $equiv for \n18_q [13]: success!
+  Trying to prove $equiv for \n18_q [14]: success!
+  Trying to prove $equiv for \n18_q [15]: success!
+Proved 98 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 98 $equiv cells in equiv:
+  Of those cells 98 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: cb67fdd6b2, CPU: user 0.12s system 0.02s, MEM: 16.30 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 38% 1x equiv_simple (0 sec), 13% 10x opt_clean (0 sec), ...

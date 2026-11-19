@@ -1,0 +1,416 @@
+
+-- Running command `
+  read_verilog build/mult8.v
+  prep -top mult8 -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/mult8_generic.v
+  prep -top mult8 -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold mult8
+  design -copy-from gate -as gate mult8
+  equiv_make gold gate equiv
+  hierarchy -top equiv
+  equiv_simple -seq 5
+    equiv_induct -seq 5
+  equiv_status -assert
+' --
+
+1. Executing Verilog-2005 frontend: build/mult8.v
+Parsing Verilog input from `build/mult8.v' to AST representation.
+Generating RTLIL representation for module `\mult8'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \mult8
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \mult8
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module mult8...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mult8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mult8.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 8 bits (of 16) from port A of cell mult8.$mul$build/mult8.v:14$1 ($mul).
+Removed top 8 bits (of 16) from port B of cell mult8.$mul$build/mult8.v:14$1 ($mul).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== mult8 ===
+
+   Number of wires:                  6
+   Number of wire bits:             80
+   Number of public wires:           6
+   Number of public wire bits:      80
+   Number of ports:                  3
+   Number of port bits:             32
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $mul                            1
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module mult8...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+5. Executing Verilog-2005 frontend: build/mult8_generic.v
+Parsing Verilog input from `build/mult8_generic.v' to AST representation.
+Generating RTLIL representation for module `\mult8'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \mult8
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \mult8
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+<suppressed ~30 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+Removed 9 unused cells and 393 unused wires.
+<suppressed ~10 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module mult8...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mult8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mult8.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mult8.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mult8'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== mult8 ===
+
+   Number of wires:                474
+   Number of wire bits:            548
+   Number of public wires:         335
+   Number of public wire bits:     409
+   Number of ports:                  3
+   Number of port bits:             32
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                484
+     $and                          177
+     $not                          137
+     $or                            59
+     $xor                          111
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module mult8...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mult8..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: n1_o_gold ({ 8'00000000 \a_gold }), n1_o_gate ({ 8'00000000 \a_gate }) -> n1_o
+Presumably equivalent wires: n2_o_gold ({ 8'00000000 \b_gold }), n2_o_gate ({ 8'00000000 \b_gate }) -> n2_o
+Presumably equivalent wires: n3_o_gold (\p_gold), n3_o_gate (\p_gate) -> n3_o
+Presumably equivalent wires: p_gold (\p_gold), p_gate (\p_gate) -> p
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 64 unproven $equiv cells (4 groups) in equiv:
+ Grouping SAT models for \p:
+  Trying to prove $equiv for \p [0]: success!
+  Trying to prove $equiv for \p [1]: success!
+  Trying to prove $equiv for \p [2]: success!
+  Trying to prove $equiv for \p [3]: success!
+  Trying to prove $equiv for \p [4]: success!
+  Trying to prove $equiv for \p [5]: success!
+  Trying to prove $equiv for \p [6]: success!
+  Trying to prove $equiv for \p [7]: success!
+  Trying to prove $equiv for \p [8]: success!
+  Trying to prove $equiv for \p [9]: success!
+  Trying to prove $equiv for \p [10]: success!
+  Trying to prove $equiv for \p [11]: success!
+  Trying to prove $equiv for \p [12]: success!
+  Trying to prove $equiv for \p [13]: success!
+  Trying to prove $equiv for \p [14]: success!
+  Trying to prove $equiv for \p [15]: success!
+ Grouping SAT models for \n1_o:
+  Trying to prove $equiv for \n1_o [0]: success!
+  Trying to prove $equiv for \n1_o [1]: success!
+  Trying to prove $equiv for \n1_o [2]: success!
+  Trying to prove $equiv for \n1_o [3]: success!
+  Trying to prove $equiv for \n1_o [4]: success!
+  Trying to prove $equiv for \n1_o [5]: success!
+  Trying to prove $equiv for \n1_o [6]: success!
+  Trying to prove $equiv for \n1_o [7]: success!
+  Trying to prove $equiv for \n1_o [8]: success!
+  Trying to prove $equiv for \n1_o [9]: success!
+  Trying to prove $equiv for \n1_o [10]: success!
+  Trying to prove $equiv for \n1_o [11]: success!
+  Trying to prove $equiv for \n1_o [12]: success!
+  Trying to prove $equiv for \n1_o [13]: success!
+  Trying to prove $equiv for \n1_o [14]: success!
+  Trying to prove $equiv for \n1_o [15]: success!
+ Grouping SAT models for \n2_o:
+  Trying to prove $equiv for \n2_o [0]: success!
+  Trying to prove $equiv for \n2_o [1]: success!
+  Trying to prove $equiv for \n2_o [2]: success!
+  Trying to prove $equiv for \n2_o [3]: success!
+  Trying to prove $equiv for \n2_o [4]: success!
+  Trying to prove $equiv for \n2_o [5]: success!
+  Trying to prove $equiv for \n2_o [6]: success!
+  Trying to prove $equiv for \n2_o [7]: success!
+  Trying to prove $equiv for \n2_o [8]: success!
+  Trying to prove $equiv for \n2_o [9]: success!
+  Trying to prove $equiv for \n2_o [10]: success!
+  Trying to prove $equiv for \n2_o [11]: success!
+  Trying to prove $equiv for \n2_o [12]: success!
+  Trying to prove $equiv for \n2_o [13]: success!
+  Trying to prove $equiv for \n2_o [14]: success!
+  Trying to prove $equiv for \n2_o [15]: success!
+ Grouping SAT models for \n3_o:
+  Trying to prove $equiv for \n3_o [0]: success!
+  Trying to prove $equiv for \n3_o [1]: success!
+  Trying to prove $equiv for \n3_o [2]: success!
+  Trying to prove $equiv for \n3_o [3]: success!
+  Trying to prove $equiv for \n3_o [4]: success!
+  Trying to prove $equiv for \n3_o [5]: success!
+  Trying to prove $equiv for \n3_o [6]: success!
+  Trying to prove $equiv for \n3_o [7]: success!
+  Trying to prove $equiv for \n3_o [8]: success!
+  Trying to prove $equiv for \n3_o [9]: success!
+  Trying to prove $equiv for \n3_o [10]: success!
+  Trying to prove $equiv for \n3_o [11]: success!
+  Trying to prove $equiv for \n3_o [12]: success!
+  Trying to prove $equiv for \n3_o [13]: success!
+  Trying to prove $equiv for \n3_o [14]: success!
+  Trying to prove $equiv for \n3_o [15]: success!
+Proved 64 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 64 $equiv cells in equiv:
+  Of those cells 64 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: c83226ee9c, CPU: user 114.69s system 0.04s, MEM: 21.09 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 99% 1x equiv_simple (114 sec), 0% 10x opt_clean (0 sec), ...

@@ -1,0 +1,12 @@
+### ghdl synth  --std=08 --out=verilog rtl/std_logic_arith_bad.vhd -e std_logic_arith_bad
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+rtl/std_logic_arith_bad.vhd:6:10:error: use of synopsys package "std_logic_arith" needs the -fsynopsys option
+use ieee.std_logic_arith.all;
+         ^
+
+### ghdl synth exit code = 1
+### Verilog output size  = 0 bytes
+### module names in output:
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):

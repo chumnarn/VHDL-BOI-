@@ -1,0 +1,490 @@
+
+-- Running command `
+  read_verilog build/counter_sync.v
+  prep -top counter_sync -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/counter_sync_generic.v
+  prep -top counter_sync -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold counter_sync
+  design -copy-from gate -as gate counter_sync
+  equiv_make gold gate equiv
+  hierarchy -top equiv
+  equiv_simple -seq 5
+    equiv_induct -seq 5
+  equiv_status -assert
+' --
+
+1. Executing Verilog-2005 frontend: build/counter_sync.v
+Parsing Verilog input from `build/counter_sync.v' to AST representation.
+Generating RTLIL representation for module `\counter_sync'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \counter_sync
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \counter_sync
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\counter_sync.$proc$build/counter_sync.v:21$4'.
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\counter_sync.\n11_q' using process `\counter_sync.$proc$build/counter_sync.v:21$4'.
+  created $dff cell `$procdff$5' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `counter_sync.$proc$build/counter_sync.v:21$4'.
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module counter_sync...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_sync..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_sync.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 7 bits (of 8) from port B of cell counter_sync.$add$build/counter_sync.v:15$1 ($add).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== counter_sync ===
+
+   Number of wires:                  9
+   Number of wire bits:             51
+   Number of public wires:           9
+   Number of public wire bits:      51
+   Number of ports:                  4
+   Number of port bits:             11
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $add                            1
+     $dff                            1
+     $mux                            2
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module counter_sync...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+5. Executing Verilog-2005 frontend: build/counter_sync_generic.v
+Parsing Verilog input from `build/counter_sync_generic.v' to AST representation.
+Generating RTLIL representation for module `\counter_sync'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \counter_sync
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \counter_sync
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:60$38 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:57$37 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:54$36 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:51$35 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:48$34 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:45$33 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:42$32 in module counter_sync.
+Marked 1 switch rules as full_case in process $proc$build/counter_sync_generic.v:39$31 in module counter_sync.
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~16 debug messages>
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:60$38'.
+     1/1: $0\n11_q[6:6]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:57$37'.
+     1/1: $0\n11_q[5:5]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:54$36'.
+     1/1: $0\n11_q[4:4]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:51$35'.
+     1/1: $0\n11_q[3:3]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:48$34'.
+     1/1: $0\n11_q[2:2]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:45$33'.
+     1/1: $0\n11_q[1:1]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:42$32'.
+     1/1: $0\n11_q[0:0]
+Creating decoders for process `\counter_sync.$proc$build/counter_sync_generic.v:39$31'.
+     1/1: $0\n11_q[7:7]
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\counter_sync.\n11_q [6]' using process `\counter_sync.$proc$build/counter_sync_generic.v:60$38'.
+  created $dff cell `$procdff$79' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [5]' using process `\counter_sync.$proc$build/counter_sync_generic.v:57$37'.
+  created $dff cell `$procdff$80' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [4]' using process `\counter_sync.$proc$build/counter_sync_generic.v:54$36'.
+  created $dff cell `$procdff$81' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [3]' using process `\counter_sync.$proc$build/counter_sync_generic.v:51$35'.
+  created $dff cell `$procdff$82' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [2]' using process `\counter_sync.$proc$build/counter_sync_generic.v:48$34'.
+  created $dff cell `$procdff$83' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [1]' using process `\counter_sync.$proc$build/counter_sync_generic.v:45$33'.
+  created $dff cell `$procdff$84' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [0]' using process `\counter_sync.$proc$build/counter_sync_generic.v:42$32'.
+  created $dff cell `$procdff$85' with positive edge clock.
+Creating register for signal `\counter_sync.\n11_q [7]' using process `\counter_sync.$proc$build/counter_sync_generic.v:39$31'.
+  created $dff cell `$procdff$86' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:60$38'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:60$38'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:57$37'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:57$37'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:54$36'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:54$36'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:51$35'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:51$35'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:48$34'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:48$34'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:45$33'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:45$33'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:42$32'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:42$32'.
+Found and cleaned up 2 empty switches in `\counter_sync.$proc$build/counter_sync_generic.v:39$31'.
+Removing empty process `counter_sync.$proc$build/counter_sync_generic.v:39$31'.
+Cleaned up 16 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+<suppressed ~1 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+Removed 0 unused cells and 41 unused wires.
+<suppressed ~1 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module counter_sync...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \counter_sync..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \counter_sync.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module counter_sync.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\counter_sync'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== counter_sync ===
+
+   Number of wires:                 39
+   Number of wire bits:             67
+   Number of public wires:          15
+   Number of public wire bits:      43
+   Number of ports:                  4
+   Number of port bits:             11
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 48
+     $and                            6
+     $dff                            8
+     $mux                           16
+     $not                            9
+     $or                             2
+     $xor                            7
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module counter_sync...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \counter_sync..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: ce_gold (\ce_gold), ce_gate (\ce_gate) -> ce
+Presumably equivalent wires: clk_gold (\clk_gold), clk_gate (\clk_gate) -> clk
+Presumably equivalent wires: cnt_gold (\n11_q_gold), cnt_gate (\n11_q_gate) -> cnt
+Presumably equivalent wires: n11_q_gold (\n11_q_gold), n11_q_gate (\n11_q_gate) -> n11_q
+Presumably equivalent wires: n5_o_gold (\n5_o_gold), n5_o_gate (\n5_o_gate) -> n5_o
+Presumably equivalent wires: q_gold (\n11_q_gold), q_gate (\n11_q_gate) -> q
+Presumably equivalent wires: rst_gold (\rst_gold), rst_gate (\rst_gate) -> rst
+Changing input A of cell $and$build/counter_sync_generic.v:27$13_gate ($and): \n11_q_gate [2] -> \n11_q [2]
+Changing input A of cell $and$build/counter_sync_generic.v:29$15_gate ($and): \n11_q_gate [3] -> \n11_q [3]
+Changing input B of cell $and$build/counter_sync_generic.v:29$15_gate ($and): \n11_q_gate [2] -> \n11_q [2]
+Changing input A of cell $and$build/counter_sync_generic.v:32$21_gate ($and): \n11_q_gate [4] -> \n11_q [4]
+Changing input A of cell $and$build/counter_sync_generic.v:34$23_gate ($and): \n11_q_gate [5] -> \n11_q [5]
+Changing input B of cell $and$build/counter_sync_generic.v:34$23_gate ($and): \n11_q_gate [4] -> \n11_q [4]
+Changing input A of cell $and$build/counter_sync_generic.v:37$29_gate ($and): \n11_q_gate [6] -> \n11_q [6]
+Changing input A of cell $not$build/counter_sync_generic.v:23$6_gate ($not): \n11_q_gate [0] -> \n11_q [0]
+Changing input A of cell $procmux$39_gate ($mux): \n11_q_gate [6] -> \n11_q [6]
+Changing input B of cell $procmux$39_gate ($mux): \n5_o_gate [6] -> \n5_o [6]
+Changing input A of cell $procmux$44_gate ($mux): \n11_q_gate [5] -> \n11_q [5]
+Changing input B of cell $procmux$44_gate ($mux): \n5_o_gate [5] -> \n5_o [5]
+Changing input A of cell $procmux$49_gate ($mux): \n11_q_gate [4] -> \n11_q [4]
+Changing input B of cell $procmux$49_gate ($mux): \n5_o_gate [4] -> \n5_o [4]
+Changing input A of cell $procmux$54_gate ($mux): \n11_q_gate [3] -> \n11_q [3]
+Changing input B of cell $procmux$54_gate ($mux): \n5_o_gate [3] -> \n5_o [3]
+Changing input A of cell $procmux$59_gate ($mux): \n11_q_gate [2] -> \n11_q [2]
+Changing input B of cell $procmux$59_gate ($mux): \n5_o_gate [2] -> \n5_o [2]
+Changing input A of cell $procmux$64_gate ($mux): \n11_q_gate [1] -> \n11_q [1]
+Changing input B of cell $procmux$64_gate ($mux): \n5_o_gate [1] -> \n5_o [1]
+Changing input A of cell $procmux$69_gate ($mux): \n11_q_gate [0] -> \n11_q [0]
+Changing input B of cell $procmux$69_gate ($mux): \n5_o_gate [0] -> \n5_o [0]
+Changing input A of cell $procmux$74_gate ($mux): \n11_q_gate [7] -> \n11_q [7]
+Changing input B of cell $procmux$74_gate ($mux): \n5_o_gate [7] -> \n5_o [7]
+Changing input A of cell $xor$build/counter_sync_generic.v:24$7_gate ($xor): \n11_q_gate [1] -> \n11_q [1]
+Changing input B of cell $xor$build/counter_sync_generic.v:24$7_gate ($xor): \n11_q_gate [0] -> \n11_q [0]
+Changing input B of cell $xor$build/counter_sync_generic.v:26$10_gate ($xor): \n11_q_gate [2] -> \n11_q [2]
+Changing input B of cell $xor$build/counter_sync_generic.v:28$14_gate ($xor): \n11_q_gate [3] -> \n11_q [3]
+Changing input B of cell $xor$build/counter_sync_generic.v:31$18_gate ($xor): \n11_q_gate [4] -> \n11_q [4]
+Changing input B of cell $xor$build/counter_sync_generic.v:33$22_gate ($xor): \n11_q_gate [5] -> \n11_q [5]
+Changing input B of cell $xor$build/counter_sync_generic.v:36$26_gate ($xor): \n11_q_gate [6] -> \n11_q [6]
+Changing input B of cell $xor$build/counter_sync_generic.v:38$30_gate ($xor): \n11_q_gate [7] -> \n11_q [7]
+Changing input A of cell $and$build/counter_sync_generic.v:25$8_gate ($and): \n11_q_gate [1] -> \n11_q [1]
+Changing input B of cell $and$build/counter_sync_generic.v:25$8_gate ($and): \n11_q_gate [0] -> \n11_q [0]
+Changing input A of cell $ternary$build/counter_sync.v:17$2_gold ($mux): \n11_q_gold -> \n11_q
+Changing input B of cell $ternary$build/counter_sync.v:17$2_gold ($mux): \n5_o_gold -> \n5_o
+Changing input A of cell $add$build/counter_sync.v:15$1_gold ($add): \n11_q_gold -> \n11_q
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 32 unproven $equiv cells (4 groups) in equiv:
+ Grouping SAT models for \cnt:
+  Trying to prove $equiv for \cnt [0]: success!
+  Trying to prove $equiv for \cnt [1]: success!
+  Trying to prove $equiv for \cnt [2]: success!
+  Trying to prove $equiv for \cnt [3]: success!
+  Trying to prove $equiv for \cnt [4]: success!
+  Trying to prove $equiv for \cnt [5]: success!
+  Trying to prove $equiv for \cnt [6]: success!
+  Trying to prove $equiv for \cnt [7]: success!
+ Grouping SAT models for \q:
+  Trying to prove $equiv for \q [0]: success!
+  Trying to prove $equiv for \q [1]: success!
+  Trying to prove $equiv for \q [2]: success!
+  Trying to prove $equiv for \q [3]: success!
+  Trying to prove $equiv for \q [4]: success!
+  Trying to prove $equiv for \q [5]: success!
+  Trying to prove $equiv for \q [6]: success!
+  Trying to prove $equiv for \q [7]: success!
+ Grouping SAT models for \n5_o:
+  Trying to prove $equiv for \n5_o [0]: success!
+  Trying to prove $equiv for \n5_o [1]: success!
+  Trying to prove $equiv for \n5_o [2]: success!
+  Trying to prove $equiv for \n5_o [3]: success!
+  Trying to prove $equiv for \n5_o [4]: success!
+  Trying to prove $equiv for \n5_o [5]: success!
+  Trying to prove $equiv for \n5_o [6]: success!
+  Trying to prove $equiv for \n5_o [7]: success!
+ Grouping SAT models for \n11_q:
+  Trying to prove $equiv for \n11_q [0]: success!
+  Trying to prove $equiv for \n11_q [1]: success!
+  Trying to prove $equiv for \n11_q [2]: success!
+  Trying to prove $equiv for \n11_q [3]: success!
+  Trying to prove $equiv for \n11_q [4]: success!
+  Trying to prove $equiv for \n11_q [5]: success!
+  Trying to prove $equiv for \n11_q [6]: success!
+  Trying to prove $equiv for \n11_q [7]: success!
+Proved 32 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 32 $equiv cells in equiv:
+  Of those cells 32 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: d5e384233f, CPU: user 0.17s system 0.04s, MEM: 15.42 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 32% 1x equiv_simple (0 sec), 16% 10x opt_clean (0 sec), ...

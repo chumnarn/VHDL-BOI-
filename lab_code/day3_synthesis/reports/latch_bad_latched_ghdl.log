@@ -1,0 +1,11 @@
+### ghdl synth --latches --std=08 --out=verilog rtl/latch_bad.vhd -e latch_bad
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+
+### ghdl synth exit code = 0
+### Verilog output size  = 249 bytes
+### module names in output:
+###   module latch_bad
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):
+###   11:  always @(e)

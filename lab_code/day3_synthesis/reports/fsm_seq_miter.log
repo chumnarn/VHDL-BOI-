@@ -1,0 +1,496 @@
+
+-- Running command `
+  read_verilog build/fsm_seq.v
+  prep -top fsm_seq -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/fsm_seq_generic.v
+  prep -top fsm_seq -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold fsm_seq
+  design -copy-from gate -as gate fsm_seq
+  miter -equiv -flatten -make_assert gold gate miter
+  hierarchy -top miter
+  sat -verify -prove-asserts -seq 12 miter
+' --
+
+1. Executing Verilog-2005 frontend: build/fsm_seq.v
+Parsing Verilog input from `build/fsm_seq.v' to AST representation.
+Generating RTLIL representation for module `\fsm_seq'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \fsm_seq
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \fsm_seq
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/fsm_seq.v:59$12 in module fsm_seq.
+Marked 1 switch rules as full_case in process $proc$build/fsm_seq.v:44$8 in module fsm_seq.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 3 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq.v:67$13'.
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq.v:59$12'.
+     1/1: $1\n39_o[1:0]
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq.v:44$8'.
+     1/1: $1\n26_o[1:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fsm_seq.\n39_o' from process `\fsm_seq.$proc$build/fsm_seq.v:59$12'.
+No latch inferred for signal `\fsm_seq.\n26_o' from process `\fsm_seq.$proc$build/fsm_seq.v:44$8'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fsm_seq.\n40_q' using process `\fsm_seq.$proc$build/fsm_seq.v:67$13'.
+  created $dff cell `$procdff$24' with positive edge clock.
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `fsm_seq.$proc$build/fsm_seq.v:67$13'.
+Found and cleaned up 1 empty switch in `\fsm_seq.$proc$build/fsm_seq.v:59$12'.
+Removing empty process `fsm_seq.$proc$build/fsm_seq.v:59$12'.
+Found and cleaned up 1 empty switch in `\fsm_seq.$proc$build/fsm_seq.v:44$8'.
+Removing empty process `fsm_seq.$proc$build/fsm_seq.v:44$8'.
+Cleaned up 2 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+<suppressed ~3 debug messages>
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+Removed 1 unused cells and 18 unused wires.
+<suppressed ~3 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module fsm_seq...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+<suppressed ~18 debug messages>
+Removed a total of 6 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_seq..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_seq.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+2.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+2.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_seq..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_seq.
+Performed a total of 0 changes.
+
+2.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+2.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+2.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+2.8.14. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from mux cell fsm_seq.$ternary$build/fsm_seq.v:31$2 ($mux).
+Removed top 1 bits (of 2) from port B of cell fsm_seq.$eq$build/fsm_seq.v:39$6 ($eq).
+Removed top 2 bits (of 3) from port B of cell fsm_seq.$procmux$16_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell fsm_seq.$procmux$17_CMP0 ($eq).
+Removed top 1 bits (of 2) from wire fsm_seq.n12_o.
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== fsm_seq ===
+
+   Number of wires:                 23
+   Number of wire bits:             35
+   Number of public wires:          20
+   Number of public wire bits:      32
+   Number of ports:                  4
+   Number of port bits:              5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 12
+     $dff                            1
+     $eq                             5
+     $logic_not                      1
+     $mux                            3
+     $pmux                           2
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module fsm_seq...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+5. Executing Verilog-2005 frontend: build/fsm_seq_generic.v
+Parsing Verilog input from `build/fsm_seq_generic.v' to AST representation.
+Generating RTLIL representation for module `\fsm_seq'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \fsm_seq
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \fsm_seq
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 3 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq_generic.v:70$64'.
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq_generic.v:68$63'.
+Creating decoders for process `\fsm_seq.$proc$build/fsm_seq_generic.v:66$62'.
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fsm_seq.\n40_q [2]' using process `\fsm_seq.$proc$build/fsm_seq_generic.v:70$64'.
+  created $dff cell `$procdff$65' with positive edge clock.
+Creating register for signal `\fsm_seq.\n40_q [1]' using process `\fsm_seq.$proc$build/fsm_seq_generic.v:68$63'.
+  created $dff cell `$procdff$66' with positive edge clock.
+Creating register for signal `\fsm_seq.\n40_q [0]' using process `\fsm_seq.$proc$build/fsm_seq_generic.v:66$62'.
+  created $dff cell `$procdff$67' with positive edge clock.
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `fsm_seq.$proc$build/fsm_seq_generic.v:70$64'.
+Removing empty process `fsm_seq.$proc$build/fsm_seq_generic.v:68$63'.
+Removing empty process `fsm_seq.$proc$build/fsm_seq_generic.v:66$62'.
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+<suppressed ~1 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+Removed 0 unused cells and 27 unused wires.
+<suppressed ~1 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module fsm_seq...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_seq..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_seq.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+6.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_seq..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+6.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_seq.
+Performed a total of 0 changes.
+
+6.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+6.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+6.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+6.8.14. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_seq.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_seq'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== fsm_seq ===
+
+   Number of wires:                 44
+   Number of wire bits:             52
+   Number of public wires:          35
+   Number of public wire bits:      43
+   Number of ports:                  4
+   Number of port bits:              5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 35
+     $and                            9
+     $dff                            3
+     $mux                            1
+     $not                           11
+     $or                            11
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module fsm_seq...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_seq..
+
+9. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold" and gate cell "gate".
+
+9.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+9.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \miter
+
+10.2. Analyzing design hierarchy..
+Top module:  \miter
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+Module miter directly or indirectly contains formal properties -> setting "keep" attribute.
+
+11. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+No constraints for initial state found.
+
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 7:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 8:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 9:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 10:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 11:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Setting up time step 12:
+Final constraint equation: { } = { }
+Imported 52 cells to SAT database.
+Import proof for assert: $auto$miter.cc:242:create_miter_equiv$69 when 1'1.
+
+Solving problem with 3648 variables and 9626 clauses..
+ERROR: Called with -verify and proof did fail!

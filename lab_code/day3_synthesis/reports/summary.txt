@@ -1,1 +1,36 @@
+VHDL SYNTHESIS SUMMARY
+generated: 2026-11-14 10:52:23 UTC
+ghdl     : GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+yosys    : Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
 
+---------------------+-------+---------+--------------+---------+---------+-------------------------
+alu4                 | 0     | 57      | 208.950400    | PASS    | PASS    | ALU 4-bit combinational (case + numeric_std)
+                     | latch cells in generic netlist = 0
+counter_sync         | 0     | 24      | 280.268800    | FAIL    | PASS    | Counter 8-bit sync reset + clock enable
+                     | latch cells in generic netlist = 0
+fsm_seq              | 0     | 26      | 106.352000    | FAIL    | PASS    | FSM 3 สถานะแบบ Moore
+                     | latch cells in generic netlist = 0
+adder8               | 0     | 49      | 205.196800    | PASS    | PASS    | Adder 8-bit unsigned + carry out
+                     | latch cells in generic netlist = 0
+mult8                | 0     | 354     | 1904.326400   | TIMEOUT | PASS    | Multiplier 8x8 unsigned
+                     | latch cells in generic netlist = 0
+shifter              | 0     | 146     | 721.942400    | PASS    | PASS    | Barrel shifter 8-bit
+                     | latch cells in generic netlist = 0
+lfsr16               | 0     | 35      | 569.296000    | FAIL    | PASS    | LFSR 16-bit Galois form
+                     | latch cells in generic netlist = 0
+latch_bad            | 1     | -       | -             | n/a     | FAIL    | ตั้งใจสร้าง LATCH — GHDL ต้องการ --latches
+                     | latch cells in generic netlist = 0
+latch_bad_latched    | 0     | 0       | -             | PASS    | PASS    | เปิด --latches — ได้ latch จริง
+                     | latch cells in generic netlist = 0
+latch_good           | 0     | 1       | 6.256000      | PASS    | PASS    | เวอร์ชันที่แก้แล้ว — ไม่มี latch
+                     | latch cells in generic netlist = 0
+rom_16x8             | 0     | 25      | 113.859200    | PASS    | PASS    | ROM 16x8 จาก constant array
+                     | latch cells in generic netlist = 0
+std_logic_arith_bad  | 1     | -       | -             | n/a     | FAIL    | ใช้ std_logic_arith — คาดว่าจะไม่ผ่าน
+                     | latch cells in generic netlist = 0
+
+PASS=10  FAIL=2  (ทั้งหมด 12 รายการ)
+  จากนั้น FAIL=2 รายการ แยกเป็น:
+    - ตั้งใจให้ GHDL synth ล้มเหลว (latch_bad, std_logic_arith_bad) = ผลที่ถูกต้อง
+    - เปิด --latches (latch_bad_latched) ได้ latch จริง
+    - TIMEOUT=1 รายการ (SAT แบบ bounded แก้ไม่จบในเวลาที่กำหนด)

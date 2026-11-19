@@ -1,0 +1,433 @@
+
+-- Running command `
+  read_verilog build/alu4.v
+  prep -top alu4 -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/alu4_generic.v
+  prep -top alu4 -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold alu4
+  design -copy-from gate -as gate alu4
+  miter -equiv -flatten -make_assert gold gate miter
+  hierarchy -top miter
+  sat -verify -prove-asserts -seq 12 miter
+' --
+
+1. Executing Verilog-2005 frontend: build/alu4.v
+Parsing Verilog input from `build/alu4.v' to AST representation.
+Generating RTLIL representation for module `\alu4'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \alu4
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \alu4
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/alu4.v:36$8 in module alu4.
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~1 debug messages>
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\alu4.$proc$build/alu4.v:36$8'.
+     1/1: $1\n18_o[3:0]
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\alu4.\n18_o' from process `\alu4.$proc$build/alu4.v:36$8'.
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\alu4.$proc$build/alu4.v:36$8'.
+Removing empty process `alu4.$proc$build/alu4.v:36$8'.
+Cleaned up 1 empty switch.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+<suppressed ~2 debug messages>
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+Removed 0 unused cells and 12 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module alu4...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \alu4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \alu4.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 2) from port B of cell alu4.$eq$build/alu4.v:27$4 ($eq).
+Removed top 2 bits (of 3) from port B of cell alu4.$procmux$13_CMP0 ($eq).
+Removed top 1 bits (of 3) from port B of cell alu4.$procmux$14_CMP0 ($eq).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== alu4 ===
+
+   Number of wires:                 19
+   Number of wire bits:             46
+   Number of public wires:          16
+   Number of public wire bits:      43
+   Number of ports:                  5
+   Number of port bits:             15
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 13
+     $add                            1
+     $and                            1
+     $eq                             5
+     $logic_not                      2
+     $mux                            1
+     $or                             1
+     $pmux                           1
+     $sub                            1
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module alu4...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+5. Executing Verilog-2005 frontend: build/alu4_generic.v
+Parsing Verilog input from `build/alu4_generic.v' to AST representation.
+Generating RTLIL representation for module `\alu4'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \alu4
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \alu4
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+<suppressed ~7 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+Removed 4 unused cells and 65 unused wires.
+<suppressed ~5 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module alu4...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \alu4..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~7 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \alu4.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module alu4.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\alu4'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== alu4 ===
+
+   Number of wires:                 76
+   Number of wire bits:             89
+   Number of public wires:          56
+   Number of public wire bits:      69
+   Number of ports:                  5
+   Number of port bits:             15
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 73
+     $and                           21
+     $mux                            7
+     $not                           20
+     $or                            15
+     $xor                           10
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module alu4...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \alu4..
+
+9. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold" and gate cell "gate".
+
+9.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+9.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \miter
+
+10.2. Analyzing design hierarchy..
+Top module:  \miter
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+Module miter directly or indirectly contains formal properties -> setting "keep" attribute.
+
+11. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+No constraints for initial state found.
+
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 7:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 8:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 9:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 10:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 11:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Setting up time step 12:
+Final constraint equation: { } = { }
+Imported 93 cells to SAT database.
+Import proof for assert: $auto$miter.cc:269:create_miter_equiv$102 when 1'1.
+
+Solving problem with 7779 variables and 20560 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 53a2409927, CPU: user 0.46s system 0.06s, MEM: 22.37 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 58% 1x sat (0 sec), 10% 11x opt_expr (0 sec), ...

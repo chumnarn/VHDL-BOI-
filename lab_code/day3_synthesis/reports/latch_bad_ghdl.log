@@ -1,0 +1,12 @@
+### ghdl synth  --std=08 --out=verilog rtl/latch_bad.vhd -e latch_bad
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+rtl/latch_bad.vhd:17:3:error: latch infered for net "s" (use --latches)
+  process (d, e)
+  ^
+
+### ghdl synth exit code = 1
+### Verilog output size  = 0 bytes
+### module names in output:
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):

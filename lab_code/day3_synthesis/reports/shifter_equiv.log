@@ -1,0 +1,592 @@
+
+-- Running command `
+  read_verilog build/shifter.v
+  prep -top shifter -flatten
+  memory_map
+  opt_clean
+  design -stash gold
+
+  read_verilog build/shifter_generic.v
+  prep -top shifter -flatten
+  memory_map
+  opt_clean
+  design -stash gate
+
+  design -copy-from gold -as gold shifter
+  design -copy-from gate -as gate shifter
+  equiv_make gold gate equiv
+  hierarchy -top equiv
+  equiv_simple -seq 5
+    equiv_induct -seq 5
+  equiv_status -assert
+' --
+
+1. Executing Verilog-2005 frontend: build/shifter.v
+Parsing Verilog input from `build/shifter.v' to AST representation.
+Generating RTLIL representation for module `\shifter'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \shifter
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \shifter
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+2.3. Executing FLATTEN pass (flatten design).
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+Removed 0 unused cells and 33 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module shifter...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+<suppressed ~24 debug messages>
+Removed a total of 8 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \shifter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~1 debug messages>
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \shifter.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 2 bits (of 3) from port B of cell shifter.$gt$build/shifter.v:137$17 ($gt).
+Removed top 2 bits (of 3) from port B of cell shifter.$gt$build/shifter.v:145$19 ($gt).
+Removed top 1 bits (of 3) from port B of cell shifter.$gt$build/shifter.v:153$21 ($gt).
+Removed top 1 bits (of 3) from port B of cell shifter.$gt$build/shifter.v:161$23 ($gt).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== shifter ===
+
+   Number of wires:                 69
+   Number of wire bits:            412
+   Number of public wires:          69
+   Number of public wire bits:     412
+   Number of ports:                  4
+   Number of port bits:             20
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 25
+     $gt                             8
+     $mux                           17
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module shifter...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+5. Executing Verilog-2005 frontend: build/shifter_generic.v
+Parsing Verilog input from `build/shifter_generic.v' to AST representation.
+Generating RTLIL representation for module `\shifter'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \shifter
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \shifter
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+<suppressed ~5 debug messages>
+
+6.3. Executing FLATTEN pass (flatten design).
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+Removed 2 unused cells and 153 unused wires.
+<suppressed ~3 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module shifter...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \shifter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~153 debug messages>
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \shifter.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+6.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \shifter..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~153 debug messages>
+
+6.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \shifter.
+Performed a total of 0 changes.
+
+6.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+Removed a total of 0 cells.
+
+6.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+6.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+6.8.14. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module shifter.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\shifter'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== shifter ===
+
+   Number of wires:                174
+   Number of wire bits:            321
+   Number of public wires:         159
+   Number of public wire bits:     306
+   Number of ports:                  4
+   Number of port bits:             20
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                159
+     $and                           23
+     $mux                          107
+     $not                           19
+     $or                            10
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module shifter...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \shifter..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: d_gold (\d_gold), d_gate (\d_gate) -> d
+Presumably equivalent wires: left_gold (\left_gold), left_gate (\left_gate) -> left
+Presumably equivalent wires: n101_o_gold (\y_gold), n101_o_gate (\y_gate) -> n101_o
+Presumably equivalent wires: n15_o_gold ({ \n10_o_gold [6:0] 1'0 }), n15_o_gate ({ \n15_o_gate [7:1] 1'0 }) -> n15_o
+  Skipping signal bit n15_o_gate [1]: undriven on gate side.
+  Skipping signal bit n15_o_gate [2]: undriven on gate side.
+  Skipping signal bit n15_o_gate [3]: undriven on gate side.
+  Skipping signal bit n15_o_gate [4]: undriven on gate side.
+  Skipping signal bit n15_o_gate [5]: undriven on gate side.
+  Skipping signal bit n15_o_gate [6]: undriven on gate side.
+  Skipping signal bit n15_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n21_o_gold ({ \n16_o_gold [6:0] 1'0 }), n21_o_gate ({ \n21_o_gate [7:1] 1'0 }) -> n21_o
+  Skipping signal bit n21_o_gate [1]: undriven on gate side.
+  Skipping signal bit n21_o_gate [2]: undriven on gate side.
+  Skipping signal bit n21_o_gate [3]: undriven on gate side.
+  Skipping signal bit n21_o_gate [4]: undriven on gate side.
+  Skipping signal bit n21_o_gate [5]: undriven on gate side.
+  Skipping signal bit n21_o_gate [6]: undriven on gate side.
+  Skipping signal bit n21_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n27_o_gold ({ \n22_o_gold [6:0] 1'0 }), n27_o_gate ({ \n27_o_gate [7:1] 1'0 }) -> n27_o
+  Skipping signal bit n27_o_gate [1]: undriven on gate side.
+  Skipping signal bit n27_o_gate [2]: undriven on gate side.
+  Skipping signal bit n27_o_gate [3]: undriven on gate side.
+  Skipping signal bit n27_o_gate [4]: undriven on gate side.
+  Skipping signal bit n27_o_gate [5]: undriven on gate side.
+  Skipping signal bit n27_o_gate [6]: undriven on gate side.
+  Skipping signal bit n27_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n33_o_gold ({ \n28_o_gold [6:0] 1'0 }), n33_o_gate ({ \n33_o_gate [7:1] 1'0 }) -> n33_o
+  Skipping signal bit n33_o_gate [1]: undriven on gate side.
+  Skipping signal bit n33_o_gate [2]: undriven on gate side.
+  Skipping signal bit n33_o_gate [3]: undriven on gate side.
+  Skipping signal bit n33_o_gate [4]: undriven on gate side.
+  Skipping signal bit n33_o_gate [5]: undriven on gate side.
+  Skipping signal bit n33_o_gate [6]: undriven on gate side.
+  Skipping signal bit n33_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n39_o_gold ({ \n34_o_gold [6:0] 1'0 }), n39_o_gate ({ \n39_o_gate [7:1] 1'0 }) -> n39_o
+  Skipping signal bit n39_o_gate [1]: undriven on gate side.
+  Skipping signal bit n39_o_gate [2]: undriven on gate side.
+  Skipping signal bit n39_o_gate [3]: undriven on gate side.
+  Skipping signal bit n39_o_gate [4]: undriven on gate side.
+  Skipping signal bit n39_o_gate [5]: undriven on gate side.
+  Skipping signal bit n39_o_gate [6]: undriven on gate side.
+  Skipping signal bit n39_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n45_o_gold ({ \n40_o_gold [6:0] 1'0 }), n45_o_gate ({ \n45_o_gate [7:1] 1'0 }) -> n45_o
+  Skipping signal bit n45_o_gate [1]: undriven on gate side.
+  Skipping signal bit n45_o_gate [2]: undriven on gate side.
+  Skipping signal bit n45_o_gate [3]: undriven on gate side.
+  Skipping signal bit n45_o_gate [4]: undriven on gate side.
+  Skipping signal bit n45_o_gate [5]: undriven on gate side.
+  Skipping signal bit n45_o_gate [6]: undriven on gate side.
+  Skipping signal bit n45_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n51_o_gold ({ \n46_o_gold [6:0] 1'0 }), n51_o_gate ({ \n51_o_gate [7:1] 1'0 }) -> n51_o
+  Skipping signal bit n51_o_gate [1]: undriven on gate side.
+  Skipping signal bit n51_o_gate [2]: undriven on gate side.
+  Skipping signal bit n51_o_gate [3]: undriven on gate side.
+  Skipping signal bit n51_o_gate [4]: undriven on gate side.
+  Skipping signal bit n51_o_gate [5]: undriven on gate side.
+  Skipping signal bit n51_o_gate [6]: undriven on gate side.
+  Skipping signal bit n51_o_gate [7]: undriven on gate side.
+Presumably equivalent wires: n55_o_gold (\d_gold [7:1]), n55_o_gate (\d_gate [7:1]) -> n55_o
+Presumably equivalent wires: n57_o_gold ({ 1'0 \d_gold [7:1] }), n57_o_gate ({ 1'0 \d_gate [7:1] }) -> n57_o
+Presumably equivalent wires: n63_o_gold ({ 1'0 \n58_o_gold [7:1] }), n63_o_gate ({ 1'0 \n63_o_gate [6:0] }) -> n63_o
+  Skipping signal bit n63_o_gate [0]: undriven on gate side.
+  Skipping signal bit n63_o_gate [1]: undriven on gate side.
+  Skipping signal bit n63_o_gate [2]: undriven on gate side.
+  Skipping signal bit n63_o_gate [3]: undriven on gate side.
+  Skipping signal bit n63_o_gate [4]: undriven on gate side.
+  Skipping signal bit n63_o_gate [5]: undriven on gate side.
+  Skipping signal bit n63_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n69_o_gold ({ 1'0 \n64_o_gold [7:1] }), n69_o_gate ({ 1'0 \n69_o_gate [6:0] }) -> n69_o
+  Skipping signal bit n69_o_gate [0]: undriven on gate side.
+  Skipping signal bit n69_o_gate [1]: undriven on gate side.
+  Skipping signal bit n69_o_gate [2]: undriven on gate side.
+  Skipping signal bit n69_o_gate [3]: undriven on gate side.
+  Skipping signal bit n69_o_gate [4]: undriven on gate side.
+  Skipping signal bit n69_o_gate [5]: undriven on gate side.
+  Skipping signal bit n69_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n75_o_gold ({ 1'0 \n70_o_gold [7:1] }), n75_o_gate ({ 1'0 \n75_o_gate [6:0] }) -> n75_o
+  Skipping signal bit n75_o_gate [0]: undriven on gate side.
+  Skipping signal bit n75_o_gate [1]: undriven on gate side.
+  Skipping signal bit n75_o_gate [2]: undriven on gate side.
+  Skipping signal bit n75_o_gate [3]: undriven on gate side.
+  Skipping signal bit n75_o_gate [4]: undriven on gate side.
+  Skipping signal bit n75_o_gate [5]: undriven on gate side.
+  Skipping signal bit n75_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n7_o_gold (\d_gold [6:0]), n7_o_gate (\d_gate [6:0]) -> n7_o
+Presumably equivalent wires: n81_o_gold ({ 1'0 \n76_o_gold [7:1] }), n81_o_gate ({ 1'0 \n81_o_gate [6:0] }) -> n81_o
+  Skipping signal bit n81_o_gate [0]: undriven on gate side.
+  Skipping signal bit n81_o_gate [1]: undriven on gate side.
+  Skipping signal bit n81_o_gate [2]: undriven on gate side.
+  Skipping signal bit n81_o_gate [3]: undriven on gate side.
+  Skipping signal bit n81_o_gate [4]: undriven on gate side.
+  Skipping signal bit n81_o_gate [5]: undriven on gate side.
+  Skipping signal bit n81_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n87_o_gold ({ 1'0 \n82_o_gold [7:1] }), n87_o_gate ({ 1'0 \n87_o_gate [6:0] }) -> n87_o
+  Skipping signal bit n87_o_gate [0]: undriven on gate side.
+  Skipping signal bit n87_o_gate [1]: undriven on gate side.
+  Skipping signal bit n87_o_gate [2]: undriven on gate side.
+  Skipping signal bit n87_o_gate [3]: undriven on gate side.
+  Skipping signal bit n87_o_gate [4]: undriven on gate side.
+  Skipping signal bit n87_o_gate [5]: undriven on gate side.
+  Skipping signal bit n87_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n93_o_gold ({ 1'0 \n88_o_gold [7:1] }), n93_o_gate ({ 1'0 \n93_o_gate [6:0] }) -> n93_o
+  Skipping signal bit n93_o_gate [0]: undriven on gate side.
+  Skipping signal bit n93_o_gate [1]: undriven on gate side.
+  Skipping signal bit n93_o_gate [2]: undriven on gate side.
+  Skipping signal bit n93_o_gate [3]: undriven on gate side.
+  Skipping signal bit n93_o_gate [4]: undriven on gate side.
+  Skipping signal bit n93_o_gate [5]: undriven on gate side.
+  Skipping signal bit n93_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n99_o_gold ({ 1'0 \n94_o_gold [7:1] }), n99_o_gate ({ 1'0 \n99_o_gate [6:0] }) -> n99_o
+  Skipping signal bit n99_o_gate [0]: undriven on gate side.
+  Skipping signal bit n99_o_gate [1]: undriven on gate side.
+  Skipping signal bit n99_o_gate [2]: undriven on gate side.
+  Skipping signal bit n99_o_gate [3]: undriven on gate side.
+  Skipping signal bit n99_o_gate [4]: undriven on gate side.
+  Skipping signal bit n99_o_gate [5]: undriven on gate side.
+  Skipping signal bit n99_o_gate [6]: undriven on gate side.
+Presumably equivalent wires: n9_o_gold ({ \d_gold [6:0] 1'0 }), n9_o_gate ({ \d_gate [6:0] 1'0 }) -> n9_o
+Presumably equivalent wires: shamt_gold (\shamt_gold), shamt_gate (\shamt_gate) -> shamt
+Presumably equivalent wires: y_gold (\y_gold), y_gate (\y_gate) -> y
+Setting undriven nets to undef: \n15_o [7:1]
+Setting undriven nets to undef: \n21_o [7:1]
+Setting undriven nets to undef: \n27_o [7:1]
+Setting undriven nets to undef: \n33_o [7:1]
+Setting undriven nets to undef: \n39_o [7:1]
+Setting undriven nets to undef: \n45_o [7:1]
+Setting undriven nets to undef: \n51_o [7:1]
+Setting undriven nets to undef: \n63_o [6:0]
+Setting undriven nets to undef: \n69_o [6:0]
+Setting undriven nets to undef: \n75_o [6:0]
+Setting undriven nets to undef: \n81_o [6:0]
+Setting undriven nets to undef: \n87_o [6:0]
+Setting undriven nets to undef: \n93_o [6:0]
+Setting undriven nets to undef: \n99_o [6:0]
+Setting undriven nets to undef: \n15_o_gate [7:1]
+Setting undriven nets to undef: \n21_o_gate [7:1]
+Setting undriven nets to undef: \n27_o_gate [7:1]
+Setting undriven nets to undef: \n33_o_gate [7:1]
+Setting undriven nets to undef: \n39_o_gate [7:1]
+Setting undriven nets to undef: \n45_o_gate [7:1]
+Setting undriven nets to undef: \n51_o_gate [7:1]
+Setting undriven nets to undef: \n63_o_gate [6:0]
+Setting undriven nets to undef: \n69_o_gate [6:0]
+Setting undriven nets to undef: \n75_o_gate [6:0]
+Setting undriven nets to undef: \n81_o_gate [6:0]
+Setting undriven nets to undef: \n87_o_gate [6:0]
+Setting undriven nets to undef: \n93_o_gate [6:0]
+Setting undriven nets to undef: \n99_o_gate [6:0]
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 60 unproven $equiv cells (20 groups) in equiv:
+ Grouping SAT models for \y:
+  Trying to prove $equiv for \y [0]: success!
+  Trying to prove $equiv for \y [1]: success!
+  Trying to prove $equiv for \y [2]: success!
+  Trying to prove $equiv for \y [3]: success!
+  Trying to prove $equiv for \y [4]: success!
+  Trying to prove $equiv for \y [5]: success!
+  Trying to prove $equiv for \y [6]: success!
+  Trying to prove $equiv for \y [7]: success!
+ Grouping SAT models for \n7_o:
+  Trying to prove $equiv for \n7_o [0]: success!
+  Trying to prove $equiv for \n7_o [1]: success!
+  Trying to prove $equiv for \n7_o [2]: success!
+  Trying to prove $equiv for \n7_o [3]: success!
+  Trying to prove $equiv for \n7_o [4]: success!
+  Trying to prove $equiv for \n7_o [5]: success!
+  Trying to prove $equiv for \n7_o [6]: success!
+ Grouping SAT models for \n9_o:
+  Trying to prove $equiv for \n9_o [0]: success!
+  Trying to prove $equiv for \n9_o [1]: success!
+  Trying to prove $equiv for \n9_o [2]: success!
+  Trying to prove $equiv for \n9_o [3]: success!
+  Trying to prove $equiv for \n9_o [4]: success!
+  Trying to prove $equiv for \n9_o [5]: success!
+  Trying to prove $equiv for \n9_o [6]: success!
+  Trying to prove $equiv for \n9_o [7]: success!
+  Trying to prove $equiv for \n15_o [0]: success!
+  Trying to prove $equiv for \n21_o [0]: success!
+  Trying to prove $equiv for \n27_o [0]: success!
+  Trying to prove $equiv for \n33_o [0]: success!
+  Trying to prove $equiv for \n39_o [0]: success!
+  Trying to prove $equiv for \n45_o [0]: success!
+  Trying to prove $equiv for \n51_o [0]: success!
+ Grouping SAT models for \n55_o:
+  Trying to prove $equiv for \n55_o [0]: success!
+  Trying to prove $equiv for \n55_o [1]: success!
+  Trying to prove $equiv for \n55_o [2]: success!
+  Trying to prove $equiv for \n55_o [3]: success!
+  Trying to prove $equiv for \n55_o [4]: success!
+  Trying to prove $equiv for \n55_o [5]: success!
+  Trying to prove $equiv for \n55_o [6]: success!
+ Grouping SAT models for \n57_o:
+  Trying to prove $equiv for \n57_o [0]: success!
+  Trying to prove $equiv for \n57_o [1]: success!
+  Trying to prove $equiv for \n57_o [2]: success!
+  Trying to prove $equiv for \n57_o [3]: success!
+  Trying to prove $equiv for \n57_o [4]: success!
+  Trying to prove $equiv for \n57_o [5]: success!
+  Trying to prove $equiv for \n57_o [6]: success!
+  Trying to prove $equiv for \n57_o [7]: success!
+  Trying to prove $equiv for \n63_o [7]: success!
+  Trying to prove $equiv for \n69_o [7]: success!
+  Trying to prove $equiv for \n75_o [7]: success!
+  Trying to prove $equiv for \n81_o [7]: success!
+  Trying to prove $equiv for \n87_o [7]: success!
+  Trying to prove $equiv for \n93_o [7]: success!
+  Trying to prove $equiv for \n99_o [7]: success!
+ Grouping SAT models for \n101_o:
+  Trying to prove $equiv for \n101_o [0]: success!
+  Trying to prove $equiv for \n101_o [1]: success!
+  Trying to prove $equiv for \n101_o [2]: success!
+  Trying to prove $equiv for \n101_o [3]: success!
+  Trying to prove $equiv for \n101_o [4]: success!
+  Trying to prove $equiv for \n101_o [5]: success!
+  Trying to prove $equiv for \n101_o [6]: success!
+  Trying to prove $equiv for \n101_o [7]: success!
+Proved 60 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 60 $equiv cells in equiv:
+  Of those cells 60 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: fce6c3d51f, CPU: user 0.25s system 0.04s, MEM: 18.10 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 32% 1x equiv_simple (0 sec), 14% 11x opt_clean (0 sec), ...

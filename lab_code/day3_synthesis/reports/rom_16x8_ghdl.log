@@ -1,0 +1,13 @@
+### ghdl synth  --std=08 --out=verilog rtl/rom_16x8.vhd -e rom_16x8
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+rtl/rom_16x8.vhd:27:16:note: found ROM "n10", width: 8 bits, depth: 16
+    dout <= rom(idx);
+               ^
+
+### ghdl synth exit code = 0
+### Verilog output size  = 987 bytes
+### module names in output:
+###   module rom_16x8
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):

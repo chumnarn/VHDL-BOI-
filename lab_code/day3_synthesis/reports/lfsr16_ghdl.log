@@ -1,0 +1,11 @@
+### ghdl synth  --std=08 --out=verilog rtl/lfsr16.vhd -e lfsr16
+### GHDL version:
+GHDL 5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+
+
+### ghdl synth exit code = 0
+### Verilog output size  = 1208 bytes
+### module names in output:
+###   module lfsr16
+### always blocks (บอกว่าเป็น edge-triggered หรือ level-sensitive):
+###   46:  always @(posedge clk)
