@@ -78,7 +78,7 @@ tb_sec25_verbatim.vhd:46:9:@50ns:(report note): PASS=2 FAIL=0
       │  │  process   │   │  process    │   │  process    │         │
       │  │            │   │             │   │             │         │
       │  │ สร้าง input │   │ เก็บ output  │   │ สรุปผล       │         │
-      │  │ ตามเวลา    │  │ ไปเทียบ       │   │ PASS/FAI    │         │
+      │  │ ตามเวลา    │   │ ไปเทียบ      │   │ PASS/FAIL   │         │
       │  └─────┬──────┘   └──────┬──────┘   └──────┬──────┘         │
       │        │                 │                 │                │
       │        │  signal (ต้องผ่าน clock)            │                │
