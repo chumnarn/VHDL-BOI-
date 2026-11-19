@@ -1,0 +1,3 @@
+rtl/add_sub_shared.vhd:5:19:warning: incomplete or unknown pragma directive ignored [-Wpragma]
+-- Synthesis notes:
+                  ^

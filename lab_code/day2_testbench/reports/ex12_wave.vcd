@@ -1,0 +1,114 @@
+$date
+  Sat Nov 14 17:11:19 2026
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module textio $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module numeric_std $end
+$upscope $end
+$scope module env $end
+$upscope $end
+$scope module ex12_event_log $end
+$var reg 1 ! clk $end
+$var reg 1 " rst $end
+$var reg 1 # ce $end
+$var reg 8 $ cnt[7:0] $end
+$scope module dut $end
+$var reg 1 % clk $end
+$var reg 1 & rst $end
+$var reg 1 ' ce $end
+$var reg 8 ( cnt[7:0] $end
+$var reg 8 ) cnt_i[7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+1"
+0#
+b00000000 $
+0%
+1&
+0'
+b00000000 (
+b00000000 )
+#5000000
+1!
+1%
+#10000000
+0!
+0%
+#15000000
+1!
+1%
+#20000000
+0!
+0"
+0%
+0&
+#25000000
+1!
+1%
+#26000000
+1#
+1'
+#30000000
+0!
+0%
+#35000000
+1!
+b00000001 $
+1%
+b00000001 (
+b00000001 )
+#36000000
+0#
+0'
+#40000000
+0!
+0%
+#45000000
+1!
+1%
+#46000000
+1#
+1'
+#50000000
+0!
+0%
+#55000000
+1!
+b00000010 $
+1%
+b00000010 (
+b00000010 )
+#56000000
+0#
+0'
+#60000000
+0!
+0%
+#65000000
+1!
+1%
+#66000000
+1#
+1'
+#70000000
+0!
+0%
+#75000000
+1!
+b00000011 $
+1%
+b00000011 (
+b00000011 )

@@ -1,0 +1,1213 @@
+
+-- Running command `
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v
+                prep -top adder8 -flatten
+                memory_map
+                opt_clean
+                design -stash gold
+
+                read_verilog /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v
+                prep -top adder8 -flatten
+                memory_map
+                opt_clean
+                design -stash gate
+
+                design -copy-from gold -as gold adder8
+                design -copy-from gate -as gate adder8
+                equiv_make gold gate equiv
+                hierarchy -top equiv
+                equiv_simple -seq 5
+    equiv_induct -seq 5
+                equiv_status -assert
+             ' --
+
+1. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v' to AST representation.
+Generating RTLIL representation for module `\or_gate'.
+Generating RTLIL representation for module `\and_gate'.
+Generating RTLIL representation for module `\xor_gate'.
+Generating RTLIL representation for module `\full_adder_struct'.
+Generating RTLIL representation for module `\adder8'.
+Successfully finished Verilog frontend.
+
+2. Executing PREP pass.
+
+2.1. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1.1. Analyzing design hierarchy..
+Top module:  \adder8
+Used module:     \full_adder_struct
+Used module:         \or_gate
+Used module:         \and_gate
+Used module:         \xor_gate
+
+2.1.2. Analyzing design hierarchy..
+Top module:  \adder8
+Used module:     \full_adder_struct
+Used module:         \or_gate
+Used module:         \and_gate
+Used module:         \xor_gate
+Removed 0 unused modules.
+
+2.2. Executing PROC pass (convert processes to netlists).
+
+2.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+2.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+2.2.4. Executing PROC_INIT pass (extract init attributes).
+
+2.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+2.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+2.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+2.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+2.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+2.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+2.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+2.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+Optimizing module full_adder_struct.
+Optimizing module xor_gate.
+Optimizing module and_gate.
+Optimizing module or_gate.
+
+2.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module full_adder_struct.
+Deleting now unused module xor_gate.
+Deleting now unused module and_gate.
+Deleting now unused module or_gate.
+<suppressed ~13 debug messages>
+
+2.4. Executing FUTURE pass.
+
+2.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+2.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+Removed 0 unused cells and 40 unused wires.
+<suppressed ~1 debug messages>
+
+2.7. Executing CHECK pass (checking for obvious problems).
+Checking module adder8...
+Found and reported 0 problems.
+
+2.8. Executing OPT pass (performing simple optimizations).
+
+2.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+2.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+2.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \adder8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+2.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \adder8.
+Performed a total of 0 changes.
+
+2.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+2.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+2.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+2.8.8. Finished OPT passes. (There is nothing left to do.)
+
+2.9. Executing WREDUCE pass (reducing word size of cells).
+
+2.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+2.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+2.12. Executing OPT pass (performing simple optimizations).
+
+2.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+2.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+2.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+2.12.4. Finished fast OPT passes.
+
+2.13. Printing statistics.
+
+=== adder8 ===
+
+   Number of wires:                329
+   Number of wire bits:            373
+   Number of public wires:         329
+   Number of public wire bits:     373
+   Number of ports:                  5
+   Number of port bits:             26
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 88
+     $and                           16
+     $or                             8
+     $scopeinfo                     48
+     $xor                           16
+
+2.14. Executing CHECK pass (checking for obvious problems).
+Checking module adder8...
+Found and reported 0 problems.
+
+3. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+5. Executing Verilog-2005 frontend: /mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v
+Parsing Verilog input from `/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v' to AST representation.
+Generating RTLIL representation for module `\adder8'.
+Generating RTLIL representation for module `\and_gate'.
+Generating RTLIL representation for module `\full_adder_struct'.
+Generating RTLIL representation for module `\or_gate'.
+Generating RTLIL representation for module `\xor_gate'.
+Successfully finished Verilog frontend.
+
+6. Executing PREP pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..
+Top module:  \adder8
+Used module:     \full_adder_struct
+Used module:         \or_gate
+Used module:         \and_gate
+Used module:         \xor_gate
+
+6.1.2. Analyzing design hierarchy..
+Top module:  \adder8
+Used module:     \full_adder_struct
+Used module:         \or_gate
+Used module:         \and_gate
+Used module:         \xor_gate
+Removed 0 unused modules.
+
+6.2. Executing PROC pass (convert processes to netlists).
+
+6.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.2.4. Executing PROC_INIT pass (extract init attributes).
+
+6.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+6.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module xor_gate.
+Optimizing module or_gate.
+Optimizing module full_adder_struct.
+Optimizing module and_gate.
+Optimizing module adder8.
+
+6.3. Executing FLATTEN pass (flatten design).
+Deleting now unused module xor_gate.
+Deleting now unused module or_gate.
+Deleting now unused module full_adder_struct.
+Deleting now unused module and_gate.
+<suppressed ~13 debug messages>
+
+6.4. Executing FUTURE pass.
+
+6.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+6.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+Removed 0 unused cells and 40 unused wires.
+<suppressed ~1 debug messages>
+
+6.7. Executing CHECK pass (checking for obvious problems).
+Checking module adder8...
+Found and reported 0 problems.
+
+6.8. Executing OPT pass (performing simple optimizations).
+
+6.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+6.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+6.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \adder8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \adder8.
+Performed a total of 0 changes.
+
+6.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+6.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+6.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+6.8.8. Finished OPT passes. (There is nothing left to do.)
+
+6.9. Executing WREDUCE pass (reducing word size of cells).
+
+6.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+6.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+6.12. Executing OPT pass (performing simple optimizations).
+
+6.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module adder8.
+
+6.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\adder8'.
+Removed a total of 0 cells.
+
+6.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+6.12.4. Finished fast OPT passes.
+
+6.13. Printing statistics.
+
+=== adder8 ===
+
+   Number of wires:                329
+   Number of wire bits:            373
+   Number of public wires:         329
+   Number of public wire bits:     373
+   Number of ports:                  5
+   Number of port bits:             26
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 88
+     $and                           16
+     $or                             8
+     $scopeinfo                     48
+     $xor                           16
+
+6.14. Executing CHECK pass (checking for obvious problems).
+Checking module adder8...
+Found and reported 0 problems.
+
+7. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \adder8..
+
+9. Executing EQUIV_MAKE pass (creating equiv checking module).
+Presumably equivalent wires: a_gold (\a_gold), a_gate (\a_gate) -> a
+Presumably equivalent wires: b_gold (\b_gold), b_gate (\b_gate) -> b
+Presumably equivalent wires: c_gold ({ \cout_gold \gen_n8_u.u2.b_gold \gen_n7_u.u2.b_gold \gen_n6_u.u2.b_gold \gen_n5_u.u2.b_gold \gen_n4_u.u2.b_gold \gen_n3_u.u2.b_gold \gen_n2_u.u2.b_gold \cin_gold }), c_gate ({ \cout_gate \gen_n8_u.u2.b_gate \gen_n7_u.u2.b_gate \gen_n6_u.u2.b_gate \gen_n5_u.u2.b_gate \gen_n4_u.u2.b_gate \gen_n3_u.u2.b_gate \gen_n2_u.u2.b_gate \cin_gate }) -> c
+Presumably equivalent wires: cin_gold (\cin_gold), cin_gate (\cin_gate) -> cin
+Presumably equivalent wires: cout_gold (\cout_gold), cout_gate (\cout_gate) -> cout
+Presumably equivalent wires: gen_n1_u.a_gold (\a_gold [0]), gen_n1_u.a_gate (\a_gate [0]) -> gen_n1_u.a
+Presumably equivalent wires: gen_n1_u.b_gold (\b_gold [0]), gen_n1_u.b_gate (\b_gate [0]) -> gen_n1_u.b
+Presumably equivalent wires: gen_n1_u.cin_gold (\cin_gold), gen_n1_u.cin_gate (\cin_gate) -> gen_n1_u.cin
+Presumably equivalent wires: gen_n1_u.cout_gold (\gen_n2_u.u2.b_gold), gen_n1_u.cout_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u.cout
+Presumably equivalent wires: gen_n1_u.s1_gold (\gen_n1_u.u2.a_gold), gen_n1_u.s1_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.s1
+Presumably equivalent wires: gen_n1_u.s2_gold (\gen_n1_u.u5.a_gold), gen_n1_u.s2_gate (\gen_n1_u.u5.a_gate) -> gen_n1_u.s2
+Presumably equivalent wires: gen_n1_u.s3_gold (\gen_n1_u.u5.b_gold), gen_n1_u.s3_gate (\gen_n1_u.u5.b_gate) -> gen_n1_u.s3
+Presumably equivalent wires: gen_n1_u.sum_gold (\gen_n1_u.sum_gold), gen_n1_u.sum_gate (\gen_n1_u.sum_gate) -> gen_n1_u.sum
+Presumably equivalent wires: gen_n1_u.u1.a_gold (\a_gold [0]), gen_n1_u.u1.a_gate (\a_gate [0]) -> gen_n1_u.u1.a
+Presumably equivalent wires: gen_n1_u.u1.b_gold (\b_gold [0]), gen_n1_u.u1.b_gate (\b_gate [0]) -> gen_n1_u.u1.b
+Presumably equivalent wires: gen_n1_u.u1.n85_o_gold (\gen_n1_u.u2.a_gold), gen_n1_u.u1.n85_o_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.u1.n85_o
+Presumably equivalent wires: gen_n1_u.u1.y_gold (\gen_n1_u.u2.a_gold), gen_n1_u.u1.y_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.u1.y
+Presumably equivalent wires: gen_n1_u.u1_y_gold (\gen_n1_u.u2.a_gold), gen_n1_u.u1_y_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.u1_y
+Presumably equivalent wires: gen_n1_u.u2.a_gold (\gen_n1_u.u2.a_gold), gen_n1_u.u2.a_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.u2.a
+Presumably equivalent wires: gen_n1_u.u2.b_gold (\cin_gold), gen_n1_u.u2.b_gate (\cin_gate) -> gen_n1_u.u2.b
+Presumably equivalent wires: gen_n1_u.u2.n85_o_gold (\gen_n1_u.sum_gold), gen_n1_u.u2.n85_o_gate (\gen_n1_u.sum_gate) -> gen_n1_u.u2.n85_o
+Presumably equivalent wires: gen_n1_u.u2.y_gold (\gen_n1_u.sum_gold), gen_n1_u.u2.y_gate (\gen_n1_u.sum_gate) -> gen_n1_u.u2.y
+Presumably equivalent wires: gen_n1_u.u2_y_gold (\gen_n1_u.sum_gold), gen_n1_u.u2_y_gate (\gen_n1_u.sum_gate) -> gen_n1_u.u2_y
+Presumably equivalent wires: gen_n1_u.u3.a_gold (\a_gold [0]), gen_n1_u.u3.a_gate (\a_gate [0]) -> gen_n1_u.u3.a
+Presumably equivalent wires: gen_n1_u.u3.b_gold (\b_gold [0]), gen_n1_u.u3.b_gate (\b_gate [0]) -> gen_n1_u.u3.b
+Presumably equivalent wires: gen_n1_u.u3.n87_o_gold (\gen_n1_u.u5.a_gold), gen_n1_u.u3.n87_o_gate (\gen_n1_u.u5.a_gate) -> gen_n1_u.u3.n87_o
+Presumably equivalent wires: gen_n1_u.u3.y_gold (\gen_n1_u.u5.a_gold), gen_n1_u.u3.y_gate (\gen_n1_u.u5.a_gate) -> gen_n1_u.u3.y
+Presumably equivalent wires: gen_n1_u.u3_y_gold (\gen_n1_u.u5.a_gold), gen_n1_u.u3_y_gate (\gen_n1_u.u5.a_gate) -> gen_n1_u.u3_y
+Presumably equivalent wires: gen_n1_u.u4.a_gold (\gen_n1_u.u2.a_gold), gen_n1_u.u4.a_gate (\gen_n1_u.u2.a_gate) -> gen_n1_u.u4.a
+Presumably equivalent wires: gen_n1_u.u4.b_gold (\cin_gold), gen_n1_u.u4.b_gate (\cin_gate) -> gen_n1_u.u4.b
+Presumably equivalent wires: gen_n1_u.u4.n87_o_gold (\gen_n1_u.u5.b_gold), gen_n1_u.u4.n87_o_gate (\gen_n1_u.u5.b_gate) -> gen_n1_u.u4.n87_o
+Presumably equivalent wires: gen_n1_u.u4.y_gold (\gen_n1_u.u5.b_gold), gen_n1_u.u4.y_gate (\gen_n1_u.u5.b_gate) -> gen_n1_u.u4.y
+Presumably equivalent wires: gen_n1_u.u4_y_gold (\gen_n1_u.u5.b_gold), gen_n1_u.u4_y_gate (\gen_n1_u.u5.b_gate) -> gen_n1_u.u4_y
+Presumably equivalent wires: gen_n1_u.u5.a_gold (\gen_n1_u.u5.a_gold), gen_n1_u.u5.a_gate (\gen_n1_u.u5.a_gate) -> gen_n1_u.u5.a
+Presumably equivalent wires: gen_n1_u.u5.b_gold (\gen_n1_u.u5.b_gold), gen_n1_u.u5.b_gate (\gen_n1_u.u5.b_gate) -> gen_n1_u.u5.b
+Presumably equivalent wires: gen_n1_u.u5.n89_o_gold (\gen_n2_u.u2.b_gold), gen_n1_u.u5.n89_o_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u.u5.n89_o
+Presumably equivalent wires: gen_n1_u.u5.y_gold (\gen_n2_u.u2.b_gold), gen_n1_u.u5.y_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u.u5.y
+Presumably equivalent wires: gen_n1_u.u5_y_gold (\gen_n2_u.u2.b_gold), gen_n1_u.u5_y_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u.u5_y
+Presumably equivalent wires: gen_n1_u_cout_gold (\gen_n2_u.u2.b_gold), gen_n1_u_cout_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u_cout
+Presumably equivalent wires: gen_n1_u_n5_gold (\gen_n1_u.sum_gold), gen_n1_u_n5_gate (\gen_n1_u.sum_gate) -> gen_n1_u_n5
+Presumably equivalent wires: gen_n1_u_n6_gold (\gen_n2_u.u2.b_gold), gen_n1_u_n6_gate (\gen_n2_u.u2.b_gate) -> gen_n1_u_n6
+Presumably equivalent wires: gen_n1_u_sum_gold (\gen_n1_u.sum_gold), gen_n1_u_sum_gate (\gen_n1_u.sum_gate) -> gen_n1_u_sum
+Presumably equivalent wires: gen_n2_u.a_gold (\a_gold [1]), gen_n2_u.a_gate (\a_gate [1]) -> gen_n2_u.a
+Presumably equivalent wires: gen_n2_u.b_gold (\b_gold [1]), gen_n2_u.b_gate (\b_gate [1]) -> gen_n2_u.b
+Presumably equivalent wires: gen_n2_u.cin_gold (\gen_n2_u.u2.b_gold), gen_n2_u.cin_gate (\gen_n2_u.u2.b_gate) -> gen_n2_u.cin
+Presumably equivalent wires: gen_n2_u.cout_gold (\gen_n3_u.u2.b_gold), gen_n2_u.cout_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u.cout
+Presumably equivalent wires: gen_n2_u.s1_gold (\gen_n2_u.u2.a_gold), gen_n2_u.s1_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.s1
+Presumably equivalent wires: gen_n2_u.s2_gold (\gen_n2_u.u5.a_gold), gen_n2_u.s2_gate (\gen_n2_u.u5.a_gate) -> gen_n2_u.s2
+Presumably equivalent wires: gen_n2_u.s3_gold (\gen_n2_u.u5.b_gold), gen_n2_u.s3_gate (\gen_n2_u.u5.b_gate) -> gen_n2_u.s3
+Presumably equivalent wires: gen_n2_u.sum_gold (\gen_n2_u.sum_gold), gen_n2_u.sum_gate (\gen_n2_u.sum_gate) -> gen_n2_u.sum
+Presumably equivalent wires: gen_n2_u.u1.a_gold (\a_gold [1]), gen_n2_u.u1.a_gate (\a_gate [1]) -> gen_n2_u.u1.a
+Presumably equivalent wires: gen_n2_u.u1.b_gold (\b_gold [1]), gen_n2_u.u1.b_gate (\b_gate [1]) -> gen_n2_u.u1.b
+Presumably equivalent wires: gen_n2_u.u1.n85_o_gold (\gen_n2_u.u2.a_gold), gen_n2_u.u1.n85_o_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.u1.n85_o
+Presumably equivalent wires: gen_n2_u.u1.y_gold (\gen_n2_u.u2.a_gold), gen_n2_u.u1.y_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.u1.y
+Presumably equivalent wires: gen_n2_u.u1_y_gold (\gen_n2_u.u2.a_gold), gen_n2_u.u1_y_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.u1_y
+Presumably equivalent wires: gen_n2_u.u2.a_gold (\gen_n2_u.u2.a_gold), gen_n2_u.u2.a_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.u2.a
+Presumably equivalent wires: gen_n2_u.u2.b_gold (\gen_n2_u.u2.b_gold), gen_n2_u.u2.b_gate (\gen_n2_u.u2.b_gate) -> gen_n2_u.u2.b
+Presumably equivalent wires: gen_n2_u.u2.n85_o_gold (\gen_n2_u.sum_gold), gen_n2_u.u2.n85_o_gate (\gen_n2_u.sum_gate) -> gen_n2_u.u2.n85_o
+Presumably equivalent wires: gen_n2_u.u2.y_gold (\gen_n2_u.sum_gold), gen_n2_u.u2.y_gate (\gen_n2_u.sum_gate) -> gen_n2_u.u2.y
+Presumably equivalent wires: gen_n2_u.u2_y_gold (\gen_n2_u.sum_gold), gen_n2_u.u2_y_gate (\gen_n2_u.sum_gate) -> gen_n2_u.u2_y
+Presumably equivalent wires: gen_n2_u.u3.a_gold (\a_gold [1]), gen_n2_u.u3.a_gate (\a_gate [1]) -> gen_n2_u.u3.a
+Presumably equivalent wires: gen_n2_u.u3.b_gold (\b_gold [1]), gen_n2_u.u3.b_gate (\b_gate [1]) -> gen_n2_u.u3.b
+Presumably equivalent wires: gen_n2_u.u3.n87_o_gold (\gen_n2_u.u5.a_gold), gen_n2_u.u3.n87_o_gate (\gen_n2_u.u5.a_gate) -> gen_n2_u.u3.n87_o
+Presumably equivalent wires: gen_n2_u.u3.y_gold (\gen_n2_u.u5.a_gold), gen_n2_u.u3.y_gate (\gen_n2_u.u5.a_gate) -> gen_n2_u.u3.y
+Presumably equivalent wires: gen_n2_u.u3_y_gold (\gen_n2_u.u5.a_gold), gen_n2_u.u3_y_gate (\gen_n2_u.u5.a_gate) -> gen_n2_u.u3_y
+Presumably equivalent wires: gen_n2_u.u4.a_gold (\gen_n2_u.u2.a_gold), gen_n2_u.u4.a_gate (\gen_n2_u.u2.a_gate) -> gen_n2_u.u4.a
+Presumably equivalent wires: gen_n2_u.u4.b_gold (\gen_n2_u.u2.b_gold), gen_n2_u.u4.b_gate (\gen_n2_u.u2.b_gate) -> gen_n2_u.u4.b
+Presumably equivalent wires: gen_n2_u.u4.n87_o_gold (\gen_n2_u.u5.b_gold), gen_n2_u.u4.n87_o_gate (\gen_n2_u.u5.b_gate) -> gen_n2_u.u4.n87_o
+Presumably equivalent wires: gen_n2_u.u4.y_gold (\gen_n2_u.u5.b_gold), gen_n2_u.u4.y_gate (\gen_n2_u.u5.b_gate) -> gen_n2_u.u4.y
+Presumably equivalent wires: gen_n2_u.u4_y_gold (\gen_n2_u.u5.b_gold), gen_n2_u.u4_y_gate (\gen_n2_u.u5.b_gate) -> gen_n2_u.u4_y
+Presumably equivalent wires: gen_n2_u.u5.a_gold (\gen_n2_u.u5.a_gold), gen_n2_u.u5.a_gate (\gen_n2_u.u5.a_gate) -> gen_n2_u.u5.a
+Presumably equivalent wires: gen_n2_u.u5.b_gold (\gen_n2_u.u5.b_gold), gen_n2_u.u5.b_gate (\gen_n2_u.u5.b_gate) -> gen_n2_u.u5.b
+Presumably equivalent wires: gen_n2_u.u5.n89_o_gold (\gen_n3_u.u2.b_gold), gen_n2_u.u5.n89_o_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u.u5.n89_o
+Presumably equivalent wires: gen_n2_u.u5.y_gold (\gen_n3_u.u2.b_gold), gen_n2_u.u5.y_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u.u5.y
+Presumably equivalent wires: gen_n2_u.u5_y_gold (\gen_n3_u.u2.b_gold), gen_n2_u.u5_y_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u.u5_y
+Presumably equivalent wires: gen_n2_u_cout_gold (\gen_n3_u.u2.b_gold), gen_n2_u_cout_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u_cout
+Presumably equivalent wires: gen_n2_u_n14_gold (\gen_n2_u.sum_gold), gen_n2_u_n14_gate (\gen_n2_u.sum_gate) -> gen_n2_u_n14
+Presumably equivalent wires: gen_n2_u_n15_gold (\gen_n3_u.u2.b_gold), gen_n2_u_n15_gate (\gen_n3_u.u2.b_gate) -> gen_n2_u_n15
+Presumably equivalent wires: gen_n2_u_sum_gold (\gen_n2_u.sum_gold), gen_n2_u_sum_gate (\gen_n2_u.sum_gate) -> gen_n2_u_sum
+Presumably equivalent wires: gen_n3_u.a_gold (\a_gold [2]), gen_n3_u.a_gate (\a_gate [2]) -> gen_n3_u.a
+Presumably equivalent wires: gen_n3_u.b_gold (\b_gold [2]), gen_n3_u.b_gate (\b_gate [2]) -> gen_n3_u.b
+Presumably equivalent wires: gen_n3_u.cin_gold (\gen_n3_u.u2.b_gold), gen_n3_u.cin_gate (\gen_n3_u.u2.b_gate) -> gen_n3_u.cin
+Presumably equivalent wires: gen_n3_u.cout_gold (\gen_n4_u.u2.b_gold), gen_n3_u.cout_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u.cout
+Presumably equivalent wires: gen_n3_u.s1_gold (\gen_n3_u.u2.a_gold), gen_n3_u.s1_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.s1
+Presumably equivalent wires: gen_n3_u.s2_gold (\gen_n3_u.u5.a_gold), gen_n3_u.s2_gate (\gen_n3_u.u5.a_gate) -> gen_n3_u.s2
+Presumably equivalent wires: gen_n3_u.s3_gold (\gen_n3_u.u5.b_gold), gen_n3_u.s3_gate (\gen_n3_u.u5.b_gate) -> gen_n3_u.s3
+Presumably equivalent wires: gen_n3_u.sum_gold (\gen_n3_u.sum_gold), gen_n3_u.sum_gate (\gen_n3_u.sum_gate) -> gen_n3_u.sum
+Presumably equivalent wires: gen_n3_u.u1.a_gold (\a_gold [2]), gen_n3_u.u1.a_gate (\a_gate [2]) -> gen_n3_u.u1.a
+Presumably equivalent wires: gen_n3_u.u1.b_gold (\b_gold [2]), gen_n3_u.u1.b_gate (\b_gate [2]) -> gen_n3_u.u1.b
+Presumably equivalent wires: gen_n3_u.u1.n85_o_gold (\gen_n3_u.u2.a_gold), gen_n3_u.u1.n85_o_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.u1.n85_o
+Presumably equivalent wires: gen_n3_u.u1.y_gold (\gen_n3_u.u2.a_gold), gen_n3_u.u1.y_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.u1.y
+Presumably equivalent wires: gen_n3_u.u1_y_gold (\gen_n3_u.u2.a_gold), gen_n3_u.u1_y_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.u1_y
+Presumably equivalent wires: gen_n3_u.u2.a_gold (\gen_n3_u.u2.a_gold), gen_n3_u.u2.a_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.u2.a
+Presumably equivalent wires: gen_n3_u.u2.b_gold (\gen_n3_u.u2.b_gold), gen_n3_u.u2.b_gate (\gen_n3_u.u2.b_gate) -> gen_n3_u.u2.b
+Presumably equivalent wires: gen_n3_u.u2.n85_o_gold (\gen_n3_u.sum_gold), gen_n3_u.u2.n85_o_gate (\gen_n3_u.sum_gate) -> gen_n3_u.u2.n85_o
+Presumably equivalent wires: gen_n3_u.u2.y_gold (\gen_n3_u.sum_gold), gen_n3_u.u2.y_gate (\gen_n3_u.sum_gate) -> gen_n3_u.u2.y
+Presumably equivalent wires: gen_n3_u.u2_y_gold (\gen_n3_u.sum_gold), gen_n3_u.u2_y_gate (\gen_n3_u.sum_gate) -> gen_n3_u.u2_y
+Presumably equivalent wires: gen_n3_u.u3.a_gold (\a_gold [2]), gen_n3_u.u3.a_gate (\a_gate [2]) -> gen_n3_u.u3.a
+Presumably equivalent wires: gen_n3_u.u3.b_gold (\b_gold [2]), gen_n3_u.u3.b_gate (\b_gate [2]) -> gen_n3_u.u3.b
+Presumably equivalent wires: gen_n3_u.u3.n87_o_gold (\gen_n3_u.u5.a_gold), gen_n3_u.u3.n87_o_gate (\gen_n3_u.u5.a_gate) -> gen_n3_u.u3.n87_o
+Presumably equivalent wires: gen_n3_u.u3.y_gold (\gen_n3_u.u5.a_gold), gen_n3_u.u3.y_gate (\gen_n3_u.u5.a_gate) -> gen_n3_u.u3.y
+Presumably equivalent wires: gen_n3_u.u3_y_gold (\gen_n3_u.u5.a_gold), gen_n3_u.u3_y_gate (\gen_n3_u.u5.a_gate) -> gen_n3_u.u3_y
+Presumably equivalent wires: gen_n3_u.u4.a_gold (\gen_n3_u.u2.a_gold), gen_n3_u.u4.a_gate (\gen_n3_u.u2.a_gate) -> gen_n3_u.u4.a
+Presumably equivalent wires: gen_n3_u.u4.b_gold (\gen_n3_u.u2.b_gold), gen_n3_u.u4.b_gate (\gen_n3_u.u2.b_gate) -> gen_n3_u.u4.b
+Presumably equivalent wires: gen_n3_u.u4.n87_o_gold (\gen_n3_u.u5.b_gold), gen_n3_u.u4.n87_o_gate (\gen_n3_u.u5.b_gate) -> gen_n3_u.u4.n87_o
+Presumably equivalent wires: gen_n3_u.u4.y_gold (\gen_n3_u.u5.b_gold), gen_n3_u.u4.y_gate (\gen_n3_u.u5.b_gate) -> gen_n3_u.u4.y
+Presumably equivalent wires: gen_n3_u.u4_y_gold (\gen_n3_u.u5.b_gold), gen_n3_u.u4_y_gate (\gen_n3_u.u5.b_gate) -> gen_n3_u.u4_y
+Presumably equivalent wires: gen_n3_u.u5.a_gold (\gen_n3_u.u5.a_gold), gen_n3_u.u5.a_gate (\gen_n3_u.u5.a_gate) -> gen_n3_u.u5.a
+Presumably equivalent wires: gen_n3_u.u5.b_gold (\gen_n3_u.u5.b_gold), gen_n3_u.u5.b_gate (\gen_n3_u.u5.b_gate) -> gen_n3_u.u5.b
+Presumably equivalent wires: gen_n3_u.u5.n89_o_gold (\gen_n4_u.u2.b_gold), gen_n3_u.u5.n89_o_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u.u5.n89_o
+Presumably equivalent wires: gen_n3_u.u5.y_gold (\gen_n4_u.u2.b_gold), gen_n3_u.u5.y_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u.u5.y
+Presumably equivalent wires: gen_n3_u.u5_y_gold (\gen_n4_u.u2.b_gold), gen_n3_u.u5_y_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u.u5_y
+Presumably equivalent wires: gen_n3_u_cout_gold (\gen_n4_u.u2.b_gold), gen_n3_u_cout_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u_cout
+Presumably equivalent wires: gen_n3_u_n23_gold (\gen_n3_u.sum_gold), gen_n3_u_n23_gate (\gen_n3_u.sum_gate) -> gen_n3_u_n23
+Presumably equivalent wires: gen_n3_u_n24_gold (\gen_n4_u.u2.b_gold), gen_n3_u_n24_gate (\gen_n4_u.u2.b_gate) -> gen_n3_u_n24
+Presumably equivalent wires: gen_n3_u_sum_gold (\gen_n3_u.sum_gold), gen_n3_u_sum_gate (\gen_n3_u.sum_gate) -> gen_n3_u_sum
+Presumably equivalent wires: gen_n4_u.a_gold (\a_gold [3]), gen_n4_u.a_gate (\a_gate [3]) -> gen_n4_u.a
+Presumably equivalent wires: gen_n4_u.b_gold (\b_gold [3]), gen_n4_u.b_gate (\b_gate [3]) -> gen_n4_u.b
+Presumably equivalent wires: gen_n4_u.cin_gold (\gen_n4_u.u2.b_gold), gen_n4_u.cin_gate (\gen_n4_u.u2.b_gate) -> gen_n4_u.cin
+Presumably equivalent wires: gen_n4_u.cout_gold (\gen_n5_u.u2.b_gold), gen_n4_u.cout_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u.cout
+Presumably equivalent wires: gen_n4_u.s1_gold (\gen_n4_u.u2.a_gold), gen_n4_u.s1_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.s1
+Presumably equivalent wires: gen_n4_u.s2_gold (\gen_n4_u.u5.a_gold), gen_n4_u.s2_gate (\gen_n4_u.u5.a_gate) -> gen_n4_u.s2
+Presumably equivalent wires: gen_n4_u.s3_gold (\gen_n4_u.u5.b_gold), gen_n4_u.s3_gate (\gen_n4_u.u5.b_gate) -> gen_n4_u.s3
+Presumably equivalent wires: gen_n4_u.sum_gold (\gen_n4_u.sum_gold), gen_n4_u.sum_gate (\gen_n4_u.sum_gate) -> gen_n4_u.sum
+Presumably equivalent wires: gen_n4_u.u1.a_gold (\a_gold [3]), gen_n4_u.u1.a_gate (\a_gate [3]) -> gen_n4_u.u1.a
+Presumably equivalent wires: gen_n4_u.u1.b_gold (\b_gold [3]), gen_n4_u.u1.b_gate (\b_gate [3]) -> gen_n4_u.u1.b
+Presumably equivalent wires: gen_n4_u.u1.n85_o_gold (\gen_n4_u.u2.a_gold), gen_n4_u.u1.n85_o_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.u1.n85_o
+Presumably equivalent wires: gen_n4_u.u1.y_gold (\gen_n4_u.u2.a_gold), gen_n4_u.u1.y_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.u1.y
+Presumably equivalent wires: gen_n4_u.u1_y_gold (\gen_n4_u.u2.a_gold), gen_n4_u.u1_y_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.u1_y
+Presumably equivalent wires: gen_n4_u.u2.a_gold (\gen_n4_u.u2.a_gold), gen_n4_u.u2.a_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.u2.a
+Presumably equivalent wires: gen_n4_u.u2.b_gold (\gen_n4_u.u2.b_gold), gen_n4_u.u2.b_gate (\gen_n4_u.u2.b_gate) -> gen_n4_u.u2.b
+Presumably equivalent wires: gen_n4_u.u2.n85_o_gold (\gen_n4_u.sum_gold), gen_n4_u.u2.n85_o_gate (\gen_n4_u.sum_gate) -> gen_n4_u.u2.n85_o
+Presumably equivalent wires: gen_n4_u.u2.y_gold (\gen_n4_u.sum_gold), gen_n4_u.u2.y_gate (\gen_n4_u.sum_gate) -> gen_n4_u.u2.y
+Presumably equivalent wires: gen_n4_u.u2_y_gold (\gen_n4_u.sum_gold), gen_n4_u.u2_y_gate (\gen_n4_u.sum_gate) -> gen_n4_u.u2_y
+Presumably equivalent wires: gen_n4_u.u3.a_gold (\a_gold [3]), gen_n4_u.u3.a_gate (\a_gate [3]) -> gen_n4_u.u3.a
+Presumably equivalent wires: gen_n4_u.u3.b_gold (\b_gold [3]), gen_n4_u.u3.b_gate (\b_gate [3]) -> gen_n4_u.u3.b
+Presumably equivalent wires: gen_n4_u.u3.n87_o_gold (\gen_n4_u.u5.a_gold), gen_n4_u.u3.n87_o_gate (\gen_n4_u.u5.a_gate) -> gen_n4_u.u3.n87_o
+Presumably equivalent wires: gen_n4_u.u3.y_gold (\gen_n4_u.u5.a_gold), gen_n4_u.u3.y_gate (\gen_n4_u.u5.a_gate) -> gen_n4_u.u3.y
+Presumably equivalent wires: gen_n4_u.u3_y_gold (\gen_n4_u.u5.a_gold), gen_n4_u.u3_y_gate (\gen_n4_u.u5.a_gate) -> gen_n4_u.u3_y
+Presumably equivalent wires: gen_n4_u.u4.a_gold (\gen_n4_u.u2.a_gold), gen_n4_u.u4.a_gate (\gen_n4_u.u2.a_gate) -> gen_n4_u.u4.a
+Presumably equivalent wires: gen_n4_u.u4.b_gold (\gen_n4_u.u2.b_gold), gen_n4_u.u4.b_gate (\gen_n4_u.u2.b_gate) -> gen_n4_u.u4.b
+Presumably equivalent wires: gen_n4_u.u4.n87_o_gold (\gen_n4_u.u5.b_gold), gen_n4_u.u4.n87_o_gate (\gen_n4_u.u5.b_gate) -> gen_n4_u.u4.n87_o
+Presumably equivalent wires: gen_n4_u.u4.y_gold (\gen_n4_u.u5.b_gold), gen_n4_u.u4.y_gate (\gen_n4_u.u5.b_gate) -> gen_n4_u.u4.y
+Presumably equivalent wires: gen_n4_u.u4_y_gold (\gen_n4_u.u5.b_gold), gen_n4_u.u4_y_gate (\gen_n4_u.u5.b_gate) -> gen_n4_u.u4_y
+Presumably equivalent wires: gen_n4_u.u5.a_gold (\gen_n4_u.u5.a_gold), gen_n4_u.u5.a_gate (\gen_n4_u.u5.a_gate) -> gen_n4_u.u5.a
+Presumably equivalent wires: gen_n4_u.u5.b_gold (\gen_n4_u.u5.b_gold), gen_n4_u.u5.b_gate (\gen_n4_u.u5.b_gate) -> gen_n4_u.u5.b
+Presumably equivalent wires: gen_n4_u.u5.n89_o_gold (\gen_n5_u.u2.b_gold), gen_n4_u.u5.n89_o_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u.u5.n89_o
+Presumably equivalent wires: gen_n4_u.u5.y_gold (\gen_n5_u.u2.b_gold), gen_n4_u.u5.y_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u.u5.y
+Presumably equivalent wires: gen_n4_u.u5_y_gold (\gen_n5_u.u2.b_gold), gen_n4_u.u5_y_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u.u5_y
+Presumably equivalent wires: gen_n4_u_cout_gold (\gen_n5_u.u2.b_gold), gen_n4_u_cout_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u_cout
+Presumably equivalent wires: gen_n4_u_n32_gold (\gen_n4_u.sum_gold), gen_n4_u_n32_gate (\gen_n4_u.sum_gate) -> gen_n4_u_n32
+Presumably equivalent wires: gen_n4_u_n33_gold (\gen_n5_u.u2.b_gold), gen_n4_u_n33_gate (\gen_n5_u.u2.b_gate) -> gen_n4_u_n33
+Presumably equivalent wires: gen_n4_u_sum_gold (\gen_n4_u.sum_gold), gen_n4_u_sum_gate (\gen_n4_u.sum_gate) -> gen_n4_u_sum
+Presumably equivalent wires: gen_n5_u.a_gold (\a_gold [4]), gen_n5_u.a_gate (\a_gate [4]) -> gen_n5_u.a
+Presumably equivalent wires: gen_n5_u.b_gold (\b_gold [4]), gen_n5_u.b_gate (\b_gate [4]) -> gen_n5_u.b
+Presumably equivalent wires: gen_n5_u.cin_gold (\gen_n5_u.u2.b_gold), gen_n5_u.cin_gate (\gen_n5_u.u2.b_gate) -> gen_n5_u.cin
+Presumably equivalent wires: gen_n5_u.cout_gold (\gen_n6_u.u2.b_gold), gen_n5_u.cout_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u.cout
+Presumably equivalent wires: gen_n5_u.s1_gold (\gen_n5_u.u2.a_gold), gen_n5_u.s1_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.s1
+Presumably equivalent wires: gen_n5_u.s2_gold (\gen_n5_u.u5.a_gold), gen_n5_u.s2_gate (\gen_n5_u.u5.a_gate) -> gen_n5_u.s2
+Presumably equivalent wires: gen_n5_u.s3_gold (\gen_n5_u.u5.b_gold), gen_n5_u.s3_gate (\gen_n5_u.u5.b_gate) -> gen_n5_u.s3
+Presumably equivalent wires: gen_n5_u.sum_gold (\gen_n5_u.sum_gold), gen_n5_u.sum_gate (\gen_n5_u.sum_gate) -> gen_n5_u.sum
+Presumably equivalent wires: gen_n5_u.u1.a_gold (\a_gold [4]), gen_n5_u.u1.a_gate (\a_gate [4]) -> gen_n5_u.u1.a
+Presumably equivalent wires: gen_n5_u.u1.b_gold (\b_gold [4]), gen_n5_u.u1.b_gate (\b_gate [4]) -> gen_n5_u.u1.b
+Presumably equivalent wires: gen_n5_u.u1.n85_o_gold (\gen_n5_u.u2.a_gold), gen_n5_u.u1.n85_o_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.u1.n85_o
+Presumably equivalent wires: gen_n5_u.u1.y_gold (\gen_n5_u.u2.a_gold), gen_n5_u.u1.y_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.u1.y
+Presumably equivalent wires: gen_n5_u.u1_y_gold (\gen_n5_u.u2.a_gold), gen_n5_u.u1_y_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.u1_y
+Presumably equivalent wires: gen_n5_u.u2.a_gold (\gen_n5_u.u2.a_gold), gen_n5_u.u2.a_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.u2.a
+Presumably equivalent wires: gen_n5_u.u2.b_gold (\gen_n5_u.u2.b_gold), gen_n5_u.u2.b_gate (\gen_n5_u.u2.b_gate) -> gen_n5_u.u2.b
+Presumably equivalent wires: gen_n5_u.u2.n85_o_gold (\gen_n5_u.sum_gold), gen_n5_u.u2.n85_o_gate (\gen_n5_u.sum_gate) -> gen_n5_u.u2.n85_o
+Presumably equivalent wires: gen_n5_u.u2.y_gold (\gen_n5_u.sum_gold), gen_n5_u.u2.y_gate (\gen_n5_u.sum_gate) -> gen_n5_u.u2.y
+Presumably equivalent wires: gen_n5_u.u2_y_gold (\gen_n5_u.sum_gold), gen_n5_u.u2_y_gate (\gen_n5_u.sum_gate) -> gen_n5_u.u2_y
+Presumably equivalent wires: gen_n5_u.u3.a_gold (\a_gold [4]), gen_n5_u.u3.a_gate (\a_gate [4]) -> gen_n5_u.u3.a
+Presumably equivalent wires: gen_n5_u.u3.b_gold (\b_gold [4]), gen_n5_u.u3.b_gate (\b_gate [4]) -> gen_n5_u.u3.b
+Presumably equivalent wires: gen_n5_u.u3.n87_o_gold (\gen_n5_u.u5.a_gold), gen_n5_u.u3.n87_o_gate (\gen_n5_u.u5.a_gate) -> gen_n5_u.u3.n87_o
+Presumably equivalent wires: gen_n5_u.u3.y_gold (\gen_n5_u.u5.a_gold), gen_n5_u.u3.y_gate (\gen_n5_u.u5.a_gate) -> gen_n5_u.u3.y
+Presumably equivalent wires: gen_n5_u.u3_y_gold (\gen_n5_u.u5.a_gold), gen_n5_u.u3_y_gate (\gen_n5_u.u5.a_gate) -> gen_n5_u.u3_y
+Presumably equivalent wires: gen_n5_u.u4.a_gold (\gen_n5_u.u2.a_gold), gen_n5_u.u4.a_gate (\gen_n5_u.u2.a_gate) -> gen_n5_u.u4.a
+Presumably equivalent wires: gen_n5_u.u4.b_gold (\gen_n5_u.u2.b_gold), gen_n5_u.u4.b_gate (\gen_n5_u.u2.b_gate) -> gen_n5_u.u4.b
+Presumably equivalent wires: gen_n5_u.u4.n87_o_gold (\gen_n5_u.u5.b_gold), gen_n5_u.u4.n87_o_gate (\gen_n5_u.u5.b_gate) -> gen_n5_u.u4.n87_o
+Presumably equivalent wires: gen_n5_u.u4.y_gold (\gen_n5_u.u5.b_gold), gen_n5_u.u4.y_gate (\gen_n5_u.u5.b_gate) -> gen_n5_u.u4.y
+Presumably equivalent wires: gen_n5_u.u4_y_gold (\gen_n5_u.u5.b_gold), gen_n5_u.u4_y_gate (\gen_n5_u.u5.b_gate) -> gen_n5_u.u4_y
+Presumably equivalent wires: gen_n5_u.u5.a_gold (\gen_n5_u.u5.a_gold), gen_n5_u.u5.a_gate (\gen_n5_u.u5.a_gate) -> gen_n5_u.u5.a
+Presumably equivalent wires: gen_n5_u.u5.b_gold (\gen_n5_u.u5.b_gold), gen_n5_u.u5.b_gate (\gen_n5_u.u5.b_gate) -> gen_n5_u.u5.b
+Presumably equivalent wires: gen_n5_u.u5.n89_o_gold (\gen_n6_u.u2.b_gold), gen_n5_u.u5.n89_o_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u.u5.n89_o
+Presumably equivalent wires: gen_n5_u.u5.y_gold (\gen_n6_u.u2.b_gold), gen_n5_u.u5.y_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u.u5.y
+Presumably equivalent wires: gen_n5_u.u5_y_gold (\gen_n6_u.u2.b_gold), gen_n5_u.u5_y_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u.u5_y
+Presumably equivalent wires: gen_n5_u_cout_gold (\gen_n6_u.u2.b_gold), gen_n5_u_cout_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u_cout
+Presumably equivalent wires: gen_n5_u_n41_gold (\gen_n5_u.sum_gold), gen_n5_u_n41_gate (\gen_n5_u.sum_gate) -> gen_n5_u_n41
+Presumably equivalent wires: gen_n5_u_n42_gold (\gen_n6_u.u2.b_gold), gen_n5_u_n42_gate (\gen_n6_u.u2.b_gate) -> gen_n5_u_n42
+Presumably equivalent wires: gen_n5_u_sum_gold (\gen_n5_u.sum_gold), gen_n5_u_sum_gate (\gen_n5_u.sum_gate) -> gen_n5_u_sum
+Presumably equivalent wires: gen_n6_u.a_gold (\a_gold [5]), gen_n6_u.a_gate (\a_gate [5]) -> gen_n6_u.a
+Presumably equivalent wires: gen_n6_u.b_gold (\b_gold [5]), gen_n6_u.b_gate (\b_gate [5]) -> gen_n6_u.b
+Presumably equivalent wires: gen_n6_u.cin_gold (\gen_n6_u.u2.b_gold), gen_n6_u.cin_gate (\gen_n6_u.u2.b_gate) -> gen_n6_u.cin
+Presumably equivalent wires: gen_n6_u.cout_gold (\gen_n7_u.u2.b_gold), gen_n6_u.cout_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u.cout
+Presumably equivalent wires: gen_n6_u.s1_gold (\gen_n6_u.u2.a_gold), gen_n6_u.s1_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.s1
+Presumably equivalent wires: gen_n6_u.s2_gold (\gen_n6_u.u5.a_gold), gen_n6_u.s2_gate (\gen_n6_u.u5.a_gate) -> gen_n6_u.s2
+Presumably equivalent wires: gen_n6_u.s3_gold (\gen_n6_u.u5.b_gold), gen_n6_u.s3_gate (\gen_n6_u.u5.b_gate) -> gen_n6_u.s3
+Presumably equivalent wires: gen_n6_u.sum_gold (\gen_n6_u.sum_gold), gen_n6_u.sum_gate (\gen_n6_u.sum_gate) -> gen_n6_u.sum
+Presumably equivalent wires: gen_n6_u.u1.a_gold (\a_gold [5]), gen_n6_u.u1.a_gate (\a_gate [5]) -> gen_n6_u.u1.a
+Presumably equivalent wires: gen_n6_u.u1.b_gold (\b_gold [5]), gen_n6_u.u1.b_gate (\b_gate [5]) -> gen_n6_u.u1.b
+Presumably equivalent wires: gen_n6_u.u1.n85_o_gold (\gen_n6_u.u2.a_gold), gen_n6_u.u1.n85_o_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.u1.n85_o
+Presumably equivalent wires: gen_n6_u.u1.y_gold (\gen_n6_u.u2.a_gold), gen_n6_u.u1.y_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.u1.y
+Presumably equivalent wires: gen_n6_u.u1_y_gold (\gen_n6_u.u2.a_gold), gen_n6_u.u1_y_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.u1_y
+Presumably equivalent wires: gen_n6_u.u2.a_gold (\gen_n6_u.u2.a_gold), gen_n6_u.u2.a_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.u2.a
+Presumably equivalent wires: gen_n6_u.u2.b_gold (\gen_n6_u.u2.b_gold), gen_n6_u.u2.b_gate (\gen_n6_u.u2.b_gate) -> gen_n6_u.u2.b
+Presumably equivalent wires: gen_n6_u.u2.n85_o_gold (\gen_n6_u.sum_gold), gen_n6_u.u2.n85_o_gate (\gen_n6_u.sum_gate) -> gen_n6_u.u2.n85_o
+Presumably equivalent wires: gen_n6_u.u2.y_gold (\gen_n6_u.sum_gold), gen_n6_u.u2.y_gate (\gen_n6_u.sum_gate) -> gen_n6_u.u2.y
+Presumably equivalent wires: gen_n6_u.u2_y_gold (\gen_n6_u.sum_gold), gen_n6_u.u2_y_gate (\gen_n6_u.sum_gate) -> gen_n6_u.u2_y
+Presumably equivalent wires: gen_n6_u.u3.a_gold (\a_gold [5]), gen_n6_u.u3.a_gate (\a_gate [5]) -> gen_n6_u.u3.a
+Presumably equivalent wires: gen_n6_u.u3.b_gold (\b_gold [5]), gen_n6_u.u3.b_gate (\b_gate [5]) -> gen_n6_u.u3.b
+Presumably equivalent wires: gen_n6_u.u3.n87_o_gold (\gen_n6_u.u5.a_gold), gen_n6_u.u3.n87_o_gate (\gen_n6_u.u5.a_gate) -> gen_n6_u.u3.n87_o
+Presumably equivalent wires: gen_n6_u.u3.y_gold (\gen_n6_u.u5.a_gold), gen_n6_u.u3.y_gate (\gen_n6_u.u5.a_gate) -> gen_n6_u.u3.y
+Presumably equivalent wires: gen_n6_u.u3_y_gold (\gen_n6_u.u5.a_gold), gen_n6_u.u3_y_gate (\gen_n6_u.u5.a_gate) -> gen_n6_u.u3_y
+Presumably equivalent wires: gen_n6_u.u4.a_gold (\gen_n6_u.u2.a_gold), gen_n6_u.u4.a_gate (\gen_n6_u.u2.a_gate) -> gen_n6_u.u4.a
+Presumably equivalent wires: gen_n6_u.u4.b_gold (\gen_n6_u.u2.b_gold), gen_n6_u.u4.b_gate (\gen_n6_u.u2.b_gate) -> gen_n6_u.u4.b
+Presumably equivalent wires: gen_n6_u.u4.n87_o_gold (\gen_n6_u.u5.b_gold), gen_n6_u.u4.n87_o_gate (\gen_n6_u.u5.b_gate) -> gen_n6_u.u4.n87_o
+Presumably equivalent wires: gen_n6_u.u4.y_gold (\gen_n6_u.u5.b_gold), gen_n6_u.u4.y_gate (\gen_n6_u.u5.b_gate) -> gen_n6_u.u4.y
+Presumably equivalent wires: gen_n6_u.u4_y_gold (\gen_n6_u.u5.b_gold), gen_n6_u.u4_y_gate (\gen_n6_u.u5.b_gate) -> gen_n6_u.u4_y
+Presumably equivalent wires: gen_n6_u.u5.a_gold (\gen_n6_u.u5.a_gold), gen_n6_u.u5.a_gate (\gen_n6_u.u5.a_gate) -> gen_n6_u.u5.a
+Presumably equivalent wires: gen_n6_u.u5.b_gold (\gen_n6_u.u5.b_gold), gen_n6_u.u5.b_gate (\gen_n6_u.u5.b_gate) -> gen_n6_u.u5.b
+Presumably equivalent wires: gen_n6_u.u5.n89_o_gold (\gen_n7_u.u2.b_gold), gen_n6_u.u5.n89_o_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u.u5.n89_o
+Presumably equivalent wires: gen_n6_u.u5.y_gold (\gen_n7_u.u2.b_gold), gen_n6_u.u5.y_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u.u5.y
+Presumably equivalent wires: gen_n6_u.u5_y_gold (\gen_n7_u.u2.b_gold), gen_n6_u.u5_y_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u.u5_y
+Presumably equivalent wires: gen_n6_u_cout_gold (\gen_n7_u.u2.b_gold), gen_n6_u_cout_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u_cout
+Presumably equivalent wires: gen_n6_u_n50_gold (\gen_n6_u.sum_gold), gen_n6_u_n50_gate (\gen_n6_u.sum_gate) -> gen_n6_u_n50
+Presumably equivalent wires: gen_n6_u_n51_gold (\gen_n7_u.u2.b_gold), gen_n6_u_n51_gate (\gen_n7_u.u2.b_gate) -> gen_n6_u_n51
+Presumably equivalent wires: gen_n6_u_sum_gold (\gen_n6_u.sum_gold), gen_n6_u_sum_gate (\gen_n6_u.sum_gate) -> gen_n6_u_sum
+Presumably equivalent wires: gen_n7_u.a_gold (\a_gold [6]), gen_n7_u.a_gate (\a_gate [6]) -> gen_n7_u.a
+Presumably equivalent wires: gen_n7_u.b_gold (\b_gold [6]), gen_n7_u.b_gate (\b_gate [6]) -> gen_n7_u.b
+Presumably equivalent wires: gen_n7_u.cin_gold (\gen_n7_u.u2.b_gold), gen_n7_u.cin_gate (\gen_n7_u.u2.b_gate) -> gen_n7_u.cin
+Presumably equivalent wires: gen_n7_u.cout_gold (\gen_n8_u.u2.b_gold), gen_n7_u.cout_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u.cout
+Presumably equivalent wires: gen_n7_u.s1_gold (\gen_n7_u.u2.a_gold), gen_n7_u.s1_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.s1
+Presumably equivalent wires: gen_n7_u.s2_gold (\gen_n7_u.u5.a_gold), gen_n7_u.s2_gate (\gen_n7_u.u5.a_gate) -> gen_n7_u.s2
+Presumably equivalent wires: gen_n7_u.s3_gold (\gen_n7_u.u5.b_gold), gen_n7_u.s3_gate (\gen_n7_u.u5.b_gate) -> gen_n7_u.s3
+Presumably equivalent wires: gen_n7_u.sum_gold (\gen_n7_u.sum_gold), gen_n7_u.sum_gate (\gen_n7_u.sum_gate) -> gen_n7_u.sum
+Presumably equivalent wires: gen_n7_u.u1.a_gold (\a_gold [6]), gen_n7_u.u1.a_gate (\a_gate [6]) -> gen_n7_u.u1.a
+Presumably equivalent wires: gen_n7_u.u1.b_gold (\b_gold [6]), gen_n7_u.u1.b_gate (\b_gate [6]) -> gen_n7_u.u1.b
+Presumably equivalent wires: gen_n7_u.u1.n85_o_gold (\gen_n7_u.u2.a_gold), gen_n7_u.u1.n85_o_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.u1.n85_o
+Presumably equivalent wires: gen_n7_u.u1.y_gold (\gen_n7_u.u2.a_gold), gen_n7_u.u1.y_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.u1.y
+Presumably equivalent wires: gen_n7_u.u1_y_gold (\gen_n7_u.u2.a_gold), gen_n7_u.u1_y_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.u1_y
+Presumably equivalent wires: gen_n7_u.u2.a_gold (\gen_n7_u.u2.a_gold), gen_n7_u.u2.a_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.u2.a
+Presumably equivalent wires: gen_n7_u.u2.b_gold (\gen_n7_u.u2.b_gold), gen_n7_u.u2.b_gate (\gen_n7_u.u2.b_gate) -> gen_n7_u.u2.b
+Presumably equivalent wires: gen_n7_u.u2.n85_o_gold (\gen_n7_u.sum_gold), gen_n7_u.u2.n85_o_gate (\gen_n7_u.sum_gate) -> gen_n7_u.u2.n85_o
+Presumably equivalent wires: gen_n7_u.u2.y_gold (\gen_n7_u.sum_gold), gen_n7_u.u2.y_gate (\gen_n7_u.sum_gate) -> gen_n7_u.u2.y
+Presumably equivalent wires: gen_n7_u.u2_y_gold (\gen_n7_u.sum_gold), gen_n7_u.u2_y_gate (\gen_n7_u.sum_gate) -> gen_n7_u.u2_y
+Presumably equivalent wires: gen_n7_u.u3.a_gold (\a_gold [6]), gen_n7_u.u3.a_gate (\a_gate [6]) -> gen_n7_u.u3.a
+Presumably equivalent wires: gen_n7_u.u3.b_gold (\b_gold [6]), gen_n7_u.u3.b_gate (\b_gate [6]) -> gen_n7_u.u3.b
+Presumably equivalent wires: gen_n7_u.u3.n87_o_gold (\gen_n7_u.u5.a_gold), gen_n7_u.u3.n87_o_gate (\gen_n7_u.u5.a_gate) -> gen_n7_u.u3.n87_o
+Presumably equivalent wires: gen_n7_u.u3.y_gold (\gen_n7_u.u5.a_gold), gen_n7_u.u3.y_gate (\gen_n7_u.u5.a_gate) -> gen_n7_u.u3.y
+Presumably equivalent wires: gen_n7_u.u3_y_gold (\gen_n7_u.u5.a_gold), gen_n7_u.u3_y_gate (\gen_n7_u.u5.a_gate) -> gen_n7_u.u3_y
+Presumably equivalent wires: gen_n7_u.u4.a_gold (\gen_n7_u.u2.a_gold), gen_n7_u.u4.a_gate (\gen_n7_u.u2.a_gate) -> gen_n7_u.u4.a
+Presumably equivalent wires: gen_n7_u.u4.b_gold (\gen_n7_u.u2.b_gold), gen_n7_u.u4.b_gate (\gen_n7_u.u2.b_gate) -> gen_n7_u.u4.b
+Presumably equivalent wires: gen_n7_u.u4.n87_o_gold (\gen_n7_u.u5.b_gold), gen_n7_u.u4.n87_o_gate (\gen_n7_u.u5.b_gate) -> gen_n7_u.u4.n87_o
+Presumably equivalent wires: gen_n7_u.u4.y_gold (\gen_n7_u.u5.b_gold), gen_n7_u.u4.y_gate (\gen_n7_u.u5.b_gate) -> gen_n7_u.u4.y
+Presumably equivalent wires: gen_n7_u.u4_y_gold (\gen_n7_u.u5.b_gold), gen_n7_u.u4_y_gate (\gen_n7_u.u5.b_gate) -> gen_n7_u.u4_y
+Presumably equivalent wires: gen_n7_u.u5.a_gold (\gen_n7_u.u5.a_gold), gen_n7_u.u5.a_gate (\gen_n7_u.u5.a_gate) -> gen_n7_u.u5.a
+Presumably equivalent wires: gen_n7_u.u5.b_gold (\gen_n7_u.u5.b_gold), gen_n7_u.u5.b_gate (\gen_n7_u.u5.b_gate) -> gen_n7_u.u5.b
+Presumably equivalent wires: gen_n7_u.u5.n89_o_gold (\gen_n8_u.u2.b_gold), gen_n7_u.u5.n89_o_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u.u5.n89_o
+Presumably equivalent wires: gen_n7_u.u5.y_gold (\gen_n8_u.u2.b_gold), gen_n7_u.u5.y_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u.u5.y
+Presumably equivalent wires: gen_n7_u.u5_y_gold (\gen_n8_u.u2.b_gold), gen_n7_u.u5_y_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u.u5_y
+Presumably equivalent wires: gen_n7_u_cout_gold (\gen_n8_u.u2.b_gold), gen_n7_u_cout_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u_cout
+Presumably equivalent wires: gen_n7_u_n59_gold (\gen_n7_u.sum_gold), gen_n7_u_n59_gate (\gen_n7_u.sum_gate) -> gen_n7_u_n59
+Presumably equivalent wires: gen_n7_u_n60_gold (\gen_n8_u.u2.b_gold), gen_n7_u_n60_gate (\gen_n8_u.u2.b_gate) -> gen_n7_u_n60
+Presumably equivalent wires: gen_n7_u_sum_gold (\gen_n7_u.sum_gold), gen_n7_u_sum_gate (\gen_n7_u.sum_gate) -> gen_n7_u_sum
+Presumably equivalent wires: gen_n8_u.a_gold (\a_gold [7]), gen_n8_u.a_gate (\a_gate [7]) -> gen_n8_u.a
+Presumably equivalent wires: gen_n8_u.b_gold (\b_gold [7]), gen_n8_u.b_gate (\b_gate [7]) -> gen_n8_u.b
+Presumably equivalent wires: gen_n8_u.cin_gold (\gen_n8_u.u2.b_gold), gen_n8_u.cin_gate (\gen_n8_u.u2.b_gate) -> gen_n8_u.cin
+Presumably equivalent wires: gen_n8_u.cout_gold (\cout_gold), gen_n8_u.cout_gate (\cout_gate) -> gen_n8_u.cout
+Presumably equivalent wires: gen_n8_u.s1_gold (\gen_n8_u.u2.a_gold), gen_n8_u.s1_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.s1
+Presumably equivalent wires: gen_n8_u.s2_gold (\gen_n8_u.u5.a_gold), gen_n8_u.s2_gate (\gen_n8_u.u5.a_gate) -> gen_n8_u.s2
+Presumably equivalent wires: gen_n8_u.s3_gold (\gen_n8_u.u5.b_gold), gen_n8_u.s3_gate (\gen_n8_u.u5.b_gate) -> gen_n8_u.s3
+Presumably equivalent wires: gen_n8_u.sum_gold (\gen_n8_u.sum_gold), gen_n8_u.sum_gate (\gen_n8_u.sum_gate) -> gen_n8_u.sum
+Presumably equivalent wires: gen_n8_u.u1.a_gold (\a_gold [7]), gen_n8_u.u1.a_gate (\a_gate [7]) -> gen_n8_u.u1.a
+Presumably equivalent wires: gen_n8_u.u1.b_gold (\b_gold [7]), gen_n8_u.u1.b_gate (\b_gate [7]) -> gen_n8_u.u1.b
+Presumably equivalent wires: gen_n8_u.u1.n85_o_gold (\gen_n8_u.u2.a_gold), gen_n8_u.u1.n85_o_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.u1.n85_o
+Presumably equivalent wires: gen_n8_u.u1.y_gold (\gen_n8_u.u2.a_gold), gen_n8_u.u1.y_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.u1.y
+Presumably equivalent wires: gen_n8_u.u1_y_gold (\gen_n8_u.u2.a_gold), gen_n8_u.u1_y_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.u1_y
+Presumably equivalent wires: gen_n8_u.u2.a_gold (\gen_n8_u.u2.a_gold), gen_n8_u.u2.a_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.u2.a
+Presumably equivalent wires: gen_n8_u.u2.b_gold (\gen_n8_u.u2.b_gold), gen_n8_u.u2.b_gate (\gen_n8_u.u2.b_gate) -> gen_n8_u.u2.b
+Presumably equivalent wires: gen_n8_u.u2.n85_o_gold (\gen_n8_u.sum_gold), gen_n8_u.u2.n85_o_gate (\gen_n8_u.sum_gate) -> gen_n8_u.u2.n85_o
+Presumably equivalent wires: gen_n8_u.u2.y_gold (\gen_n8_u.sum_gold), gen_n8_u.u2.y_gate (\gen_n8_u.sum_gate) -> gen_n8_u.u2.y
+Presumably equivalent wires: gen_n8_u.u2_y_gold (\gen_n8_u.sum_gold), gen_n8_u.u2_y_gate (\gen_n8_u.sum_gate) -> gen_n8_u.u2_y
+Presumably equivalent wires: gen_n8_u.u3.a_gold (\a_gold [7]), gen_n8_u.u3.a_gate (\a_gate [7]) -> gen_n8_u.u3.a
+Presumably equivalent wires: gen_n8_u.u3.b_gold (\b_gold [7]), gen_n8_u.u3.b_gate (\b_gate [7]) -> gen_n8_u.u3.b
+Presumably equivalent wires: gen_n8_u.u3.n87_o_gold (\gen_n8_u.u5.a_gold), gen_n8_u.u3.n87_o_gate (\gen_n8_u.u5.a_gate) -> gen_n8_u.u3.n87_o
+Presumably equivalent wires: gen_n8_u.u3.y_gold (\gen_n8_u.u5.a_gold), gen_n8_u.u3.y_gate (\gen_n8_u.u5.a_gate) -> gen_n8_u.u3.y
+Presumably equivalent wires: gen_n8_u.u3_y_gold (\gen_n8_u.u5.a_gold), gen_n8_u.u3_y_gate (\gen_n8_u.u5.a_gate) -> gen_n8_u.u3_y
+Presumably equivalent wires: gen_n8_u.u4.a_gold (\gen_n8_u.u2.a_gold), gen_n8_u.u4.a_gate (\gen_n8_u.u2.a_gate) -> gen_n8_u.u4.a
+Presumably equivalent wires: gen_n8_u.u4.b_gold (\gen_n8_u.u2.b_gold), gen_n8_u.u4.b_gate (\gen_n8_u.u2.b_gate) -> gen_n8_u.u4.b
+Presumably equivalent wires: gen_n8_u.u4.n87_o_gold (\gen_n8_u.u5.b_gold), gen_n8_u.u4.n87_o_gate (\gen_n8_u.u5.b_gate) -> gen_n8_u.u4.n87_o
+Presumably equivalent wires: gen_n8_u.u4.y_gold (\gen_n8_u.u5.b_gold), gen_n8_u.u4.y_gate (\gen_n8_u.u5.b_gate) -> gen_n8_u.u4.y
+Presumably equivalent wires: gen_n8_u.u4_y_gold (\gen_n8_u.u5.b_gold), gen_n8_u.u4_y_gate (\gen_n8_u.u5.b_gate) -> gen_n8_u.u4_y
+Presumably equivalent wires: gen_n8_u.u5.a_gold (\gen_n8_u.u5.a_gold), gen_n8_u.u5.a_gate (\gen_n8_u.u5.a_gate) -> gen_n8_u.u5.a
+Presumably equivalent wires: gen_n8_u.u5.b_gold (\gen_n8_u.u5.b_gold), gen_n8_u.u5.b_gate (\gen_n8_u.u5.b_gate) -> gen_n8_u.u5.b
+Presumably equivalent wires: gen_n8_u.u5.n89_o_gold (\cout_gold), gen_n8_u.u5.n89_o_gate (\cout_gate) -> gen_n8_u.u5.n89_o
+Presumably equivalent wires: gen_n8_u.u5.y_gold (\cout_gold), gen_n8_u.u5.y_gate (\cout_gate) -> gen_n8_u.u5.y
+Presumably equivalent wires: gen_n8_u.u5_y_gold (\cout_gold), gen_n8_u.u5_y_gate (\cout_gate) -> gen_n8_u.u5_y
+Presumably equivalent wires: gen_n8_u_cout_gold (\cout_gold), gen_n8_u_cout_gate (\cout_gate) -> gen_n8_u_cout
+Presumably equivalent wires: gen_n8_u_n68_gold (\gen_n8_u.sum_gold), gen_n8_u_n68_gate (\gen_n8_u.sum_gate) -> gen_n8_u_n68
+Presumably equivalent wires: gen_n8_u_n69_gold (\cout_gold), gen_n8_u_n69_gate (\cout_gate) -> gen_n8_u_n69
+Presumably equivalent wires: gen_n8_u_sum_gold (\gen_n8_u.sum_gold), gen_n8_u_sum_gate (\gen_n8_u.sum_gate) -> gen_n8_u_sum
+Presumably equivalent wires: n11_o_gold (\a_gold [1]), n11_o_gate (\a_gate [1]) -> n11_o
+Presumably equivalent wires: n12_o_gold (\b_gold [1]), n12_o_gate (\b_gate [1]) -> n12_o
+Presumably equivalent wires: n13_o_gold (\gen_n2_u.u2.b_gold), n13_o_gate (\gen_n2_u.u2.b_gate) -> n13_o
+Presumably equivalent wires: n20_o_gold (\a_gold [2]), n20_o_gate (\a_gate [2]) -> n20_o
+Presumably equivalent wires: n21_o_gold (\b_gold [2]), n21_o_gate (\b_gate [2]) -> n21_o
+Presumably equivalent wires: n22_o_gold (\gen_n3_u.u2.b_gold), n22_o_gate (\gen_n3_u.u2.b_gate) -> n22_o
+Presumably equivalent wires: n29_o_gold (\a_gold [3]), n29_o_gate (\a_gate [3]) -> n29_o
+Presumably equivalent wires: n2_o_gold (\a_gold [0]), n2_o_gate (\a_gate [0]) -> n2_o
+Presumably equivalent wires: n30_o_gold (\b_gold [3]), n30_o_gate (\b_gate [3]) -> n30_o
+Presumably equivalent wires: n31_o_gold (\gen_n4_u.u2.b_gold), n31_o_gate (\gen_n4_u.u2.b_gate) -> n31_o
+Presumably equivalent wires: n38_o_gold (\a_gold [4]), n38_o_gate (\a_gate [4]) -> n38_o
+Presumably equivalent wires: n39_o_gold (\b_gold [4]), n39_o_gate (\b_gate [4]) -> n39_o
+Presumably equivalent wires: n3_o_gold (\b_gold [0]), n3_o_gate (\b_gate [0]) -> n3_o
+Presumably equivalent wires: n40_o_gold (\gen_n5_u.u2.b_gold), n40_o_gate (\gen_n5_u.u2.b_gate) -> n40_o
+Presumably equivalent wires: n47_o_gold (\a_gold [5]), n47_o_gate (\a_gate [5]) -> n47_o
+Presumably equivalent wires: n48_o_gold (\b_gold [5]), n48_o_gate (\b_gate [5]) -> n48_o
+Presumably equivalent wires: n49_o_gold (\gen_n6_u.u2.b_gold), n49_o_gate (\gen_n6_u.u2.b_gate) -> n49_o
+Presumably equivalent wires: n4_o_gold (\cin_gold), n4_o_gate (\cin_gate) -> n4_o
+Presumably equivalent wires: n56_o_gold (\a_gold [6]), n56_o_gate (\a_gate [6]) -> n56_o
+Presumably equivalent wires: n57_o_gold (\b_gold [6]), n57_o_gate (\b_gate [6]) -> n57_o
+Presumably equivalent wires: n58_o_gold (\gen_n7_u.u2.b_gold), n58_o_gate (\gen_n7_u.u2.b_gate) -> n58_o
+Presumably equivalent wires: n65_o_gold (\a_gold [7]), n65_o_gate (\a_gate [7]) -> n65_o
+Presumably equivalent wires: n66_o_gold (\b_gold [7]), n66_o_gate (\b_gate [7]) -> n66_o
+Presumably equivalent wires: n67_o_gold (\gen_n8_u.u2.b_gold), n67_o_gate (\gen_n8_u.u2.b_gate) -> n67_o
+Presumably equivalent wires: n74_o_gold (\cout_gold), n74_o_gate (\cout_gate) -> n74_o
+Presumably equivalent wires: n75_o_gold ({ \cout_gold \gen_n8_u.u2.b_gold \gen_n7_u.u2.b_gold \gen_n6_u.u2.b_gold \gen_n5_u.u2.b_gold \gen_n4_u.u2.b_gold \gen_n3_u.u2.b_gold \gen_n2_u.u2.b_gold \cin_gold }), n75_o_gate ({ \cout_gate \gen_n8_u.u2.b_gate \gen_n7_u.u2.b_gate \gen_n6_u.u2.b_gate \gen_n5_u.u2.b_gate \gen_n4_u.u2.b_gate \gen_n3_u.u2.b_gate \gen_n2_u.u2.b_gate \cin_gate }) -> n75_o
+Presumably equivalent wires: n76_o_gold ({ \gen_n8_u.sum_gold \gen_n7_u.sum_gold \gen_n6_u.sum_gold \gen_n5_u.sum_gold \gen_n4_u.sum_gold \gen_n3_u.sum_gold \gen_n2_u.sum_gold \gen_n1_u.sum_gold }), n76_o_gate ({ \gen_n8_u.sum_gate \gen_n7_u.sum_gate \gen_n6_u.sum_gate \gen_n5_u.sum_gate \gen_n4_u.sum_gate \gen_n3_u.sum_gate \gen_n2_u.sum_gate \gen_n1_u.sum_gate }) -> n76_o
+Presumably equivalent wires: sum_gold ({ \gen_n8_u.sum_gold \gen_n7_u.sum_gold \gen_n6_u.sum_gold \gen_n5_u.sum_gold \gen_n4_u.sum_gold \gen_n3_u.sum_gold \gen_n2_u.sum_gold \gen_n1_u.sum_gold }), sum_gate ({ \gen_n8_u.sum_gate \gen_n7_u.sum_gate \gen_n6_u.sum_gate \gen_n5_u.sum_gate \gen_n4_u.sum_gate \gen_n3_u.sum_gate \gen_n2_u.sum_gate \gen_n1_u.sum_gate }) -> sum
+Changing input B of cell $flatten\gen_n1_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n1_u.u2.a_gate -> \gen_n1_u.u2.a
+Changing input B of cell $flatten\gen_n1_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n1_u.u2.a_gate -> \gen_n1_u.u2.a
+Changing input A of cell $flatten\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n1_u.u5.b_gate -> \gen_n1_u.u5.b
+Changing input B of cell $flatten\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n1_u.u5.a_gate -> \gen_n1_u.u5.a
+Changing input A of cell $flatten\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n2_u.u2.b_gate -> \gen_n2_u.u2.b
+Changing input B of cell $flatten\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n2_u.u2.a_gate -> \gen_n2_u.u2.a
+Changing input A of cell $flatten\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n2_u.u2.b_gate -> \gen_n2_u.u2.b
+Changing input B of cell $flatten\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n2_u.u2.a_gate -> \gen_n2_u.u2.a
+Changing input A of cell $flatten\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n2_u.u5.b_gate -> \gen_n2_u.u5.b
+Changing input B of cell $flatten\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n2_u.u5.a_gate -> \gen_n2_u.u5.a
+Changing input A of cell $flatten\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n3_u.u2.b_gate -> \gen_n3_u.u2.b
+Changing input B of cell $flatten\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n3_u.u2.a_gate -> \gen_n3_u.u2.a
+Changing input A of cell $flatten\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n3_u.u2.b_gate -> \gen_n3_u.u2.b
+Changing input B of cell $flatten\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n3_u.u2.a_gate -> \gen_n3_u.u2.a
+Changing input A of cell $flatten\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n3_u.u5.b_gate -> \gen_n3_u.u5.b
+Changing input B of cell $flatten\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n3_u.u5.a_gate -> \gen_n3_u.u5.a
+Changing input A of cell $flatten\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n4_u.u2.b_gate -> \gen_n4_u.u2.b
+Changing input B of cell $flatten\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n4_u.u2.a_gate -> \gen_n4_u.u2.a
+Changing input A of cell $flatten\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n4_u.u2.b_gate -> \gen_n4_u.u2.b
+Changing input B of cell $flatten\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n4_u.u2.a_gate -> \gen_n4_u.u2.a
+Changing input A of cell $flatten\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n4_u.u5.b_gate -> \gen_n4_u.u5.b
+Changing input B of cell $flatten\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n4_u.u5.a_gate -> \gen_n4_u.u5.a
+Changing input A of cell $flatten\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n5_u.u2.b_gate -> \gen_n5_u.u2.b
+Changing input B of cell $flatten\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n5_u.u2.a_gate -> \gen_n5_u.u2.a
+Changing input A of cell $flatten\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n5_u.u2.b_gate -> \gen_n5_u.u2.b
+Changing input B of cell $flatten\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n5_u.u2.a_gate -> \gen_n5_u.u2.a
+Changing input A of cell $flatten\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n5_u.u5.b_gate -> \gen_n5_u.u5.b
+Changing input B of cell $flatten\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n5_u.u5.a_gate -> \gen_n5_u.u5.a
+Changing input A of cell $flatten\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n6_u.u2.b_gate -> \gen_n6_u.u2.b
+Changing input B of cell $flatten\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n6_u.u2.a_gate -> \gen_n6_u.u2.a
+Changing input A of cell $flatten\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n6_u.u2.b_gate -> \gen_n6_u.u2.b
+Changing input B of cell $flatten\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n6_u.u2.a_gate -> \gen_n6_u.u2.a
+Changing input A of cell $flatten\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n6_u.u5.b_gate -> \gen_n6_u.u5.b
+Changing input B of cell $flatten\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n6_u.u5.a_gate -> \gen_n6_u.u5.a
+Changing input A of cell $flatten\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n7_u.u2.b_gate -> \gen_n7_u.u2.b
+Changing input B of cell $flatten\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n7_u.u2.a_gate -> \gen_n7_u.u2.a
+Changing input A of cell $flatten\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n7_u.u2.b_gate -> \gen_n7_u.u2.b
+Changing input B of cell $flatten\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n7_u.u2.a_gate -> \gen_n7_u.u2.a
+Changing input A of cell $flatten\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n7_u.u5.b_gate -> \gen_n7_u.u5.b
+Changing input B of cell $flatten\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n7_u.u5.a_gate -> \gen_n7_u.u5.a
+Changing input A of cell $flatten\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n8_u.u2.b_gate -> \gen_n8_u.u2.b
+Changing input B of cell $flatten\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:261$19_gate ($xor): \gen_n8_u.u2.a_gate -> \gen_n8_u.u2.a
+Changing input A of cell $flatten\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n8_u.u2.b_gate -> \gen_n8_u.u2.b
+Changing input B of cell $flatten\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:186$17_gate ($and): \gen_n8_u.u2.a_gate -> \gen_n8_u.u2.a
+Changing input A of cell $flatten\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n8_u.u5.b_gate -> \gen_n8_u.u5.b
+Changing input B of cell $flatten\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_generic.v:249$18_gate ($or): \gen_n8_u.u5.a_gate -> \gen_n8_u.u5.a
+Changing input A of cell $flatten\gen_n1_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n1_u.u2.a_gold -> \gen_n1_u.u2.a
+Changing input A of cell $flatten\gen_n1_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n1_u.u2.a_gold -> \gen_n1_u.u2.a
+Changing input A of cell $flatten\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n1_u.u5.a_gold -> \gen_n1_u.u5.a
+Changing input B of cell $flatten\gen_n1_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n1_u.u5.b_gold -> \gen_n1_u.u5.b
+Changing input A of cell $flatten\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n2_u.u2.a_gold -> \gen_n2_u.u2.a
+Changing input B of cell $flatten\gen_n2_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n2_u.u2.b_gold -> \gen_n2_u.u2.b
+Changing input A of cell $flatten\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n2_u.u2.a_gold -> \gen_n2_u.u2.a
+Changing input B of cell $flatten\gen_n2_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n2_u.u2.b_gold -> \gen_n2_u.u2.b
+Changing input A of cell $flatten\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n2_u.u5.a_gold -> \gen_n2_u.u5.a
+Changing input B of cell $flatten\gen_n2_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n2_u.u5.b_gold -> \gen_n2_u.u5.b
+Changing input A of cell $flatten\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n3_u.u2.a_gold -> \gen_n3_u.u2.a
+Changing input B of cell $flatten\gen_n3_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n3_u.u2.b_gold -> \gen_n3_u.u2.b
+Changing input A of cell $flatten\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n3_u.u2.a_gold -> \gen_n3_u.u2.a
+Changing input B of cell $flatten\gen_n3_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n3_u.u2.b_gold -> \gen_n3_u.u2.b
+Changing input A of cell $flatten\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n3_u.u5.a_gold -> \gen_n3_u.u5.a
+Changing input B of cell $flatten\gen_n3_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n3_u.u5.b_gold -> \gen_n3_u.u5.b
+Changing input A of cell $flatten\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n4_u.u2.a_gold -> \gen_n4_u.u2.a
+Changing input B of cell $flatten\gen_n4_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n4_u.u2.b_gold -> \gen_n4_u.u2.b
+Changing input A of cell $flatten\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n4_u.u2.a_gold -> \gen_n4_u.u2.a
+Changing input B of cell $flatten\gen_n4_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n4_u.u2.b_gold -> \gen_n4_u.u2.b
+Changing input A of cell $flatten\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n4_u.u5.a_gold -> \gen_n4_u.u5.a
+Changing input B of cell $flatten\gen_n4_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n4_u.u5.b_gold -> \gen_n4_u.u5.b
+Changing input A of cell $flatten\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n5_u.u2.a_gold -> \gen_n5_u.u2.a
+Changing input B of cell $flatten\gen_n5_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n5_u.u2.b_gold -> \gen_n5_u.u2.b
+Changing input A of cell $flatten\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n5_u.u2.a_gold -> \gen_n5_u.u2.a
+Changing input B of cell $flatten\gen_n5_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n5_u.u2.b_gold -> \gen_n5_u.u2.b
+Changing input A of cell $flatten\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n5_u.u5.a_gold -> \gen_n5_u.u5.a
+Changing input B of cell $flatten\gen_n5_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n5_u.u5.b_gold -> \gen_n5_u.u5.b
+Changing input A of cell $flatten\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n6_u.u2.a_gold -> \gen_n6_u.u2.a
+Changing input B of cell $flatten\gen_n6_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n6_u.u2.b_gold -> \gen_n6_u.u2.b
+Changing input A of cell $flatten\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n6_u.u2.a_gold -> \gen_n6_u.u2.a
+Changing input B of cell $flatten\gen_n6_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n6_u.u2.b_gold -> \gen_n6_u.u2.b
+Changing input A of cell $flatten\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n6_u.u5.a_gold -> \gen_n6_u.u5.a
+Changing input B of cell $flatten\gen_n6_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n6_u.u5.b_gold -> \gen_n6_u.u5.b
+Changing input A of cell $flatten\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n7_u.u2.a_gold -> \gen_n7_u.u2.a
+Changing input B of cell $flatten\gen_n7_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n7_u.u2.b_gold -> \gen_n7_u.u2.b
+Changing input A of cell $flatten\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n7_u.u2.a_gold -> \gen_n7_u.u2.a
+Changing input B of cell $flatten\gen_n7_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n7_u.u2.b_gold -> \gen_n7_u.u2.b
+Changing input A of cell $flatten\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n7_u.u5.a_gold -> \gen_n7_u.u5.a
+Changing input B of cell $flatten\gen_n7_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n7_u.u5.b_gold -> \gen_n7_u.u5.b
+Changing input A of cell $flatten\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n8_u.u2.a_gold -> \gen_n8_u.u2.a
+Changing input B of cell $flatten\gen_n8_u.\u2.$xor$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:28$3_gold ($xor): \gen_n8_u.u2.b_gold -> \gen_n8_u.u2.b
+Changing input A of cell $flatten\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n8_u.u2.a_gold -> \gen_n8_u.u2.a
+Changing input B of cell $flatten\gen_n8_u.\u4.$and$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:18$2_gold ($and): \gen_n8_u.u2.b_gold -> \gen_n8_u.u2.b
+Changing input A of cell $flatten\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n8_u.u5.a_gold -> \gen_n8_u.u5.a
+Changing input B of cell $flatten\gen_n8_u.\u5.$or$/mnt/e/lab/VHDL(BOI)/lab_code/day3/build/adder8_vhdl.v:8$1_gold ($or): \gen_n8_u.u5.b_gold -> \gen_n8_u.u5.b
+Presumably equivalent cells: gen_n1_u_gold gen_n1_u_gate ($scopeinfo) -> gen_n1_u
+Presumably equivalent cells: gen_n1_u.u1_gold gen_n1_u.u1_gate ($scopeinfo) -> gen_n1_u.u1
+Presumably equivalent cells: gen_n1_u.u2_gold gen_n1_u.u2_gate ($scopeinfo) -> gen_n1_u.u2
+Presumably equivalent cells: gen_n1_u.u3_gold gen_n1_u.u3_gate ($scopeinfo) -> gen_n1_u.u3
+Presumably equivalent cells: gen_n1_u.u4_gold gen_n1_u.u4_gate ($scopeinfo) -> gen_n1_u.u4
+Presumably equivalent cells: gen_n1_u.u5_gold gen_n1_u.u5_gate ($scopeinfo) -> gen_n1_u.u5
+Presumably equivalent cells: gen_n2_u_gold gen_n2_u_gate ($scopeinfo) -> gen_n2_u
+Presumably equivalent cells: gen_n2_u.u1_gold gen_n2_u.u1_gate ($scopeinfo) -> gen_n2_u.u1
+Presumably equivalent cells: gen_n2_u.u2_gold gen_n2_u.u2_gate ($scopeinfo) -> gen_n2_u.u2
+Presumably equivalent cells: gen_n2_u.u3_gold gen_n2_u.u3_gate ($scopeinfo) -> gen_n2_u.u3
+Presumably equivalent cells: gen_n2_u.u4_gold gen_n2_u.u4_gate ($scopeinfo) -> gen_n2_u.u4
+Presumably equivalent cells: gen_n2_u.u5_gold gen_n2_u.u5_gate ($scopeinfo) -> gen_n2_u.u5
+Presumably equivalent cells: gen_n3_u_gold gen_n3_u_gate ($scopeinfo) -> gen_n3_u
+Presumably equivalent cells: gen_n3_u.u1_gold gen_n3_u.u1_gate ($scopeinfo) -> gen_n3_u.u1
+Presumably equivalent cells: gen_n3_u.u2_gold gen_n3_u.u2_gate ($scopeinfo) -> gen_n3_u.u2
+Presumably equivalent cells: gen_n3_u.u3_gold gen_n3_u.u3_gate ($scopeinfo) -> gen_n3_u.u3
+Presumably equivalent cells: gen_n3_u.u4_gold gen_n3_u.u4_gate ($scopeinfo) -> gen_n3_u.u4
+Presumably equivalent cells: gen_n3_u.u5_gold gen_n3_u.u5_gate ($scopeinfo) -> gen_n3_u.u5
+Presumably equivalent cells: gen_n4_u_gold gen_n4_u_gate ($scopeinfo) -> gen_n4_u
+Presumably equivalent cells: gen_n4_u.u1_gold gen_n4_u.u1_gate ($scopeinfo) -> gen_n4_u.u1
+Presumably equivalent cells: gen_n4_u.u2_gold gen_n4_u.u2_gate ($scopeinfo) -> gen_n4_u.u2
+Presumably equivalent cells: gen_n4_u.u3_gold gen_n4_u.u3_gate ($scopeinfo) -> gen_n4_u.u3
+Presumably equivalent cells: gen_n4_u.u4_gold gen_n4_u.u4_gate ($scopeinfo) -> gen_n4_u.u4
+Presumably equivalent cells: gen_n4_u.u5_gold gen_n4_u.u5_gate ($scopeinfo) -> gen_n4_u.u5
+Presumably equivalent cells: gen_n5_u_gold gen_n5_u_gate ($scopeinfo) -> gen_n5_u
+Presumably equivalent cells: gen_n5_u.u1_gold gen_n5_u.u1_gate ($scopeinfo) -> gen_n5_u.u1
+Presumably equivalent cells: gen_n5_u.u2_gold gen_n5_u.u2_gate ($scopeinfo) -> gen_n5_u.u2
+Presumably equivalent cells: gen_n5_u.u3_gold gen_n5_u.u3_gate ($scopeinfo) -> gen_n5_u.u3
+Presumably equivalent cells: gen_n5_u.u4_gold gen_n5_u.u4_gate ($scopeinfo) -> gen_n5_u.u4
+Presumably equivalent cells: gen_n5_u.u5_gold gen_n5_u.u5_gate ($scopeinfo) -> gen_n5_u.u5
+Presumably equivalent cells: gen_n6_u_gold gen_n6_u_gate ($scopeinfo) -> gen_n6_u
+Presumably equivalent cells: gen_n6_u.u1_gold gen_n6_u.u1_gate ($scopeinfo) -> gen_n6_u.u1
+Presumably equivalent cells: gen_n6_u.u2_gold gen_n6_u.u2_gate ($scopeinfo) -> gen_n6_u.u2
+Presumably equivalent cells: gen_n6_u.u3_gold gen_n6_u.u3_gate ($scopeinfo) -> gen_n6_u.u3
+Presumably equivalent cells: gen_n6_u.u4_gold gen_n6_u.u4_gate ($scopeinfo) -> gen_n6_u.u4
+Presumably equivalent cells: gen_n6_u.u5_gold gen_n6_u.u5_gate ($scopeinfo) -> gen_n6_u.u5
+Presumably equivalent cells: gen_n7_u_gold gen_n7_u_gate ($scopeinfo) -> gen_n7_u
+Presumably equivalent cells: gen_n7_u.u1_gold gen_n7_u.u1_gate ($scopeinfo) -> gen_n7_u.u1
+Presumably equivalent cells: gen_n7_u.u2_gold gen_n7_u.u2_gate ($scopeinfo) -> gen_n7_u.u2
+Presumably equivalent cells: gen_n7_u.u3_gold gen_n7_u.u3_gate ($scopeinfo) -> gen_n7_u.u3
+Presumably equivalent cells: gen_n7_u.u4_gold gen_n7_u.u4_gate ($scopeinfo) -> gen_n7_u.u4
+Presumably equivalent cells: gen_n7_u.u5_gold gen_n7_u.u5_gate ($scopeinfo) -> gen_n7_u.u5
+Presumably equivalent cells: gen_n8_u_gold gen_n8_u_gate ($scopeinfo) -> gen_n8_u
+Presumably equivalent cells: gen_n8_u.u1_gold gen_n8_u.u1_gate ($scopeinfo) -> gen_n8_u.u1
+Presumably equivalent cells: gen_n8_u.u2_gold gen_n8_u.u2_gate ($scopeinfo) -> gen_n8_u.u2
+Presumably equivalent cells: gen_n8_u.u3_gold gen_n8_u.u3_gate ($scopeinfo) -> gen_n8_u.u3
+Presumably equivalent cells: gen_n8_u.u4_gold gen_n8_u.u4_gate ($scopeinfo) -> gen_n8_u.u4
+Presumably equivalent cells: gen_n8_u.u5_gold gen_n8_u.u5_gate ($scopeinfo) -> gen_n8_u.u5
+
+10. Executing HIERARCHY pass (managing design hierarchy).
+
+10.1. Analyzing design hierarchy..
+Top module:  \equiv
+
+10.2. Analyzing design hierarchy..
+Top module:  \equiv
+Removing unused module `\gate'.
+Removing unused module `\gold'.
+Removed 2 unused modules.
+
+11. Executing EQUIV_SIMPLE pass.
+Found 356 unproven $equiv cells (326 groups) in equiv:
+ Grouping SAT models for \sum:
+  Trying to prove $equiv for \sum [0]: success!
+  Trying to prove $equiv for \sum [1]: success!
+  Trying to prove $equiv for \sum [2]: success!
+  Trying to prove $equiv for \sum [3]: success!
+  Trying to prove $equiv for \sum [4]: success!
+  Trying to prove $equiv for \sum [5]: success!
+  Trying to prove $equiv for \sum [6]: success!
+  Trying to prove $equiv for \sum [7]: success!
+  Trying to prove $equiv for \cout: success!
+ Grouping SAT models for \c:
+  Trying to prove $equiv for \c [0]: success!
+  Trying to prove $equiv for \c [1]: success!
+  Trying to prove $equiv for \c [2]: success!
+  Trying to prove $equiv for \c [3]: success!
+  Trying to prove $equiv for \c [4]: success!
+  Trying to prove $equiv for \c [5]: success!
+  Trying to prove $equiv for \c [6]: success!
+  Trying to prove $equiv for \c [7]: success!
+  Trying to prove $equiv for \c [8]: success!
+  Trying to prove $equiv for \n2_o: success!
+  Trying to prove $equiv for \n3_o: success!
+  Trying to prove $equiv for \n4_o: success!
+  Trying to prove $equiv for \gen_n1_u_n5: success!
+  Trying to prove $equiv for \gen_n1_u_n6: success!
+  Trying to prove $equiv for \gen_n1_u_sum: success!
+  Trying to prove $equiv for \gen_n1_u_cout: success!
+  Trying to prove $equiv for \n11_o: success!
+  Trying to prove $equiv for \n12_o: success!
+  Trying to prove $equiv for \n13_o: success!
+  Trying to prove $equiv for \gen_n2_u_n14: success!
+  Trying to prove $equiv for \gen_n2_u_n15: success!
+  Trying to prove $equiv for \gen_n2_u_sum: success!
+  Trying to prove $equiv for \gen_n2_u_cout: success!
+  Trying to prove $equiv for \n20_o: success!
+  Trying to prove $equiv for \n21_o: success!
+  Trying to prove $equiv for \n22_o: success!
+  Trying to prove $equiv for \gen_n3_u_n23: success!
+  Trying to prove $equiv for \gen_n3_u_n24: success!
+  Trying to prove $equiv for \gen_n3_u_sum: success!
+  Trying to prove $equiv for \gen_n3_u_cout: success!
+  Trying to prove $equiv for \n29_o: success!
+  Trying to prove $equiv for \n30_o: success!
+  Trying to prove $equiv for \n31_o: success!
+  Trying to prove $equiv for \gen_n4_u_n32: success!
+  Trying to prove $equiv for \gen_n4_u_n33: success!
+  Trying to prove $equiv for \gen_n4_u_sum: success!
+  Trying to prove $equiv for \gen_n4_u_cout: success!
+  Trying to prove $equiv for \n38_o: success!
+  Trying to prove $equiv for \n39_o: success!
+  Trying to prove $equiv for \n40_o: success!
+  Trying to prove $equiv for \gen_n5_u_n41: success!
+  Trying to prove $equiv for \gen_n5_u_n42: success!
+  Trying to prove $equiv for \gen_n5_u_sum: success!
+  Trying to prove $equiv for \gen_n5_u_cout: success!
+  Trying to prove $equiv for \n47_o: success!
+  Trying to prove $equiv for \n48_o: success!
+  Trying to prove $equiv for \n49_o: success!
+  Trying to prove $equiv for \gen_n6_u_n50: success!
+  Trying to prove $equiv for \gen_n6_u_n51: success!
+  Trying to prove $equiv for \gen_n6_u_sum: success!
+  Trying to prove $equiv for \gen_n6_u_cout: success!
+  Trying to prove $equiv for \n56_o: success!
+  Trying to prove $equiv for \n57_o: success!
+  Trying to prove $equiv for \n58_o: success!
+  Trying to prove $equiv for \gen_n7_u_n59: success!
+  Trying to prove $equiv for \gen_n7_u_n60: success!
+  Trying to prove $equiv for \gen_n7_u_sum: success!
+  Trying to prove $equiv for \gen_n7_u_cout: success!
+  Trying to prove $equiv for \n65_o: success!
+  Trying to prove $equiv for \n66_o: success!
+  Trying to prove $equiv for \n67_o: success!
+  Trying to prove $equiv for \gen_n8_u_n68: success!
+  Trying to prove $equiv for \gen_n8_u_n69: success!
+  Trying to prove $equiv for \gen_n8_u_sum: success!
+  Trying to prove $equiv for \gen_n8_u_cout: success!
+  Trying to prove $equiv for \n74_o: success!
+ Grouping SAT models for \n75_o:
+  Trying to prove $equiv for \n75_o [0]: success!
+  Trying to prove $equiv for \n75_o [1]: success!
+  Trying to prove $equiv for \n75_o [2]: success!
+  Trying to prove $equiv for \n75_o [3]: success!
+  Trying to prove $equiv for \n75_o [4]: success!
+  Trying to prove $equiv for \n75_o [5]: success!
+  Trying to prove $equiv for \n75_o [6]: success!
+  Trying to prove $equiv for \n75_o [7]: success!
+  Trying to prove $equiv for \n75_o [8]: success!
+ Grouping SAT models for \n76_o:
+  Trying to prove $equiv for \n76_o [0]: success!
+  Trying to prove $equiv for \n76_o [1]: success!
+  Trying to prove $equiv for \n76_o [2]: success!
+  Trying to prove $equiv for \n76_o [3]: success!
+  Trying to prove $equiv for \n76_o [4]: success!
+  Trying to prove $equiv for \n76_o [5]: success!
+  Trying to prove $equiv for \n76_o [6]: success!
+  Trying to prove $equiv for \n76_o [7]: success!
+  Trying to prove $equiv for \gen_n1_u.u5.y: success!
+  Trying to prove $equiv for \gen_n1_u.u5.b: success!
+  Trying to prove $equiv for \gen_n1_u.u5.a: success!
+  Trying to prove $equiv for \gen_n1_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n1_u.u4.a: success!
+  Trying to prove $equiv for \gen_n1_u.u4.b: success!
+  Trying to prove $equiv for \gen_n1_u.u4.y: success!
+  Trying to prove $equiv for \gen_n1_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n1_u.u3.a: success!
+  Trying to prove $equiv for \gen_n1_u.u3.b: success!
+  Trying to prove $equiv for \gen_n1_u.u3.y: success!
+  Trying to prove $equiv for \gen_n1_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n1_u.u2.a: success!
+  Trying to prove $equiv for \gen_n1_u.u2.b: success!
+  Trying to prove $equiv for \gen_n1_u.u2.y: success!
+  Trying to prove $equiv for \gen_n1_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n1_u.u1.a: success!
+  Trying to prove $equiv for \gen_n1_u.u1.b: success!
+  Trying to prove $equiv for \gen_n1_u.u1.y: success!
+  Trying to prove $equiv for \gen_n1_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n1_u.u5_y: success!
+  Trying to prove $equiv for \gen_n1_u.u4_y: success!
+  Trying to prove $equiv for \gen_n1_u.u3_y: success!
+  Trying to prove $equiv for \gen_n1_u.u2_y: success!
+  Trying to prove $equiv for \gen_n1_u.u1_y: success!
+  Trying to prove $equiv for \gen_n1_u.s3: success!
+  Trying to prove $equiv for \gen_n1_u.s2: success!
+  Trying to prove $equiv for \gen_n1_u.s1: success!
+  Trying to prove $equiv for \gen_n1_u.cout: success!
+  Trying to prove $equiv for \gen_n2_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n1_u.sum: success!
+  Trying to prove $equiv for \gen_n2_u.u5.y: success!
+  Trying to prove $equiv for \gen_n1_u.cin: success!
+  Trying to prove $equiv for \gen_n2_u.u5.b: success!
+  Trying to prove $equiv for \gen_n1_u.b: success!
+  Trying to prove $equiv for \gen_n2_u.u5.a: success!
+  Trying to prove $equiv for \gen_n1_u.a: success!
+  Trying to prove $equiv for \gen_n2_u.u4.a: success!
+  Trying to prove $equiv for \gen_n2_u.u4.b: success!
+  Trying to prove $equiv for \gen_n2_u.u4.y: success!
+  Trying to prove $equiv for \gen_n2_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n2_u.u3.a: success!
+  Trying to prove $equiv for \gen_n2_u.u3.b: success!
+  Trying to prove $equiv for \gen_n2_u.u3.y: success!
+  Trying to prove $equiv for \gen_n2_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n2_u.u2.a: success!
+  Trying to prove $equiv for \gen_n2_u.u2.b: success!
+  Trying to prove $equiv for \gen_n2_u.u2.y: success!
+  Trying to prove $equiv for \gen_n2_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n2_u.u1.a: success!
+  Trying to prove $equiv for \gen_n2_u.u1.b: success!
+  Trying to prove $equiv for \gen_n2_u.u1.y: success!
+  Trying to prove $equiv for \gen_n2_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n2_u.u5_y: success!
+  Trying to prove $equiv for \gen_n2_u.u4_y: success!
+  Trying to prove $equiv for \gen_n2_u.u3_y: success!
+  Trying to prove $equiv for \gen_n2_u.u2_y: success!
+  Trying to prove $equiv for \gen_n2_u.u1_y: success!
+  Trying to prove $equiv for \gen_n2_u.s3: success!
+  Trying to prove $equiv for \gen_n2_u.s2: success!
+  Trying to prove $equiv for \gen_n2_u.s1: success!
+  Trying to prove $equiv for \gen_n2_u.cout: success!
+  Trying to prove $equiv for \gen_n3_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n2_u.sum: success!
+  Trying to prove $equiv for \gen_n3_u.u5.y: success!
+  Trying to prove $equiv for \gen_n2_u.cin: success!
+  Trying to prove $equiv for \gen_n3_u.u5.b: success!
+  Trying to prove $equiv for \gen_n2_u.b: success!
+  Trying to prove $equiv for \gen_n3_u.u5.a: success!
+  Trying to prove $equiv for \gen_n2_u.a: success!
+  Trying to prove $equiv for \gen_n3_u.u4.a: success!
+  Trying to prove $equiv for \gen_n3_u.u4.b: success!
+  Trying to prove $equiv for \gen_n3_u.u4.y: success!
+  Trying to prove $equiv for \gen_n3_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n3_u.u3.a: success!
+  Trying to prove $equiv for \gen_n3_u.u3.b: success!
+  Trying to prove $equiv for \gen_n3_u.u3.y: success!
+  Trying to prove $equiv for \gen_n3_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n3_u.u2.a: success!
+  Trying to prove $equiv for \gen_n3_u.u2.b: success!
+  Trying to prove $equiv for \gen_n3_u.u2.y: success!
+  Trying to prove $equiv for \gen_n3_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n3_u.u1.a: success!
+  Trying to prove $equiv for \gen_n3_u.u1.b: success!
+  Trying to prove $equiv for \gen_n3_u.u1.y: success!
+  Trying to prove $equiv for \gen_n3_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n3_u.u5_y: success!
+  Trying to prove $equiv for \gen_n3_u.u4_y: success!
+  Trying to prove $equiv for \gen_n3_u.u3_y: success!
+  Trying to prove $equiv for \gen_n3_u.u2_y: success!
+  Trying to prove $equiv for \gen_n3_u.u1_y: success!
+  Trying to prove $equiv for \gen_n3_u.s3: success!
+  Trying to prove $equiv for \gen_n3_u.s2: success!
+  Trying to prove $equiv for \gen_n3_u.s1: success!
+  Trying to prove $equiv for \gen_n3_u.cout: success!
+  Trying to prove $equiv for \gen_n4_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n3_u.sum: success!
+  Trying to prove $equiv for \gen_n4_u.u5.y: success!
+  Trying to prove $equiv for \gen_n3_u.cin: success!
+  Trying to prove $equiv for \gen_n4_u.u5.b: success!
+  Trying to prove $equiv for \gen_n3_u.b: success!
+  Trying to prove $equiv for \gen_n4_u.u5.a: success!
+  Trying to prove $equiv for \gen_n3_u.a: success!
+  Trying to prove $equiv for \gen_n4_u.u4.a: success!
+  Trying to prove $equiv for \gen_n4_u.u4.b: success!
+  Trying to prove $equiv for \gen_n4_u.u4.y: success!
+  Trying to prove $equiv for \gen_n4_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n4_u.u3.a: success!
+  Trying to prove $equiv for \gen_n4_u.u3.b: success!
+  Trying to prove $equiv for \gen_n4_u.u3.y: success!
+  Trying to prove $equiv for \gen_n4_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n4_u.u2.a: success!
+  Trying to prove $equiv for \gen_n4_u.u2.b: success!
+  Trying to prove $equiv for \gen_n4_u.u2.y: success!
+  Trying to prove $equiv for \gen_n4_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n4_u.u1.a: success!
+  Trying to prove $equiv for \gen_n4_u.u1.b: success!
+  Trying to prove $equiv for \gen_n4_u.u1.y: success!
+  Trying to prove $equiv for \gen_n4_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n4_u.u5_y: success!
+  Trying to prove $equiv for \gen_n4_u.u4_y: success!
+  Trying to prove $equiv for \gen_n4_u.u3_y: success!
+  Trying to prove $equiv for \gen_n4_u.u2_y: success!
+  Trying to prove $equiv for \gen_n4_u.u1_y: success!
+  Trying to prove $equiv for \gen_n4_u.s3: success!
+  Trying to prove $equiv for \gen_n4_u.s2: success!
+  Trying to prove $equiv for \gen_n4_u.s1: success!
+  Trying to prove $equiv for \gen_n4_u.cout: success!
+  Trying to prove $equiv for \gen_n5_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n4_u.sum: success!
+  Trying to prove $equiv for \gen_n5_u.u5.y: success!
+  Trying to prove $equiv for \gen_n4_u.cin: success!
+  Trying to prove $equiv for \gen_n5_u.u5.b: success!
+  Trying to prove $equiv for \gen_n4_u.b: success!
+  Trying to prove $equiv for \gen_n5_u.u5.a: success!
+  Trying to prove $equiv for \gen_n4_u.a: success!
+  Trying to prove $equiv for \gen_n5_u.u4.a: success!
+  Trying to prove $equiv for \gen_n5_u.u4.b: success!
+  Trying to prove $equiv for \gen_n5_u.u4.y: success!
+  Trying to prove $equiv for \gen_n5_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n5_u.u3.a: success!
+  Trying to prove $equiv for \gen_n5_u.u3.b: success!
+  Trying to prove $equiv for \gen_n5_u.u3.y: success!
+  Trying to prove $equiv for \gen_n5_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n5_u.u2.a: success!
+  Trying to prove $equiv for \gen_n5_u.u2.b: success!
+  Trying to prove $equiv for \gen_n5_u.u2.y: success!
+  Trying to prove $equiv for \gen_n5_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n5_u.u1.a: success!
+  Trying to prove $equiv for \gen_n5_u.u1.b: success!
+  Trying to prove $equiv for \gen_n5_u.u1.y: success!
+  Trying to prove $equiv for \gen_n5_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n5_u.u5_y: success!
+  Trying to prove $equiv for \gen_n5_u.u4_y: success!
+  Trying to prove $equiv for \gen_n5_u.u3_y: success!
+  Trying to prove $equiv for \gen_n5_u.u2_y: success!
+  Trying to prove $equiv for \gen_n5_u.u1_y: success!
+  Trying to prove $equiv for \gen_n5_u.s3: success!
+  Trying to prove $equiv for \gen_n5_u.s2: success!
+  Trying to prove $equiv for \gen_n5_u.s1: success!
+  Trying to prove $equiv for \gen_n5_u.cout: success!
+  Trying to prove $equiv for \gen_n6_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n5_u.sum: success!
+  Trying to prove $equiv for \gen_n6_u.u5.y: success!
+  Trying to prove $equiv for \gen_n5_u.cin: success!
+  Trying to prove $equiv for \gen_n6_u.u5.b: success!
+  Trying to prove $equiv for \gen_n5_u.b: success!
+  Trying to prove $equiv for \gen_n6_u.u5.a: success!
+  Trying to prove $equiv for \gen_n5_u.a: success!
+  Trying to prove $equiv for \gen_n6_u.u4.a: success!
+  Trying to prove $equiv for \gen_n6_u.u4.b: success!
+  Trying to prove $equiv for \gen_n6_u.u4.y: success!
+  Trying to prove $equiv for \gen_n6_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n6_u.u3.a: success!
+  Trying to prove $equiv for \gen_n6_u.u3.b: success!
+  Trying to prove $equiv for \gen_n6_u.u3.y: success!
+  Trying to prove $equiv for \gen_n6_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n6_u.u2.a: success!
+  Trying to prove $equiv for \gen_n6_u.u2.b: success!
+  Trying to prove $equiv for \gen_n6_u.u2.y: success!
+  Trying to prove $equiv for \gen_n6_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n6_u.u1.a: success!
+  Trying to prove $equiv for \gen_n6_u.u1.b: success!
+  Trying to prove $equiv for \gen_n6_u.u1.y: success!
+  Trying to prove $equiv for \gen_n6_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n6_u.u5_y: success!
+  Trying to prove $equiv for \gen_n6_u.u4_y: success!
+  Trying to prove $equiv for \gen_n6_u.u3_y: success!
+  Trying to prove $equiv for \gen_n6_u.u2_y: success!
+  Trying to prove $equiv for \gen_n6_u.u1_y: success!
+  Trying to prove $equiv for \gen_n6_u.s3: success!
+  Trying to prove $equiv for \gen_n6_u.s2: success!
+  Trying to prove $equiv for \gen_n6_u.s1: success!
+  Trying to prove $equiv for \gen_n6_u.cout: success!
+  Trying to prove $equiv for \gen_n7_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n6_u.sum: success!
+  Trying to prove $equiv for \gen_n7_u.u5.y: success!
+  Trying to prove $equiv for \gen_n6_u.cin: success!
+  Trying to prove $equiv for \gen_n7_u.u5.b: success!
+  Trying to prove $equiv for \gen_n6_u.b: success!
+  Trying to prove $equiv for \gen_n7_u.u5.a: success!
+  Trying to prove $equiv for \gen_n6_u.a: success!
+  Trying to prove $equiv for \gen_n7_u.u4.a: success!
+  Trying to prove $equiv for \gen_n7_u.u4.b: success!
+  Trying to prove $equiv for \gen_n7_u.u4.y: success!
+  Trying to prove $equiv for \gen_n7_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n7_u.u3.a: success!
+  Trying to prove $equiv for \gen_n7_u.u3.b: success!
+  Trying to prove $equiv for \gen_n7_u.u3.y: success!
+  Trying to prove $equiv for \gen_n7_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n7_u.u2.a: success!
+  Trying to prove $equiv for \gen_n7_u.u2.b: success!
+  Trying to prove $equiv for \gen_n7_u.u2.y: success!
+  Trying to prove $equiv for \gen_n7_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n7_u.u1.a: success!
+  Trying to prove $equiv for \gen_n7_u.u1.b: success!
+  Trying to prove $equiv for \gen_n7_u.u1.y: success!
+  Trying to prove $equiv for \gen_n7_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n7_u.u5_y: success!
+  Trying to prove $equiv for \gen_n7_u.u4_y: success!
+  Trying to prove $equiv for \gen_n7_u.u3_y: success!
+  Trying to prove $equiv for \gen_n7_u.u2_y: success!
+  Trying to prove $equiv for \gen_n7_u.u1_y: success!
+  Trying to prove $equiv for \gen_n7_u.s3: success!
+  Trying to prove $equiv for \gen_n7_u.s2: success!
+  Trying to prove $equiv for \gen_n7_u.s1: success!
+  Trying to prove $equiv for \gen_n7_u.cout: success!
+  Trying to prove $equiv for \gen_n8_u.u5.n89_o: success!
+  Trying to prove $equiv for \gen_n7_u.sum: success!
+  Trying to prove $equiv for \gen_n8_u.u5.y: success!
+  Trying to prove $equiv for \gen_n7_u.cin: success!
+  Trying to prove $equiv for \gen_n8_u.u5.b: success!
+  Trying to prove $equiv for \gen_n7_u.b: success!
+  Trying to prove $equiv for \gen_n8_u.u5.a: success!
+  Trying to prove $equiv for \gen_n7_u.a: success!
+  Trying to prove $equiv for \gen_n8_u.u4.a: success!
+  Trying to prove $equiv for \gen_n8_u.u4.b: success!
+  Trying to prove $equiv for \gen_n8_u.u4.y: success!
+  Trying to prove $equiv for \gen_n8_u.u4.n87_o: success!
+  Trying to prove $equiv for \gen_n8_u.u3.a: success!
+  Trying to prove $equiv for \gen_n8_u.u3.b: success!
+  Trying to prove $equiv for \gen_n8_u.u3.y: success!
+  Trying to prove $equiv for \gen_n8_u.u3.n87_o: success!
+  Trying to prove $equiv for \gen_n8_u.u2.a: success!
+  Trying to prove $equiv for \gen_n8_u.u2.b: success!
+  Trying to prove $equiv for \gen_n8_u.u2.y: success!
+  Trying to prove $equiv for \gen_n8_u.u2.n85_o: success!
+  Trying to prove $equiv for \gen_n8_u.u1.a: success!
+  Trying to prove $equiv for \gen_n8_u.u1.b: success!
+  Trying to prove $equiv for \gen_n8_u.u1.y: success!
+  Trying to prove $equiv for \gen_n8_u.u1.n85_o: success!
+  Trying to prove $equiv for \gen_n8_u.u5_y: success!
+  Trying to prove $equiv for \gen_n8_u.u4_y: success!
+  Trying to prove $equiv for \gen_n8_u.u3_y: success!
+  Trying to prove $equiv for \gen_n8_u.u2_y: success!
+  Trying to prove $equiv for \gen_n8_u.u1_y: success!
+  Trying to prove $equiv for \gen_n8_u.s3: success!
+  Trying to prove $equiv for \gen_n8_u.s2: success!
+  Trying to prove $equiv for \gen_n8_u.s1: success!
+  Trying to prove $equiv for \gen_n8_u.cout: success!
+  Trying to prove $equiv for \gen_n8_u.sum: success!
+  Trying to prove $equiv for \gen_n8_u.cin: success!
+  Trying to prove $equiv for \gen_n8_u.b: success!
+  Trying to prove $equiv for \gen_n8_u.a: success!
+Proved 356 previously unproven $equiv cells.
+
+12. Executing EQUIV_INDUCT pass.
+No selected unproven $equiv cells found in equiv.
+Proved 0 previously unproven $equiv cells.
+
+13. Executing EQUIV_STATUS pass.
+Found 356 $equiv cells in equiv:
+  Of those cells 356 are proven and 0 are unproven.
+  Equivalence successfully proven!
+
+End of script. Logfile hash: 1887dc6729, CPU: user 1.02s system 0.06s, MEM: 18.61 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 75% 1x equiv_simple (0 sec), 6% 10x opt_clean (0 sec), ...

@@ -1,0 +1,22 @@
+﻿Regression summary  (ModelSim/Questa)
+generated: 2026-11-14 17:09:47
+------------------------------------------------------------
+ex01_delta_cycle             PASS   errors=0
+ex02_signal_vs_variable      PASS   errors=0
+ex03_wait_statements         PASS   errors=0
+ex04_clock_bug               PASS   errors=0
+ex04_clock_fixed             PASS   errors=0
+ex05_procedure_checker       PASS   errors=0
+ex06_random_stimulus         PASS   errors=0
+ex07_uart_scoreboard         PASS   errors=0
+ex08_file_io                 PASS   errors=0
+ex10_external_name           PASS   errors=0
+ex12_event_log               PASS   errors=0
+ex09 LEVEL=0                 PASS   severity=note (expected note)  vsim_exit=0
+ex09 LEVEL=1                 PASS   severity=warning (expected warning)  vsim_exit=0
+ex09 LEVEL=2                 PASS   severity=error (expected error)  vsim_exit=0
+ex09 LEVEL=3                 PASS   severity=failure (expected failure)  vsim_exit=0
+cfg_using_rtl                PASS 
+cfg_using_alt                PASS 
+------------------------------------------------------------
+TOTAL FAIL: 0

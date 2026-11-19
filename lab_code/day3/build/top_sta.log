@@ -1,0 +1,9 @@
+OpenSTA 2.7.0 GITDIR-NOT Copyright (c) 2025, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+note: set_operating_conditions is not supported by this STA (Error: run_sta.tcl line 1, set_operating_conditions -process is not a known keyword or flag.)
+note: the default operating conditions of the Liberty file are used
+STA report written to /mnt/e/lab/VHDL(BOI)/lab_code/day3/reports/top_sta.rpt

@@ -1,0 +1,34 @@
+# ** Note: (vsim-220) 'C:/Siemens/modelsim_dlx64_2026.1/win64pe/../modelsim.ini' is used as the ini file.
+# vsim -c work.cfg_using_alt -do "run -all; quit -f" 
+# Start time: 17:10:53 on Nov 14,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.cfg_using_alt
+# Loading work.ex11_configuration(sim)
+# Loading work.ex11_counter(alt)
+# run -all
+# ** Note: [C1] counter value after 5 clocks = 10
+#    Time: 70 ns  Iteration: 0  Instance: /ex11_configuration
+# ** Note: [C2] rtl architecture gives 5, alt architecture gives 10
+#    Time: 70 ns  Iteration: 0  Instance: /ex11_configuration
+# Break in Process stim at ex11_configuration.vhd line 99
+# Stopped at ex11_configuration.vhd line 99
+#  quit -f
+# End time: 17:10:54 on Nov 14,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

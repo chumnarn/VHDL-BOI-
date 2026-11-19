@@ -1,0 +1,9 @@
+rtl/adder8.vhd:4:19:warning: incomplete or unknown pragma directive ignored [-Wpragma]
+-- Synthesis notes:
+                  ^
+rtl/adder8_pipelined.vhd:5:19:warning: incomplete or unknown pragma directive ignored [-Wpragma]
+-- Synthesis notes:
+                  ^
+rtl/add_sub_shared.vhd:5:19:warning: incomplete or unknown pragma directive ignored [-Wpragma]
+-- Synthesis notes:
+                  ^

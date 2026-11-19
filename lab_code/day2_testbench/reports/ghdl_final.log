@@ -1,0 +1,198 @@
+==============================================================
+ ANALYZE
+==============================================================
+analyze: OK
+
+==============================================================
+ RUN EXAMPLES
+==============================================================
+
+--------------------------------------------------------------
+ RUN ex01_delta_cycle 
+--------------------------------------------------------------
+ex01_delta_cycle.vhd:33:9:@0ms:(report note): [A1] t=0 fs  after v := '1'      -> v='1'  (immediate)
+ex01_delta_cycle.vhd:40:9:@0ms:(report note): [A2] t=0 fs  after sig_a <= '1'  -> sig_a='0'  (OLD value!)
+ex01_delta_cycle.vhd:44:9:@0ms:(report note): [B1] t=0 fs  after wait for 0 ns  -> sig_a='1'  (NEW value, same time)
+ex01_delta_cycle.vhd:48:9:@1ns:(report note): [B2] t=1000000 fs  after wait for 1 ns  -> sig_a='1'
+ex01_delta_cycle.vhd:61:9:@10ns:(report note): [C1] t=10000000 fs  stage1 drives ping <= '1'
+ex01_delta_cycle.vhd:69:13:@10ns:(report note): [C2] t=10000000 fs  stage2 wakes (ping), drives pong <= '1'  -> same now, different delta cycle
+ex01_delta_cycle.vhd:78:13:@10ns:(report note): [C3] t=10000000 fs  stage3 wakes (pong) -> 3-stage chain done with 0 ns of time elapsed
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex02_signal_vs_variable 
+--------------------------------------------------------------
+ex02_signal_vs_variable.vhd:34:9:@0ms:(report note): [A1] right after loop: var_cnt=10  sig_cnt=0  (signal is still the OLD value)
+ex02_signal_vs_variable.vhd:68:9:@0ms:(report note): [C1] watcher sees shared_cnt = 0
+ex02_signal_vs_variable.vhd:68:9:@0ms:(report note): [C1] watcher sees shared_cnt = 1
+ex02_signal_vs_variable.vhd:38:9:@0ms:(report note): [A2] after wait for 0 ns: var_cnt=10  sig_cnt=1  (signal updated, but too late for the summary)
+ex02_signal_vs_variable.vhd:42:9:@1ns:(report note): [A3] after wait for 1 ns: sig_cnt=1
+ex02_signal_vs_variable.vhd:68:9:@1ns:(report note): [C1] watcher sees shared_cnt = 2
+ex02_signal_vs_variable.vhd:68:9:@2ns:(report note): [C1] watcher sees shared_cnt = 3
+ex02_signal_vs_variable.vhd:68:9:@3ns:(report note): [C1] watcher sees shared_cnt = 4
+ex02_signal_vs_variable.vhd:68:9:@4ns:(report note): [C1] watcher sees shared_cnt = 5
+ex02_signal_vs_variable.vhd:68:9:@5ns:(report note): [C1] watcher sees shared_cnt = 6
+ex02_signal_vs_variable.vhd:68:9:@6ns:(report note): [C1] watcher sees shared_cnt = 7
+ex02_signal_vs_variable.vhd:68:9:@7ns:(report note): [C1] watcher sees shared_cnt = 8
+ex02_signal_vs_variable.vhd:68:9:@8ns:(report note): [C1] watcher sees shared_cnt = 9
+ex02_signal_vs_variable.vhd:68:9:@9ns:(report note): [C1] watcher sees shared_cnt = 10
+ex02_signal_vs_variable.vhd:57:13:@10ns:(report note): [B1] protected shared variable = 10
+ex02_signal_vs_variable.vhd:77:9:@10ns:(report note): [C2] counter_proc finished the loop, shared_cnt = 10
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex03_wait_statements 
+--------------------------------------------------------------
+ex03_wait_statements.vhd:27:9:@0ms:(report note): [A1] t=0 fs  start
+ex03_wait_statements.vhd:72:9:@0ms:(report note): [D1] t=0 fs  before wait;
+ex03_wait_statements.vhd:84:9:@5ns:(report note): [DRV] t=5000000 fs  drives stim_sig <= '1'
+ex03_wait_statements.vhd:57:9:@5ns:(report note): [C1] t=5000000 fs  wait on woke up when stim_sig changed -> '1'
+ex03_wait_statements.vhd:43:9:@5ns:(report note): [B1] t=5000000 fs  wait until woke up because stim_sig = '1'
+ex03_wait_statements.vhd:87:9:@5ns:(report note): [DRV] t=5000000 fs  drives ack_sig <= '1'
+ex03_wait_statements.vhd:47:9:@5ns:(report note): [B2] t=5000000 fs  wait until woke up because ack_sig = '1'
+ex03_wait_statements.vhd:61:9:@5ns:(report note): [C2] t=5000000 fs  wait on woke up when ack_sig changed -> '1'
+ex03_wait_statements.vhd:29:9:@12ns:(report note): [A2] t=12000000 fs  after wait for 12 ns
+ex03_wait_statements.vhd:31:9:@15ns:(report note): [A3] t=15000000 fs  after wait for 3 ns (total 15 ns)
+ex03_wait_statements.vhd:94:9:@40ns:(report note): [END] t=40000000 fs  done
+simulation stopped @40ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex04_clock_bug 
+--------------------------------------------------------------
+ex04_clock_bug.vhd:55:9:@200ns:(report note): [BAD] rising edges actually seen = 0
+ex04_clock_bug.vhd:56:9:@200ns:(report note): [BAD] current clk value        = 'U'
+ex04_clock_bug.vhd:57:9:@200ns:(report note): [BAD] current detected value   = '0'
+ex04_clock_bug.vhd:58:9:@200ns:(report note): [BAD] -> the clock never ticked; the DUT stayed in reset
+simulation stopped @200ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex04_clock_fixed 
+--------------------------------------------------------------
+ex04_clock_fixed.vhd:53:9:@200ns:(report note): [GOOD] rising edges actually seen = 20
+ex04_clock_fixed.vhd:54:9:@200ns:(report note): [GOOD] current clk value        = '0'
+ex04_clock_fixed.vhd:55:9:@200ns:(report note): [GOOD] current detected value   = '0'
+ex04_clock_fixed.vhd:56:9:@200ns:(report note): [GOOD] -> the clock ticks and the FSM runs
+simulation stopped @200ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex05_procedure_checker 
+--------------------------------------------------------------
+ex05_procedure_checker.vhd:92:13:@56ns:(report note): [F1] impure function works (detected = '1')
+tb_support_pkg.vhd:51:13:@56ns:(report note): ex05_procedure_checker  PASS=3  FAIL=0
+simulation stopped @56ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex06_random_stimulus 
+--------------------------------------------------------------
+ex06_random_stimulus.vhd:90:9:@2016ns:(report note): [R1] seed=12345  vectors=200  checksum=365623  final count=98
+ex06_random_stimulus.vhd:94:9:@2016ns:(report note): [R2] re-run with the same seed and the checksum must match
+tb_support_pkg.vhd:51:13:@2016ns:(report note): ex06_random_stimulus  PASS=200  FAIL=0
+simulation stopped @2016ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex07_uart_scoreboard 
+--------------------------------------------------------------
+ex07_uart_scoreboard.vhd:136:9:@5555ns:(report note): [S1] frames decoded = 5  queue remaining = 0
+tb_support_pkg.vhd:51:13:@5555ns:(report note): ex07_uart_scoreboard  PASS=5  FAIL=0
+simulation stopped @5555ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex08_file_io 
+--------------------------------------------------------------
+ex08_file_io.vhd:107:9:@136ns:(report note): [F1] vectors read = 12  passed = 12  failed = 0
+ex08_file_io.vhd:110:9:@136ns:(report note): [F2] report written to reports/ex08_report.txt
+tb_support_pkg.vhd:51:13:@136ns:(report note): ex08_file_io  PASS=12  FAIL=0
+simulation stopped @136ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex10_external_name 
+--------------------------------------------------------------
+ex10_external_name.vhd:68:9:@70ns:(report note): [X1] output port cnt = 5
+ex10_external_name.vhd:69:9:@70ns:(report note): [X2] internal cnt_i  = 5
+ex10_external_name.vhd:70:9:@70ns:(report note): [X3] both must be equal (external name reaches inside the DUT)
+simulation stopped @70ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex12_event_log --vcd=reports/ex12_wave.vcd
+--------------------------------------------------------------
+../../src/ieee2008/numeric_std-body.vhdl:3036:7:@0ms:(assertion warning): NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+ex12_event_log.vhd:67:9:@76ns:(report note): [L1] event log written to reports/ex12_events.txt
+ex12_event_log.vhd:68:9:@76ns:(report note): [L2] final count = 3
+simulation stopped @76ns
+[exit code = 0]
+
+==============================================================
+ RUN ex09 -- SEVERITY LEVELS (ดูผลของ exit code)
+==============================================================
+
+--------------------------------------------------------------
+ RUN ex09_assertion_severity -gLEVEL=0
+--------------------------------------------------------------
+ex09_assertion_severity.vhd:29:17:@10ns:(report note): severity NOTE: informational message
+simulation stopped @10ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex09_assertion_severity -gLEVEL=1
+--------------------------------------------------------------
+ex09_assertion_severity.vhd:31:17:@10ns:(report warning): severity WARNING: abnormal but not fatal
+simulation stopped @10ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex09_assertion_severity -gLEVEL=2
+--------------------------------------------------------------
+ex09_assertion_severity.vhd:34:17:@10ns:(report error): severity ERROR: an error was detected
+simulation stopped @10ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN ex09_assertion_severity -gLEVEL=3
+--------------------------------------------------------------
+ex09_assertion_severity.vhd:36:17:@10ns:(report failure): severity FAILURE: test failed, stop the simulation
+ghdl:error: report failed
+  instance: /ex09_assertion_severity/stim
+ghdl:error: simulation failed
+[exit code = 1]
+
+==============================================================
+ RUN ex11 -- CONFIGURATION DECLARATION
+==============================================================
+
+--------------------------------------------------------------
+ RUN cfg_using_rtl
+--------------------------------------------------------------
+ex11_configuration.vhd:96:9:@70ns:(report note): [C1] counter value after 5 clocks = 5
+ex11_configuration.vhd:98:9:@70ns:(report note): [C2] rtl architecture gives 5, alt architecture gives 10
+simulation stopped @70ns
+[exit code = 0]
+
+--------------------------------------------------------------
+ RUN cfg_using_alt
+--------------------------------------------------------------
+ex11_configuration.vhd:96:9:@70ns:(report note): [C1] counter value after 5 clocks = 10
+ex11_configuration.vhd:98:9:@70ns:(report note): [C2] rtl architecture gives 5, alt architecture gives 10
+simulation stopped @70ns
+[exit code = 0]
+
+==============================================================
+ ARTIFACTS
+==============================================================
+total 20
+drwxrwxrwx 1 cxp cxp  4096 Nov 14 17:11 .
+drwxrwxrwx 1 cxp cxp  4096 Nov 14 17:09 ..
+-rwxrwxrwx 1 cxp cxp   111 Nov 14 17:11 ex08_report.txt
+-rwxrwxrwx 1 cxp cxp   218 Nov 14 17:11 ex12_events.txt
+-rwxrwxrwx 1 cxp cxp  1106 Nov 14 17:11 ex12_wave.vcd
+-rwxrwxrwx 1 cxp cxp 10500 Nov 14 17:11 ghdl_final.log
+drwxrwxrwx 1 cxp cxp  4096 Nov 14 16:53 modelsim
+
+DONE

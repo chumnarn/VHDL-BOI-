@@ -12,6 +12,12 @@
 > คู่มือ: [`../Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md`](../Manual_5_5_Lab5B_UART_TX_to_GDSII_LibreLane_StepByStepGuide.md)
 > — เป็นแล็บเสริมของวันที่ 5 ที่ส่ง Mini Project UART TX ผ่าน Open-source ASIC flow
 > จนได้ GDSII พร้อม DRC/LVS/Antenna ผ่าน จริง
+>
+> **หัวข้อ 2.7 — VHDL Testbench เชิงลึก** อยู่ใน [`day2_testbench/`](day2_testbench/)
+> คู่มือ: [`../Manual_2_7_VHDL_Testbench_DeepDive.md`](../Manual_2_7_VHDL_Testbench_DeepDive.md)
+> — ชุดตัวอย่าง testbench 13 ชิ้นที่พิสูจน์กลไกระดับภาษาของ VHDL
+> (simulation cycle, delta cycle, wait statement, signal vs variable)
+> ด้วยการรันจริงทั้งบน GHDL และ ModelSim/Questa
 
 ## ผลการตรวจสอบอัตโนมัติ
 
@@ -60,6 +66,62 @@ LibreLane v3.0.17 · PDK sky130A** บน WSL Ubuntu 26.04 — **ทุกขั
 
 รัน: `bash run_yosys_lab.sh --full`
 
+### ฝั่ง VHDL Testbench เชิงลึก — หัวข้อ 2.7 (`day2_testbench/`)
+
+โค้ดใน `day2_testbench/` ตรวจสอบด้วย **GHDL 5.0.1 (WSL Ubuntu 26.04)** และ
+**ModelSim/Questa Advanced Simulator 2026.1 (Windows)** — **ผลตรงกันทั้งสองเครื่องมือ
+และผ่านทั้งหมด (TOTAL FAIL: 0)**
+
+| ตัวอย่าง | สิ่งที่พิสูจน์ | ผลจริง |
+| --- | --- | --- |
+| `ex01_delta_cycle` | อ่าน signal ที่เพิ่ง assign ได้ค่าเก่า · chain 3 ชั้นใช้เวลา 0 ns | `sig_a='0'` → `'1'` หลัง `wait for 0 ns` |
+| `ex02_signal_vs_variable` | ตัวนับ signal รายงานค่าเก่า | `var_cnt=10` / `sig_cnt=0` · protected shared var = 10 |
+| `ex03_wait_statements` | wait ทั้ง 4 แบบ + handshake | `[B1]` → `[B2]` → `[C2]` ครบที่ `t=5 ns` |
+| `ex04_clock_bug` | นาฬิกาไม่ init → ไม่มี edge | **rising edges = 0**, `clk='U'` |
+| `ex04_clock_fixed` | แก้แล้ว | **rising edges = 20** ใน 200 ns (คาบ 10 ns) |
+| `ex05_procedure_checker` | procedure / impure function / TB package | `PASS=3 FAIL=0` |
+| `ex06_random_stimulus` | seed เดิม → ลำดับเดิม | `seed=12345, vectors=200, checksum=365623, count=98` · `PASS=200` |
+| `ex07_uart_scoreboard` | decode UART + เทียบ queue | 5 เฟรม · `PASS=5 FAIL=0` |
+| `ex08_file_io` | อ่าน vector + เขียนรายงาน | `vectors read = 12` · `PASS=12 FAIL=0` |
+| `ex09_assertion_severity` | severity → พฤติกรรมของแต่ละเครื่องมือ | note/warning/error/failure ตรงตามคาดทั้ง 2 เครื่องมือ |
+| `ex10_external_name` | อ่าน signal ภายใน DUT | `output port cnt = 5` = `internal cnt_i = 5` |
+| `ex11_configuration` | สลับ architecture ของ DUT | `cfg_using_rtl` → **5** · `cfg_using_alt` → **10** |
+| `ex12_event_log` | เขียน timeline ลงไฟล์ | `final count = 3` · ได้ทั้ง `.txt` และ `.vcd` |
+
+รัน: `bash day2_testbench/run_all.sh` (GHDL)
+หรือ `powershell -File day2_testbench/run_modelsim_regression.ps1` (Questa)
+
+> ⚠️ ModelSim/Questa คืน exit code 0 แม้จะมี severity failure — สคริปต์จึงตรวจ
+> ข้อความ `Errors: N` ใน log แทน ดูรายละเอียดที่ [`day2_testbench/README.md`](day2_testbench/README.md)
+
+### ฝั่ง VHDL Synthesis เชิงลึก — หัวข้อ 3.8 (`day3_synthesis/`)
+
+โค้ดใน `day3_synthesis/` ตรวจสอบด้วย **GHDL 5.0.1 + Yosys 0.52 + Icarus Verilog 12.0 + PDK sky130A**
+(WSL Ubuntu 26.04) — ผล **PASS=10 / FAIL=2** (FAIL ทั้ง 2 คือเคสที่ตั้งใจให้ GHDL ปฏิเสศ)
+และ **GLS ตรงตามคาด 4/4 เคส**
+
+| ตัวอย่าง | สิ่งที่พิสูจน์ | generic cells | sky130 area |
+| --- | --- | ---: | ---: |
+| `alu4` | `case` → priority mux + `numeric_std` | 57 | 208.950400 |
+| `counter_sync` | sync reset + clock enable → DFF | 24 | 280.268800 |
+| `fsm_seq` | Yosys recode binary → **one-hot** (2 → 3 FF) | 26 | 106.352000 |
+| `adder8` | `resize` ก่อนบวก → carry chain | 49 | 205.196800 |
+| `mult8` | `unsigned * unsigned` → partial-product array | 354 | 1904.326400 |
+| `shifter` | variable shift → mux tree 3 ระดับ | 146 | 721.942400 |
+| `lfsr16` | LFSR Galois → XOR + FF | 35 | 569.296000 |
+| `latch_bad` | ❌ `if` ไม่ครบ path | – | – |
+| `latch_bad_latched` | ⚠️ **netlist ผิด โดยไม่มีเครื่องมือเตือน** | 0 | – |
+| `latch_good` | ✅ แก้แล้ว → mux 1 บิต | 1 | 6.256000 |
+| `rom_16x8` | constant array → ROM → mux tree | 25 | 113.859200 |
+| `std_logic_arith_bad` | ❌ package ของ Synopsys | – | – |
+
+รัน: `bash day3_synthesis/run_everything.sh` (ใช้เวลา ~6–8 นาที)
+รายละเอียด: [`day3_synthesis/README.md`](day3_synthesis/README.md)
+
+> ⚠️ ข้อค้นพบสำคัญ: เมื่อเปิด `ghdl synth --latches` แล้วส่งต่อให้ Yosys
+> Yosys จะตีความ `always @(e)` เป็น combinational แล้ว **ทิ้ง enable ไปทั้งก้อน**
+> ทั้ง `check -assert` และ formal proof ก็ **ไม่จับ** — จับได้เฉพาะ **GLS**
+
 ## โครงสร้าง Directory
 
 ```
@@ -95,17 +157,51 @@ lab_code/
 │   ├── tb_adder4.vhd
 │   └── run_lab2.do
 │
-├── day3/                  # RTL Synthesis (Precision RTL)
-│   ├── adder8.vhd
-│   ├── adder8_pipelined.vhd
-│   ├── add_sub_shared.vhd
-│   ├── top.vhd
-│   ├── tb_adder8.vhd
-│   ├── tb_add_sub_shared.vhd
-│   ├── tb_adder8_pipelined.vhd
-│   ├── constraints.sdc
-│   ├── synth.tcl          (Precision RTL synthesis)
-│   └── run_lab3.do
+├── day2_testbench/          # VHDL Testbench เชิงลึก (หัวข้อ 2.7)
+│   ├── README.md
+│   ├── run_all.sh           (batch runner สำหรับ GHDL)
+│   ├── run_one.do           (สำหรับ ModelSim/Questa)
+│   ├── run_modelsim_regression.ps1  (regression + สรุปผลบน Questa)
+│   ├── counter_pkg.vhd      (protected type)
+│   ├── tb_support_pkg.vhd   (เครื่องมือร่วม: report_result, check_vector)
+│   ├── uart_sb_pkg.vhd      (scoreboard queue)
+│   ├── rtl/{seq_det_moore.vhd, counter8.vhd, uart_tx.vhd}
+│   ├── ex01..ex12*.vhd      (13 ตัวอย่าง)
+│   └── vectors/tb_vectors.txt
+│
+├── day3/                  # Lab 3A — RTL Synthesis (Precision RTL)
+│   ├── README.md
+│   ├── rtl/               (full_adder_struct, adder8, adder8_pipelined, add_sub_shared, top)
+│   ├── tb/                (4 testbench VHDL สำหรับ RTL sim + 4 testbench Verilog สำหรับ GLS)
+│   ├── sdc/               (constraint แยกต่อ design — 4 ไฟล์)
+│   ├── scripts/
+│   │   ├── synth_top.tcl              (Precision RTL synthesis — ตัวหลัก)
+│   │   ├── synth_adder8.tcl           (Precision RTL — combinational)
+│   │   ├── synth_adder8_pipelined.tcl
+│   │   ├── synth_add_sub_shared.tcl
+│   │   ├── check_sdc_ports.py         (ตัวตรวจ SDC ↔ entity — มี --selftest)
+│   │   ├── check_precision_tcl.py     (ตัวตรวจสคริปต์ Tcl — มี --selftest)
+│   │   ├── make_filtered_liberty.py   (สร้าง Liberty ที่ใส่ dont_use)
+│   │   ├── run_sta.tcl                (สคริปต์ OpenSTA)
+│   │   └── run_reference_flow.sh      (reference flow แบบ open-source)
+│   ├── run_lab3.do        (Questa batch ทั้งแล็บ)
+│   ├── build/             (เอาต์พุต)
+│   └── reports/           (หลักฐานจากการรันจริง: summary.txt + report ทุก design)
+│
+├── day3_synthesis/        # VHDL Synthesis เชิงลึก (หัวข้อ 3.8)
+│   ├── README.md
+│   ├── check_tools.sh     (ตรวจเครื่องมือในเครื่อง)
+│   ├── run_everything.sh  (รันทุกอย่าง: synthesis + proof + GLS)
+│   ├── run_all.sh         (สังเคราะห์ทุกตัวอย่าง)
+│   ├── synth_one.sh       (สังเคราะห์ 1 ตัว + formal proof)
+│   ├── run_gls.sh         (gate-level simulation)
+│   ├── extract_stats.sh   (ดึงตัวเลขสรุป)
+│   ├── dump_logs.sh
+│   ├── rtl/               (11 ไฟล์ VHDL)
+│   ├── verilog/latch_ok.v (รูปแบบ latch ที่ Yosys เข้าใจถูกต้อง)
+│   ├── tb/                (tb_alu4, tb_adder8, tb_latch_bad, tb_latch_ok)
+│   ├── build/             (เอาต์พุต: .v, _generic.v, _sky130.v)
+│   └── reports/           (หลักฐาน: summary.txt + log ทุกขั้นตอน)
 │
 ├── day3_yosys/           # RTL Synthesis (Yosys + LibreLane — open-source, Lab 3B)
 │   ├── README.md
@@ -201,7 +297,8 @@ run 1 us                         # run simulation
 
 ```bash
 cd lab_code/day3
-precision -shell -file synth.tcl
+cd /path/to/lab_code/day3
+precision -shell -file scripts/synth_top.tcl
 ```
 
 ผลลัพธ์จะอยู่ใน `reports/` และ `netlist/`
@@ -277,10 +374,12 @@ export PATH="/root/.nix-profile/bin:$PATH"
 | 2 | 8-bit Counter with CE + load | ✅ ผ่าน | Synchronous reset |
 | 2 | Sequence Detector (Moore + Mealy) | ✅ ผ่าน | Self-checking TB + overlapping detection (10 checks each) |
 | 2 | 4-bit Adder (Structural) | ✅ ผ่าน | Exhaustive 16x16x2 |
+| 2 | **ชุดตัวอย่าง VHDL Testbench เชิงลึก (หัวข้อ 2.7)** | ✅ รันจริงผ่าน | 13 ตัวอย่าง · GHDL + Questa ผ่านทั้งหมด · จับบั๊กจริง 12 จุด |
 | 3 | 8-bit Ripple Carry Adder | ✅ ผ่าน | |
 | 3 | 8-bit Pipelined Adder | ✅ ผ่าน | Latency = 1 cycle |
 | 3 | ADD/SUB Resource Sharing | ✅ ผ่าน | Exhaustive pattern + signed overflow |
 | 3 | Precision RTL Synthesis | ⚠️ ต้องมี PDK | ปรับ tech_lib path |
+| 3 | **ชุดตัวอย่าง VHDL Synthesis เชิงลึก (หัวข้อ 3.8)** | ✅ รันจริงผ่าน | 11 ตัวอย่าง · map เข้า sky130A · GLS 4/4 · formal proof ผ่าน · จับบั๊กจริง 6 จุด |
 | 3 | **Yosys Generic + Gate-Level Synthesis** | ✅ รันจริงผ่าน | 52 / 78 cells generic · 41 / 66 cells gate |
 | 3 | **Gate-Level Simulation ของ netlist Yosys** | ✅ รันจริงผ่าน | 131,072 patterns เท่ากับ RTL |
 | 3 | **VHDL → GHDL → Verilog → Yosys** | ✅ รันจริงผ่าน | 88 cells · ผ่าน 131,072 patterns |

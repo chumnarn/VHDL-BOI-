@@ -1,0 +1,3 @@
+rtl/adder8.vhd:4:19:warning: incomplete or unknown pragma directive ignored [-Wpragma]
+-- Synthesis notes:
+                  ^

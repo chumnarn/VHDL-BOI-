@@ -1,0 +1,6 @@
+ex08_file_io report
+--------------------
+vectors read : 12
+passed       : 12
+failed       : 0
+final count  : 7

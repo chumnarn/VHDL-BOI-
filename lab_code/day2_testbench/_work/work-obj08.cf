@@ -1,0 +1,65 @@
+v 4
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex12_event_log.vhd" "1d3fff6eaa0a84a99fd89cd6ccae6d815d8d752f" "20261114101117.880":
+  entity ex12_event_log at 11( 758) + 0 on 54;
+  architecture sim of ex12_event_log at 22( 977) + 0 on 55;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex11_configuration.vhd" "3a443333e0b80481ebc1606c3b6eaee6a40391ab" "20261114101117.877":
+  entity ex11_counter at 15( 944) + 0 on 47;
+  architecture rtl of ex11_counter at 28( 1260) + 0 on 48;
+  architecture alt of ex11_counter at 45( 1794) + 0 on 49;
+  entity ex11_configuration at 61( 2198) + 0 on 50;
+  architecture sim of ex11_configuration at 68( 2329) + 0 on 51;
+  configuration cfg_using_rtl at 107( 3744) + 0 on 52;
+  configuration cfg_using_alt at 114( 3939) + 0 on 53;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex10_external_name.vhd" "785ae79c52e180864a8152512c584ac3f50654e4" "20261114101117.873":
+  entity ex10_counter at 12( 986) + 0 on 43;
+  architecture rtl of ex10_counter at 24( 1228) + 0 on 44;
+  entity ex10_external_name at 42( 1915) + 0 on 45;
+  architecture sim of ex10_external_name at 49( 2046) + 0 on 46;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex09_assertion_severity.vhd" "8d6c46ccb523ec7d034228227044d4d9fbb65138" "20261114101117.870":
+  entity ex09_assertion_severity at 9( 547) + 0 on 41;
+  architecture sim of ex09_assertion_severity at 18( 752) + 0 on 42;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex08_file_io.vhd" "3a724681a9104ed59592292dcd130d18e4013fa8" "20261114101117.866":
+  entity ex08_file_io at 8( 507) + 0 on 39;
+  architecture sim of ex08_file_io at 22( 829) + 0 on 40;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex07_uart_scoreboard.vhd" "83f694f5da3ac6f21850b59f82920a35fd0cfcd5" "20261114101117.863":
+  entity ex07_uart_scoreboard at 9( 717) + 0 on 37;
+  architecture sim of ex07_uart_scoreboard at 23( 1065) + 0 on 38;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex06_random_stimulus.vhd" "dcc94b239917bd001a4ae5c7caf907b850594382" "20261114101117.860":
+  entity ex06_random_stimulus at 12( 963) + 0 on 35;
+  architecture sim of ex06_random_stimulus at 26( 1363) + 0 on 36;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex05_procedure_checker.vhd" "a0efab5d7004fcb9efa2f231e7d4de16a9ae65cf" "20261114101117.856":
+  entity ex05_procedure_checker at 14( 1072) + 0 on 33;
+  architecture sim of ex05_procedure_checker at 22( 1228) + 0 on 34;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex04_clock_fixed.vhd" "3ffc13d735ff4caf197f9a351adc64a16b1174b3" "20261114101117.853":
+  entity ex04_clock_fixed at 8( 541) + 0 on 31;
+  architecture sim of ex04_clock_fixed at 14( 642) + 0 on 32;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex04_clock_bug.vhd" "9cebfd0a126a3d66759c29308a185f9175aba77a" "20261114101117.849":
+  entity ex04_clock_bug at 9( 629) + 0 on 29;
+  architecture sim of ex04_clock_bug at 15( 726) + 0 on 30;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex03_wait_statements.vhd" "769a6ccbd84eee12e32f094156e2a5e8586fdb79" "20261114101117.846":
+  entity ex03_wait_statements at 8( 487) + 0 on 27;
+  architecture sim of ex03_wait_statements at 14( 596) + 0 on 28;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex02_signal_vs_variable.vhd" "18a296b6cc1cd4f94e73bc24011ec986359beecc" "20261114101117.843":
+  entity ex02_signal_vs_variable at 8( 553) + 0 on 25;
+  architecture sim of ex02_signal_vs_variable at 16( 708) + 0 on 26;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "ex01_delta_cycle.vhd" "71abce6648a03960e0aeeb4a2016f9436ec92576" "20261114101117.841":
+  entity ex01_delta_cycle at 9( 735) + 0 on 23;
+  architecture sim of ex01_delta_cycle at 15( 836) + 0 on 24;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "rtl/uart_tx.vhd" "02eeea3f157190c8f2c79e765bc8b6ae4ee5468f" "20261114101117.837":
+  entity uart_tx at 3( 89) + 0 on 21;
+  architecture rtl of uart_tx at 19( 479) + 0 on 22;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "rtl/counter8.vhd" "775c446bdc75cbdafab61712258bec3778d20301" "20261114101117.831":
+  entity counter8 at 3( 135) + 0 on 19;
+  architecture rtl of counter8 at 16( 390) + 0 on 20;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "rtl/seq_det_moore.vhd" "69ab8eb7eebf88cb2feb051ab3d0061a9cd95655" "20261114101117.825":
+  entity seq_det_moore at 4( 268) + 0 on 17;
+  architecture rtl of seq_det_moore at 16( 516) + 0 on 18;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "uart_sb_pkg.vhd" "8f19a7bae7fa845951459f366491b16c4e2b0641" "20261114101117.820":
+  package uart_sb_pkg at 6( 360) + 0 on 15 body;
+  package body uart_sb_pkg at 18( 765) + 0 on 16;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "tb_support_pkg.vhd" "93c4c88ac1e430d9823f118e7397bccde200170d" "20261114101117.816":
+  package tb_support_pkg at 6( 426) + 0 on 13 body;
+  package body tb_support_pkg at 38( 1944) + 0 on 14;
+file "/mnt/e/lab/VHDL(BOI)/lab_code/day2_testbench/" "counter_pkg.vhd" "f7e765e0f34c3fbf67cb395e9815f12352c42e1a" "20261114101117.812":
+  package counter_pkg at 7( 558) + 0 on 11 body;
+  package body counter_pkg at 19( 856) + 0 on 12;
