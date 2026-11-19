@@ -1258,4 +1258,4 @@ randomize ...
 
 ---
 
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 90-120 นาที รวม ASCII diagrams, coverage examples, scoreboard code, methodology comparison tables พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 4 เช้า หรือแบ่งเป็น 2 mini-lectures (Methodology 60 นาที + Coverage-Driven 60 นาที)
+ 
