@@ -46,9 +46,9 @@
          (Precision RTL / Yosys)                  ▲
                                                   │
                                     ┌─────────────┴─────────────┐
-                                    │  Floorplan → P&R → DRC/LVS │
-                                    │  OpenROAD · Magic · KLayout │
-                                    │  Netgen                    │
+                                    │ Floorplan → P&R → DRC/LVS │
+                                    │ OpenROAD · Magic · KLayout│
+                                    │ Netgen                    │
                                     └───────────────────────────┘
 ```
 
@@ -90,24 +90,24 @@
                    │
     ┌──────────────▼───────────────┐
     │ Verilator lint               │  syntax, width, undriven
-    │ Yosys synthesis               │  RTL → RTLIL → netlist
+    │ Yosys synthesis              │  RTL → RTLIL → netlist
     └──────────────┬───────────────┘
                    │  netlist (standard cell)
     ┌──────────────▼───────────────┐
     │ OpenROAD                     │
     │   ├ floorplan                │  core/die, PDN, rows
-    │   ├ global placement          │  กระจาย cell ให้ครบทั้ง die
-    │   ├ detailed placement        │  จัดวางจริงตาม row
-    │   ├ CTS                       │  สร้าง clock tree + balance skew
-    │   ├ global routing            │  coarse routing
-    │   ├ detailed routing          │  fine routing + DRC
-    │   └ fill insertion            │  เติม dummy cell
+    │   ├ global placement         │  กระจาย cell ให้ครบทั้ง die
+    │   ├ detailed placement       │  จัดวางจริงตาม row
+    │   ├ CTS                      │  สร้าง clock tree + balance skew
+    │   ├ global routing           │  coarse routing
+    │   ├ detailed routing         │  fine routing + DRC
+    │   └ fill insertion           │  เติม dummy cell
     └──────────────┬───────────────┘
                    │
     ┌──────────────▼───────────────┐
-    │ Magic / KLayout               │  DRC, GDSII stream-out, render
-    │ Netgen                        │  LVS (netlist ↔ layout)
-    │ OpenSTA                       │  multi-corner timing
+    │ Magic / KLayout              │  DRC, GDSII stream-out, render
+    │ Netgen                       │  LVS (netlist ↔ layout)
+    │ OpenSTA                      │  multi-corner timing
     └──────────────┬───────────────┘
                    │
         ┌──────────▼──────────┐
