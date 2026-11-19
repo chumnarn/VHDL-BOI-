@@ -11,11 +11,11 @@
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│ 1. SPEC     : Requirements, feature, success criteria        │
+│ 1. SPEC     : Requirements, feature, success criteria         │
 │ 2. RTL      : VHDL/Verilog design (Day 1-2)                   │
-│ 3. VERIFY   : Self-checking TB + assertions + coverage (Day 2-4)│
+│ 3. VERIFY   : Self-checking TB + assertions + coverage(Day 2-4)│
 │ 4. SYNTH    : RTL → netlist + constraints (Day 3)             │
-│ 5. GLS      : Gate-Level Sim with SDF (Day 4)                  │
+│ 5. GLS      : Gate-Level Sim with SDF (Day 4)                 │
 └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,12 +59,12 @@
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│ 6. FLOORPLAN   : Macro placement, power grid                 │
+│ 6. FLOORPLAN   : Macro placement, power grid                  │
 │ 7. PLACEMENT   : Standard cells placement                     │
 │ 8. CTS         : Clock Tree Synthesis                         │
-│ 9. ROUTING     : Wire routing                                  │
+│ 9. ROUTING     : Wire routing                                 │
 │ 10. SIGN-OFF   : STA, DRC, LVS, power, ESD                    │
-│ 11. GDSII      : Layout database                                │
+│ 11. GDSII      : Layout database                              │
 │ 12. FAB        : TSMC, Samsung, etc.                          │
 └───────────────────────────────────────────────────────────────┘
 ```
@@ -75,32 +75,32 @@
 
 ```
    ┌─────────────────────────────────────────────┐
-   │ RTL Design + Verification                       │
-   │ - TB pass                                    │
-   │ - Coverage ≥ 95%                           │
-   │ - Assertions pass                          │
+   │ RTL Design + Verification                   │
+   │ - TB pass                                   │
+   │ - Coverage ≥ 95%                            │
+   │ - Assertions pass                           │
    └─────────────┬───────────────────────────────┘
                  │
                  ▼
    ┌─────────────────────────────────────────────┐
    │ Synthesis                                   │
-   │ - Timing report OK                         │
-   │ - No latches                               │
-   │ - All clocks propagated                    │
+   │ - Timing report OK                          │
+   │ - No latches                                │
+   │ - All clocks propagated                     │
    └─────────────┬───────────────────────────────┘
                  │
                  ▼
    ┌─────────────────────────────────────────────┐
    │ Gate-Level Simulation                       │
-   │ - Same TB passes                           │
+   │ - Same TB passes                            │
    │ - No X in output                            │
    │ - No timing violation                       │
    └─────────────┬───────────────────────────────┘
                  │
                  ▼
    ┌─────────────────────────────────────────────┐
-   │ Sign-Off                                     │
-   │ - All checks pass                          │
+   │ Sign-Off                                    │
+   │ - All checks pass                           │
    │ - Ready for back-end or tape-out            │
    └─────────────────────────────────────────────┘
 ```
@@ -393,21 +393,21 @@ endgroup
 ```
                   ┌─────────────────────────────────────┐
                   │   Chip-Level (SoC)                  │
-                  │   - Full system                    │
+                  │   - Full system                     │
                   │   - Emulation                       │
-                  │   - Software bring-up                │
+                  │   - Software bring-up               │
                   └─────────────────────────────────────┘
                   ┌─────────────────────────────────────┐
                   │   Subsystem / Block                 │
-                  │   - Multi-IP integration              │
-                  │   - Constrained random               │
-                  │   - Scoreboard                       │
+                  │   - Multi-IP integration            │
+                  │   - Constrained random              │
+                  │   - Scoreboard                      │
                   └─────────────────────────────────────┘
                   ┌─────────────────────────────────────┐
                   │   Module / IP                       │
                   │   - Single block                    │
-                  │   - Directed + assertions         │
-                  │   - Functional coverage         │
+                  │   - Directed + assertions           │
+                  │   - Functional coverage             │
                   └─────────────────────────────────────┘
 ```
 
@@ -428,27 +428,27 @@ endgroup
 
 ```
    ┌──────────────────────────────────────────┐
-   │  Spec → Features (Functional Coverage)     │
+   │  Spec → Features (Functional Coverage)   │
    └────────────┬─────────────────────────────┘
                 │
                 ▼
    ┌──────────────────────────────────────────┐
-   │  Code Coverage (Statement, Rigidify)         │
+   │  Code Coverage (Statement, Rigidify)     │
    └────────────┬─────────────────────────────┘
                 │
                 ▼
    ┌──────────────────────────────────────────┐
-   │  Toggle Coverage (Coverage)                    │
+   │  Toggle Coverage (Coverage)              │
    └────────────┬─────────────────────────────┘
                 │
                 ▼
    ┌──────────────────────────────────────────┐
-   │  Assertion Coverage (Coverage)                 │
+   │  Assertion Coverage (Coverage)           │
    └────────────┬─────────────────────────────┘
                 │
                 ▼
    ┌──────────────────────────────────────────┐
-   │  Combined Coverage ≥ Goals → DONE           │
+   │  Combined Coverage ≥ Goals → DONE        │
    └──────────────────────────────────────────┘
 ```
 
@@ -583,15 +583,15 @@ endgroup
 ## E.2 Architecture
 
 ```
-   ┌─────────────────────────────────────────────┐
-   │  UART TX Top                                 │
-   │                                              │
+   ┌───────────────────────────────────────────┐
+   │  UART TX Top                              │
+   │                                           │
    │  ┌────────────┐      ┌─────────────┐      │
    │  │ Baud Gen   │─────►│ FSM         │      │
    │  │            │      │             │      │
    │  └────────────┘      └──────┬──────┘      │
    │                             │             │
-   │  ┌────────────┐            ▼             │
+   │  ┌────────────┐            ▼              │
    │  │ Register   │      ┌─────────────┐      │
    │  │ File       │◄─────│ Shift Reg   │      │
    │  └────────────┘      └──────┬──────┘      │
@@ -600,7 +600,7 @@ endgroup
    │                       ┌──────────┐        │
    │                       │ TX line  │        │
    │                       └──────────┘        │
-   └─────────────────────────────────────────────┘
+   └───────────────────────────────────────────┘
 ```
 
 ## E.3 Verification Plan
@@ -1053,4 +1053,3 @@ All checks passed. Ready for tape-out.
 
 ---
 
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 90-120 นาที รวม ASCII diagrams, code examples, verification plan examples, sign-off criteria พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 5 เช้า หรือแบ่งเป็น 2 mini-lectures (ASIC Flow 60 นาที + Verification Plan 60 นาที)
