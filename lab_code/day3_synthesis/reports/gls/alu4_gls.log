@@ -1,0 +1,3 @@
+GLS tb_alu4: checked 1024 combinations, errors = 0
+GLS RESULT: PASS
+tb/tb_alu4.v:50: $finish called at 1024000 (1ps)

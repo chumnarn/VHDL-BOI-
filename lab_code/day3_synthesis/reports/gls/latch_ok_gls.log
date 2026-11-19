@@ -1,0 +1,3 @@
+GLS tb_latch_ok: errors = 0
+GLS RESULT: PASS
+tb/tb_latch_ok.v:34: $finish called at 2000 (1ps)

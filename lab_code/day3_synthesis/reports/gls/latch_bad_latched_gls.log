@@ -1,0 +1,4 @@
+FAIL phase2: latch should HOLD 1 after e=0, got q=0
+GLS tb_latch_bad: errors = 1
+GLS RESULT: FAIL
+tb/tb_latch_bad.v:37: $finish called at 2000 (1ps)
