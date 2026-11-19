@@ -643,10 +643,10 @@ end process;
                   ┌─────┐
                   │ C   │
                   └─────┤
-                       │
-                       ▼
+                        │
+                        ▼
                      rst_n_initial
-                       │
+                        │
                   ┌─────────┐
                   │ Schmitt │  -- ป้องกัน oscillation
                   │ Trigger │
@@ -1121,5 +1121,4 @@ report_timing -check_type removal
 - "Questa Advanced Simulator User Manual" — Reset & CDC checks.
 
 ---
-
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 90-120 นาที รวม ASCII diagrams, timing diagrams, code templates, MTBF calculation พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 2 เช้า หรือแบ่งเป็น 2 mini-lectures (Synchronous Design 1 ชม. + Reset Strategy 1 ชม.)
+ 
