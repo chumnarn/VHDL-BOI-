@@ -71,9 +71,9 @@ always @*
       │
       │  ① GHDL synth  ─────► Verilog (ยังเป็น behavioral!)
       │     (ตัวแปลง)            │
-      │                          │  ② Yosys synth
-      │                          │     (synthesizer จริง)
-      │                          ▼
+      │                         │  ② Yosys synth
+      │                         │     (synthesizer จริง)
+      │                         ▼
       │                   generic netlist
       │                   ($_AND_, $_MUX_, $_DFF_P_ …)
       │                          │
