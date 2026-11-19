@@ -50,49 +50,49 @@
 
 ```
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  PART 1 — Digital IC Design & Verification (วันที่ 1-5)  ✅ จัดทำครบ          ║
+║  PART 1 — Digital IC Design & Verification (วันที่ 1-5)  ✅ จัดทำครบ        ║
 ╠══════════════════════════════════════════════════════════════════════════╣
-║  Day 1  Fundamentals of VHDL and Digital IC Design          [คู่มือหลัก]      ║
+║  Day 1  Fundamentals of VHDL and Digital IC Design        [คู่มือหลัก]      ║
 ║    1.1 Digital IC Design Flow                             ✅ มี deep dive ║
-║    1.2 พื้นฐานภาษา VHDL (ASIC vs FPGA + Building Blocks)     ✅ มี deep dive ║
+║    1.2 พื้นฐานภาษา VHDL (ASIC vs FPGA + Building Blocks)   ✅ มี deep dive ║
 ║    1.3 Simulation vs Synthesis + Data Types               ✅ มี deep dive ║
 ║    1.4 LAB 1 — AND/OR/MUX/Decoder + Simulation          ✅ มี step-by-step║
 ║                                                                          ║
-║  Day 2  Advanced RTL Design Using VHDL                           [คู่มือหลัก] ║
+║  Day 2  Advanced RTL Design Using VHDL                          [คู่มือหลัก] ║
 ║    2.1 Synchronous Design & Reset Strategy                ✅ มี deep dive ║
 ║    2.2 FSM — Moore vs Mealy                               ✅ มี deep dive ║
-║    2.3 Structural vs Behavioral Modeling                      ✅ ในคู่มือหลัก ║
+║    2.3 Structural vs Behavioral Modeling                    ✅ ในคู่มือหลัก ║
 ║    2.4 RTL Design Guidelines (Latch, CDC)                 ✅ มี deep dive ║
 ║    2.5 Testbench                                          ✅ มี deep dive ║
 ║    2.6 LAB 2 — FSM + Testbench + HDL Designer           ✅ มี step-by-step║
 ║    2.7 VHDL Testbench เชิงลึก (simulation cycle / delta cycle)  มี deep dive ║
-║                                                                          ║
-║  Day 3  RTL Synthesis and Optimization (Precision RTL)           [คู่มือหลัก] ║
-║    3.1 Synthesis Flow                                         ✅ ในคู่มือหลัก ║
-║    3.2 Constraints (SDC)                                      ✅ ในคู่มือหลัก ║
-║    3.3 Timing Analysis เบื้องต้น                                  ✅ ในคู่มือหลัก ║
-║    3.4 Optimization Techniques                                ✅ ในคู่มือหลัก ║
-║    3.5 การสังเคราะห์ด้วย Yosys (Open-source)                     ✅ มี deep dive ║
-║    3.6 LAB 3B — Yosys & LibreLane (RTL → GDSII)          ✅ มี step-by-step║
-║    3.7 LAB 3 — 8-bit Adder variants + Synthesis                ✅ ในคู่มือหลัก ║
 ║                                                                           ║
+║  Day 3  RTL Synthesis and Optimization (Precision RTL)          [คู่มือหลัก] ║
+║    3.1 Synthesis Flow                                        ✅ ในคู่มือหลัก ║
+║    3.2 Constraints (SDC)                                     ✅ ในคู่มือหลัก ║
+║    3.3 Timing Analysis เบื้องต้น                                 ✅ ในคู่มือหลัก ║
+║    3.4 Optimization Techniques                               ✅ ในคู่มือหลัก ║
+║    3.5 การสังเคราะห์ด้วย Yosys (Open-source)                   ✅ มี deep dive ║
+║    3.6 LAB 3B — Yosys & LibreLane (RTL → GDSII)          ✅ มี step-by-step║
+║    3.7 LAB 3 — 8-bit Adder variants + Synthesis               ✅ ในคู่มือหลัก ║
+║                                                                            ║
 ║  Day 4  Design Verification Using Questa                          [คู่มือหลัก] ║
 ║    4.1 Verification Methodology                             ✅ มี deep dive ║
 ║    4.2 Assertions & Functional Coverage                     ✅ มี deep dive ║
 ║    4.3 Gate-Level Simulation & SDF                          ✅ มี deep dive ║
 ║    4.4 LAB 4 — ALU Verification + GLS                     ✅ มี step-by-step║
 ║                                                                             ║
-║  Day 5  Mini Project — UART TX                                     [คู่มือหลัก] ║
-║    5.1 ASIC Flow Integration                                 ✅ มี deep dive ║
-║    5.2 Verification Plan & Sign-off                          ✅ มี deep dive ║
-║    5.3 Mini Project — RTL Design                             ✅ มี deep dive ║
-║    5.4 RTL-to-GDSII Full Chip Flow (LibreLane)               ✅ มี deep dive ║
-║    5.5 LAB 5B — Mini Project จนถึง GDSII                     ✅ มี step-by-step║
-║    5.6 สรุปและประเด็นสำคัญ (ปิดท้าย Part 1)                          ✅ มี deep dive ║
+║  Day 5  Mini Project — UART TX                                    [คู่มือหลัก] ║
+║    5.1 ASIC Flow Integration                                ✅ มี deep dive ║
+║    5.2 Verification Plan & Sign-off                         ✅ มี deep dive ║
+║    5.3 Mini Project — RTL Design                            ✅ มี deep dive ║
+║    5.4 RTL-to-GDSII Full Chip Flow (LibreLane)              ✅ มี deep dive ║
+║    5.5 LAB 5B — Mini Project จนถึง GDSII                   ✅ มี step-by-step║
+║    5.6 สรุปและประเด็นสำคัญ (ปิดท้าย Part 1)                     ✅ มี deep dive ║
 ╚═════════════════════════════════════════════════════════════════════════════╝
 
 ╔══════════════════════════════════════════════════════════════════════════╗
-║  PART 2 — IC Layout + MEMS Design (วันที่ 6-10)  ❌ ยังไม่ได้จัดทำ                ║
+║  PART 2 — IC Layout + MEMS Design (วันที่ 6-10)  ❌ ยังไม่ได้จัดทำ             ║
 ╠══════════════════════════════════════════════════════════════════════════╣
 ║  Day 6   Basic IC Design / Tanner Tools                    ❌            ║
 ║  Day 7   CMOS Layout / L-Edit                              ❌            ║
