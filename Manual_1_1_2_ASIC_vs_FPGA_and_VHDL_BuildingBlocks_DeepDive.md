@@ -1101,5 +1101,4 @@ end architecture;
 - "Siemens EDA HDL Designer User Manual."
 
 ---
-
-> **หมายเหตุ:** เนื้อหานี้ออกแบบให้บรรยายได้ประมาณ 120-150 นาที รวมตัวอย่างโค้ดครบถ้วน พร้อมใช้ประกอบการสอนภาคทฤษฎี Day 1 หรือแทรกเป็น 2 lectures แยก (ASIC vs FPGA 1 ชม., VHDL Building Blocks 1 ชม.)
+ 
