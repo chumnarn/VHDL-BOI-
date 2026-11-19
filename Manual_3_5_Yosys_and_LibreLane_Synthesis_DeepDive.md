@@ -175,7 +175,7 @@ Precision RTL, Genus, Design Compiler เป็นเครื่องมือ
    └─────────────┘                   └──────────────┘
         │                                   │
         ├─ proc    : process → logic        ├─ write_verilog
-        ├─ opt     : ลบ logic ที่ไม่จำเป็น       ├─ write_json
+        ├─ opt     : ลบ logic ที่ไม่จำเป็น      ├─ write_json
         ├─ fsm     : ถอด FSM → logic        ├─ write_sdf
         ├─ memory  : memory → logic         ├─ write_edif
         ├─ techmap : logic → gate           └─ write_spice
