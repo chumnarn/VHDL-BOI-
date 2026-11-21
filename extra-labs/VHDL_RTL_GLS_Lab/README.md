@@ -1,4 +1,4 @@
-# Lab ภาษาไทย — VHDL RTL to Gate-Level Simulation
+# Lab — VHDL RTL to Gate-Level Simulation
 
 **ระยะเวลา 75–90 นาที** · **วงจร** Moore FSM ตรวจจับลำดับ 101 แบบซ้อนทับ · **ระดับภาษา** VHDL-2008
 
