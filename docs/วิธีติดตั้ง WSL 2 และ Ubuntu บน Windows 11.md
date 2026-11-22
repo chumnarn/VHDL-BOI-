@@ -1,6 +1,6 @@
 # วิธีติดตั้ง WSL 2 และ Ubuntu บน Windows 11
 
-อาจารย์สามารถติดตั้งจาก **PowerShell ที่เปิดด้วยสิทธิ์ Administrator** ด้วยคำสั่ง `wsl --install` จากนั้นรีสตาร์ต เปิด Ubuntu เพื่อสร้างผู้ใช้ Linux แล้วตรวจด้วย `wsl -l -v` ว่าคอลัมน์ **VERSION** ของ Ubuntu เป็น **2** ครับ [Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install?utm_source=chatgpt.com)
+เราสามารถติดตั้งจาก **PowerShell ที่เปิดด้วยสิทธิ์ Administrator** ด้วยคำสั่ง `wsl --install` จากนั้นรีสตาร์ต เปิด Ubuntu เพื่อสร้างผู้ใช้ Linux แล้วตรวจด้วย `wsl -l -v` ว่าคอลัมน์ **VERSION** ของ Ubuntu เป็น **2**  [Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install?utm_source=chatgpt.com)
 
 คู่มือนี้ใช้ Windows 11 เป็นหลัก คำสั่งติดตั้งแบบเดียวกันใช้ได้บน Windows 10 เวอร์ชัน 2004 ขึ้นไปที่มี Build 19041 ขึ้นไปด้วย [Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install?utm_source=chatgpt.com)
 
