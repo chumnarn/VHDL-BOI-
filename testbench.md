@@ -9,7 +9,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity tb_and_gate is
 end entity tb_and_gate;
 
-architecture sim of tb_and_gate is
+architecture sim1 of tb_and_gate is
     signal a, b : std_logic := '0';
     signal y    : std_logic;
 begin
@@ -60,7 +60,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity tb_and_gate is
 end entity tb_and_gate;
 
-architecture sim of tb_and_gate is
+architecture sim2 of tb_and_gate is
     signal a, b : std_logic := '0';
     signal y    : std_logic;
 begin
