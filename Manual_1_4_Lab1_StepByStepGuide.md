@@ -321,6 +321,7 @@ end architecture rtl;
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity tb_lab1 is
     -- testbench ไม่มี port
@@ -329,6 +330,7 @@ end entity tb_lab1;
 architecture sim of tb_lab1 is
     -- ============ Signals เชื่อมต่อ DUT ============
     signal a, b     : std_logic := '0';
+    signal d0, d1     : std_logic := '0';
     signal sel      : std_logic := '0';
     signal en       : std_logic := '0';
     signal a_dec    : std_logic_vector(1 downto 0) := "00";
@@ -349,8 +351,8 @@ begin
         port map (a => a, b => b, y => y_or);
 
     -- 3) MUX
-    u_mux : entity work.mux2x1
-        port map (a => a, b => b, sel => sel, y => y_mux);
+    u_mux : entity work.mux2to1
+        port map (d0 => d0, d1 => d1, sel => sel, y => y_mux);
 
     -- 4) Decoder
     u_dec : entity work.dec2x4
