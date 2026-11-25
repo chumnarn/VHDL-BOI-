@@ -619,6 +619,7 @@ end architecture rtl;
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+-- use IEEE.STD_NUMERIC.ALL;
 
 entity tb_seq_det is
 end entity tb_seq_det;
