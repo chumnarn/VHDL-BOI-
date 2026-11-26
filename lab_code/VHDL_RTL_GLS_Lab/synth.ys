@@ -1,0 +1,9 @@
+read_verilog build/seq_det_101_elab.v
+synth -top seq_det_101
+check -assert
+stat
+write_verilog -noattr -noexpr build/seq_det_101_mapped.v
+
+design -reset
+read_verilog +/simcells.v
+write_verilog -noattr build/generic_cells.v
