@@ -116,6 +116,11 @@ librelane --version     # ต้องได้ LibreLane v3.0.x
 PDK ดาวน์โหลดอัตโนมัติเมื่อรัน `librelane --volare-pdk -p sky130A` (ครั้งแรกประมาณ 1–2 GB)
 รายละเอียดวิธีติดตั้งและเปลี่ยน PDK ดูที่ [`librelane/README.md`](librelane/README.md)
 
+```bash
+export SKY130_LIB=/home/user/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+echo $SKY130_LIB
+```
 ---
 
 ## 5. วิธีรัน
@@ -162,24 +167,14 @@ make clean        # ล้าง build/
 > ต้องห่อด้วย `"` เสมอ ไม่งั้น shell จะตีความ `(BOI)` เป็น subshell
 
 ---
-```bash
-export SKY130_LIB=/home/user/.ciel/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 
-echo $SKY130_LIB
-```
 
 ```bash
-
 librelane --pdk sky130A --last-run --flow OpenInOpenROAD librelane/config.yaml
-
-
 ```
 
 ```bash
-
 librelane --pdk sky130A --last-run --flow OpenInKlayout librelane/config.yaml
-
-
 ```
 
 ---
